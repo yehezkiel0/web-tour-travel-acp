@@ -1,0 +1,52 @@
+.wrapper-accordion {
+    display: flex;
+    height: 588px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.accordion {
+    position: relative;
+    flex: 0 0 238px;
+    transform: translateZ(0);
+    transition: flex-basis 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: flex-basis;
+    cursor: pointer;
+}
+
+.accordion.active {
+    flex: 0 0 466px;
+}
+
+.description {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.accordion.active .description {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.tag-arrow {
+    top: 12px;
+    right: 20px;
+    padding: 8px 12px;
+    z-index: 3;
+    position: absolute;
+    background-color: #ffdd26;
+    border-radius: 100%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color;
+}
+
+.tag.inactive,
+.tag-arrow.inactive {
+    background-color: #828282;
+}
+
+.tag-arrow.inactive {
+    transform: rotate(-45deg);
+}

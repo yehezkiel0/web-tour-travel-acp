@@ -1,0 +1,24 @@
+.scroll {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    --gap: 20px;
+    gap: var(--gap);
+}
+
+.scroll .item-logo {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--gap);
+    animation: infinite-scroll 20s linear infinite;
+}
+
+.scroll:hover .item-logo {
+    animation-play-state: paused;
+}
+
+@keyframes infinite-scroll {
+    to {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}

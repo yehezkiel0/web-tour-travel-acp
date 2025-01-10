@@ -1,0 +1,13 @@
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+.body-lock {
+    overflow: hidden;
+    height: 100vh;
+}

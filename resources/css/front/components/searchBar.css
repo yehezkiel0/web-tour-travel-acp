@@ -1,0 +1,52 @@
+.step-item {
+    transition: all 0.3s ease;
+}
+
+.step-item:hover {
+    transform: translateY(-2px);
+}
+
+.icon-container {
+    transition: transform 0.3s ease;
+}
+
+.step-item:hover .icon-container {
+    transform: scale(1.1);
+}
+
+.datepicker-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0% !important;
+    margin-top: 8px !important;
+    background-color: #1f2937 !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    padding: 8px !important;
+    z-index: 1060 !important;
+    transition: transform 0.3s ease !important;
+}
+
+.datepicker table tr td.active.active {
+    background-color: #fcd34d !important;
+    border-color: #fcd34d !important;
+}
+
+.datepicker table tr td.today {
+    background-color: #fef3c7 !important;
+    border-color: #fef3c7 !important;
+}
+
+.datepicker table tr :hover {
+    background-color: gray !important;
+}
+
+#datepicker-text {
+    cursor: pointer;
+}
+
+.datepicker table {
+    width: 450px !important;
+    color: white !important;
+}

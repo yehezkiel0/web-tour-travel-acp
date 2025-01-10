@@ -1,0 +1,46 @@
+.navbar-container {
+    @apply w-full z-50;
+    height: var(--navbar-height);
+}
+
+.navbar {
+    @apply w-full z-50 transition-all duration-300 ease-in-out;
+    height: var(--navbar-height);
+}
+
+.navbar-fixed {
+    @apply fixed top-0 left-0 right-0 bg-white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-placeholder {
+    height: var(--navbar-height);
+    display: none;
+}
+
+.navbar-fixed + .navbar-placeholder {
+    display: block;
+}
+
+.custom-border {
+    position: relative;
+}
+
+.custom-border::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #3477f6;
+    border-radius: 20px 20px 0 0;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.custom-border:hover::after {
+    transform: scaleX(1);
+}

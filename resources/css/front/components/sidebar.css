@@ -1,0 +1,35 @@
+.sidebar-home {
+    position: fixed;
+    top: 0;
+    transform: translateY(-100%);
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-home.active {
+    transform: translateY(0);
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-home.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+}
+
+.sidebar-fixed {
+    position: sticky;
+    z-index: 9999;
+    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.sidebar-home li:hover {
+    background-color: #f5f5f5;
+    color: #1e40af;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
