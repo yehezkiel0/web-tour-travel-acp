@@ -1,10 +1,10 @@
-<section class="container mx-auto">
+<section class="w-full">
     <div class="max-w-7xl mx-auto py-[50px] grid grid-cols-5 gap-x-[78px]">
-        <div class="flex flex-col gap-y-7 items-start col-span-2 px-5">
+        <div class="flex flex-col gap-y-7 items-start col-span-2">
             <div class="flex flex-row gap-x-2 items-center py-[8px]">
                 <img src="{{ asset('images/icon/Logo.svg') }}/" alt="Logo-Footer" class="" />
             </div>
-            <h4 class="text-[#333333] text-normal font-medium text-justify">
+            <h4 class="text-[#333333] text-normal font-medium text-justify px-5">
                 <span class="font-bold">ACP Travel & Tours is</span> a trusted travel agency offering comprehensive
                 tourism
                 services to

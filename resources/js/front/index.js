@@ -6,6 +6,7 @@ import { initAuth } from "./modules/auth";
 import { initAccordion } from "./modules/accordion";
 import { initInfiniteScroll } from "./modules/scroll";
 import { initDatePicker } from "./modules/datepicker";
+import { initSearchResult } from "./modules/search-result";
 
 // Wait for DOM to be ready
 $(() => {
@@ -16,4 +17,5 @@ $(() => {
     initAccordion($);
     initInfiniteScroll();
     initDatePicker($);
+    initSearchResult($);
 });

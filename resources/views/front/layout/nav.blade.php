@@ -98,7 +98,7 @@
                                         Edit Profile
                                     </a>
                                 </li>
-                                <li class="z-[1000] px-4">
+                                <li class="z-[1000] pb-2 px-4">
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="text-sm flex items-center gap-x-3">

@@ -6,9 +6,12 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Front\LandingPageController;
+use App\Http\Controllers\Front\SearchResultController;
 use App\Http\Controllers\User\UserAuthController;
 
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
+
+Route::get('/search-result', [SearchResultController::class, 'index'])->name('search_result');
 
 
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');

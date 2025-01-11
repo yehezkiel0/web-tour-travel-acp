@@ -19,7 +19,6 @@
     </div>
     <script script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <script src="https://kit.fontawesome.com/7fa26d577c.js" crossorigin="anonymous"></script>
-
     <x-alert-notification />
 </body>
 

@@ -1,0 +1,35 @@
+/* Mengatur warna dan lebar slider */
+.price-range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 12px;
+    border-radius: 8px;
+    background: #3477f6;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.price-range:hover {
+    opacity: 1;
+}
+
+.price-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #3477f6;
+    border: 2px solid white;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.price-range::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1e40af;
+    border: 2px solid white;
+    cursor: pointer;
+}
