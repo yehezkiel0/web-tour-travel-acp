@@ -2,8 +2,8 @@
 @section('content')
     @include('front.layout.nav')
     <section class="bg-[#EBF1FE] bg-opacity-70">
-        <div class="max-w-7xl mx-auto flex flex-row items-center py-[60px]">
-            <div class="max-w-md mx-auto py-[30px] bg-white rounded-xl shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-row items-start justify-center gap-x-5 py-[60px]">
+            <div class="max-w-md py-[30px] bg-white rounded-xl shadow-lg">
                 <div class="flex justify-between items-center mb-[30px] px-7">
                     <h2 class="text-base font-medium text-gray-2">Advance Search</h2>
                     <button class="clear-all-btn text-gray-3 text-xs hover:text-gray-500">Clear All</button>
@@ -88,6 +88,38 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div class="w-full flex flex-col gap-y-4">
+                <div class="max-h-60 flex flex-row gap-x-6 p-5 bg-white border border-[#E0E0E0] rounded-md">
+                    <div class="max-w-[285px] ">
+                        <img src="{{ asset('images/home/Jeju.png') }}" alt=""
+                            class="w-full object-cover rounded-md">
+                    </div>
+                    <div class="max-w-sm flex flex-col gap-y-[10px]">
+                        <h2 class="text-xl font-medium text-gray">Beautiful Jeju Island Private UNESCO</h2>
+                        <div class="inline-flex space-x-3 font-medium text-[13px]">
+                            <div class="text-primary bg-[#EBF1FE] py-1 px-2 rounded-[10px] border border-primary">Private
+                                Tour</div>
+                            <div
+                                class="text-[#FFB100] bg-[#FFFAEE] py-1 px-2 rounded-[10px] border border-[#FFB100] flex items-center gap-x-2">
+                                <img src="{{ asset('images/icon/time-rotate.svg') }}">
+                                8-9 Days
+                            </div>
+                        </div>
+                        <p class="text-gray-2 font-normal text-xs pb-[10px]">Relaxed tour to Jeju’s top spots: Oedolgae,
+                            Seongsan, and
+                            more. No shopping stops, just unforgettable moments!</p>
+                        <a href="#"
+                            class="text-white bg-primary font-medium text-xs text-center rounded-md py-2 px-8 w-[140px]">Book
+                            Now</a>
+                    </div>
+                    <div class="flex flex-col justify-end pl-[30px] pb-4">
+                        <p class="text-gray-2 font-normal text-sm text-end">Start From</p>
+                        <p class="text-gray-2 font-semibold text-[17px]">IDR 1.377.000</p>
+                        <span class="flex justify-end text-gray-2 font-normal text-xs">/pax</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
