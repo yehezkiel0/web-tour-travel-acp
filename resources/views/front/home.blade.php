@@ -46,13 +46,14 @@
                                     <div
                                         class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                         <div
-                                            class="absolute bottom-2 sm:bottom-4 px-3 sm:px-5 bg-blend-multiply bg-[#BDBDBD] bg-opacity-30 w-full">
-                                            <h3 class="text-white text-2xl sm:text-lg lg:text-sm xl:text-lg font-bold">
+                                            class="absolute bottom-3 sm:bottom-4 px-3 sm:px-5 bg-blend-multiply bg-[#BDBDBD] bg-opacity-30 w-full">
+                                            <h3
+                                                class="text-white text-xl sm:text-lg lg:text-sm xl:text-xl font-semibold md:font-bold">
                                                 {{ $destination->title }}</h3>
                                             <div
                                                 class="flex flex-row items-center gap-x-1 sm:gap-x-2 text-white text-lg sm:text-base lg:text-sm">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                                <p class="xl:text-base font-normal">{{ $destination->city }}</p>
+                                                <i class="fa-solid fa-location-dot text-sm lg:text-base"></i>
+                                                <p class="text-sm xl:text-base font-normal">{{ $destination->city }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -70,82 +71,106 @@
         {{-- Search --}}
         <section>
             <div class="max-w-7xl mx-auto py-[28px]">
-                <div class="flex flex-row items-center justify-center gap-x-10">
-                    <div class="w-1/2 mx-auto h-[568]">
+                <div class="flex flex-col gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-10">
+                    <div class="w-full md:w-1/2 px-4 md:px-0 mx-auto h-[568]">
                         <div class="w-full flex flex-col items-center relative" id="image-search">
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search"
                                 class="rounded-lg w-full" />
                             <div
-                                class="absolute bottom-8 lg:w-[496px] h-14 bg-gray-3 rounded-full p-2 border-[3px] border-gray-400 flex items-center">
-                                <div class="flex flex-row relative items-center gap-x-4">
-                                    <div class="flex items-center gap-x-2 text-[#E0E0E0] pl-4 py-2">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <select class="bg-transparent border-none outline-none">
-                                            <option class="hidden" value="" disabled selected>Destination
+                                class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[496px] px-2 md:px-4 lg:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
+                                <div class="w-full flex flex-row relative items-center justify-evenly lg:gap-x-2">
+                                    <div class="flex flex-row items-center lg:gap-x-2 text-[#E0E0E0]">
+                                        <i class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-base"></i>
+                                        <select
+                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-base">
+                                            <option class="hidden text-[8px] md:text-xs lg:text-base" value=""
+                                                disabled selected>
+                                                Destination
                                             </option>
-                                            <option class="bg-gray-1 text-white">Bali</option>
-                                            <option class="bg-gray-1 text-white">Seoul</option>
+                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Bali
+                                            </option>
+                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Seoul
+                                            </option>
                                         </select>
                                     </div>
-                                    <div class="h-8 w-px bg-gray-300"></div>
+                                    <div class="h-4 md:h-6 lg:h-8 w-px bg-gray-300"></div>
 
-                                    <div class="flex flex-row items-center cursor-pointer gap-x-2 py-2 text-[#E0E0E0]"
+                                    <div class="flex flex-row items-center cursor-pointer pr-1 pl-1 gap-x-1 md:pr-2 lg:px-0 lg:gap-x-2 text-[#E0E0E0]"
                                         id="datepicker-container">
-                                        <img src="{{ asset('images/icon/time.svg') }}" alt="date" class="w-5 h-5">
-                                        <p id="datepicker-text">Date</p>
-                                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                                        <img src="{{ asset('images/icon/time.svg') }}" alt="date"
+                                            class="md:w-3 md:h-3 lg:w-5 lg:h-5">
+                                        <p id="datepicker-text" class="text-[10px] md:text-xs lg:text-base">Date</p>
+                                        <i class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
                                         <input type="text" id="datepicker" class="hidden">
                                     </div>
-                                    <div class="h-8 w-px bg-gray-300"></div>
+                                    <div class="h-4 md:h-6 lg:h-8 w-px bg-gray-300"></div>
 
-                                    <div class="flex items-center gap-x-2 text-[#E0E0E0] py-2">
+                                    <div class="flex items-center pl-1 gap-x-1 md:px-2 lg:px-0 lg:gap-x-2 text-[#E0E0E0]">
                                         <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking">
-                                        <select class="bg-transparent border-none outline-none">
-                                            <option class="hidden" value="" disabled selected>Type
+                                        <select
+                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-base">
+                                            <option class="hidden" value="" disabled selected>
+                                                Type
                                             </option>
-                                            <option class="bg-gray-1 text-white">Bali</option>
-                                            <option class="bg-gray-1 text-white">Seoul</option>
+                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Bali
+                                            </option>
+                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Seoul
+                                            </option>
                                         </select>
                                     </div>
-                                    <button
-                                        class="font-semibold text-sm text-gray-1 rounded-3xl bg-secondary py-2 px-4 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
+                                    <button type="submit"
+                                        class="font-semibold text-[10px] sm:text-[11px] lg:text-sm text-gray-1 rounded-3xl bg-secondary py-2 px-3 md:py-1 md:px-2 lg:py-2 lg:px-4 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="w-1/2 mx-auto">
-                        <div class="flex flex-col gap-y-[23px]">
-                            <div class="flex flex-col gap-y-2">
-                                <h1 class="font-bold text-[35px] leading-75 text-gray-1">One Click for <span
-                                        class="text-primary">You</span></h1>
-                                <p class="text-gray-3">How it works?</p>
+                    <div class="w-full px-4 md:px-0 md:w-1/2 mx-auto">
+                        <div class="flex flex-col gap-y-3 md:gap-y-[14px] lg:gap-y-[23px]">
+                            <div class="flex flex-col gap-y-0 lg:gap-y-2 text-center md:text-start">
+                                <h1 class="font-bold text-xl md:text-2xl lg:text-[35px] text-gray-1">
+                                    One
+                                    Click for <span class="text-primary">You</span></h1>
+                                <p class="text-gray-3 text-xs lg:text-base">How it works?</p>
                             </div>
                             <div
-                                class="step-item flex flex-row items-center gap-x-10 rounded-2xl border border-[#E0E0E0] py-9 px-10 cursor-pointer">
-                                <img src="{{ asset('images/icon/date.svg') }}" alt="date" class="icon-container">
-                                <div class="flex flex-col gap-y-2">
-                                    <h3 class="font-semibold text-gray-1">Set Your Date</h3>
-                                    <p class="text-gray-1 text-xs">Choose the perfect date to start your unforgettable
+                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 lg:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 lg:py-9 lg:px-10 cursor-pointer">
+                                <img src="{{ asset('images/icon/date.svg') }}" alt="date"
+                                    class="icon-container w-10 md:w-12 lg:w-[52px] h-auto">
+                                <div class="flex flex-col gap-y-1 lg:gap-y-2">
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm lg:text-base">Set Your Date</h3>
+                                    <p class="text-gray-1 text-[10px] lg:text-xs">Choose the perfect date to
+                                        start your
+                                        unforgettable
                                         journey.
                                     </p>
                                 </div>
                             </div>
                             <div
-                                class="step-item flex flex-row items-center gap-x-10 rounded-2xl border border-[#E0E0E0] py-9 px-10 cursor-pointer">
-                                <img src="{{ asset('images/icon/flight.svg') }}" alt="date" class="icon-container">
-                                <div class="flex flex-col gap-y-2">
-                                    <h3 class="font-semibold text-gray-1">Select Your Destination</h3>
-                                    <p class="text-gray-1 text-xs">Pick stunning destinations that match your dream
+                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 lg:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 lg:py-9 lg:px-10 cursor-pointer">
+                                <img src="{{ asset('images/icon/flight.svg') }}" alt="date"
+                                    class="icon-container w-10 md:w-12 lg:w-[52px]">
+                                <div class="flex flex-col gap-y-1 lg:gap-y-2">
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm lg:text-base">Select Your
+                                        Destination
+                                    </h3>
+                                    <p class="text-gray-1 text-[10px] lg:text-xs">Pick stunning destinations
+                                        that match
+                                        your dream
                                         adventure.
                                     </p>
                                 </div>
                             </div>
                             <div
-                                class="step-item flex flex-row items-center gap-x-10 rounded-2xl border border-[#E0E0E0] py-9 px-10 cursor-pointer">
-                                <img src="{{ asset('images/icon/search.svg') }}" alt="date" class="icon-container">
-                                <div class="flex flex-col gap-y-2">
-                                    <h3 class="font-semibold text-gray-1">Choose Your Trip Type</h3>
-                                    <p class="text-gray-1 text-xs">From open trip, private trip, and various package, pick
+                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 lg:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 lg:py-9 lg:px-10 cursor-pointer">
+                                <img src="{{ asset('images/icon/search.svg') }}" alt="date"
+                                    class="icon-container w-10 md:w-12 lg:w-[52px]">
+                                <div class="flex flex-col gap-y-1 lg:gap-y-2">
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm lg:text-base">Choose Your Trip
+                                        Type
+                                    </h3>
+                                    <p class="text-gray-1 text-[10px] lg:text-xs">From open trip, private
+                                        trip, and
+                                        various package, pick
                                         the trip that suits you best.
                                     </p>
                                 </div>
@@ -159,7 +184,8 @@
         <section>
             <div class="open-trip max-w-7xl mx-auto py-[28px]">
                 <div class="flex flex-col gap-y-[20px] sm:gap-x-8 sm:grid sm:grid-cols-2 lg:grid-cols-4">
-                    <div class="lg:col-span-1 flex flex-col gap-y-[20px] justify-center items-center sm:items-start">
+                    <div
+                        class="lg:col-span-1 flex flex-col gap-y-2 lg:gap-y-[20px] justify-center items-center sm:items-start">
                         <h2
                             class="font-bold text-2xl block sm:flex sm:flex-col sm:gap-y-2 sm:text-4xl lg:text-[35px] text-center sm:text-left leading-[60px]">
                             Hop on Our <span class="font-semibold text-primary">Open Trip</span>
