@@ -41,6 +41,7 @@
     transition: transform 0.3s ease;
 }
 
-.custom-border:hover::after {
+.custom-border:hover::after,
+.custom-border.is-active::after {
     transform: scaleX(1);
 }

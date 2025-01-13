@@ -5,8 +5,9 @@
             <a href="#" class="cursor-pointer">
                 <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" />
             </a>
-            <ul class="hidden lg:flex flex-row gap-x-6 lg:gap-x-10">
-                <li><a href="#" class="flex pb-[26px] pt-7 custom-border">Home</a>
+            <ul class="nav-menu hidden lg:flex flex-row gap-x-6 lg:gap-x-10 items-center">
+                <li><a href="{{ route('home') }}"
+                        class="{{ request()->is('/') ? 'is-active custom-border' : '' }}flex pb-[26px] pt-7 custom-border">Home</a>
                 </li>
                 <li class="relative">
                     <a href="#" class="relative flex flex-row items-baseline gap-x-2 pb-[26px] pt-7"

@@ -58,4 +58,9 @@ export const initNavbar = ($) => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     $hamburger.on("click", handleHamburgerClick);
     window.addEventListener("resize", handleResize, { passive: true });
+
+    $(".nav-menu a").on("click", function (e) {
+        $(".nav-menu a").removeClass("is-active");
+        $(this).addClass("is-active");
+    });
 };

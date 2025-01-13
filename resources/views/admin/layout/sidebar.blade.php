@@ -13,7 +13,7 @@
             </li>
             <li>
                 <a href="{{ route('admin_destination_index') }}"
-                    class="{{ Request::is('admin/destination/*') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
+                    class="{{ Request::is('admin/destination') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
                     <i class="fa-solid fa-plane-departure"></i>
                     <span class="font-light text-sm">Destination</span>
                 </a>

@@ -110,7 +110,7 @@
                             Seongsan, and
                             more. No shopping stops, just unforgettable moments!</p>
                         <a href="#"
-                            class="text-white bg-primary font-medium text-xs text-center rounded-md py-2 px-8 w-[140px]">Book
+                            class="text-white bg-primary font-medium text-xs text-center rounded-md py-2 px-8 w-[140px] hover:bg-primary-400 transition-all ease-in-out duration-300">Book
                             Now</a>
                     </div>
                     <div class="flex flex-col justify-end pl-[30px] pb-4">
