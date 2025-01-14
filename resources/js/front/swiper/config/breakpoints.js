@@ -15,6 +15,10 @@ export const tripBreakpoints = {
         spaceBetween: 20,
     },
     1024: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+    },
+    1280: {
         slidesPerView: 3,
         spaceBetween: 30,
     },

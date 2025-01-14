@@ -5,10 +5,10 @@
         <!-- Hero Section -->
         <section>
             <div class="hero max-w-7xl mx-auto pb-8">
-                <div class="flex flex-col-reverse items-center lg:flex-row lg:justify-between">
-                    <div class="flex flex-col items-center gap-y-5 lg:items-start lg:gap-y-10">
-                        <div class="flex flex-col items-center py-0 sm:gap-y-2 lg:gap-y-5 lg:items-start lg:py-4">
-                            <div class="text-2xl flex gap-x-2 md:text-4xl lg:text-5xl lg:block font-bold leading-[60px]">
+                <div class="flex flex-col-reverse items-center lg:flex-row lg:justify-between md:px-7 lg:px-5 xl:px-0">
+                    <div class="flex flex-col items-center gap-y-5 lg:items-start lg:gap-y-10 lg:pl-4">
+                        <div class="flex flex-col items-center py-0 sm:gap-y-2 lg:gap-y-5 lg:py-4 lg:items-start">
+                            <div class="text-2xl flex gap-x-2 md:text-4xl xl:text-5xl lg:block font-bold leading-[60px]">
                                 <h1>Make Dreams a</h1>
                                 <h1 class="text-primary">Destination</h1>
                             </div>
@@ -23,7 +23,7 @@
                         </button>
                     </div>
                     <img src="{{ asset('images/home/Hero_Image.png') }}" alt="Hero-Image"
-                        class="hero-image h-[500px] sm:h-[600px] md:h-[700px]" />
+                        class="hero-image h-auto sm:w-[450px] xl:w-[600px]" />
                 </div>
             </div>
         </section>
@@ -31,13 +31,13 @@
         <section class="relative">
             <div class="popular-destination max-w-7xl mx-auto py-[28px]">
                 <h6
-                    class="flex justify-center lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
+                    class="flex justify-center md:gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
                     Explore <span class="text-primary"> Destination </span>
                 </h6>
                 <p class="pb-[40px] text-center text-xs sm:text-sm lg:text-base">We have more than 100 destination you can
                     choose</p>
                 <div class="swiper-container">
-                    <div class="swiper-wrapper">
+                    <div class="swiper-wrapper md:px-7 lg:px-5 xl:px-0">
                         @foreach ($popularDestinations as $destination)
                             <div class="swiper-slide card">
                                 <div class="rounded-xl overflow-hidden relative flex flex-col cursor-pointer">
@@ -71,50 +71,61 @@
         {{-- Search --}}
         <section>
             <div class="max-w-7xl mx-auto py-[28px]">
-                <div class="flex flex-col gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-10">
+                <div
+                    class="flex flex-col gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 md:px-7 lg:px-5 xl:px-0">
                     <div class="w-full md:w-1/2 px-4 md:px-0 mx-auto h-[568]">
                         <div class="w-full flex flex-col items-center relative" id="image-search">
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search"
                                 class="rounded-lg w-full" />
                             <div
-                                class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[496px] px-2 md:px-4 lg:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
-                                <div class="w-full flex flex-row relative items-center justify-evenly lg:gap-x-2">
+                                class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[432px] xl:w-[496px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
+                                <div class="w-full flex flex-row relative items-center justify-evenly xl:gap-x-2">
                                     <div class="flex flex-row items-center lg:gap-x-2 text-[#E0E0E0]">
-                                        <i class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-base"></i>
+                                        <i
+                                            class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-sm xl:text-base"></i>
                                         <select
-                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-base">
-                                            <option class="hidden text-[8px] md:text-xs lg:text-base" value=""
-                                                disabled selected>
+                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                            <option class="hidden text-[8px] md:text-xs lg:text-sm xl:text-base"
+                                                value="" disabled selected>
                                                 Destination
                                             </option>
-                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Bali
+                                            <option
+                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                Bali
                                             </option>
-                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Seoul
+                                            <option
+                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                Seoul
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="h-4 md:h-6 lg:h-8 w-px bg-gray-300"></div>
+                                    <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
 
                                     <div class="flex flex-row items-center cursor-pointer pr-1 pl-1 gap-x-1 md:pr-2 lg:px-0 lg:gap-x-2 text-[#E0E0E0]"
                                         id="datepicker-container">
                                         <img src="{{ asset('images/icon/time.svg') }}" alt="date"
                                             class="md:w-3 md:h-3 lg:w-5 lg:h-5">
-                                        <p id="datepicker-text" class="text-[10px] md:text-xs lg:text-base">Date</p>
+                                        <p id="datepicker-text" class="text-[10px] md:text-xs lg:text-sm xl:text-base">Date
+                                        </p>
                                         <i class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
                                         <input type="text" id="datepicker" class="hidden">
                                     </div>
-                                    <div class="h-4 md:h-6 lg:h-8 w-px bg-gray-300"></div>
+                                    <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
 
                                     <div class="flex items-center pl-1 gap-x-1 md:px-2 lg:px-0 lg:gap-x-2 text-[#E0E0E0]">
                                         <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking">
                                         <select
-                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-base">
+                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
                                             <option class="hidden" value="" disabled selected>
                                                 Type
                                             </option>
-                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Bali
+                                            <option
+                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                Bali
                                             </option>
-                                            <option class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-base">Seoul
+                                            <option
+                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                Seoul
                                             </option>
                                         </select>
                                     </div>
@@ -127,18 +138,18 @@
                     <div class="w-full px-4 md:px-0 md:w-1/2 mx-auto">
                         <div class="flex flex-col gap-y-3 md:gap-y-[14px] lg:gap-y-[23px]">
                             <div class="flex flex-col gap-y-0 lg:gap-y-2 text-center md:text-start">
-                                <h1 class="font-bold text-xl md:text-2xl lg:text-[35px] text-gray-1">
+                                <h1 class="font-bold text-xl md:text-2xl xl:text-[35px] text-gray-1">
                                     One
                                     Click for <span class="text-primary">You</span></h1>
-                                <p class="text-gray-3 text-xs lg:text-base">How it works?</p>
+                                <p class="text-gray-3 text-xs xl:text-base">How it works?</p>
                             </div>
                             <div
-                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 lg:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 lg:py-9 lg:px-10 cursor-pointer">
+                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 xl:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 xl:py-9 xl:px-10 cursor-pointer">
                                 <img src="{{ asset('images/icon/date.svg') }}" alt="date"
-                                    class="icon-container w-10 md:w-12 lg:w-[52px] h-auto">
+                                    class="icon-container w-10 md:w-11 lg:w-[52px] h-auto">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm lg:text-base">Set Your Date</h3>
-                                    <p class="text-gray-1 text-[10px] lg:text-xs">Choose the perfect date to
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Set Your Date</h3>
+                                    <p class="text-gray-1 text-[10px] xl:text-xs">Choose the perfect date to
                                         start your
                                         unforgettable
                                         journey.
@@ -146,14 +157,14 @@
                                 </div>
                             </div>
                             <div
-                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 lg:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 lg:py-9 lg:px-10 cursor-pointer">
+                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 xl:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 xl:py-9 xl:px-10 cursor-pointer">
                                 <img src="{{ asset('images/icon/flight.svg') }}" alt="date"
-                                    class="icon-container w-10 md:w-12 lg:w-[52px]">
+                                    class="icon-container w-10 md:w-11 lg:w-[52px]">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm lg:text-base">Select Your
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Select Your
                                         Destination
                                     </h3>
-                                    <p class="text-gray-1 text-[10px] lg:text-xs">Pick stunning destinations
+                                    <p class="text-gray-1 text-[10px] xl:text-xs">Pick stunning destinations
                                         that match
                                         your dream
                                         adventure.
@@ -161,14 +172,14 @@
                                 </div>
                             </div>
                             <div
-                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 lg:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 lg:py-9 lg:px-10 cursor-pointer">
+                                class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 xl:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 xl:py-9 xl:px-10 cursor-pointer">
                                 <img src="{{ asset('images/icon/search.svg') }}" alt="date"
-                                    class="icon-container w-10 md:w-12 lg:w-[52px]">
+                                    class="icon-container w-10 md:w-11 lg:w-[52px]">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm lg:text-base">Choose Your Trip
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Choose Your Trip
                                         Type
                                     </h3>
-                                    <p class="text-gray-1 text-[10px] lg:text-xs">From open trip, private
+                                    <p class="text-gray-1 text-[10px] xl:text-xs">From open trip, private
                                         trip, and
                                         various package, pick
                                         the trip that suits you best.
@@ -183,9 +194,10 @@
         <!-- Open Trip -->
         <section>
             <div class="open-trip max-w-7xl mx-auto py-[28px]">
-                <div class="flex flex-col gap-y-[20px] sm:gap-x-8 sm:grid sm:grid-cols-2 lg:grid-cols-4">
+                <div
+                    class="flex flex-col gap-y-[20px] sm:gap-x-8 sm:grid sm:grid-cols-2 lg:grid-cols-4 md:px-7 lg:px-5 xl:px-0">
                     <div
-                        class="lg:col-span-1 flex flex-col gap-y-2 lg:gap-y-[20px] justify-center items-center sm:items-start">
+                        class="lg:col-span-1 flex flex-col gap-y-2 lg:gap-y-[20px] justify-center items-center sm:items-start md:pl-4 lg:pl-0">
                         <h2
                             class="font-bold text-2xl block sm:flex sm:flex-col sm:gap-y-2 sm:text-4xl lg:text-[35px] text-center sm:text-left leading-[60px]">
                             Hop on Our <span class="font-semibold text-primary">Open Trip</span>

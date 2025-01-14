@@ -1,11 +1,11 @@
 <div class="navbar-container">
     <nav class="navbar" id="navbar-home">
         <div
-            class="nav-home flex flex-row-reverse lg:flex-row max-w-7xl mx-auto justify-between items-center px-4 pt-4 lg:px-0">
+            class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center px-4 pt-4 xl:px-0">
             <a href="#" class="cursor-pointer">
                 <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" />
             </a>
-            <ul class="nav-menu hidden lg:flex flex-row gap-x-6 lg:gap-x-10 items-center">
+            <ul class="nav-menu hidden xl:flex flex-row gap-x-6 xl:gap-x-10 items-center">
                 <li><a href="{{ route('home') }}"
                         class="{{ request()->is('/') ? 'is-active custom-border' : '' }}flex pb-[26px] pt-7 custom-border">Home</a>
                 </li>
@@ -113,7 +113,7 @@
                     </ul>
                 @endauth
             </div>
-            <div class="lg:hidden">
+            <div class="xl:hidden">
                 <button class="hamburger hamburger--slider" type="button">
                     <span class="hamburger-box ">
                         <span class="hamburger-inner"></span>

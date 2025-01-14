@@ -47,7 +47,7 @@ export const initNavbar = ($) => {
     };
 
     const handleResize = () => {
-        if (window.innerWidth > 1024) {
+        if (window.innerWidth > 1280) {
             $hamburger.removeClass("is-active");
             $sidebar.removeClass("active").addClass("hidden");
             $navHome.removeClass("sidebar-fixed");
