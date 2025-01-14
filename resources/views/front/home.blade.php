@@ -268,27 +268,31 @@
                     </p>
                     <div class="wrapper-accordion gap-x-4">
                         @for ($i = 0; $i < 4; $i++)
-                            <div
-                                class="accordion h-full rounded-[20px] overflow-hidden relative flex flex-col cursor-pointer">
-                                <div class="tag font-bold text-[12px] text-primary-800 mt-4 px-5">
-                                    <span>Private Trip</span>
-                                </div>
-                                <div class="tag-arrow font-bold text-primary-800 mt-2">
-                                    <i class="fa-solid fa-arrow-right text-lg"></i>
-                                </div>
-                                <div class="absolute inset-0">
-                                    <img src="{{ asset('images/home/NightCity.png') }}" alt=""
-                                        class="object-cover h-full w-full" />
-                                    <div class="absolute inset-0 bg-gradient-custom"></div>
-                                </div>
-                                <div class="content w-full absolute bottom-0">
-                                    <div class="p-5 text-white">
-                                        <h4 class="text-2xl font-semibold pb-[10px]">
-                                            K-POP Fan Tour
-                                        </h4>
-                                        <p class="description opacity-0">
-                                            Visit stunning coastal views, fresh seafood markets, and cultural sites.
-                                        </p>
+                            <div class="accordion rounded-[20px] overflow-hidden cursor-pointer">
+                                <div class="card-container">
+                                    <div class="image-layer">
+                                        <img src="{{ asset('images/home/NightCity.png') }}" alt=""
+                                            class="object-cover" />
+                                        <div class="gradient-overlay"></div>
+                                    </div>
+
+                                    <div class="content-layer">
+                                        <div class="tag font-bold text-[12px] text-primary-800 px-5">
+                                            <span>Private Trip</span>
+                                        </div>
+
+                                        <div class="tag-arrow font-bold text-primary-800">
+                                            <i class="fa-solid fa-arrow-right text-lg"></i>
+                                        </div>
+
+                                        <div class="card-content text-white p-5">
+                                            <h4 class="text-2xl font-semibold pb-[10px]">
+                                                K-POP Fan Tour
+                                            </h4>
+                                            <p class="description">
+                                                Visit stunning coastal views, fresh seafood markets, and cultural sites.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
