@@ -12,7 +12,7 @@ class LandingPageController extends Controller
     public function home()
     {
         $popularDestinations = Destination::orderBy('view_count', 'desc')->take(10)->get();
-        $openTrips = Destination::where('type', 'Open Trip')->take(4)->get();
+        $openTrips = Destination::where('type', 'Open Trip')->take(8)->get();
         foreach ($openTrips as $trip) {
             $trip->formatted_start_date = Carbon::parse($trip->date_started)->format('d F');
             $trip->formatted_end_date = Carbon::parse($trip->date_ended)->format('d F');

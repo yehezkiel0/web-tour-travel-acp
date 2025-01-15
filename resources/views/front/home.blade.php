@@ -5,20 +5,21 @@
         <!-- Hero Section -->
         <section>
             <div class="hero max-w-7xl mx-auto pb-8">
-                <div class="flex flex-col-reverse items-center lg:flex-row lg:justify-between md:px-7 lg:px-5 xl:px-0">
+                <div class="flex flex-col-reverse items-center lg:flex-row lg:justify-between px-4 md:px-7 lg:px-5 xl:px-0">
                     <div class="flex flex-col items-center gap-y-5 lg:items-start lg:gap-y-10 lg:pl-4">
                         <div class="flex flex-col items-center py-0 sm:gap-y-2 lg:gap-y-5 lg:py-4 lg:items-start">
-                            <div class="text-2xl flex gap-x-2 md:text-4xl xl:text-5xl lg:block font-bold leading-[60px]">
+                            <div
+                                class="text-xl sm:text-2xl flex gap-x-2 md:text-4xl xl:text-5xl lg:block font-bold leading-10 lg:leading-[60px]">
                                 <h1>Make Dreams a</h1>
                                 <h1 class="text-primary">Destination</h1>
                             </div>
-                            <p class="text-[12px] xs:text-[14px] sm:text-base text-[#4F4F4F]">
+                            <p class="text-[12px] sm:text-[14px] md:text-base text-[#4F4F4F]">
                                 Make your dream trip to South Korea come true with <br />
                                 unforgettable experiences from ACP Tour & Travel.
                             </p>
                         </div>
                         <button
-                            class="bg-primary py-[10px] px-10 w-52 rounded-xl text-white border border-[#E0E0E0] font-semibold hover:bg-primary-400">
+                            class="bg-primary py-2 px-5 sm:py-[10px] sm:px-10 w-40 md:w-52 rounded-xl text-xs md:text-base text-white border border-[#E0E0E0] font-semibold hover:bg-primary-400">
                             Discover Now
                         </button>
                     </div>
@@ -29,7 +30,7 @@
         </section>
         <!-- Popular Destination -->
         <section class="relative">
-            <div class="popular-destination max-w-7xl mx-auto py-[28px]">
+            <div class="popular-destination max-w-7xl mx-auto py-[28px] px-6 md:px-7 lg:px-5 xl:px-0">
                 <h6
                     class="flex justify-center md:gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
                     Explore <span class="text-primary"> Destination </span>
@@ -37,7 +38,7 @@
                 <p class="pb-[40px] text-center text-xs sm:text-sm lg:text-base">We have more than 100 destination you can
                     choose</p>
                 <div class="swiper-container">
-                    <div class="swiper-wrapper md:px-7 lg:px-5 xl:px-0">
+                    <div class="swiper-wrapper">
                         @foreach ($popularDestinations as $destination)
                             <div class="swiper-slide card">
                                 <div class="rounded-xl overflow-hidden relative flex flex-col cursor-pointer">
@@ -72,8 +73,8 @@
         <section>
             <div class="max-w-7xl mx-auto py-[28px]">
                 <div
-                    class="flex flex-col gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 md:px-7 lg:px-5 xl:px-0">
-                    <div class="w-full md:w-1/2 px-4 md:px-0 mx-auto h-[568]">
+                    class="flex flex-col gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 px-6 md:px-7 lg:px-5 xl:px-0">
+                    <div class="w-full md:w-1/2 mx-auto h-[568]">
                         <div class="w-full flex flex-col items-center relative" id="image-search">
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search"
                                 class="rounded-lg w-full" />
@@ -135,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full px-4 md:px-0 md:w-1/2 mx-auto">
+                    <div class="w-full md:w-1/2 mx-auto">
                         <div class="flex flex-col gap-y-3 md:gap-y-[14px] lg:gap-y-[23px]">
                             <div class="flex flex-col gap-y-0 lg:gap-y-2 text-center md:text-start">
                                 <h1 class="font-bold text-xl md:text-2xl xl:text-[35px] text-gray-1">
@@ -195,11 +196,11 @@
         <section>
             <div class="open-trip max-w-7xl mx-auto py-[28px]">
                 <div
-                    class="flex flex-col gap-y-[20px] sm:gap-x-8 sm:grid sm:grid-cols-2 lg:grid-cols-4 md:px-7 lg:px-5 xl:px-0">
+                    class="flex flex-col gap-y-[20px] sm:gap-x-8 sm:grid sm:grid-cols-2 lg:grid-cols-4 px-6 md:px-7 lg:px-5 xl:px-0">
                     <div
                         class="lg:col-span-1 flex flex-col gap-y-2 lg:gap-y-[20px] justify-center items-center sm:items-start md:pl-4 lg:pl-0">
                         <h2
-                            class="font-bold text-2xl block sm:flex sm:flex-col sm:gap-y-2 sm:text-4xl lg:text-[35px] text-center sm:text-left leading-[60px]">
+                            class="font-bold text-2xl block sm:flex sm:flex-col sm:gap-y-2 sm:text-4xl lg:text-[35px] text-center sm:text-left lg:leading-[60px]">
                             Hop on Our <span class="font-semibold text-primary">Open Trip</span>
                         </h2>
                         <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">We make exploring with
@@ -207,12 +208,12 @@
                         </p>
                         <a href="#" class="">
                             <button
-                                class="bg-white py-[10px] px-10 w-52 rounded-[10px] text-primary border border-primary font-semibold text-sm hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                                class="bg-white py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-primary border border-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
                                 See More
                             </button>
                         </a>
                     </div>
-                    <div class="lg:col-span-3 px-4 lg:px-0">
+                    <div class="lg:col-span-3 lg:px-0">
                         <div class="swiper-open-trip">
                             <div class="swiper-wrapper">
                                 @foreach ($openTrips as $trip)
@@ -222,18 +223,19 @@
                                                 <span>{{ $trip->type }}</span>
                                             </div>
                                             <img src="{{ asset('uploads/' . $trip->featured_photo) }}"
-                                                alt="featured-photo" class="object-cover h-[420px] w-full" />
+                                                alt="featured-photo" class="object-cover h-[300px] md:h-[420px] w-full" />
                                             <div
                                                 class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                                 <div
                                                     class="background-transparent absolute bottom-0 border-t-2 border-white  bg-gradient-to-b from-radialCardStart via-radialCardMid to-radialCardEnd 
-                                                    backdrop-blur-sm w-full">
-                                                    <div class="p-5">
-                                                        <h4 class="text-lg font-bold text-white pb-[10px]">
+                                                    backdrop-blur-sm w-full md:h-auto h-36">
+                                                    <div class="px-4 py-2 md:px-5 md:py-5">
+                                                        <h4
+                                                            class="text-[15px] md:text-lg font-bold text-white md:pb-[10px]">
                                                             {{ $trip->title }}
                                                         </h4>
                                                         <div
-                                                            class="flex flex-col gap-x-1 py-[10px] gap-y-1 text-white text-[13px]">
+                                                            class="flex flex-col gap-x-1 py-[5px] md:py-[10px] gap-y-1 text-white text-[10px] md:text-[13px]">
                                                             <div class="flex flex-row gap-x-2">
                                                                 <img src="{{ asset('images/icon/time.svg') }}" />
                                                                 <p>{{ $trip->formatted_start_date }} -
@@ -248,9 +250,9 @@
                                                                 <p>10 - 20</p>
                                                             </div>
                                                         </div>
-                                                        <div class="text-white text-[13px]">
+                                                        <div class="text-white text-[10px] md:text-[13px]">
                                                             <p>Start From</p>
-                                                            <p class="font-bold text-[20px] text-secondary">
+                                                            <p class="font-bold text-sm md:text-[20px] text-secondary">
                                                                 Rp. {{ number_format($trip->price) }} <span
                                                                     class="text-[13px] text-white font-normal">/person</span>
                                                             </p>
@@ -270,15 +272,17 @@
         <!-- Private Trip -->
         <section>
             <div class="private-trip max-w-7xl mx-auto py-[28px]">
-                <div class="flex flex-col gap-y-[20px] justify-center items-center">
-                    <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center leading-[60px]">
+                <div
+                    class="flex flex-col gap-y-4 sm:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
+                    <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center lg:leading-[60px]">
                         Embark on Your Personalized
                         <span class="font-semibold text-primary">Private Trip</span>
                     </h2>
-                    <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">We create personalized journeys
+                    <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base text-center">We create personalized
+                        journeys
                         tailored to your preferences
                     </p>
-                    <div class="wrapper-accordion gap-x-4">
+                    <div class="wrapper-accordion xl:gap-x-4">
                         @for ($i = 0; $i < 4; $i++)
                             <div class="accordion rounded-[20px] overflow-hidden cursor-pointer">
                                 <div class="card-container">
@@ -310,9 +314,9 @@
                             </div>
                         @endfor
                     </div>
-                    <a class="py-[50px]" href="#">
+                    <a class="py-[20px] md:py-[50px]" href="#">
                         <button
-                            class="bg-button-custom1 py-[10px] px-10 w-52 rounded-[10px] text-primary font-semibold text-sm hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                            class="bg-button-custom1 py-2 px-5 sm:py-[10px] sm:px-10 w-40 md:w-52 rounded-[10px] text-xs md:text-base text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
                             See all
                         </button>
                     </a>
@@ -329,7 +333,7 @@
                     <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">From entertainment and beauty to medical
                         trips and recruitment, we’ve got all your needs covered.
                     </p>
-                    <div class="flex flex-col bg-primary-100">
+                    <div class="flex flex-col">
                         <div class="flex flex-row items-start justify-center gap-x-[130px]">
                             <div class="w-[60%]">
                                 <img src="{{ asset('images/home/medical-health.png') }}" alt="medical-health"

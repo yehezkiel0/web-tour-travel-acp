@@ -1,6 +1,7 @@
 .swiper-container,
 .swiper-open-trip {
     overflow: hidden;
+    margin: 0 auto;
 }
 
 .swiper-slide {
@@ -64,7 +65,8 @@
         position: static;
         margin: 10px;
     }
-    .swiper-container {
-        padding: 0 10px;
+    .swiper-open-trip .swiper-slide {
+        width: 328px;
+        height: 300px;
     }
 }
