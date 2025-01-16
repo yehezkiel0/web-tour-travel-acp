@@ -23,3 +23,14 @@ export const tripBreakpoints = {
         spaceBetween: 30,
     },
 };
+
+export const servicesBreakpoints = {
+    640: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+    },
+    1024: {
+        slidesPerView: 2,
+        spaceBetween: 30,
+    },
+};

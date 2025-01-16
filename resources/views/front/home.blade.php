@@ -37,7 +37,7 @@
                 </h6>
                 <p class="pb-[40px] text-center text-xs sm:text-sm lg:text-base">We have more than 100 destination you can
                     choose</p>
-                <div class="swiper-container">
+                <div class="swiper-popular-destination swiper-container">
                     <div class="swiper-wrapper">
                         @foreach ($popularDestinations as $destination)
                             <div class="swiper-slide card">
@@ -73,7 +73,7 @@
         <section>
             <div class="max-w-7xl mx-auto py-[28px]">
                 <div
-                    class="flex flex-col gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 px-6 md:px-7 lg:px-5 xl:px-0">
+                    class="flex flex-col-reverse gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 px-6 md:px-7 lg:px-5 xl:px-0">
                     <div class="w-full md:w-1/2 mx-auto h-[568]">
                         <div class="w-full flex flex-col items-center relative" id="image-search">
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search"
@@ -214,7 +214,7 @@
                         </a>
                     </div>
                     <div class="lg:col-span-3 lg:px-0">
-                        <div class="swiper-open-trip">
+                        <div class="swiper-open-trip swiper-container">
                             <div class="swiper-wrapper">
                                 @foreach ($openTrips as $trip)
                                     <div class="swiper-slide card">
@@ -326,75 +326,112 @@
         <!-- Our Services -->
         <section>
             <div class="services w-full mx-auto py-[28px]">
-                <div class="flex flex-col gap-y-[20px] justify-center items-center">
-                    <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center leading-[60px]">
+                <div
+                    class="flex flex-col gap-y-4 lg:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
+                    <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center">
                         Our Services <span class="font-semibold text-primary">Go Beyond Travel</span>
                     </h2>
-                    <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">From entertainment and beauty to medical
+                    <p class="pb-4 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base text-center">
+                        From entertainment and
+                        beauty to medical
                         trips and recruitment, we’ve got all your needs covered.
                     </p>
-                    <div class="flex flex-col">
-                        <div class="flex flex-row items-start justify-center gap-x-[130px]">
-                            <div class="w-[60%]">
-                                <img src="{{ asset('images/home/medical-health.png') }}" alt="medical-health"
-                                    class="rounded-e-[270px] h-[540px] w-full drop-shadow-xl">
+                    <div class="swiper-services w-full">
+                        <div class="swiper-wrapper xl:flex-col">
+                            {{-- Medical --}}
+                            <div class="swiper-slide service">
+                                <div
+                                    class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none xl:flex-row items-center gap-y-3 xl:gap-x-14">
+                                    <div class="w-full xl:w-3/5">
+                                        <img src="{{ asset('images/home/medical-health.png') }}" alt="medical-health"
+                                            class="w-full xl:rounded-e-[270px] h-40 xl:h-[540px] xl:drop-shadow-xl object-cover">
+                                    </div>
+                                    <div
+                                        class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] flex flex-col justify-center text-primary-800">
+                                        <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">Medical Health <br
+                                                class="hidden xl:block"> & Beauty
+                                        </h1>
+                                        <p
+                                            class="text-[10px] line-clamp-2 xl:text-sm font-normal w-full xl:w-3/4 xl:text-justify leading-tight">
+                                            Manjakan
+                                            diri dengan
+                                            layanan
+                                            kesehatan dan
+                                            kecantikan terbaik di
+                                            Korea. Dapatkan akses ke
+                                            perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.
+                                        </p>
+                                        <a class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start"
+                                            href="#">
+                                            <button
+                                                class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                                                See all
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div
-                                class="w-[40%] gap-y-[30px] pt-[60px] flex flex-col justify-center text-primary-800 leading-[60px]">
-                                <h1 class="text-[45px] font-bold">Medical Health <br> & Beauty</h1>
-                                <p class="text-xs font-normal text-justify w-[70%] leading-tight">Manjakan diri dengan
-                                    layanan
-                                    kesehatan dan
-                                    kecantikan terbaik di
-                                    Korea. Dapatkan akses ke
-                                    perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.</p>
-                                <a class="py-[20px]" href="#">
-                                    <button
-                                        class="bg-white py-[14px] px-[10px] w-52 rounded-[10px] border border-primary text-primary font-semibold text-sm hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                        See all
-                                    </button>
-                                </a>
+                            {{-- Recruitment --}}
+                            <div class="swiper-slide service">
+                                <div
+                                    class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none xl:flex-row-reverse items-center gap-y-3 xl:gap-x-14">
+                                    <div class="w-full xl:w-3/5">
+                                        <img src="{{ asset('images/home/Recruitment.png') }}" alt="Recruitment"
+                                            class="w-full xl:rounded-s-[270px] h-40 xl:h-[540px] xl:drop-shadow-xl object-cover">
+                                    </div>
+                                    <div
+                                        class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] xl:pl-[130px] flex flex-col justify-center text-primary-800">
+                                        <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">Job <br
+                                                class="hidden xl:block"> Recruitment</h1>
+                                        <p
+                                            class="text-[10px] line-clamp-2 xl:text-sm font-normal xl:w-3/4 xl:text-justify leading-tight">
+                                            Buka peluang karir Anda
+                                            di
+                                            Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses
+                                            mudah,
+                                            mulai
+                                            dari
+                                            pencarian lowongan hingga pengurusan dokumen.</p>
+                                        <a class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start"
+                                            href="#">
+                                            <button
+                                                class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                                                See all
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-row-reverse items-start justify-center gap-x-[130px]">
-                            <div class="w-[60%]">
-                                <img src="{{ asset('images/home/Recruitment.png') }}" alt="medical-health"
-                                    class="rounded-s-[270px] h-[540px] w-full drop-shadow-xl">
-                            </div>
-                            <div
-                                class="w-[40%] gap-y-[30px] pt-[60px] pl-[130px] flex flex-col justify-center text-primary-800 leading-[60px]">
-                                <h1 class="text-[45px] font-bold">Job <br> Recruitment</h1>
-                                <p class="text-xs font-normal text-justify w-[70%] leading-tight">Buka peluang karir Anda
-                                    di
-                                    Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses mudah, mulai
-                                    dari
-                                    pencarian lowongan hingga pengurusan dokumen.</p>
-                                <a class="py-[20px]" href="#">
-                                    <button
-                                        class="bg-white py-[14px] px-[10px] w-52 rounded-[10px] border border-primary text-primary font-semibold text-sm hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                        See all
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex flex-row items-start justify-center gap-x-[130px]">
-                            <div class="w-[60%]">
-                                <img src="{{ asset('images/home/Entertainment.png') }}" alt="medical-health"
-                                    class="rounded-e-[270px] h-[540px] w-full drop-shadow-xl">
-                            </div>
-                            <div
-                                class="w-[40%] gap-y-[30px] pt-[60px] flex flex-col justify-center text-primary-800 leading-[60px]">
-                                <h1 class="text-[45px] font-bold">Event <br> Entertainment</h1>
-                                <p class="text-xs font-normal text-justify w-[70%] leading-tight">Manjakan diri dengan
-                                    layanan
-                                    kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan
-                                    pengalaman kecantikan premium dari ahli terpercaya.</p>
-                                <a class="py-[20px]" href="#">
-                                    <button
-                                        class="bg-white py-[14px] px-[10px] w-52 rounded-[10px] border border-primary text-primary font-semibold text-sm hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                        See all
-                                    </button>
-                                </a>
+                            {{-- Entertainment --}}
+                            <div class="swiper-slide service">
+                                <div
+                                    class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none xl:flex-row items-center gap-y-3 xl:gap-x-14">
+                                    <div class="w-full xl:w-3/5">
+                                        <img src="{{ asset('images/home/Entertainment.png') }}" alt="entertainment"
+                                            class="w-full xl:rounded-e-[270px] h-40 xl:h-[540px] xl:drop-shadow-xl object-cover">
+                                    </div>
+                                    <div
+                                        class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] flex flex-col justify-center text-primary-800">
+                                        <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">Event <br
+                                                class="hidden xl:block"> Entertainment</h1>
+                                        <p
+                                            class="text-[10px] line-clamp-2 xl:text-sm font-normal xl:w-3/4 text-justify leading-tight">
+                                            Manjakan diri
+                                            dengan
+                                            layanan
+                                            kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis
+                                            modern
+                                            dan
+                                            pengalaman kecantikan premium dari ahli terpercaya.</p>
+                                        <a class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start"
+                                            href="#">
+                                            <button
+                                                class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                                                See all
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

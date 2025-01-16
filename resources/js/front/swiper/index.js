@@ -1,12 +1,15 @@
-import { initializeMainSwiper } from "./instances/mainSwiper";
+import { initializePopularDestinationSwiper } from "./instances/popularDestinationSwiper";
 import { initializeTripSwiper } from "./instances/tripSwiper";
+import { initializeServicesSwiper } from "./instances/servicesSwiper";
 
 export function initializeSwipers() {
-    const mainSwiper = initializeMainSwiper();
+    const popularDestinationSwiper = initializePopularDestinationSwiper();
     const tripSwiper = initializeTripSwiper();
+    const serviceSwiper = initializeServicesSwiper();
 
     return {
-        mainSwiper,
+        popularDestinationSwiper,
         tripSwiper,
+        serviceSwiper,
     };
 }

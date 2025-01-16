@@ -1,9 +1,9 @@
 import { createSwiper } from "../../utils/swiperFactory";
 import { commonBreakpoints } from "../config/breakpoints";
 
-export function initializeMainSwiper() {
+export function initializePopularDestinationSwiper() {
     const swiper = createSwiper(
-        ".swiper-container",
+        ".swiper-popular-destination",
         commonBreakpoints,
         ".swiper-button-next",
         ".swiper-button-prev"
