@@ -29,8 +29,8 @@
             </div>
         </section>
         <!-- Popular Destination -->
-        <section class="relative">
-            <div class="popular-destination max-w-7xl mx-auto py-[28px] px-6 md:px-7 lg:px-5 xl:px-0">
+        <section class="popular-destination relative">
+            <div class="max-w-7xl mx-auto py-[28px] px-6 md:px-7 lg:px-5 xl:px-0">
                 <h6
                     class="flex justify-center md:gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
                     Explore <span class="text-primary"> Destination </span>
@@ -71,7 +71,7 @@
         </section>
         {{-- Search --}}
         <section>
-            <div class="max-w-7xl mx-auto py-[28px]">
+            <div class="max-w-7xl mx-auto py-[28px] scroll-m-10">
                 <div
                     class="flex flex-col-reverse gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 px-6 md:px-7 lg:px-5 xl:px-0">
                     <div class="w-full md:w-1/2 mx-auto h-[568]">
@@ -271,7 +271,7 @@
         </section>
         <!-- Private Trip -->
         <section>
-            <div class="private-trip max-w-7xl mx-auto py-[28px]">
+            <div class="private-trip max-w-7xl mx-auto py-[28px] scroll-m-10">
                 <div
                     class="flex flex-col gap-y-4 sm:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
                     <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center lg:leading-[60px]">
@@ -325,7 +325,7 @@
         </section>
         <!-- Our Services -->
         <section>
-            <div class="services w-full mx-auto py-[28px]">
+            <div class="services w-full mx-auto py-[28px] scroll-m-10">
                 <div
                     class="flex flex-col gap-y-4 lg:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
                     <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center">
@@ -439,7 +439,7 @@
             </div>
         </section>
         <!-- Why Choose Us -->
-        <section>
+        <section class="why-choose-us scroll-m-10">
             <div class="why-choose-us mx-auto max-w-7xl bg-white py-[28px]">
                 <div class="flex flex-row items-center justify-center">
                     <div class="w-[40%] gap-y-[30px] pt-[60px] flex flex-col justify-center leading-[60px]">
