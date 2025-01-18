@@ -32,11 +32,20 @@
     display: none;
 }
 
-/* @media (min-width: 1280px) {
-    .services-swiper {
-        display: none;
-    }
-} */
+.swiper-services button::before {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background-color: var(--primary-400);
+}
+
+/* Optimasi animasi dengan transform */
+.swiper-services .swiper-slide {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+}
 
 @media (max-width: 968px) {
     .swiper-button-prev {

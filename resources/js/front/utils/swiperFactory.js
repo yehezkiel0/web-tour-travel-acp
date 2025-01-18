@@ -19,6 +19,7 @@ export function createSwiper(
             swiperInstance = new Swiper(container, {
                 slidesPerView: 1,
                 spaceBetween: 10,
+                preloadImages: false,
                 lazy: true,
                 navigation: {
                     nextEl: nextEl,
@@ -41,32 +42,8 @@ export function createSwiper(
             });
         }
     }
-    // return new Swiper(container, {
-    //     slidesPerView: 1,
-    //     spaceBetween: 10,
-    //     lazy: true,
-    //     navigation: {
-    //         nextEl: nextEl,
-    //         prevEl: prevEl,
-    //     },
-    //     pagination: {
-    //         el: ".swiper-pagination",
-    //         clickable: true,
-    //     },
-    //     breakpoints: breakpoints,
-    //     on: {
-    //         slideChange: function () {
-    //             const prevButton = document.querySelector(prevEl);
-    //             if (prevButton) {
-    //                 prevButton.style.display =
-    //                     this.activeIndex === 0 ? "none" : "block";
-    //             }
-    //         },
-    //     },
-    // });
     initSwiper();
 
-    // Tambahkan event listener untuk mengatur ulang Swiper saat layar diubah
     window.addEventListener("resize", initSwiper);
 
     return swiperInstance;

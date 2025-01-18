@@ -1,5 +1,5 @@
-<section class="footer lg:py-16">
-    <div class="container w-[90%] md:w-[80%] xl:max-w-7xl mx-auto py-8 border-t border-[#E0E0E0]">
+<section class="footer lg:py-16 border-t border-[#E0E0E0]">
+    <div class="container w-[90%] md:w-[80%] lg:w-[90%] xl:max-w-7xl mx-auto py-8">
         <div>
             <img src="{{ asset('images/icon/Logo.svg') }}/" alt="Logo-Footer" class="mb-8" />
             <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
@@ -45,7 +45,7 @@
                     <h3 class="mb-6 font-bold text-lg">Connect Us</h3>
                     <ul class="space-y-2">
                         <li>
-                            <a href="#" class="font-normal hover:underline">support@acptours.id</a>
+                            <a href="#" class="font-normal hover:underline">support&#64;acptours.id</a>
                         </li>
                         <li>
                             <a href="#" class="font-normal hover:underline">021 - 2208 - 1996</a>
@@ -58,10 +58,10 @@
             </div>
         </div>
     </div>
-    <div class="container w-[90%] md:w-[80%] xl:max-w-7xl mx-auto py-12 px-5">
+    <div class="container w-[90%] md:w-[80%] lg:w-[90%] xl:max-w-7xl mx-auto pt-12 px-4">
         <div class="flex flex-col-reverse gap-y-4 md:flex-row md:justify-between items-center">
             <p class="text-[#333333] font-normal">
-                Copyright 2019 • All rights reserved • ACP Tours
+                &copy; 2019 &bull; All rights reserved &bull; ACP Tours
             </p>
             <div class="flex flex-row gap-x-2">
                 <a href="#"

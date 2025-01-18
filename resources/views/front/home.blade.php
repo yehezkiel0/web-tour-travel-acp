@@ -324,115 +324,83 @@
             </div>
         </section>
         <!-- Our Services -->
-        <section>
-            <div class="services w-full mx-auto py-[28px] scroll-m-10">
-                <div
-                    class="flex flex-col gap-y-4 lg:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
+        <section class="services">
+            <div class="container mx-auto py-7 scroll-m-10">
+                <div class="flex flex-col gap-y-4 lg:gap-y-5 justify-center items-center px-6 xl:px-0">
                     <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center">
                         Our Services <span class="font-semibold text-primary">Go Beyond Travel</span>
                     </h2>
-                    <p class="pb-4 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base text-center">
-                        From entertainment and
-                        beauty to medical
-                        trips and recruitment, we’ve got all your needs covered.
+                    <p class="pb-4 sm:pb-5 lg:pb-10 text-xs sm:text-base text-center">
+                        From entertainment and beauty to medical trips and recruitment, we've got all your needs covered.
                     </p>
+
                     <div class="swiper-services w-full">
                         <div class="swiper-wrapper xl:flex-col">
-                            {{-- Medical --}}
-                            <div class="swiper-slide service">
-                                <div
-                                    class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none xl:flex-row items-center gap-y-3 xl:gap-x-14">
-                                    <div class="w-full xl:w-3/5">
-                                        <img src="{{ asset('images/home/medical-health.png') }}" alt="medical-health"
-                                            class="w-full xl:rounded-e-[270px] h-40 xl:h-[540px] xl:drop-shadow-xl object-cover">
-                                    </div>
+                            @php
+                                $services = [
+                                    [
+                                        'image' => 'medical-health.png',
+                                        'title' => 'Medical Health & Beauty',
+                                        'description' =>
+                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
+                                        'imageClass' => 'xl:rounded-e-[270px]',
+                                        'reverse' => false,
+                                    ],
+                                    [
+                                        'image' => 'Recruitment.png',
+                                        'title' => 'Job Recruitment',
+                                        'description' =>
+                                            'Buka peluang karir Anda di Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses mudah, mulai dari pencarian lowongan hingga pengurusan dokumen.',
+                                        'imageClass' => 'xl:rounded-s-[270px]',
+                                        'reverse' => true,
+                                    ],
+                                    [
+                                        'image' => 'Entertainment.png',
+                                        'title' => 'Event Entertainment',
+                                        'description' =>
+                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
+                                        'imageClass' => 'xl:rounded-e-[270px]',
+                                        'reverse' => false,
+                                    ],
+                                ];
+                            @endphp
+
+                            @foreach ($services as $service)
+                                <div class="swiper-slide service">
                                     <div
-                                        class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] flex flex-col justify-center text-primary-800">
-                                        <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">Medical Health <br
-                                                class="hidden xl:block"> & Beauty
-                                        </h1>
-                                        <p
-                                            class="text-[10px] line-clamp-2 xl:text-sm font-normal w-full xl:w-3/4 xl:text-justify leading-tight">
-                                            Manjakan
-                                            diri dengan
-                                            layanan
-                                            kesehatan dan
-                                            kecantikan terbaik di
-                                            Korea. Dapatkan akses ke
-                                            perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.
-                                        </p>
-                                        <a class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start"
-                                            href="#">
-                                            <button
-                                                class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                                See all
-                                            </button>
-                                        </a>
+                                        class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none {{ $service['reverse'] ? 'xl:flex-row-reverse' : 'xl:flex-row' }} items-center gap-y-3 xl:gap-x-14">
+                                        <div class="w-full xl:w-3/5">
+                                            {{-- Optimasi gambar dengan width dan height yang spesifik --}}
+                                            <img src="{{ asset('images/home/' . $service['image']) }}"
+                                                alt="{{ Str::slug($service['title']) }}"
+                                                class="w-full {{ $service['imageClass'] }} h-40 xl:h-[540px] xl:drop-shadow-xl object-cover"
+                                                loading="lazy" width="600" height="540" fetchpriority="high"
+                                                decoding="async">
+                                        </div>
+                                        <div
+                                            class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] {{ $service['reverse'] ? 'xl:pl-[130px]' : '' }} flex flex-col justify-center text-primary-800">
+                                            <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">
+                                                @php
+                                                    $titleParts = explode(' & ', $service['title']);
+                                                @endphp
+                                                {{ $titleParts[0] }} <br class="hidden xl:block">
+                                                {{ isset($titleParts[1]) ? '& ' . $titleParts[1] : '' }}
+                                            </h1>
+                                            <p
+                                                class="text-[10px] line-clamp-2 lg:line-clamp-none xl:text-sm font-normal xl:w-3/4 xl:text-justify leading-tight">
+                                                {{ $service['description'] }}
+                                            </p>
+                                            <div class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start">
+                                                <button
+                                                    class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold transition-colors duration-200 hover:bg-primary-400 hover:text-white will-change-auto"
+                                                    type="button">
+                                                    See all
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{-- Recruitment --}}
-                            <div class="swiper-slide service">
-                                <div
-                                    class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none xl:flex-row-reverse items-center gap-y-3 xl:gap-x-14">
-                                    <div class="w-full xl:w-3/5">
-                                        <img src="{{ asset('images/home/Recruitment.png') }}" alt="Recruitment"
-                                            class="w-full xl:rounded-s-[270px] h-40 xl:h-[540px] xl:drop-shadow-xl object-cover">
-                                    </div>
-                                    <div
-                                        class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] xl:pl-[130px] flex flex-col justify-center text-primary-800">
-                                        <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">Job <br
-                                                class="hidden xl:block"> Recruitment</h1>
-                                        <p
-                                            class="text-[10px] line-clamp-2 xl:text-sm font-normal xl:w-3/4 xl:text-justify leading-tight">
-                                            Buka peluang karir Anda
-                                            di
-                                            Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses
-                                            mudah,
-                                            mulai
-                                            dari
-                                            pencarian lowongan hingga pengurusan dokumen.</p>
-                                        <a class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start"
-                                            href="#">
-                                            <button
-                                                class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                                See all
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Entertainment --}}
-                            <div class="swiper-slide service">
-                                <div
-                                    class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none xl:flex-row items-center gap-y-3 xl:gap-x-14">
-                                    <div class="w-full xl:w-3/5">
-                                        <img src="{{ asset('images/home/Entertainment.png') }}" alt="entertainment"
-                                            class="w-full xl:rounded-e-[270px] h-40 xl:h-[540px] xl:drop-shadow-xl object-cover">
-                                    </div>
-                                    <div
-                                        class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] flex flex-col justify-center text-primary-800">
-                                        <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">Event <br
-                                                class="hidden xl:block"> Entertainment</h1>
-                                        <p
-                                            class="text-[10px] line-clamp-2 xl:text-sm font-normal xl:w-3/4 text-justify leading-tight">
-                                            Manjakan diri
-                                            dengan
-                                            layanan
-                                            kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis
-                                            modern
-                                            dan
-                                            pengalaman kecantikan premium dari ahli terpercaya.</p>
-                                        <a class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start"
-                                            href="#">
-                                            <button
-                                                class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                                See all
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -440,46 +408,49 @@
         </section>
         <!-- Why Choose Us -->
         <section class="why-choose-us scroll-m-10">
-            <div class="why-choose-us mx-auto max-w-7xl bg-white py-[28px]">
+            <div class="mx-auto max-w-7xl bg-white py-7 px-6 xl:px-0">
                 <div class="flex flex-row items-center justify-center">
-                    <div class="w-[40%] gap-y-[30px] pt-[60px] flex flex-col justify-center leading-[60px]">
-                        <h1 class="text-[35px] font-bold text-gray-1 text-justify">Reason for <br> <span
-                                class="text-primary">Choosing
-                                Us</span>
+                    <!-- Left Content -->
+                    <div class="w-full md:w-2/5 flex flex-col justify-center gap-y-4 lg:gap-y-[30px]">
+                        <h1 class="text-2xl sm:text-4xl lg:text-[35px] font-bold text-gray-1 text-center sm:text-left">
+                            Reason for <br class="hidden sm:block">
+                            <span class="text-primary">Choosing Us</span>
                         </h1>
-                        <p class="text-xs font-normal text-gray-3 text-justify w-[80%] leading-tight">Anugrah Cahaya
-                            Pelangi offers a safe and comfortable travel experience with professional tour guides. We
+                        <p
+                            class="text-xs font-normal text-gray-3 text-justify sm:w-[90%] lg:w-4/5 leading-5 mb-4 sm:mb-6 lg:mb-8 xl:mb-14">
+                            Anugrah Cahaya Pelangi offers a safe and comfortable travel experience with professional tour
+                            guides. We
                             provide diverse travel destinations, comfortable transportation, and quality accommodations.
-                            Easy booking, including visa processing, with transparent and competitive pricing.</p>
-                        <div class="flex flex-row justify-evenly pt-8 gap-x-10">
-                            <div class="flex flex-col gap-y-[6px] items-center">
-                                <img src="{{ asset('images/icon/backpack.svg') }}" alt="backpack"
-                                    class="w-[57px] h-[57px]" />
-                                <p class="font-semibold text-primary">Success Tour</p>
-                            </div>
-                            <div class="flex flex-col gap-y-[6px] items-center">
-                                <img src="{{ asset('images/icon/happy.svg') }}" alt="backpack"
-                                    class="w-[57px] h-[57px]" />
-                                <p class="font-semibold text-primary">Happy Clients</p>
-                            </div>
-                            <div class="flex flex-col gap-y-[6px] items-center">
-                                <img src="{{ asset('images/icon/years.svg') }}" alt="backpack"
-                                    class="w-[57px] h-[57px]" />
-                                <p class="font-semibold text-primary">Year Experience</p>
-                            </div>
+                            Easy booking, including visa processing, with transparent and competitive pricing.
+                        </p>
+                        <div
+                            class="flex flex-row justify-center sm:justify-normal space-x-4 md:space-x-6 lg:space-x-8 text-[10px] lg:text-xs xl:text-normal text-primary font-semibold">
+                            @foreach ([['icon' => 'backpack.svg', 'text' => 'Success Tour'], ['icon' => 'happy.svg', 'text' => 'Happy Clients'], ['icon' => 'years.svg', 'text' => 'Year Experience']] as $item)
+                                <div
+                                    class="flex flex-col space-y-2 items-center hover:scale-105 transition-transform duration-300">
+                                    <img src="{{ asset('images/icon/' . $item['icon']) }}" alt="{{ $item['text'] }}"
+                                        class="w-9 lg:w-14" loading="lazy">
+                                    <p>{{ $item['text'] }}</p>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
-                    <div class="w-[60%] relative flex items-end justify-center py-6">
-                        <img src="{{ asset('images/home/WCU2.png') }}" alt="w1"
-                            class="rounded-full h-[135px] w-[135px] absolute bottom-4 left-16">
-                        <img src="{{ asset('images/home/WCU1.png') }}" alt="w2"
-                            class="rounded-full h-[450px] w-[450px] drop-shadow-[25px_45px_45px_rgba(52,119,246,0.4)]">
-                        <img src="{{ asset('images/home/WCU3.png') }}" alt="w3"
-                            class="rounded-full h-[225px] w-[225px] absolute top-6 right-0">
+                    <!-- Right Images -->
+                    <div class="hidden md:w-3/5 relative md:flex justify-center pb-6">
+                        <img src="{{ asset('images/home/WCU2.png') }}" alt="Feature Image 1"
+                            class="rounded-full w-24 lg:w-28 xl:w-[135px] absolute bottom-0 left-0 lg:bottom-3 lg:left-5 xl:bottom-5 xl:left-14"
+                            loading="lazy">
+                        <img src="{{ asset('images/home/WCU1.png') }}" alt="Feature Image 2"
+                            class="rounded-full w-80 lg:w-96 xl:w-[450px] drop-shadow-[25px_45px_45px_rgba(52,119,246,0.4)]"
+                            loading="lazy">
+                        <img src="{{ asset('images/home/WCU3.png') }}" alt="Feature Image 3"
+                            class="rounded-full w-40 lg:w-48 xl:w-[225px] absolute top-0 -right-1 lg:top-1 lg:-right-2 xl:top-6 xl:right-0"
+                            loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Our Partners -->
         <section class="our-partners">
             {{-- <div class="max-w-7xl mx-auto py-[100px]">
