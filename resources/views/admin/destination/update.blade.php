@@ -82,13 +82,13 @@
                                     <label for="min_people">Min Participants</label>
                                     <input type="text" id="min_people" name="min_people"
                                         class="bg-white border py-3 px-4 rounded-md text-slate-500"
-                                        value="{{ $destination - min_people }}">
+                                        value="{{ $destination->min_people }}">
                                 </div>
                                 <div class="flex flex-col gap-y-3 text-sm mb-4 w-full">
                                     <label for="max_people">Max Participants</label>
                                     <input type="text" id="max_people" name="max_people"
                                         class="bg-white border py-3 px-4 rounded-md text-slate-500"
-                                        value="{{ $destination - max_people }}">
+                                        value="{{ $destination->max_people }}">
                                 </div>
                             </div>
                         </div>

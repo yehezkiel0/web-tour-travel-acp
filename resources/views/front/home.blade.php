@@ -80,59 +80,68 @@
                                 class="rounded-lg w-full" />
                             <div
                                 class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[432px] xl:w-[496px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
-                                <div class="w-full flex flex-row relative items-center justify-evenly xl:gap-x-2">
-                                    <div class="flex flex-row items-center lg:gap-x-2 text-[#E0E0E0]">
-                                        <i
-                                            class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-sm xl:text-base"></i>
-                                        <select
-                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                            <option class="hidden text-[8px] md:text-xs lg:text-sm xl:text-base"
-                                                value="" disabled selected>
-                                                Destination
-                                            </option>
-                                            <option
-                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                Bali
-                                            </option>
-                                            <option
-                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                Seoul
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
+                                <form action="{{ route('search_result') }}" method="GET">
+                                    @csrf
+                                    <div class="flex relative items-center justify-center xl:gap-x-2">
+                                        <div class="flex flex-row items-center lg:gap-x-2 text-[#E0E0E0]">
+                                            <i
+                                                class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-sm xl:text-base"></i>
+                                            <input type="text" id="destination_input" name="destination_input"
+                                                placeholder="Destination"
+                                                class="w-3/4 bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                            {{-- <select
+                                                class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                <option class="hidden text-[8px] md:text-xs lg:text-sm xl:text-base"
+                                                    value="" disabled selected>
+                                                    Destination
+                                                </option>
+                                                <option
+                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                    Bali
+                                                </option>
+                                                <option
+                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                    Seoul
+                                                </option>
+                                            </select> --}}
+                                        </div>
+                                        <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
 
-                                    <div class="flex flex-row items-center cursor-pointer pr-1 pl-1 gap-x-1 md:pr-2 lg:px-0 lg:gap-x-2 text-[#E0E0E0]"
-                                        id="datepicker-container">
-                                        <img src="{{ asset('images/icon/time.svg') }}" alt="date"
-                                            class="md:w-3 md:h-3 lg:w-5 lg:h-5">
-                                        <p id="datepicker-text" class="text-[10px] md:text-xs lg:text-sm xl:text-base">Date
-                                        </p>
-                                        <i class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
-                                        <input type="text" id="datepicker" class="hidden">
-                                    </div>
-                                    <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
+                                        <div class="flex flex-row items-center cursor-pointer pr-1 pl-1 gap-x-1 md:mr-2 lg:mr-4 xl:mr-6 lg:px-0 lg:gap-x-2 text-[#E0E0E0]"
+                                            id="datepicker-container">
+                                            <img src="{{ asset('images/icon/time.svg') }}" alt="date"
+                                                class="md:w-3 md:h-3 lg:w-5 lg:h-5">
+                                            <p id="datepicker-text" class="text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                Date
+                                            </p>
+                                            <i
+                                                class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
+                                            <input type="text" id="datepicker" name="destination_date" class="hidden">
+                                        </div>
+                                        <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
 
-                                    <div class="flex items-center pl-1 gap-x-1 md:px-2 lg:px-0 lg:gap-x-2 text-[#E0E0E0]">
-                                        <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking">
-                                        <select
-                                            class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                            <option class="hidden" value="" disabled selected>
-                                                Type
-                                            </option>
-                                            <option
-                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                Bali
-                                            </option>
-                                            <option
-                                                class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                Seoul
-                                            </option>
-                                        </select>
+                                        <div
+                                            class="flex items-center justify-center pl-1 gap-x-1 md:pl-0 md:px-2 lg:px-0 text-[#E0E0E0]">
+                                            <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking">
+                                            <select name="destination_type"
+                                                class="bg-transparent w-3/4 border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                <option class="hidden" value="" disabled selected>
+                                                    Type
+                                                </option>
+                                                <option
+                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                    Open Trip
+                                                </option>
+                                                <option
+                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                    Private Trip
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <button type="submit"
+                                            class="font-semibold text-[10px] sm:text-[11px] lg:text-sm text-gray-1 rounded-3xl bg-secondary py-2 px-3 md:py-1 md:px-2 lg:py-2 lg:px-4 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
                                     </div>
-                                    <button type="submit"
-                                        class="font-semibold text-[10px] sm:text-[11px] lg:text-sm text-gray-1 rounded-3xl bg-secondary py-2 px-3 md:py-1 md:px-2 lg:py-2 lg:px-4 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

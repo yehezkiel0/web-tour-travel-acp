@@ -11,7 +11,7 @@ use App\Http\Controllers\User\UserAuthController;
 
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
 
-Route::get('/search-result', [SearchResultController::class, 'index'])->name('search_result');
+Route::get('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
 
 
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
