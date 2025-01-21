@@ -43,6 +43,37 @@ class SearchResultController extends Controller
             $result->duration = Carbon::parse($result->date_started)->diffInDays(Carbon::parse($result->date_ended)) . ' days';
         });
 
-        return view('front.search-result', compact('results'));
+        return view('front.search-filter', compact('results'));
+    }
+
+    public function filterSearch(Request $request)
+    {
+        $price_min = $request->input('price_min');
+        $price_max = $request->input('price_max');
+        $location = $request->input('location');
+        $date = $request->input('date');
+        $trip_type = $request->input('tripType', []);
+
+        $query = Destination::query();
+
+        // Price filter
+        if ($price_min && $price_max) {
+            $query->whereBetween('price', [$price_min, $price_max]);
+        }
+        // Date filter
+        if (!empty($date)) {
+            $query->whereDate('date_started', $date);
+        }
+
+        if (!empty($trip_type)) {
+            $query->whereIn('type', $trip_type);
+        }
+
+        $results = $query->get()->each(function ($result) {
+            $result->description_result = Purifier::clean($result->description);
+            $result->duration = Carbon::parse($result->date_started)->diffInDays(Carbon::parse($result->date_ended)) . ' days';
+        });
+
+        return view('front.partials.search-result', compact('results'));
     }
 }

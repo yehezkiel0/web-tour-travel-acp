@@ -4,7 +4,6 @@ export const initNavbar = ($) => {
     const $sidebar = $(".sidebar-home");
     const $navHome = $(".nav-home");
     const $body = $("body");
-    let lastScrollTop = 0;
     let ticking = false;
 
     const setNavbarHeight = () => {
@@ -20,28 +19,21 @@ export const initNavbar = ($) => {
             requestAnimationFrame(() => {
                 const currentScroll = window.scrollY;
                 const shouldFix = currentScroll > 0;
-
                 $navbar.toggleClass("navbar-fixed", shouldFix);
-
-                lastScrollTop = currentScroll;
                 ticking = false;
             });
-
             ticking = true;
         }
     };
-    setNavbarHeight();
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", setNavbarHeight, { passive: true });
 
     const handleHamburgerClick = (e) => {
         e.preventDefault();
         $hamburger.toggleClass("is-active");
 
         const isActive = $hamburger.hasClass("is-active");
-        $sidebar.toggleClass("active", isActive).toggleClass("hide", !isActive);
+        $sidebar
+            .toggleClass("active", isActive)
+            .toggleClass("hidden", !isActive);
         $navHome.toggleClass("sidebar-fixed", isActive);
         $body.toggleClass("body-lock", isActive);
     };
@@ -55,12 +47,25 @@ export const initNavbar = ($) => {
         }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    $hamburger.on("click", handleHamburgerClick);
-    window.addEventListener("resize", handleResize, { passive: true });
-
     $(".nav-menu a").on("click", function (e) {
         $(".nav-menu a").removeClass("is-active");
         $(this).addClass("is-active");
+        localStorage.setItem("activeMenu", $(this).attr("href"));
     });
+
+    $(document).ready(() => {
+        const activeMenu = localStorage.getItem("activeMenu");
+        if (activeMenu) {
+            $(".nav-menu a").removeClass("is-active");
+            $(`.nav-menu a[href="${activeMenu}"]`).addClass("is-active");
+        }
+
+        setNavbarHeight();
+        handleScroll();
+    });
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", setNavbarHeight, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+    $hamburger.on("click", handleHamburgerClick);
 };

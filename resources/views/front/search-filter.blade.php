@@ -10,7 +10,7 @@
                 </div>
                 <hr class="border-[#E0E0E0]">
 
-                <form id="searchForm" class="px-7">
+                <div class="px-7">
                     <!-- Location -->
                     <div class="my-[30px]">
                         <div class="flex justify-between items-center mb-2">
@@ -42,22 +42,22 @@
                         </div>
                         <input type="date"
                             class="date-input w-full text-xs p-3 bg-[#EBF1FE] rounded-lg text-gray-3 focus:outline-none"
-                            value="2025-09-01">
+                            value="{{ date('Y-m-d') }}">
                     </div>
 
                     <!-- Price Range -->
                     <div class="mb-6">
                         <label class="text-gray-2 font-semibold text-sm block mb-2">Price Range</label>
                         <div class="space-y-4">
-                            <input type="range" class="price-range w-full" min="0" max="16000000" step="100000">
+                            <input type="range" class="price-range w-full" min="0" max="16000000" step="10000">
                             <div class="flex items-center space-x-4">
                                 <input type="text"
                                     class="min-price w-1/2 py-2 px-4 border border-[#8B8B8B] rounded-full font-normal text-[#3C3C3C] text-sm"
-                                    placeholder="IDR 0" value="IDR 0">
+                                    value="0">
                                 <p class="text-[#8B8B8B]">-</p>
                                 <input type="text"
                                     class="max-price w-1/2 py-2 px-4 border border-[#8B8B8B] rounded-full font-normal text-[#3C3C3C] text-sm"
-                                    placeholder="IDR 16,000,000" value="IDR 16,000,000">
+                                    value="16000000">
                             </div>
                         </div>
                     </div>
@@ -87,40 +87,10 @@
                             </label>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="w-full flex flex-col gap-y-4 overflow-y-scroll max-h-screen">
-                @foreach ($results as $result)
-                    <div class="max-h-60 flex flex-row gap-x-6 p-5 bg-white border border-[#E0E0E0] rounded-md">
-                        <div class="max-w-[285px] ">
-                            <img src="{{ asset('uploads/' . $result->featured_photo) }}" alt="featured_photo"
-                                class="w-full object-cover rounded-md">
-                        </div>
-                        <div class="max-w-sm flex flex-col gap-y-[10px]">
-                            <h2 class="text-xl font-medium text-gray">{{ $result->title }}</h2>
-                            <div class="inline-flex space-x-3 font-medium text-[13px]">
-                                <div class="text-primary bg-[#EBF1FE] py-1 px-2 rounded-[10px] border border-primary">
-                                    {{ $result->type }}</div>
-                                <div
-                                    class="text-[#FFB100] bg-[#FFFAEE] py-1 px-2 rounded-[10px] border border-[#FFB100] flex items-center gap-x-2">
-                                    <img src="{{ asset('images/icon/time-rotate.svg') }}">
-                                    {{ $result->duration }}
-                                </div>
-                            </div>
-                            <div class="description-result text-gray-2 font-normal text-xs pb-[10px]">
-                                {!! $result->description_result !!}
-                            </div>
-                            <a href="#"
-                                class="text-white bg-primary font-medium text-xs text-center rounded-md py-2 px-8 w-[140px] hover:bg-primary-400 transition-all ease-in-out duration-300">Book
-                                Now</a>
-                        </div>
-                        <div class="flex flex-col justify-end pl-[30px] pb-4">
-                            <p class="text-gray-2 font-normal text-sm text-end">Start From</p>
-                            <p class="text-gray-2 font-semibold text-[17px]">IDR {{ number_format($result->price) }}</p>
-                            <span class="flex justify-end text-gray-2 font-normal text-xs">/pax</span>
-                        </div>
-                    </div>
-                @endforeach
+            <div id="search-results" class="w-full flex flex-col gap-y-4 overflow-y-scroll max-h-screen">
+                @include('front.partials.search-result', ['results' => $results])
             </div>
         </div>
     </section>

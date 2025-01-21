@@ -6,10 +6,10 @@
         <section>
             <div class="hero max-w-7xl mx-auto pb-8">
                 <div class="flex flex-col-reverse items-center lg:flex-row lg:justify-between px-4 md:px-7 lg:px-5 xl:px-0">
-                    <div class="flex flex-col items-center gap-y-5 lg:items-start lg:gap-y-10 lg:pl-4">
-                        <div class="flex flex-col items-center py-0 sm:gap-y-2 lg:gap-y-5 lg:py-4 lg:items-start">
+                    <div class="flex flex-col items-center gap-y-3 lg:items-start lg:gap-y-10 lg:pl-4">
+                        <div class="flex flex-col items-center py-0 gap-y-5 sm:gap-y-2 lg:gap-y-5 lg:py-4 lg:items-start">
                             <div
-                                class="text-xl sm:text-2xl flex gap-x-2 md:text-4xl xl:text-5xl lg:block font-bold leading-10 lg:leading-[60px]">
+                                class="text-xl sm:text-2xl flex gap-x-2 md:text-4xl xl:text-5xl lg:block font-bold lg:leading-[60px]">
                                 <h1>Make Dreams a</h1>
                                 <h1 class="text-primary">Destination</h1>
                             </div>
@@ -19,7 +19,7 @@
                             </p>
                         </div>
                         <button
-                            class="bg-primary py-2 px-5 sm:py-[10px] sm:px-10 w-40 md:w-52 rounded-xl text-xs md:text-base text-white border border-[#E0E0E0] font-semibold hover:bg-primary-400">
+                            class="bg-primary py-[10px] sm:py-[10px] sm:px-10 w-[164px] md:w-52 rounded-xl text-xs md:text-base text-white border border-[#E0E0E0] font-semibold hover:bg-primary-400">
                             Discover Now
                         </button>
                     </div>
@@ -32,8 +32,8 @@
         <section class="popular-destination relative">
             <div class="max-w-7xl mx-auto py-[28px] px-6 md:px-7 lg:px-5 xl:px-0">
                 <h6
-                    class="flex justify-center md:gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
-                    Explore <span class="text-primary"> Destination </span>
+                    class="flex justify-center gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
+                    Explore <span class="text-primary">Destination </span>
                 </h6>
                 <p class="pb-[40px] text-center text-xs sm:text-sm lg:text-base">We have more than 100 destination you can
                     choose</p>
@@ -80,7 +80,7 @@
                                 class="rounded-lg w-full" />
                             <div
                                 class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[432px] xl:w-[496px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
-                                <form action="{{ route('search_result') }}" method="GET">
+                                <form action="{{ route('search_result') }}" method="POST">
                                     @csrf
                                     <div class="flex relative items-center justify-center xl:gap-x-2">
                                         <div class="flex flex-row items-center lg:gap-x-2 text-[#E0E0E0]">
@@ -89,21 +89,6 @@
                                             <input type="text" id="destination_input" name="destination_input"
                                                 placeholder="Destination"
                                                 class="w-3/4 bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                            {{-- <select
-                                                class="bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                <option class="hidden text-[8px] md:text-xs lg:text-sm xl:text-base"
-                                                    value="" disabled selected>
-                                                    Destination
-                                                </option>
-                                                <option
-                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                    Bali
-                                                </option>
-                                                <option
-                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                    Seoul
-                                                </option>
-                                            </select> --}}
                                         </div>
                                         <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
 
@@ -232,7 +217,7 @@
                                                 <span>{{ $trip->type }}</span>
                                             </div>
                                             <img src="{{ asset('uploads/' . $trip->featured_photo) }}"
-                                                alt="featured-photo" class="object-cover h-[300px] md:h-[420px] w-full" />
+                                                alt="featured-photo" class="object-cover h-[360px] md:h-[420px] w-full" />
                                             <div
                                                 class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                                 <div

@@ -1,10 +1,7 @@
 export const initSearchResult = ($) => {
-    // Format number to IDR
     const formatIDR = (number) => {
         return `IDR ${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
     };
-
-    // Parse IDR string to number
     const parseIDR = (str) => {
         return parseInt(str.replace(/[^\d]/g, ""));
     };
@@ -12,17 +9,18 @@ export const initSearchResult = ($) => {
     const $priceRange = $(".price-range");
     const $minPrice = $(".min-price");
     const $maxPrice = $(".max-price");
+    const $locationSelect = $(".location-select");
+    const $dateInput = $(".date-input");
+    const $tripType = $(".trip-type");
 
-    // Nilai default
     const defaultMin = 0;
-    let dynamicMax = 16000000; // Menggunakan variabel dinamis
+    let dynamicMax = $maxPrice.val();
+    const defaultMax = dynamicMax;
 
-    // Set nilai awal pada input
     $minPrice.val(formatIDR(defaultMin));
     $maxPrice.val(formatIDR(dynamicMax));
     $priceRange.attr("max", dynamicMax).val(defaultMin);
 
-    // Event untuk memperbarui slider saat min price berubah
     $minPrice.on("input", function () {
         let value = parseIDR($(this).val());
         if (isNaN(value) || value < defaultMin) value = defaultMin;
@@ -31,42 +29,94 @@ export const initSearchResult = ($) => {
         $priceRange.val(value);
     });
 
-    // Event untuk memperbarui nilai maksimum yang dinamis
     $maxPrice.on("input", function () {
         let value = parseIDR($(this).val());
         if (isNaN(value) || value < defaultMin) value = defaultMin;
-
         dynamicMax = value;
         $maxPrice.val(formatIDR(dynamicMax));
         $priceRange.attr("max", dynamicMax);
     });
 
-    // Event pada slider
     $priceRange.on("input", function () {
         const value = parseInt($(this).val());
         $minPrice.val(formatIDR(value));
     });
 
-    // Clear all functionality
     $(".clear-all-btn").click(function () {
         $(".location-select").val("");
-        $(".date-input").val("2025-09-01");
-        $priceRange.val(defaultCurrent);
+        clearDate(".date-input");
+        $(".trip-type").prop("checked", false);
+        $priceRange.val(defaultMin);
         $minPrice.val(formatIDR(defaultMin));
         $maxPrice.val(formatIDR(defaultMax));
-        $(".trip-type").prop("checked", false);
+        updateResults();
     });
 
-    // Clear individual sections
     $(".clear-location-btn").click(function () {
         $(".location-select").val("");
     });
 
     $(".clear-date-btn").click(function () {
-        $(".date-input").val("2025-09-01");
+        clearDate(".date-input");
+        updateResults();
     });
 
     $(".clear-type-btn").click(function () {
         $(".trip-type").prop("checked", false);
     });
+
+    function clearDate(selectorInput) {
+        $(selectorInput).val("");
+    }
+
+    $(".price-range").on("input", function () {
+        updateResults();
+    });
+
+    $(".location-select").on("change", function () {
+        updateResults();
+    });
+
+    $(".trip-type").on("change", function () {
+        updateResults();
+    });
+
+    $(".date-input").on("change", function () {
+        updateResults();
+    });
+
+    let debounceTimer;
+    function updateResults() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const min_price = parseIDR($minPrice.val());
+            const max_price = parseIDR($maxPrice.val());
+            const location = $locationSelect.val();
+            const date = $dateInput.val();
+            const tripType = $tripType
+                .filter(":checked")
+                .map(function () {
+                    return $(this).val();
+                })
+                .get();
+
+            $.ajax({
+                url: "/filter-search",
+                method: "GET",
+                data: {
+                    min_price: min_price,
+                    max_price: max_price,
+                    location: location,
+                    date: date,
+                    trip_type: JSON.stringify(tripType),
+                },
+                success: function (response) {
+                    $("#search-results").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                },
+            });
+        }, 300);
+    }
 };

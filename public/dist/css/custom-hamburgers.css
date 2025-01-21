@@ -37,7 +37,7 @@
 .hamburger-inner:after,
 .hamburger-inner:before {
     position: absolute;
-    width: 28px;
+    width: 24px;
     height: 4px;
     transition-timing-function: ease;
     transition-duration: 0.15s;
