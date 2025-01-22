@@ -22,8 +22,8 @@
                             <select
                                 class="location-select appearance-none w-full p-3 bg-[#EBF1FE] rounded-lg text-gray-3 text-xs focus:outline-none">
                                 <option value="">Place to Go</option>
-                                <option value="bali">Bali</option>
-                                <option value="jakarta">Jakarta</option>
+                                <option value="seoul">Seoul</option>
+                                <option value="jeju">Jeju</option>
                                 <option value="yogyakarta">Yogyakarta</option>
                             </select>
                             <div
@@ -41,15 +41,14 @@
                                 class="clear-date-btn text-gray-3 text-xs hover:text-gray-500">Clear</button>
                         </div>
                         <input type="date"
-                            class="date-input w-full text-xs p-3 bg-[#EBF1FE] rounded-lg text-gray-3 focus:outline-none"
-                            value="{{ date('Y-m-d') }}">
+                            class="date-input w-full text-xs p-3 bg-[#EBF1FE] rounded-lg text-gray-3 focus:outline-none">
                     </div>
 
                     <!-- Price Range -->
                     <div class="mb-6">
                         <label class="text-gray-2 font-semibold text-sm block mb-2">Price Range</label>
                         <div class="space-y-4">
-                            <input type="range" class="price-range w-full" min="0" max="16000000" step="10000">
+                            <input type="range" class="price-range w-full" min="0" max="0" step="100000">
                             <div class="flex items-center space-x-4">
                                 <input type="text"
                                     class="min-price w-1/2 py-2 px-4 border border-[#8B8B8B] rounded-full font-normal text-[#3C3C3C] text-sm"
@@ -57,7 +56,7 @@
                                 <p class="text-[#8B8B8B]">-</p>
                                 <input type="text"
                                     class="max-price w-1/2 py-2 px-4 border border-[#8B8B8B] rounded-full font-normal text-[#3C3C3C] text-sm"
-                                    value="16000000">
+                                    data-max-price="{{ $maxPrice }}" value="{{ $maxPrice }}">
                             </div>
                         </div>
                     </div>
@@ -69,28 +68,30 @@
                             <button type="button"
                                 class="clear-type-btn text-gray-3 text-xs hover:text-gray-500">Clear</button>
                         </div>
-                        <div class="space-y-3 p-5 rounded-lg">
+                        <div class="space-y-3 p-5 rounded-lg" id="trip-type-container">
                             <label class="flex flex-row-reverse justify-between items-center">
                                 <input type="checkbox" class="trip-type form-checkbox h-5 w-5 accent-primary"
-                                    value="open">
+                                    name="trip-type[]" value="Open Trip">
                                 <span class="text-gray-2 font-normal text-xs">Open trip</span>
                             </label>
                             <label class="flex flex-row-reverse justify-between items-center">
                                 <input type="checkbox" class="trip-type form-checkbox h-5 w-5 accent-primary"
-                                    value="private">
+                                    name="trip-type[]" value="Private Trip">
                                 <span class="text-gray-2 font-normal text-xs">Private trip</span>
                             </label>
                             <label class="flex flex-row-reverse justify-between items-center">
                                 <input type="checkbox" class="trip-type form-checkbox h-5 w-5 accent-primary"
-                                    value="package">
+                                    name="trip-type[]" value="Package">
                                 <span class="text-gray-2 font-normal text-xs">Package</span>
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="search-results" class="w-full flex flex-col gap-y-4 overflow-y-scroll max-h-screen">
-                @include('front.partials.search-result', ['results' => $results])
+            <div id="search-results" class="w-full flex flex-col gap-y-4 overflow-y-scroll max-h-screen relative">
+                @if (@isset($results) && count($results) > 0)
+                    @include('front.partials.search-result', ['results' => $results])
+                @endif
             </div>
         </div>
     </section>

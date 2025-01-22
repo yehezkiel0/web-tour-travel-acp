@@ -1,8 +1,11 @@
 export const initSearchResult = ($) => {
     const formatIDR = (number) => {
+        if (!number) return "";
         return `IDR ${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
     };
+
     const parseIDR = (str) => {
+        if (!str) return "";
         return parseInt(str.replace(/[^\d]/g, ""));
     };
 
@@ -12,109 +15,133 @@ export const initSearchResult = ($) => {
     const $locationSelect = $(".location-select");
     const $dateInput = $(".date-input");
     const $tripType = $(".trip-type");
+    const $searchResults = $("#search-results");
 
     const defaultMin = 0;
     let dynamicMax = $maxPrice.val();
-    const defaultMax = dynamicMax;
+    let currentMax = dynamicMax;
+    let currentMin = defaultMin;
 
     $minPrice.val(formatIDR(defaultMin));
     $maxPrice.val(formatIDR(dynamicMax));
-    $priceRange.attr("max", dynamicMax).val(defaultMin);
+    $priceRange.attr({
+        min: defaultMin,
+        max: dynamicMax,
+        value: defaultMin,
+    });
 
     $minPrice.on("input", function () {
         let value = parseIDR($(this).val());
+
         if (isNaN(value) || value < defaultMin) value = defaultMin;
-        if (value > dynamicMax) value = dynamicMax;
+        if (value > currentMax) value = currentMax;
+
+        currentMin = value;
         $(this).val(formatIDR(value));
         $priceRange.val(value);
+        updateResults();
     });
 
     $maxPrice.on("input", function () {
         let value = parseIDR($(this).val());
-        if (isNaN(value) || value < defaultMin) value = defaultMin;
-        dynamicMax = value;
-        $maxPrice.val(formatIDR(dynamicMax));
-        $priceRange.attr("max", dynamicMax);
+        const maxPriceLimit = parseInt($(this).data("max-price"));
+
+        if (isNaN(value) || value < currentMin) value = currentMin;
+        if (value > maxPriceLimit) value = maxPriceLimit;
+
+        currentMax = value;
+
+        $(this).val(formatIDR(value));
+        $priceRange.attr("max", value);
+        updateResults();
     });
 
     $priceRange.on("input", function () {
         const value = parseInt($(this).val());
+        currentMin = value;
         $minPrice.val(formatIDR(value));
+
+        if (value > currentMax) {
+            currentMax = value;
+            $maxPrice.val(formatIDR(value));
+        }
+        updateResults();
     });
 
     $(".clear-all-btn").click(function () {
-        $(".location-select").val("");
-        clearDate(".date-input");
-        $(".trip-type").prop("checked", false);
-        $priceRange.val(defaultMin);
+        $locationSelect.val("");
+        $dateInput.val("");
+        $tripType.prop("checked", false);
+
+        currentMin = defaultMin;
+        currentMax = dynamicMax;
+        $priceRange.val(defaultMin).attr("max", dynamicMax);
         $minPrice.val(formatIDR(defaultMin));
-        $maxPrice.val(formatIDR(defaultMax));
-        updateResults();
+        $maxPrice.val(formatIDR(dynamicMax));
+
+        updateResults(true);
     });
 
     $(".clear-location-btn").click(function () {
-        $(".location-select").val("");
+        $locationSelect.val("");
+        updateResults(true);
     });
 
     $(".clear-date-btn").click(function () {
-        clearDate(".date-input");
-        updateResults();
+        $dateInput.val("");
+        updateResults(true);
     });
 
     $(".clear-type-btn").click(function () {
-        $(".trip-type").prop("checked", false);
+        $tripType.prop("checked", false);
+        updateResults(true);
     });
 
-    function clearDate(selectorInput) {
-        $(selectorInput).val("");
-    }
-
-    $(".price-range").on("input", function () {
-        updateResults();
-    });
-
-    $(".location-select").on("change", function () {
-        updateResults();
-    });
-
-    $(".trip-type").on("change", function () {
-        updateResults();
-    });
-
-    $(".date-input").on("change", function () {
-        updateResults();
-    });
+    $locationSelect.on("change", () => updateResults(false));
+    $tripType.on("change", () => updateResults(false));
+    $dateInput.on("change", () => updateResults(false));
 
     let debounceTimer;
-    function updateResults() {
+    function updateResults(isClear = false) {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
-            const min_price = parseIDR($minPrice.val());
-            const max_price = parseIDR($maxPrice.val());
-            const location = $locationSelect.val();
-            const date = $dateInput.val();
-            const tripType = $tripType
-                .filter(":checked")
-                .map(function () {
-                    return $(this).val();
-                })
-                .get();
+            let filters = {};
+
+            if (!isClear) {
+                if (currentMin > defaultMin) filters.min_price = currentMin;
+                if (currentMax < dynamicMax) filters.max_price = currentMax;
+                if ($locationSelect.val())
+                    filters.location = $locationSelect.val();
+                if ($dateInput.val()) filters.date = $dateInput.val();
+                if ($priceRange.val() > 0)
+                    filters.price_range = $priceRange.val();
+
+                const selectedTypes = $tripType
+                    .filter(":checked")
+                    .map(function () {
+                        return $(this).val();
+                    })
+                    .get();
+
+                if (selectedTypes.length > 0) {
+                    filters.trip_type = selectedTypes;
+                }
+            }
+            $searchResults.addClass("loading");
 
             $.ajax({
-                url: "/filter-search",
+                url: "/search-result",
                 method: "GET",
-                data: {
-                    min_price: min_price,
-                    max_price: max_price,
-                    location: location,
-                    date: date,
-                    trip_type: JSON.stringify(tripType),
-                },
+                data: filters,
                 success: function (response) {
-                    $("#search-results").html(response);
+                    setTimeout(() => {
+                        $searchResults.removeClass("loading");
+                        $("#search-results").html(response);
+                    }, 2000);
                 },
                 error: function (xhr, status, error) {
-                    console.error(error);
+                    $searchResults.removeClass("loading");
+                    console.error("Filter error:", error);
                 },
             });
         }, 300);

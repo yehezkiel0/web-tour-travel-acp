@@ -29,5 +29,10 @@ export const initDatePicker = ($) => {
     // Update text when date is selected
     $datepicker.on("changeDate", (e) => {
         $isDatePickerOpen = false;
+
+        const selectedDate = $datepicker.datepicker("getFormattedDate");
+        $datepickerText.text(selectedDate);
+        $datepickerText.removeClass("text-[#E0E0E0]");
+        $datepicker.val(selectedDate);
     });
 };

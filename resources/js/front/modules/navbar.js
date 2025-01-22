@@ -55,9 +55,13 @@ export const initNavbar = ($) => {
 
     $(document).ready(() => {
         const activeMenu = localStorage.getItem("activeMenu");
-        if (activeMenu) {
+        const currentPath = window.location.pathname;
+
+        if (activeMenu && activeMenu === currentPath) {
             $(".nav-menu a").removeClass("is-active");
             $(`.nav-menu a[href="${activeMenu}"]`).addClass("is-active");
+        } else {
+            $(".nav-menu a").removeClass("is-active");
         }
 
         setNavbarHeight();

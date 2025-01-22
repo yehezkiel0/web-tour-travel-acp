@@ -12,14 +12,14 @@ class SearchResultController extends Controller
 {
     public function searchResult(Request $request)
     {
-        // Tambahkan validasi
-        $validated = $request->validate([
+        $request->validate([
             'destination_input' => 'nullable|string|max:255',
             'destination_date' => 'nullable|date',
             'destination_type' => 'nullable|string|'
         ]);
 
         $query = Destination::query();
+        $maxPrice = Destination::max('price');
 
         if ($request->filled('destination_input')) {
             $query->where(function ($q) use ($request) {
@@ -43,30 +43,42 @@ class SearchResultController extends Controller
             $result->duration = Carbon::parse($result->date_started)->diffInDays(Carbon::parse($result->date_ended)) . ' days';
         });
 
-        return view('front.search-filter', compact('results'));
+        $request->replace([]);
+
+        return view('front.search-filter', compact('results', 'maxPrice'));
     }
 
     public function filterSearch(Request $request)
     {
-        $price_min = $request->input('price_min');
-        $price_max = $request->input('price_max');
-        $location = $request->input('location');
-        $date = $request->input('date');
-        $trip_type = $request->input('tripType', []);
-
+        $request->validate([
+            'min_price' => 'nullable|numeric',
+            'max_price' => 'nullable|numeric',
+            'price_range' => 'nullable|numeric',
+            'location' => 'nullable|string',
+            'date' => 'nullable|date',
+            'trip_type' => 'nullable|array'
+        ]);
         $query = Destination::query();
 
-        // Price filter
-        if ($price_min && $price_max) {
-            $query->whereBetween('price', [$price_min, $price_max]);
-        }
-        // Date filter
-        if (!empty($date)) {
-            $query->whereDate('date_started', $date);
+        if ($request->filled(['min_price', 'max_price'])) {
+            $minPrice = (int) $request->min_price;
+            $maxPrice = (int) $request->max_price;
+            $query->whereBetween('price', [$minPrice, $maxPrice]);
+        } elseif ($request->filled('price_range')) {
+            $priceRange = (int) $request->price_range;
+            $query->where('price', '>=', $priceRange);
         }
 
-        if (!empty($trip_type)) {
-            $query->whereIn('type', $trip_type);
+        if ($request->filled('location') && $request->location !== '') {
+            $query->where('city', $request->location);
+        }
+
+        if ($request->filled('date') && $request->date !== '') {
+            $query->whereDate('date_started', $request->date);
+        }
+
+        if ($request->filled('trip_type') && is_array($request->trip_type) && count($request->trip_type) > 0) {
+            $query->whereIn('type', $request->trip_type);
         }
 
         $results = $query->get()->each(function ($result) {

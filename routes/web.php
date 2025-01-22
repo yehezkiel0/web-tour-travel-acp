@@ -12,7 +12,7 @@ use App\Http\Controllers\User\UserAuthController;
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
 
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
-Route::get('/filter-search', [SearchResultController::class, 'filterSearch'])->name('filter_search');
+Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
 
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
 Route::post('/login', [UserAuthController::class, 'login_submit'])->name('login_submit');

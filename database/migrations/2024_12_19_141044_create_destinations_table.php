@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('country');
             $table->string('city');
-            $table->string('price');
+            $table->bigInteger('price');
             $table->date('date_started')->nullable();
             $table->date('date_ended')->nullable();
             $table->string('type');
