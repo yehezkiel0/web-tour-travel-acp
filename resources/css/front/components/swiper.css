@@ -40,14 +40,20 @@
     background-color: var(--primary-400);
 }
 
-/* Optimasi animasi dengan transform */
 .swiper-services .swiper-slide {
     transform: translateZ(0);
     will-change: transform;
     backface-visibility: hidden;
 }
 
-@media (max-width: 968px) {
+@media (max-width: 1280px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+}
+
+/* @media (max-width: 968px) {
     .swiper-button-prev {
         left: -50px !important;
         display: block;
@@ -57,9 +63,9 @@
         right: -50px !important;
         display: block;
     }
-}
+} */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .swiper-button-prev {
         display: block;
         left: 20px !important;
@@ -68,17 +74,17 @@
     .swiper-button-next {
         right: 20px !important;
     }
-}
+} */
 
 @media (max-width: 480px) {
-    .swiper-button-prev,
+    /* .swiper-button-prev,
     .swiper-button-next {
         left: auto;
         right: auto;
         transform: translateY(0);
         position: static;
         margin: 10px;
-    }
+    } */
     .swiper-open-trip .swiper-slide {
         width: 328px;
         height: 360px;

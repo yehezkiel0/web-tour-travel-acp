@@ -15,7 +15,7 @@ class UserAuthController extends Controller
 {
     public function login_register()
     {
-        return view('front.login-register');
+        return view('front.auth.login-register');
     }
 
     public function login_submit(Request $request)
@@ -108,7 +108,7 @@ class UserAuthController extends Controller
 
     public function forget_password()
     {
-        return view('front.forget-password');
+        return view('front.auth.forget-password');
     }
 
     public function forget_password_submit(Request $request)
@@ -151,7 +151,7 @@ class UserAuthController extends Controller
             return redirect()->route('login_register')->with('error', 'Token or email is not correct');
         }
 
-        return view('front.reset-password', compact('token', 'email'));
+        return view('front.auth.reset-password', compact('token', 'email'));
     }
 
     public function reset_password_submit(Request $request)

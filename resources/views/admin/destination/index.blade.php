@@ -135,6 +135,13 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                                                     <div class="flex justify-center items-center space-x-2">
                                                         <a
+                                                            href="{{ route('admin_destination_details', ['slug' => $destination->slug]) }}">
+                                                            <button type="button"
+                                                                class="inline-flex items-center px-3 py-2 border border-yellow-400 rounded-md shadow-sm text-sm font-medium text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                        <a
                                                             href="{{ route('admin_destination_edit', ['slug' => $destination->slug]) }}">
                                                             <button type="button"
                                                                 class="inline-flex items-center px-3 py-2 border border-blue-400 rounded-md shadow-sm text-sm font-medium text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">

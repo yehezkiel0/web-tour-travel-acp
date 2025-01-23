@@ -15,7 +15,7 @@ class AdminAuthController extends Controller
 {
     public function login()
     {
-        return view('admin.login');
+        return view('admin.auth.login');
     }
 
     public function login_submit(Request $request)
@@ -84,7 +84,7 @@ class AdminAuthController extends Controller
 
     public function forget_password()
     {
-        return view('admin.forget-password');
+        return view('admin.auth.forget-password');
     }
 
     public function forget_password_submit(Request $request)
@@ -128,7 +128,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin_login')->with('error', 'Token or email is not correct');
         }
 
-        return view('admin.reset-password', compact('token', 'email'));
+        return view('admin.auth.reset-password', compact('token', 'email'));
     }
 
     public function reset_password_submit(Request $request)

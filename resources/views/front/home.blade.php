@@ -79,20 +79,20 @@
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search"
                                 class="rounded-lg w-full" />
                             <div
-                                class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[432px] xl:w-[496px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
+                                class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[432px] xl:w-[520px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
                                 <form action="{{ route('search_result') }}" method="POST">
                                     @csrf
                                     <div class="flex relative items-center justify-center xl:gap-x-2">
-                                        <div class="flex flex-row items-center lg:gap-x-2 text-[#E0E0E0]">
+                                        <div class="xl:flex items-center lg:space-x-2 text-[#E0E0E0]">
                                             <i
                                                 class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-sm xl:text-base"></i>
                                             <input type="text" id="destination_input" name="destination_input"
                                                 placeholder="Destination"
-                                                class="w-3/4 bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                class="w-3/5 xl:w-full bg-transparent border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
                                         </div>
-                                        <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
+                                        <div class="h-4 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
 
-                                        <div class="flex flex-row items-center cursor-pointer pr-1 pl-1 gap-x-1 md:mr-2 lg:mr-4 xl:mr-6 lg:px-0 lg:gap-x-2 text-[#E0E0E0]"
+                                        <div class="flex flex-row items-center cursor-pointer md:mr-2 lg:mr-8 xl:mr-6 lg:space-x-2 text-[#E0E0E0]"
                                             id="datepicker-container">
                                             <img src="{{ asset('images/icon/time.svg') }}" alt="date"
                                                 class="md:w-3 md:h-3 lg:w-5 lg:h-5">
@@ -103,13 +103,13 @@
                                                 class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
                                             <input type="text" id="datepicker" name="destination_date" class="hidden">
                                         </div>
-                                        <div class="h-4 md:h-6 xl:h-8 w-px bg-gray-300"></div>
+                                        <div class="h-4 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
 
                                         <div
-                                            class="flex items-center justify-center pl-1 gap-x-1 md:pl-0 md:px-2 lg:px-0 text-[#E0E0E0]">
+                                            class="flex items-center justify-center md:mr-2 lg:mr-1 xl:mr-3 lg:space-x-0 xl:space-x-2 text-[#E0E0E0]">
                                             <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking">
                                             <select name="destination_type"
-                                                class="bg-transparent w-3/4 border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                class="bg-transparent w-full xl:w-3/4 border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
                                                 <option class="hidden" value="" disabled selected>
                                                     Type
                                                 </option>

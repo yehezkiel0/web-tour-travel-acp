@@ -31,6 +31,11 @@ class Destination extends Model
         return $this->hasMany(DestinationPhoto::class);
     }
 
+    public function destination_detail()
+    {
+        return $this->hasOne(DestinationDetail::class);
+    }
+
     public function sluggable(): array
     {
         return [

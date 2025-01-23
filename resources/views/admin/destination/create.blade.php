@@ -24,7 +24,7 @@
                         </div>
                         <div class="flex flex-col gap-y-3 text-sm mb-4">
                             <label for="description">Description*</label>
-                            <textarea name="description" id="description" class="h-[100px]" value="{{ old('description') }}"></textarea>
+                            <textarea name="description" id="textarea" class="h-[100px]" value="{{ old('description') }}"></textarea>
                         </div>
                         <div class="flex flex-row gap-x-5">
                             <div class="flex flex-col gap-y-3 text-sm mb-4 w-full">
@@ -67,7 +67,8 @@
                             <div class="flex flex-col gap-y-3 text-sm mb-4 w-full">
                                 <label for="type">Type</label>
                                 <select name="type" id="type"
-                                    class="bg-white border py-3 px-4 rounded-md text-slate-500" value="{{ old('type') }}">
+                                    class="bg-white border border-gray-300 py-3 px-4 rounded-md text-slate-500 appearance-none"
+                                    value="{{ old('type') }}">
                                     <option>Open Trip</option>
                                     <option>Private Trip</option>
                                     <option>Package</option>

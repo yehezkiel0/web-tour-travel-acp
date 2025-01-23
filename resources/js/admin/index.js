@@ -1,4 +1,5 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 $(function () {
     $("#sidebar a").on("click", function (e) {
         $("#sidebar a").removeClass("active");

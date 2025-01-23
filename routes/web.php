@@ -5,15 +5,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
+use App\Http\Controllers\Admin\AdminDestinationDetailController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
 use App\Http\Controllers\User\UserAuthController;
 
+//LandingPage
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
 
+//SearchPage
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
 
+//User Auth
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
 Route::post('/login', [UserAuthController::class, 'login_submit'])->name('login_submit');
 Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
@@ -24,7 +28,7 @@ Route::post('/forget-password', [UserAuthController::class, 'forget_password_sub
 Route::get('/reset-password', [UserAuthController::class, 'reset_password'])->name('reset_password');
 Route::post('/reset-password', [UserAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
 
-
+//Admin dashboard
 Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admin_dashboard');
     Route::get('/profile', [AdminAuthController::class, 'profile'])->name('admin_profile');
@@ -40,8 +44,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::delete('/destination/{id}', [AdminDestinationController::class, 'delete'])->name('admin_destination_delete');
     Route::get('/destination/{slug}/photos', [AdminDestinationController::class, 'photos'])->name('destination_photos');
     Route::post('/destination/{slug}/photos', [AdminDestinationController::class, 'photos_store'])->name('destination_photos_store');
-});
 
+    //DestinationDetails Section
+    Route::get('/destination/{slug}/details', [AdminDestinationDetailController::class, 'details'])->name('admin_destination_details');
+    Route::post('/destination/{slug}/details', [AdminDestinationDetailController::class, 'details_store'])->name('admin_destination_details_store');
+});
+// Admin Authentication
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'login'])->name('admin_login');
     Route::post('/login', [AdminAuthController::class, 'login_submit'])->name('admin_login_submit');
