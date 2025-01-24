@@ -7,6 +7,8 @@ import { initAccordion } from "./modules/accordion";
 import { initInfiniteScroll } from "./modules/scroll";
 import { initDatePicker } from "./modules/datepicker";
 import { initSearchResult } from "./modules/search-result";
+import { initTabPane } from "./modules/tab-pane";
+import { initGallery } from "./modules/gallery-modals";
 
 // Wait for DOM to be ready
 $(() => {
@@ -18,4 +20,6 @@ $(() => {
     initInfiniteScroll();
     initDatePicker($);
     initSearchResult($);
+    initTabPane($);
+    initGallery($);
 });

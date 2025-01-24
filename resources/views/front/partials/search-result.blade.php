@@ -1,5 +1,6 @@
 @forelse ($results as $result)
-    <div class="max-h-60 flex flex-row justify-between gap-x-6 p-5 bg-white border border-[#E0E0E0] rounded-lg">
+    <div class="max-h-60 flex flex-row justify-between gap-x-6 p-5 bg-white border border-[#E0E0E0] rounded-lg cursor-pointer"
+        onclick="window.location.href='{{ route('destination_detail', $result->slug) }}';">
         <div class="w-80 ">
             <img src="{{ asset('uploads/' . $result->featured_photo) }}" alt="featured_photo"
                 class="w-full object-cover rounded-md">
@@ -18,9 +19,11 @@
             <div class="description-result text-gray-2 font-normal text-xs pb-[10px]">
                 {!! $result->description_result !!}
             </div>
-            <a href="#"
-                class="text-white bg-primary font-medium text-xs text-center rounded-md py-2 px-8 w-[140px] hover:bg-primary-400 transition-all ease-in-out duration-300">Book
-                Now</a>
+            <a href="">
+                <button
+                    class="text-white bg-primary font-medium text-xs text-center rounded-md py-2 px-8 w-[140px] hover:bg-primary-400 transition-all ease-in-out duration-300">
+                    Book Now</button>
+            </a>
         </div>
         <div class="min-w-[117px] flex flex-col justify-end pb-4">
             <p class="text-gray-2 font-normal text-sm text-end">Start From</p>

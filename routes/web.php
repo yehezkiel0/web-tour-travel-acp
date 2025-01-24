@@ -13,6 +13,8 @@ use App\Http\Controllers\User\UserAuthController;
 //LandingPage
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
 
+Route::get('/destination/{slug}', [LandingPageController::class, 'destination_detail'])->name('destination_detail');
+
 //SearchPage
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');

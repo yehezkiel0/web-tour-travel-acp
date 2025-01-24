@@ -21,4 +21,13 @@ class LandingPageController extends Controller
 
         return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips'));
     }
+
+    public function destination_detail($slug)
+    {
+        $destination = Destination::where('slug', $slug)->with('photos')->first();
+
+        $destination_photos = $destination->photos;
+
+        return view('front.destination-detail', compact('destination', 'destination_photos'));
+    }
 }

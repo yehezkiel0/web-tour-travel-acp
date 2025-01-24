@@ -40,7 +40,7 @@
                 <div class="swiper-popular-destination swiper-container">
                     <div class="swiper-wrapper">
                         @foreach ($popularDestinations as $destination)
-                            <div class="swiper-slide card">
+                            <a href="{{ route('destination_detail', $destination->slug) }}" class="swiper-slide card">
                                 <div class="rounded-xl overflow-hidden relative flex flex-col cursor-pointer">
                                     <img src="{{ asset('uploads/' . $destination->featured_photo) }}" alt="featured-photo"
                                         class="object-cover h-[220px] w-full" />
@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
