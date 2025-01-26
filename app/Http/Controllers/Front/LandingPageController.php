@@ -26,6 +26,8 @@ class LandingPageController extends Controller
     {
         $destination = Destination::where('slug', $slug)->with('photos')->first();
 
+        $destination->duration = Carbon::parse($destination->date_started)->diffInDays($destination->date_ended);
+
         $destination_photos = $destination->photos;
 
         return view('front.destination-detail', compact('destination', 'destination_photos'));

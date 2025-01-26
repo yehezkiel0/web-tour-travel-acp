@@ -16,7 +16,7 @@
                     {{ $result->duration }}
                 </div>
             </div>
-            <div class="description-result text-gray-2 font-normal text-xs pb-[10px]">
+            <div class="description-result text-gray-2 font-normal text-xs line-clamp-2">
                 {!! $result->description_result !!}
             </div>
             <a href="">

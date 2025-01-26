@@ -1,4 +1,7 @@
 export const initGallery = ($) => {
+    if (!document.getElementById("gallery")) {
+        return;
+    }
     const photos = JSON.parse(
         document.getElementById("gallery").dataset.photos
     );
@@ -6,7 +9,7 @@ export const initGallery = ($) => {
     let currentIndex = 0;
 
     $("#openGalleryModal").on("click", function () {
-        currentIndex = 3;
+        currentIndex = 1;
         $("#currentPhoto").attr("src", `/uploads/${photos[currentIndex]}`);
         $("#galleryModal").removeClass("hidden");
         $("#galleryModal").addClass("flex");
