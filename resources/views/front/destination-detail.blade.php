@@ -89,29 +89,28 @@
             <nav class="flex gap-x-8 z-10 text-sm font-medium text-gray-1" id="destinationTabs">
                 <button data-tab="overview" class="tab-btn active py-4 px-2 custom-border">Overview</button>
                 <button data-tab="price" class="tab-btn py-4 px-2 custom-border">Price</button>
-                <button data-tab="policies" class="tab-btn py-4 px-2 custom-border">Itinerary</button>
+                <button data-tab="itinerary" class="tab-btn py-4 px-2 custom-border">Itinerary</button>
                 <button data-tab="location" class="tab-btn py-4 px-2 custom-border">Location</button>
-                <button data-tab="included" class="tab-btn py-4 px-2 custom-border">Notes</button>
+                <button data-tab="notes" class="tab-btn py-4 px-2 custom-border">Notes</button>
             </nav>
         </div>
 
         {{-- Tab Content --}}
         <div class="tab-content grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-1">
             @include('front.partials.overview')
-            <div id="pricee" class="tab-panee md:col-span-2">
-                <h2 class="text-2xl font-semibold mb-7">Price Details</h2>
-            </div>
-            <div id="Departure" class="tab-pane hidden md:col-span-2">
-                <!-- Policies content -->
-            </div>
+            @include('front.partials.price')
+            @include('front.partials.itinerary')
+            @include('front.partials.location')
+            @include('front.partials.notes')
         </div>
+    </div>
 
 
 
 
 
-        {{-- Packages Section --}}
-        {{-- <section class="mb-16">
+    {{-- Packages Section --}}
+    {{-- <section class="mb-16">
                 <h3 class="text-2xl font-bold mb-8">Packages</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 </div>

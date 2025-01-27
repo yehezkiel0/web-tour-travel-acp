@@ -2,9 +2,12 @@ export const initTabPane = ($) => {
     $(".tab-btn").click(function () {
         const tab = $(this).data("tab");
 
-        $(".tab-pane").hide();
+        $("html, body").animate({
+            scrollTop: $(`#${tab}`).offset().top - 120,
+        });
+        // $(".tab-pane").hide();
 
-        $(`#${tab}`).show();
+        // $(`#${tab}`).show();
     });
 
     const toggleText = $("#toggleText");
