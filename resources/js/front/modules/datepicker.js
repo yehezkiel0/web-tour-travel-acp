@@ -1,9 +1,9 @@
 import "bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js";
 import "bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css";
 export const initDatePicker = ($) => {
-    const $datepicker = $("#datepicker");
-    const $datepickerText = $("#datepicker-text");
-    const $datepickerContainer = $("#datepicker-container");
+    const $datepicker = $(".datepicker");
+    const $datepickerText = $(".datepicker-text");
+    const $datepickerContainer = $(".datepicker-container");
     let $isDatePickerOpen = false;
 
     // Initialize datepicker
@@ -11,7 +11,7 @@ export const initDatePicker = ($) => {
         format: "yyyy-mm-dd",
         autoclose: true,
         todayHighlight: true,
-        container: "#datepicker-container",
+        container: ".datepicker-container",
         orientation: "bottom",
         zIndexOffset: 1000,
     });
@@ -19,10 +19,10 @@ export const initDatePicker = ($) => {
     $datepickerContainer.on("click", () => {
         if (!$isDatePickerOpen) {
             $datepicker.datepicker("show");
-            $isDatePickerOpen = true;
+            $isDatePickerOpen = false;
         } else {
             $datepicker.datepicker("hide");
-            $isDatePickerOpen = false;
+            $isDatePickerOpen = true;
         }
     });
 

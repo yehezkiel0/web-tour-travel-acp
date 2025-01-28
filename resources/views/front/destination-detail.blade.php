@@ -96,25 +96,82 @@
         </div>
 
         {{-- Tab Content --}}
-        <div class="tab-content grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-1">
-            @include('front.partials.overview')
-            @include('front.partials.price')
-            @include('front.partials.itinerary')
-            @include('front.partials.location')
-            @include('front.partials.notes')
+        <div class="tab-content grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-8 text-gray-1 md:col-span-2">
+                @include('front.partials.overview')
+                @include('front.partials.price')
+                @include('front.partials.itinerary')
+                @include('front.partials.location')
+                @include('front.partials.notes')
+            </div>
+
+            <div class="bg-white rounded-2xl px-7 py-6 w-full max-w-md border h-fit">
+                <h1 class="text-xl font-semibold mb-6 text-gray-1">Start Booking</h1>
+                <form action="" method="POST" class="booking-form">
+                    @csrf
+                    <div class="space-y-6">
+                        <div>
+                            <label id="from-date" class="block text-gray-1 font-medium mb-2">From</label>
+                            <div class="relative">
+                                <input type="text" name="from_date" id="from_date"
+                                    class="date-input w-full px-[18px] py-3 bg-gray-6 rounded-md" required>
+                                <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label id="to-date" class="block text-gray-1 font-medium  mb-2">To</label>
+                            <div class="relative">
+                                <input type="text" name="to_date" id="to_date"
+                                    class="date-input w-full px-[18px] py-3 bg-gray-6 rounded-md" required>
+                                <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-gray-1 font-medium  mb-4">Add Traveller</h3>
+
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-gray-600">Adult</span>
+                                <div class="flex items-center gap-4">
+                                    <button type="button"
+                                        class="decrease-adult w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">-</button>
+                                    <input type="number" name="adult_count" id="adult-count" value="1"
+                                        class="w-16 text-center" readonly>
+                                    <button type="button"
+                                        class="increase-adult w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">+</button>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Child</span>
+                                <div class="flex items-center gap-4">
+                                    <button type="button"
+                                        class="decrease-child w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">-</button>
+                                    <input type="number" name="child_count" id="child-count" value="0"
+                                        class="w-16 text-center" readonly>
+                                    <button type="button"
+                                        class="increase-child w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <p class="text-gray-600 mb-2">Subtotal</p>
+                            <h2 class="text-4xl font-bold text-blue-500" id="total-price">IDR 11.890.000</h2>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-blue-500 text-white py-4 rounded-lg font-semibold hover:bg-blue-600 transition">
+                            Book Now
+                        </button>
+
+                        <p class="text-gray-400 text-sm text-center">*The price shown is an estimate and subject to change.
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-
-
-
-
-
-    {{-- Packages Section --}}
-    {{-- <section class="mb-16">
-                <h3 class="text-2xl font-bold mb-8">Packages</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                </div>
-            </section> --}}
     </div>
 
 

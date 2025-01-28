@@ -27,3 +27,15 @@
     color: #ffcb55;
     font-size: 1.4em;
 }
+
+.booking-form input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.calender-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}

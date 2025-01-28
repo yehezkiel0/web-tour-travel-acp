@@ -17,6 +17,7 @@
     "dependencies": {
         "bootstrap": "^5.3.3",
         "bootstrap-datepicker": "^1.10.0",
+        "flatpickr": "^4.6.13",
         "izitoast": "^1.4.0",
         "jquery": "^3.7.1",
         "swiper": "^11.1.15",

@@ -92,16 +92,16 @@
                                         </div>
                                         <div class="h-4 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
 
-                                        <div class="flex flex-row items-center cursor-pointer md:mr-2 lg:mr-8 xl:mr-6 lg:space-x-2 text-[#E0E0E0]"
-                                            id="datepicker-container">
+                                        <div
+                                            class="datepicker-container flex flex-row items-center cursor-pointer md:mr-2 lg:mr-8 xl:mr-6 lg:space-x-2 text-[#E0E0E0]">
                                             <img src="{{ asset('images/icon/time.svg') }}" alt="date"
                                                 class="md:w-3 md:h-3 lg:w-5 lg:h-5">
-                                            <p id="datepicker-text" class="text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                            <p class="datepicker-text text-[10px] md:text-xs lg:text-sm xl:text-base">
                                                 Date
                                             </p>
                                             <i
                                                 class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
-                                            <input type="text" id="datepicker" name="destination_date" class="hidden">
+                                            <input type="text" name="destination_date" class="datepicker hidden">
                                         </div>
                                         <div class="h-4 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
 

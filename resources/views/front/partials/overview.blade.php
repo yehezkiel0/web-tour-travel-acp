@@ -1,5 +1,5 @@
-<div id="overview" class="tab-pane active md:col-span-2">
-    <div class="flex items-center gap-2 justify-between mb-7">
+<div id="overview" class="tab-pane active">
+    <div class="flex items-center gap-x-7 mb-7">
         <h2 class="text-3xl font-semibold">{{ $destination->title }}</h2>
         <span
             class="bg-[#EBF1FE] text-primary border border-primary rounded-md px-2 py-1 font-medium text-[13px]">{{ $destination->type }}</span>

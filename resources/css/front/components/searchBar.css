@@ -42,7 +42,7 @@
     background-color: gray !important;
 }
 
-#datepicker-text {
+.datepicker-text {
     cursor: pointer;
 }
 

@@ -9,6 +9,7 @@ import { initDatePicker } from "./modules/datepicker";
 import { initSearchResult } from "./modules/search-result";
 import { initTabPane } from "./modules/tab-pane";
 import { initGallery } from "./modules/gallery-modals";
+import { initBookingForm } from "./modules/booking-form";
 
 // Wait for DOM to be ready
 $(() => {
@@ -22,4 +23,5 @@ $(() => {
     initSearchResult($);
     initTabPane($);
     initGallery($);
+    initBookingForm($);
 });
