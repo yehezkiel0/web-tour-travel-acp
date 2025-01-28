@@ -17,10 +17,12 @@ export default {
             colors: {
                 primary: {
                     DEFAULT: "#3477F6",
+                    50: "#EBF1FE",
                     100: "#C0D5FC",
                     200: "#A2C0FB",
                     300: "#7DA8F9",
                     400: "#5D92F8",
+                    700: "#2554AF",
                     800: "#1D4187",
                     900: "#163267",
                 },

@@ -27,7 +27,7 @@ class AdminDestinationDetailController extends Controller
       'include' => 'nullable|string',
       'exclude' => 'nullable|string',
       'nearby_hotel' => 'nullable|string|max:255',
-      'map_url' => 'nullable|url'
+      'map_url' => 'nullable'
     ]);
 
     $destination->destination_detail()->create($validated);

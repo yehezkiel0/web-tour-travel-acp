@@ -42,8 +42,8 @@ $(function () {
                 title: $(this)
                     .find('input[name^="itinerary["][name$="[title]"]')
                     .val(),
-                day: $(this)
-                    .find('input[name^="itinerary["][name$="[day]"]')
+                alternative: $(this)
+                    .find('input[name^="itinerary["][name$="[alternative]"]')
                     .val(),
                 duration: $(this)
                     .find('input[name^="itinerary["][name$="[duration]"]')

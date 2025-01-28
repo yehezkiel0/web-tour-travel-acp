@@ -1,7 +1,7 @@
 export const initSearchResult = ($) => {
     const formatIDR = (number) => {
         if (!number) return "";
-        return `IDR ${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+        return `IDR ${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
     };
 
     const parseIDR = (str) => {

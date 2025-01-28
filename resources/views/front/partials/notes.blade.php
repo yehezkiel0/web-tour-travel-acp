@@ -6,10 +6,7 @@
                 Include
             </h1>
             <div class="notes-list bg-white rounded-[30px] p-5 text-xs text-gray-2">
-                <ul class="space-y-2">
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                </ul>
+                {!! $destination->destination_detail->include !!}
             </div>
         </div>
         <div class="relative border border-primary-400 w-1/2 h-fit rounded-[30px] bg-primary">
@@ -17,13 +14,7 @@
                 Exclude
             </h1>
             <div class="notes-list bg-white rounded-[30px] p-5 text-xs text-gray-2">
-                <ul class="space-y-2">
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                </ul>
+                {!! $destination->destination_detail->exclude !!}
             </div>
         </div>
     </div>

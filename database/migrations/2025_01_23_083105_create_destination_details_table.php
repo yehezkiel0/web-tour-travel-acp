@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('include')->nullable();
             $table->text('exclude')->nullable();
             $table->text('nearby_hotel')->nullable();
-            $table->string('map_url')->nullable();
+            $table->text('map_url')->nullable();
             $table->timestamps();
         });
     }

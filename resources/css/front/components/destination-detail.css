@@ -23,6 +23,10 @@
     padding-left: 2em;
 }
 
+.notes-list > ul > li {
+    margin: 0.8em 0;
+}
+
 .notes-list > ul > li::marker {
     color: #ffcb55;
     font-size: 1.4em;

@@ -36,8 +36,7 @@
             </div>
 
             {{-- Gallery Grid --}}
-            <div id="gallery" class="grid grid-cols-1 gap-4"
-                data-photos="{{ json_encode($destination_photos->pluck('photo')) }}">
+            <div id="gallery" class="grid grid-cols-1 gap-4" data-photos='@json($destination_photos->pluck('photo'))'>
                 @foreach ($destination_photos as $index => $photo)
                     @if ($index < 1)
                         <div class="relative">
@@ -60,22 +59,22 @@
             <!-- Modal untuk Galeri -->
             <div id="galleryModal"
                 class="hidden fixed inset-0 bg-gray-1 bg-opacity-80 items-center justify-center z-50 transition-all ease-in-out duration-300">
-                <div class="relative bg-black bg-opacity-25 w-full max-h-full max-w-4xl p-4 rounded-lg">
+                <div class="relative w-full max-h-full max-w-xl md:max-w-4xl">
                     <div class="bg-opacity-100">
                         <!-- Tombol Close -->
                         <button id="closeGalleryModal"
-                            class="absolute top-3 right-4 text-red-500 text-3xl px-2 py-1 rounded-md z-10">
-                            <i class="fa-solid fa-circle-xmark"></i>
+                            class="absolute -top-10 -right-3 text-gray-4 text-xl px-2 py-1 rounded-md z-10">
+                            <i class="fa-solid fa-xmark"></i>
                         </button>
 
                         <!-- Navigasi Foto -->
-                        <div class="relative flex justify-center text-gray-1">
+                        <div class="relative flex justify-center text-gray-4">
                             <img id="currentPhoto" src="" alt="Current gallery image"
-                                class="w-full h-96 object-cover rounded-md">
-                            <button id="prevPhoto" class="absolute top-1/2 left-2 transform -translate-y-1/2 text-3xl ">
+                                class="w-full h-56  md:h-96 object-cover rounded-md">
+                            <button id="prevPhoto" class="absolute top-1/2 -left-10 transform -translate-y-1/2 text-3xl">
                                 <i class="fa-solid fa-circle-chevron-left"></i>
                             </button>
-                            <button id="nextPhoto" class="absolute top-1/2 right-2 transform -translate-y-1/2 text-3xl">
+                            <button id="nextPhoto" class="absolute top-1/2 -right-10 transform -translate-y-1/2 text-3xl">
                                 <i class="fa-solid fa-circle-chevron-right"></i>
                             </button>
                         </div>
@@ -110,63 +109,72 @@
                 <form action="" method="POST" class="booking-form">
                     @csrf
                     <div class="space-y-6">
-                        <div>
-                            <label id="from-date" class="block text-gray-1 font-medium mb-2">From</label>
-                            <div class="relative">
-                                <input type="text" name="from_date" id="from_date"
-                                    class="date-input w-full px-[18px] py-3 bg-gray-6 rounded-md" required>
-                                <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label id="to-date" class="block text-gray-1 font-medium  mb-2">To</label>
-                            <div class="relative">
-                                <input type="text" name="to_date" id="to_date"
-                                    class="date-input w-full px-[18px] py-3 bg-gray-6 rounded-md" required>
-                                <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 class="text-gray-1 font-medium  mb-4">Add Traveller</h3>
-
-                            <div class="flex justify-between items-center mb-4">
-                                <span class="text-gray-600">Adult</span>
-                                <div class="flex items-center gap-4">
-                                    <button type="button"
-                                        class="decrease-adult w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">-</button>
-                                    <input type="number" name="adult_count" id="adult-count" value="1"
-                                        class="w-16 text-center" readonly>
-                                    <button type="button"
-                                        class="increase-adult w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">+</button>
+                        {{-- Date --}}
+                        <div class="space-y-4">
+                            <div>
+                                <label id="from-date" class="block text-gray-1 font-medium mb-2">From</label>
+                                <div class="relative">
+                                    <input type="text" name="from_date" id="from_date"
+                                        class="date-input w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400"
+                                        required>
+                                    <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
                                 </div>
                             </div>
-
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Child</span>
-                                <div class="flex items-center gap-4">
-                                    <button type="button"
-                                        class="decrease-child w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">-</button>
-                                    <input type="number" name="child_count" id="child-count" value="0"
-                                        class="w-16 text-center" readonly>
-                                    <button type="button"
-                                        class="increase-child w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center">+</button>
+                            <div>
+                                <label id="to-date" class="block text-gray-1 font-medium  mb-2">To</label>
+                                <div class="relative">
+                                    <input type="text" name="to_date" id="to_date"
+                                        class="date-input w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400"
+                                        required>
+                                    <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="pt-4">
-                            <p class="text-gray-600 mb-2">Subtotal</p>
-                            <h2 class="text-4xl font-bold text-blue-500" id="total-price">IDR 11.890.000</h2>
+                        <div class="space-y-3">
+                            <h3 class="text-gray-1 font-medium">Add Traveller</h3>
+
+                            <div class="flex items-center gap-4">
+                                <div class="space-y-2">
+                                    <span class="text-gray-2 text-xs font-medium">Adult</span>
+                                    <div class="flex items-center relative">
+                                        <button type="button"
+                                            class="decrease-adult absolute top-0 left-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">-</button>
+                                        <input type="number" name="adult_count" id="adult-count" value="1"
+                                            class="w-full h-8 text-center bg-primary-50 rounded-lg" disabled>
+                                        <button type="button"
+                                            class="increase-adult absolute top-0 right-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <span class="text-gray-2 text-xs font-medium">Child</span>
+                                    <div class="relative">
+                                        <button type="button"
+                                            class="decrease-child absolute top-0 left-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">-</button>
+                                        <input type="number" name="child_count" id="child-count" value="0"
+                                            class="w-full h-8 text-center bg-primary-50 rounded-lg" disabled>
+                                        <button type="button"
+                                            class="increase-child absolute top-0 right-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-col items-center">
+                            <span class="text-gray-3 font-medium text-sm mb-2">Subtotal</span>
+                            <p id="total-price" class="text-4xl font-bold text-primary w-fit"
+                                data-total-price="{{ $destination->price }}">
+                            </p>
                         </div>
 
                         <button type="submit"
-                            class="w-full bg-blue-500 text-white py-4 rounded-lg font-semibold hover:bg-blue-600 transition">
+                            class="w-full text-white py-4 rounded-[10px] font-bold  border border-primary bg-primary hover:bg-primary-400 transition-all ease-in-out duration-300">
                             Book Now
                         </button>
 
-                        <p class="text-gray-400 text-sm text-center">*The price shown is an estimate and subject to change.
+                        <p class="text-gray-3 text-[8px] text-center">*The price shown is an estimate and subject to
+                            change.
                         </p>
                     </div>
                 </form>

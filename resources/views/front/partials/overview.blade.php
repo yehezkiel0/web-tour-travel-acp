@@ -15,7 +15,7 @@
     <div class="mt-8">
         <div class="flex items-center justify-around border border-[#E0E0E0] rounded-2xl p-7">
             <div class="flex items-center space-x-4">
-                <i class="fas fa-map-marker-alt text-primary py-2 px-3 text-lg rounded-xl bg-[#E8EDFF]"></i>
+                <i class="fas fa-map-marker-alt text-primary py-2 px-3 text-lg rounded-full bg-[#E8EDFF]"></i>
                 <div class="text-gray-1">
                     <h3 class="text-base font-semibold">Meeting Point</h3>
                     <p class="text-xs">{{ $destination->city }}</p>

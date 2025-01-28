@@ -1,11 +1,8 @@
 export const initGallery = ($) => {
-    if (!document.getElementById("gallery")) {
+    if (!$("#gallery")) {
         return;
     }
-    const photos = JSON.parse(
-        document.getElementById("gallery").dataset.photos
-    );
-
+    let photos = $("#gallery").data("photos");
     let currentIndex = 0;
 
     $("#openGalleryModal").on("click", function () {

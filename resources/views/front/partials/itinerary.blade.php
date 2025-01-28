@@ -6,7 +6,7 @@
     <div class="relative space-y-8">
         {{-- Main vertical dashed line --}}
         <div
-            class="absolute top-5 left-6 h-[calc(100%-5rem)] w-px border-l-2 border-dashed border-secondary -translate-x-1/2 ">
+            class="absolute top-5 left-6 h-[calc(100%-8rem)] w-px border-l-2 border-dashed border-secondary -translate-x-1/2 ">
         </div>
 
         {{-- Itinerary items --}}
@@ -31,14 +31,17 @@
 
                 <div>
                     <h3 class="text-lg font-semibold text-secondary-600">
-                        {{ $item['title'] }}
+                        {{ $item->title }}
                     </h3>
-                    <p class="mt-2 text-gray-600">
-                        {{ $item['description'] }}
+                    <p class="mt-2 text-primary-700 font-semibold">
+                        {{ $item->duration }}
                     </p>
-                    @if (isset($item['alternative']))
-                        <p class="mt-2 text-gray-500 italic">
-                            {{ $item['alternative'] }}
+                    <p class="mt-2 text-gray-1">
+                        {{ $item->description }}
+                    </p>
+                    @if (isset($item->alternative))
+                        <p class="mt-2 text-gray-1 italic">
+                            {{ $item->alternative }}
                         </p>
                     @endif
                 </div>
