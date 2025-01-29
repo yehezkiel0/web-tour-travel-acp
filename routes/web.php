@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminDestinationDetailController;
+use App\Http\Controllers\Front\BookingController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
 use App\Http\Controllers\User\UserAuthController;
@@ -18,6 +19,10 @@ Route::get('/destination/{slug}', [LandingPageController::class, 'destination_de
 //SearchPage
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
+
+//BookingPage
+Route::post('/destination/{slug}', [BookingController::class, 'storeBookingDetails'])->name('booking_store_detail');
+Route::get('/destination/{slug}/order', [BookingController::class, 'showBookingDetails'])->name('booking_show_detail');
 
 //User Auth
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');

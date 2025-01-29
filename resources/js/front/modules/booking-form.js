@@ -1,14 +1,25 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 export const initBookingForm = ($) => {
-    const dateInput = flatpickr(".date-input", {
-        dateFormat: "d/m/Y",
+    flatpickr("#from_date", {
+        dateFormat: "Y-m-d",
         defaultDate: "today",
+        onClose: function (selectedDates, dateStr, instance) {
+            document.getElementById("from_date").value = dateStr;
+        },
     });
 
-    $(".calender-icon").click(function () {
-        dateInput.open();
+    flatpickr("#to_date", {
+        dateFormat: "Y-m-d",
+        defaultDate: "today",
+        onClose: function (selectedDates, dateStr, instance) {
+            document.getElementById("to_date").value = dateStr;
+        },
     });
+
+    // $(".calender-icon").click(function () {
+    //     dateInput.open();
+    // });
 
     const formatIDR = (price) => {
         if (!price) return "";
@@ -62,5 +73,10 @@ export const initBookingForm = ($) => {
             $childCount.val(currentVal - 1);
             updatePrice();
         }
+    });
+
+    $(".booking-form").on("submit", function () {
+        $adultCount.removeAttr("disabled");
+        $childCount.removeAttr("disabled");
     });
 };

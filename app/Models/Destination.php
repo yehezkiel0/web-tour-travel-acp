@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Destination extends Model
@@ -26,14 +28,19 @@ class Destination extends Model
         'view_count'
     ];
 
-    public function photos()
+    public function photos(): HasMany
     {
         return $this->hasMany(DestinationPhoto::class);
     }
 
-    public function destination_detail()
+    public function destination_detail(): HasOne
     {
         return $this->hasOne(DestinationDetail::class);
+    }
+
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(BookingTransaction::class);
     }
 
     public function sluggable(): array

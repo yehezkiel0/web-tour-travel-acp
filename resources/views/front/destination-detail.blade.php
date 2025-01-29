@@ -106,7 +106,7 @@
 
             <div class="bg-white rounded-2xl px-7 py-6 w-full max-w-md border h-fit">
                 <h1 class="text-xl font-semibold mb-6 text-gray-1">Start Booking</h1>
-                <form action="" method="POST" class="booking-form">
+                <form action="{{ route('booking_store_detail', $destination->slug) }}" method="POST" class="booking-form">
                     @csrf
                     <div class="space-y-6">
                         {{-- Date --}}
@@ -115,8 +115,7 @@
                                 <label id="from-date" class="block text-gray-1 font-medium mb-2">From</label>
                                 <div class="relative">
                                     <input type="text" name="from_date" id="from_date"
-                                        class="date-input w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400"
-                                        required>
+                                        class="w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
                                     <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
                                 </div>
                             </div>
@@ -124,8 +123,7 @@
                                 <label id="to-date" class="block text-gray-1 font-medium  mb-2">To</label>
                                 <div class="relative">
                                     <input type="text" name="to_date" id="to_date"
-                                        class="date-input w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400"
-                                        required>
+                                        class="w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
                                     <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
                                 </div>
                             </div>
