@@ -10,6 +10,7 @@ import { initSearchResult } from "./modules/search-result";
 import { initTabPane } from "./modules/tab-pane";
 import { initGallery } from "./modules/gallery-modals";
 import { initBookingForm } from "./modules/booking-form";
+import { initStepper } from "./modules/stepper";
 
 // Wait for DOM to be ready
 $(() => {
@@ -24,4 +25,5 @@ $(() => {
     initTabPane($);
     initGallery($);
     initBookingForm($);
+    initStepper($);
 });

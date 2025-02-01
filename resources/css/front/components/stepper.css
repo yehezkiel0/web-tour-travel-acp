@@ -1,0 +1,15 @@
+.step-circle[data-step] {
+    @apply border-primary;
+}
+
+.step-circle[data-step].completed {
+    @apply bg-primary;
+}
+
+.step-label[data-step].active {
+    @apply text-blue-600;
+}
+
+.step-line[data-step].completed {
+    @apply border-solid border-primary;
+}

@@ -5,7 +5,7 @@
 
     <div class="container mx-auto max-w-7xl px-4 py-8">
         {{-- Header --}}
-        <nav class="flex mb-7" aria-label="Breadcrumb">
+        <nav class="flex-col mb-7 space-y-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
                     <a href="{{ route('home') }}"
@@ -104,11 +104,12 @@
                 @include('front.partials.notes')
             </div>
 
-            <div class="bg-white rounded-2xl px-7 py-6 w-full max-w-md border h-fit">
-                <h1 class="text-xl font-semibold mb-6 text-gray-1">Start Booking</h1>
+            <div class="bg-white rounded-2xl w-full border h-fit">
+                <h3 class="text-xl font-semibold text-gray-1 px-7 py-6">Start Booking</h3>
+                <hr>
                 <form action="{{ route('booking_store_detail', $destination->slug) }}" method="POST" class="booking-form">
                     @csrf
-                    <div class="space-y-6">
+                    <div class="space-y-6 px-7 py-6">
                         {{-- Date --}}
                         <div class="space-y-4">
                             <div>

@@ -27,7 +27,7 @@
         </div>
         <div class="min-w-[117px] flex flex-col justify-end pb-4">
             <p class="text-gray-2 font-normal text-sm text-end">Start From</p>
-            <p class="text-gray-2 font-semibold text-[17px]">IDR {{ number_format($result->price) }}</p>
+            <p class="text-gray-2 font-semibold text-[17px]">{{ formatIDR($result->price) }}</p>
             <span class="flex justify-end text-gray-2 font-normal text-xs">/pax</span>
         </div>
     </div>

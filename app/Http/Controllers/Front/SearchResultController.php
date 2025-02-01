@@ -37,10 +37,8 @@ class SearchResultController extends Controller
         }
 
         $results = $query->get()->each(function ($result) {
-            $result->description_result = Purifier::clean($result->description, [
-                'HTML.Allowed' => 'strong,em,ul,ol,li,p,br'
-            ]);
-            $result->duration = Carbon::parse($result->date_started)->diffInDays(Carbon::parse($result->date_ended)) . ' days';
+            $result->description_result = $result->description;
+            $result->duration = calculateDuration($result->date_started, $result->date_ended);
         });
 
         $request->replace([]);
@@ -82,8 +80,8 @@ class SearchResultController extends Controller
         }
 
         $results = $query->get()->each(function ($result) {
-            $result->description_result = Purifier::clean($result->description);
-            $result->duration = Carbon::parse($result->date_started)->diffInDays(Carbon::parse($result->date_ended)) . ' days';
+            $result->description_result = $result->description;
+            $result->duration = calculateDuration($result->date_started, $result->date_ended);
         });
 
         return view('front.partials.search-result', compact('results'));

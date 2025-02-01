@@ -13,10 +13,6 @@ class LandingPageController extends Controller
     {
         $popularDestinations = Destination::orderBy('view_count', 'desc')->take(10)->get();
         $openTrips = Destination::where('type', 'Open Trip')->take(8)->get();
-        foreach ($openTrips as $trip) {
-            $trip->formatted_start_date = Carbon::parse($trip->date_started)->format('d F');
-            $trip->formatted_end_date = Carbon::parse($trip->date_ended)->format('d F');
-        }
         $privateTrips = Destination::where('type', 'Private Trip')->take(6)->get();
 
         return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips'));
@@ -26,7 +22,7 @@ class LandingPageController extends Controller
     {
         $destination = Destination::where('slug', $slug)->with('photos', 'destination_detail')->first();
 
-        $destination->duration = Carbon::parse($destination->date_started)->diffInDays($destination->date_ended);
+        $destination->duration = calculateDuration($destination->date_started, $destination->date_ended);
 
         $destination_photos = $destination->photos;
         $itineraries = json_decode($destination->destination_detail->itinerary);

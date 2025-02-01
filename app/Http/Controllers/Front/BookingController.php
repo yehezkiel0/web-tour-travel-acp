@@ -23,7 +23,8 @@ class BookingController extends Controller
             return redirect()->route('destination_detail')->with('error', 'Destination not found.');
         }
 
-        $total_price = ($destination_price * $request->adult_count) + ($destination_price * 0.5 * $request->child_count);
+        $adult_price = ($destination_price * $request->adult_count);
+        $child_price =  ($destination_price * 0.5 * $request->child_count);
 
         session()->put('booking', [
             'slug' => $slug,
@@ -31,7 +32,8 @@ class BookingController extends Controller
             'to_date' => $request->to_date,
             'adult_count' => $request->adult_count,
             'child_count' => $request->child_count,
-            'total_price' => $total_price,
+            'adult_price' => $adult_price,
+            'child_price' => $child_price,
         ]);
 
         return redirect()->route('booking_show_detail', ['slug' => $slug]);
@@ -39,12 +41,14 @@ class BookingController extends Controller
 
     public function showBookingDetails($slug)
     {
+        $destination = Destination::where('slug', $slug)->firstOrFail();
+
         $bookingData = session('booking');
-        dd($bookingData);
+
         if (!$bookingData) {
             return redirect()->route('destination_detail', ['slug' => $slug])->with('error', 'Booking data not found.');
         }
 
-        return view('front.booking', compact('bookingData'));
+        return view('front.booking', compact('bookingData', 'destination'));
     }
 }

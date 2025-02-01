@@ -232,8 +232,8 @@
                                                             class="flex flex-col gap-x-1 py-[5px] md:py-[10px] gap-y-1 text-white text-[10px] md:text-[13px]">
                                                             <div class="flex flex-row gap-x-2">
                                                                 <img src="{{ asset('images/icon/time.svg') }}" />
-                                                                <p>{{ $trip->formatted_start_date }} -
-                                                                    {{ $trip->formatted_end_date }}</p>
+                                                                <p>{{ formatDate($trip->date_started) }} -
+                                                                    {{ formatDate($trip->date_ended) }}</p>
                                                             </div>
                                                             <div class="flex flex-row gap-x-2">
                                                                 <img src="{{ asset('images/icon/location.svg') }}" />
@@ -247,7 +247,7 @@
                                                         <div class="text-white text-[10px] md:text-[13px]">
                                                             <p>Start From</p>
                                                             <p class="font-bold text-sm md:text-[20px] text-secondary">
-                                                                Rp. {{ number_format($trip->price) }} <span
+                                                                {{ formatIDR($trip->price) }} <span
                                                                     class="text-[13px] text-white font-normal">/person</span>
                                                             </p>
                                                         </div>
