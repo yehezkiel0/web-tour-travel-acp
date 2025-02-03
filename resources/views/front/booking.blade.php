@@ -8,16 +8,6 @@
                 <div class="w-full mx-auto bg-white px-10">
                     <x-stepper :steps="['Select Tour', 'Contact Details', 'Payment', 'Complete']" :current-step="2" />
                 </div>
-                <div class="flex justify-between mt-8">
-                    <button type="button"
-                        class="prev-step px-4 py-2 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 disabled:opacity-50 disabled:cursor-not-allowed">
-                        Previous
-                    </button>
-                    <button type="button"
-                        class="next-step px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
-                        Next
-                    </button>
-                </div>
             </header>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="col-span-2">
@@ -48,16 +38,15 @@
                                 <span class="text-center">X {{ $bookingData['child_count'] }}</span>
                                 <span class="text-right">{{ formatIDR($bookingData['child_price']) }}</span>
                             </div>
-                            <div class="grid grid-cols-3 items-center">
+                            <div class="individual-visa grid grid-cols-3 items-center">
                                 <span>Individual Visa</span>
-                                <span class="text-center">X
-                                    {{ $bookingData['adult_count'] + $bookingData['child_count'] }}</span>
-                                <span class="text-right">{{ formatIDR(1500000) }}</span>
+                                <span class="text-center">X 0</span>
+                                <span id="visa-amount" class="text-right">0</span>
                             </div>
-                            <div class="grid grid-cols-3 items-center">
+                            <div class="group-visa  grid-cols-3 items-center hidden">
                                 <span>Group Visa</span>
                                 <span></span>
-                                <span class="text-right">0</span>
+                                <span id="visa-amount" class="text-right">0</span>
                             </div>
                             <div class="grid grid-cols-3 items-center">
                                 <span>Tour Tips</span>
@@ -66,9 +55,18 @@
                             </div>
                         </div>
                         <div class="space-y-4 text-gray-2">
-                            <div class="flex justify-between text-sm font-semibold">
-                                <span>Total</span>
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span>Sub Total</span>
                                 <span>{{ formatIDR(59000000) }}</span">
+                            </div>
+                            <div class="tax grid grid-cols-3 items-center text-gray-2 text-xs font-medium">
+                                <span>Tax</span>
+                                <span class="text-center">{{ round($bookingData['tax_percentage']) }}%</span>
+                                <span id= "tax-amount" class="text-right">0</span>
+                            </div>
+                            <div class="total flex justify-between text-xl font-semibold">
+                                <span>Total Price</span>
+                                <span id="total-amount">{{ formatIDR(79000000) }}</span">
                             </div>
                         </div>
                     </div>

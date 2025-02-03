@@ -40,17 +40,17 @@ export const initStepper = ($) => {
             // $(".step-title").text(steps[currentStep - 1]);
             // $(".current-step").text(currentStep);
 
-            $(".prev-step").prop("disabled", currentStep === 1);
-            $(".next-step")
-                .prop("disabled", currentStep === steps.length)
-                .text(currentStep === steps.length ? "Complete" : "Next");
+            // $(".prev-step").prop("disabled", currentStep === 1);
+            // $(".next-step")
+            //     .prop("disabled", currentStep === steps.length)
+            //     .text(currentStep === steps.length ? "Complete" : "Next");
         }
 
         // Jika masih menggunakan tombol next/prev (opsional)
-        $(".next-step, .prev-step").click(function () {
-            currentStep += $(this).hasClass("next-step") ? 1 : -1;
-            updateStepperUI();
-        });
+        // $(".next-step, .prev-step").click(function () {
+        //     currentStep += $(this).hasClass("next-step") ? 1 : -1;
+        //     updateStepperUI();
+        // });
 
         // Update UI stepper saat halaman dimuat
         updateStepperUI();

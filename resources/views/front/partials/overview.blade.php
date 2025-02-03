@@ -22,24 +22,24 @@
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <i class="fa-solid fa-map-location-dot text-primary py-2 px-3 text-lg rounded-xl bg-[#E8EDFF]"></i>
+                <i class="fa-solid fa-map-location-dot text-primary py-2 px-3 text-lg rounded-full bg-[#E8EDFF]"></i>
                 <div class="text-gray-1">
                     <h3 class="text-base font-semibold">Destination</h3>
                     <p class="text-xs">{{ $destination->city }}</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <i class="fa-regular fa-calendar text-primary py-2 px-3 text-lg rounded-xl bg-[#E8EDFF]"></i>
+                <i class="fa-regular fa-calendar text-primary py-2 px-3 text-lg rounded-full bg-[#E8EDFF]"></i>
                 <div class="text-gray-1">
                     <h3 class="text-base font-semibold">Date</h3>
                     <p class="text-xs">{{ \Carbon\Carbon::parse($destination->date_started)->format('F j, Y') }}</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <i class="fa-regular fa-clock text-primary py-2 px-3 text-lg rounded-xl bg-[#E8EDFF]"></i>
+                <i class="fa-regular fa-clock text-primary py-2 px-3 text-lg rounded-full bg-[#E8EDFF]"></i>
                 <div class="text-gray-1">
                     <h3 class="text-base font-semibold">Duration</h3>
-                    <p class="text-xs">{{ $destination->duration }} Days</p>
+                    <p class="text-xs">{{ $destination->duration }}</p>
                 </div>
             </div>
         </div>

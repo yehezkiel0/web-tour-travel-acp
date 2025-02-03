@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
+use App\Models\PricingSetting;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -17,6 +18,7 @@ class BookingController extends Controller
             'child_count' => 'required|integer|min:0',
         ]);
 
+        $pricing_settings = PricingSetting::latest()->first();
         $destination_price = Destination::where('slug', $slug)->value('price');
 
         if (!$destination_price) {
@@ -34,6 +36,9 @@ class BookingController extends Controller
             'child_count' => $request->child_count,
             'adult_price' => $adult_price,
             'child_price' => $child_price,
+            'individual_visa_rate' => $pricing_settings->individual_visa_rate,
+            'group_visa_rate' => $pricing_settings->group_visa_rate,
+            'tax_percentage' => $pricing_settings->tax_percentage,
         ]);
 
         return redirect()->route('booking_show_detail', ['slug' => $slug]);
@@ -44,6 +49,7 @@ class BookingController extends Controller
         $destination = Destination::where('slug', $slug)->firstOrFail();
 
         $bookingData = session('booking');
+
 
         if (!$bookingData) {
             return redirect()->route('destination_detail', ['slug' => $slug])->with('error', 'Booking data not found.');
