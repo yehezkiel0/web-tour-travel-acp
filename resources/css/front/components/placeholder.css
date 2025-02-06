@@ -1,0 +1,44 @@
+.form-group-booking input::placeholder {
+    color: #828282;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+.tippy-box[data-theme~="custom-tooltip"] {
+    --background-color: #ffffff;
+    font-size: 14px;
+    border-radius: 10px;
+    line-height: 1.5;
+    color: #828282;
+    background-color: var(--background-color);
+}
+
+.tippy-box[data-theme~="custom-tooltip"][data-placement^="top"]
+    > .tippy-arrow::before {
+    border-top-color: var(--background-color);
+}
+.tippy-box[data-theme~="custom-tooltip"][data-placement^="bottom"]
+    > .tippy-arrow::before {
+    border-bottom-color: var(--background-color);
+}
+.tippy-box[data-theme~="custom-tooltip"][data-placement^="left"]
+    > .tippy-arrow::before {
+    border-left-color: var(--background-color);
+}
+.tippy-box[data-theme~="custom-tooltip"][data-placement^="right"]
+    > .tippy-arrow::before {
+    border-right-color: var(--background-color);
+}
+
+.title-tooltip {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.title-tooltip span {
+    color: red;
+}
