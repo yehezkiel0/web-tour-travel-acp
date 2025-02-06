@@ -1,43 +1,52 @@
 export const initBookingDetail = ($) => {
-    const $withVisaCheckboxes = $(".with-visa");
-    const individualVisaRate = parseFloat(
-        '{{ session("booking.individual_visa_rate") }}'
-    );
-    const groupVisaRate = parseFloat(
-        '{{ session("booking.group_visa_rate") }}'
-    );
-    const taxPercentage = parseFloat('{{ session("booking.tax_percentage") }}');
+    if ($("body").data("page") === "booking_show_detail") {
+        const $withVisaCheckboxes = $(".with-visa");
+        const individualVisaRate = window.bookingData.individualVisaRate;
+        const groupVisaRate = window.bookingData.groupVisaRate;
+        const taxPercentage = window.bookingData.taxPercentage;
 
-    function updateBillDetails() {
-        const totalTravelers = $withVisaCheckboxes.length;
-        const checkedVisas = $(".with-visa:checked").length;
+        const formatIDR = (price) => {
+            if (!price) return "";
+            return `IDR ${price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+        };
 
-        let visaTotal = 0;
+        function updateBillDetails() {
+            const totalTravelers = $withVisaCheckboxes.length;
+            const checkedVisas = $(".with-visa:checked").length;
 
-        // Jika semua traveler memilih visa, gunakan tarif group
-        if (checkedVisas === totalTravelers && totalTravelers > 1) {
-            visaTotal = groupVisaRate;
-            $(".group-visa").removeClass("hidden").addClass("grid");
-            $(".individual-visa").addClass("hidden");
-        } else {
-            // Jika tidak, gunakan tarif individual per traveler
-            visaTotal = checkedVisas * individualVisaRate;
-            $(".individual-visa").removeClass("hidden").addClass("grid");
-            $(".group-visa").addClass("hidden");
+            let visaTotal = 0;
+
+            if (checkedVisas === totalTravelers && totalTravelers > 1) {
+                visaTotal = groupVisaRate;
+                $(".group-visa").removeClass("hidden").addClass("grid");
+                $(".individual-visa").addClass("hidden").removeClass("grid");
+
+                $("#group-visa-count").text(checkedVisas);
+                $("#group-visa-amount").text(formatIDR(visaTotal));
+            } else {
+                visaTotal = checkedVisas * individualVisaRate;
+                $(".individual-visa").removeClass("hidden").addClass("grid");
+                $(".group-visa").addClass("hidden").removeClass("grid");
+
+                $("#individual-visa-count").text(checkedVisas);
+                $("#individual-visa-amount").text(formatIDR(visaTotal));
+            }
+
+            const subtotal =
+                window.bookingData.adultPrice +
+                window.bookingData.childPrice +
+                visaTotal;
+
+            const tax = (subtotal + visaTotal) * (taxPercentage / 100);
+            const total = subtotal + tax;
+
+            $("#sub-total").text(formatIDR(subtotal));
+            $("#tax-amount").text(formatIDR(tax));
+            $("#total-amount").text(formatIDR(total));
         }
 
-        const subtotal = parseFloat(
-            '{{ session("booking.adult_price") + session("booking.child_price") }}'
-        );
-        const tax = (subtotal + visaTotal) * (taxPercentage / 100);
-        const total = subtotal + visaTotal + tax;
-
-        // Update tampilan detail tagihan
-        $("#visa-amount").text(formatCurrency(visaTotal));
-        $("#tax-amount").text(formatCurrency(tax));
-        $("#total-amount").text(formatCurrency(total));
+        $withVisaCheckboxes.on("change", updateBillDetails);
     }
-
-    // Event listener untuk checkbox visa
-    $withVisaCheckboxes.on("change", updateBillDetails);
 };

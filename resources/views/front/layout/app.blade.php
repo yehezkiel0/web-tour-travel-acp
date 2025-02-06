@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/custom-hamburgers.css') }}">
 </head>
 
-<body class="font-poppins">
+<body class="font-poppins" data-page="{{ request()->route()->getName() }}">
     <div class="main-wrapper bg-white">
         @yield('content')
     </div>

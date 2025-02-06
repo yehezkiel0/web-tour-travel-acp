@@ -11,7 +11,7 @@ export const initBookingForm = ($) => {
 
     flatpickr("#to_date", {
         dateFormat: "Y-m-d",
-        defaultDate: "today",
+        defaultDate: new Date().fp_incr(1),
         onClose: function (selectedDates, dateStr, instance) {
             document.getElementById("to_date").value = dateStr;
         },

@@ -43,7 +43,7 @@
                             <a href="{{ route('destination_detail', $destination->slug) }}" class="swiper-slide card">
                                 <div class="rounded-xl overflow-hidden relative flex flex-col cursor-pointer">
                                     <img src="{{ asset('uploads/' . $destination->featured_photo) }}" alt="featured-photo"
-                                        class="object-cover h-[220px] w-full" />
+                                        loading="lazy" class="object-cover h-[220px] w-full" />
                                     <div
                                         class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                         <div
@@ -76,7 +76,7 @@
                     class="flex flex-col-reverse gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 px-6 md:px-7 lg:px-5 xl:px-0">
                     <div class="w-full md:w-1/2 mx-auto h-[568]">
                         <div class="w-full flex flex-col items-center relative" id="image-search">
-                            <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search"
+                            <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search" loading="lazy"
                                 class="rounded-lg w-full" />
                             <div
                                 class="absolute bottom-6 w-[310px] md:w-[340px] lg:w-[432px] xl:w-[520px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
@@ -216,7 +216,7 @@
                                             <div class="tag font-bold text-[12px] text-primary-800">
                                                 <span>{{ $trip->type }}</span>
                                             </div>
-                                            <img src="{{ asset('uploads/' . $trip->featured_photo) }}"
+                                            <img src="{{ asset('uploads/' . $trip->featured_photo) }}" loading="lazy"
                                                 alt="featured-photo" class="object-cover h-[360px] md:h-[420px] w-full" />
                                             <div
                                                 class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
@@ -281,8 +281,8 @@
                             <div class="accordion rounded-[20px] overflow-hidden cursor-pointer">
                                 <div class="card-container">
                                     <div class="image-layer">
-                                        <img src="{{ asset('images/home/NightCity.png') }}" alt=""
-                                            class="object-cover" />
+                                        <img src="{{ asset('images/home/NightCity.png') }}" alt="private trip"
+                                            loading="lazy" class="object-cover" />
                                         <div class="gradient-overlay"></div>
                                     </div>
 
