@@ -21,6 +21,9 @@ return new class extends Migration
             $table->integer('child_count');
             $table->decimal('total_price', 10, 2);
             $table->json('traveller_details');
+            $table->string('contact_phone');
+            $table->string('contact_email');
+            $table->text('notes');
             $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->timestamps();
         });

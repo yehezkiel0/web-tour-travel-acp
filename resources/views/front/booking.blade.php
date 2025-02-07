@@ -9,7 +9,7 @@
                     <x-stepper :steps="['Select Tour', 'Contact Details', 'Payment', 'Complete']" :current-step="2" />
                 </div>
             </header>
-            <form action="" method="POST">
+            <form id="booking-form" action="{{ route('booking_store', $destination->slug) }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-1 font-medium">
                     <div class="col-span-2 space-y-7">
@@ -39,9 +39,9 @@
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-sm font-medium text-gray-3">
                                 <input type="tel" name="contact_phone" placeholder="Mobile Number"
-                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none">
+                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none" value="{{old('contact_phone')}}">
                                 <input type="email" name="contact_email" placeholder="Email"
-                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none">
+                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none" value="{{old('contact_email')}}>
                             </div>
                         </div>
                         <div class="notes w-full">

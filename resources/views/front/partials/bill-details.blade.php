@@ -52,12 +52,53 @@
         <a href="#" class="underline hover:text-gray-2">Terms & Condition</a>
         <a href="#" class="underline hover:text-gray-2">Travel Insurance</a>
     </div>
-    <button type="submit"
-        class="w-full text-white py-4 rounded-[10px] font-bold mb-9  border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300">
+    <button type="submit" id="book-now"
+        class="w-full text-white py-4 rounded-[10px] font-bold mb-9  border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300"
+        data-authenticated="{{ auth()->check() ? 'true' : 'false' }}">
         Book Now
     </button>
     <a href="{{ route('destination_detail', ['slug' => $destination->slug]) }}"
         class="flex justify-center text-[#FF3B3B] font-semibold text-center">Cancel</a>
+</div>
+
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden" id="loginModal">
+    <div class="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+        <button type="button"
+            class="absolute right-4 top-4 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+            id="closeModal" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+            </svg>
+        </button>
+        <div class="text-center">
+            <div class="mb-4 text-yellow-500">
+                <svg class="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                Login Required
+            </h3>
+
+            <p class="text-gray-600 mb-6">
+                Please log in to access this feature. Create an account if you don't have one yet.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a href="{{ route('login_register') }}"
+                    class="inline-flex justify-center items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                    Go to Login
+                </a>
+                <a href="#"
+                    class="inline-flex justify-center items-center px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer">
+                    Cancel
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -70,4 +111,25 @@
         adultCount: {{ session('booking.adult_count', 0) }},
         childCount: {{ session('booking.child_count', 0) }},
     };
+
+    document.getElementById('book-now').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const isAuthenticated = this.dataset.authenticated === 'true';
+        const closeModal = document.getElementById('closeModal');
+
+        if (isAuthenticated) {
+            document.getElementById('booking-form').submit();
+        } else {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                document.getElementById('loginModal').classList.add('hidden');
+            }, {
+                once: true
+            });
+        }
+    });
 </script>

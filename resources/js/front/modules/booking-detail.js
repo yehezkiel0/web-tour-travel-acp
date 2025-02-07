@@ -5,6 +5,8 @@ export const initBookingDetail = ($) => {
         const groupVisaRate = window.bookingData.groupVisaRate;
         const taxPercentage = window.bookingData.taxPercentage;
 
+        let total;
+
         const formatIDR = (price) => {
             if (!price) return "";
             return `IDR ${price
@@ -40,12 +42,30 @@ export const initBookingDetail = ($) => {
                 visaTotal;
 
             const tax = (subtotal + visaTotal) * (taxPercentage / 100);
-            const total = subtotal + tax;
+            total = subtotal + tax;
 
             $("#sub-total").text(formatIDR(subtotal));
             $("#tax-amount").text(formatIDR(tax));
             $("#total-amount").text(formatIDR(total));
         }
+
+        $("#book-now").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '{{route("booking_store")}}',
+                method: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    total: total,
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Booking error:", error);
+                },
+            });
+        });
 
         $withVisaCheckboxes.on("change", updateBillDetails);
     }

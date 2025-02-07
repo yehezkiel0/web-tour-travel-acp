@@ -24,6 +24,11 @@ Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->n
 Route::post('/destination/{slug}', [BookingController::class, 'storeBookingDetails'])->name('booking_store_detail');
 Route::get('/destination/{slug}/order', [BookingController::class, 'showBookingDetails'])->name('booking_show_detail');
 
+Route::middleware('auth')->group(function () {
+    Route::post('/destination/{slug}/booking', [BookingController::class, 'store'])->name('booking_store');
+    Route::get('/destination/{slug}/payment', [BookingController::class, 'indexPayment'])->name('booking_payment');
+});
+
 //User Auth
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
 Route::post('/login', [UserAuthController::class, 'login_submit'])->name('login_submit');

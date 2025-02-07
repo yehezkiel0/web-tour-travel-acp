@@ -15,7 +15,7 @@ class SearchResultController extends Controller
         $request->validate([
             'destination_input' => 'nullable|string|max:255',
             'destination_date' => 'nullable|date',
-            'destination_type' => 'nullable|string|'
+            'destination_type' => 'nullable|string'
         ]);
 
         $query = Destination::query();
