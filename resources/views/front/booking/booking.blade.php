@@ -37,7 +37,10 @@
                                     booking
                                     information will be sent here</p>
                             </div>
-                            <div class="grid grid-cols-2 gap-4 text-sm font-medium text-gray-3">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm font-medium text-gray-3">
+                                <input type="text" name="contact_name" placeholder="Full Name"
+                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
+                                    value="{{ old('contact_name') }}">
                                 <input type="tel" name="contact_phone" placeholder="Mobile Number"
                                     class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
                                     value="{{ old('contact_phone') }}">

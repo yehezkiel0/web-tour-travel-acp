@@ -41,7 +41,7 @@ export const initBookingDetail = ($) => {
                 window.bookingData.childPrice +
                 visaTotal;
 
-            const tax = (subtotal + visaTotal) * (taxPercentage / 100);
+            const tax = subtotal * (taxPercentage / 100);
             const total = subtotal + tax;
 
             $("#sub-total").text(formatIDR(subtotal));
@@ -49,8 +49,10 @@ export const initBookingDetail = ($) => {
             $("#total-amount").text(formatIDR(total));
 
             $('input[name="total_price"]').val(total);
+            $('input[name="sub_total"]').val(subtotal);
         }
 
         $withVisaCheckboxes.on("change", updateBillDetails);
+        updateBillDetails();
     }
 };

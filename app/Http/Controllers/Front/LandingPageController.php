@@ -28,6 +28,6 @@ class LandingPageController extends Controller
         $itineraries = json_decode($destination->destination_detail->itinerary);
 
 
-        return view('front.destination-detail', compact('destination', 'destination_photos', 'itineraries'));
+        return view('front.destination.destination-detail', compact('destination', 'destination_photos', 'itineraries'));
     }
 }

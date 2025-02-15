@@ -59,7 +59,7 @@ class BookingController extends Controller
             return redirect()->route('destination_detail', ['slug' => $slug])->with('error', 'Booking data not found.');
         }
 
-        return view('front.booking', compact('bookingData', 'destination'));
+        return view('front.booking.booking', compact('bookingData', 'destination'));
     }
 
     public function storeBooking(Request $request, $slug)
@@ -74,11 +74,11 @@ class BookingController extends Controller
             'travellers.*.nationality' => 'required|string|max:255',
             'travellers.*.passport_number' => 'required|regex:/^[A-Z0-9]{8,9}$/i',
             'travellers.*.passport_expiry' => 'required|date|after:today',
+            'contact_name' => 'required|string|max:255',
             'contact_phone' => 'required|string|max:20',
             'contact_email' => 'required|email|max:255',
             'total_price' => 'required|numeric',
             'notes' => 'nullable|string',
-            'status' => 'required|in:pending,paid,cancelled'
         ]);
 
         $bookingData = session('booking');
@@ -92,11 +92,21 @@ class BookingController extends Controller
             return back()->with('error', 'Number of travelers does not match the booking details.');
         }
 
-        session()->put('booking.travellers', $request->travellers);
-        session()->put('booking.contact_phone', $request->contact_phone);
-        session()->put('booking.contact_email', $request->contact_email);
-        session()->put('booking.total_price', $request->total_price);
-        session()->put('booking.notes', $request->notes);
+
+        session()->put('booking', [
+            'travellers' => $request->travellers,
+            'contact_name' => $request->contact_name,
+            'contact_phone' => $request->contact_phone,
+            'contact_email' => $request->contact_email,
+            'total_price' => $request->total_price,
+            'notes' => $request->notes,
+            'individual_visa' => $request->individual_visa,
+            'group_visa' => $request->group_visa,
+            'sub_total' => $request->sub_total
+        ]);
+
+        session()->put('booking', array_merge($bookingData, session('booking')));
+
 
         return redirect()->route('booking_checkout', ['slug' => $slug]);
     }
@@ -106,13 +116,14 @@ class BookingController extends Controller
         $destination = Destination::where('slug', $slug)->firstOrFail();
         $bookingData = session('booking');
 
+
         if (!$bookingData) {
             return redirect()->route('destination_detail', ['slug' => $slug])->with('error', 'Booking data not found.');
         }
 
         $travellers = $bookingData['travellers'] ?? [];
 
-        return view('front.checkout', compact('bookingData', 'destination', 'travellers'));
+        return view('front.booking.checkout', compact('bookingData', 'destination', 'travellers'));
     }
 
     public function payment($slug)
@@ -136,6 +147,7 @@ class BookingController extends Controller
                 'child_count' => $bookingData['child_count'],
                 'total_price' => $bookingData['total_price'],
                 'traveller_details' => json_encode($bookingData['travellers']),
+                'contact_name' => $bookingData['contact_name'],
                 'contact_phone' => $bookingData['contact_phone'],
                 'contact_email' => $bookingData['contact_email'],
                 'notes' => $bookingData['notes'],
@@ -146,11 +158,42 @@ class BookingController extends Controller
 
             DB::commit();
 
-            dd($booking);
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = config('midtrans.is3ds');
+
+            $params = [
+                'transaction_details' => [
+                    'order_id' => $booking->id,
+                    'gross_amount' => $booking->total_price,
+                ],
+                'customer_details' => [
+                    'first_name' => $booking->contact_name,
+                    'email' => $booking->contact_email,
+                    'phone' => $booking->contact_phone,
+                ],
+            ];
+            $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+
+            return redirect($paymentUrl);
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error("Error creating booking: " . $e->getMessage());
-            return redirect()->route('booking_details')->with('error', 'Failed to create booking. Please try again.')->withInput();
+            return redirect()->route('booking_details', ['slug' => $slug])->with('error', 'Failed to create booking. Please try again.')->withInput();
         }
+    }
+
+    public function success(Request $request)
+    {
+        $transaction = BookingTransaction::where('id', $request->order_id)->first();
+        if (!$transaction) {
+            return redirect()->route('home')->with('error', 'Transaction not found.');
+        }
+        return view('front.booking.success');
     }
 }

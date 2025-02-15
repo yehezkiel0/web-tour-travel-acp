@@ -17,8 +17,10 @@ class BookingTransaction extends Model
         'total_price',
         'traveller_details',
         'status',
+        'contact_name',
         'contact_phone',
         'contact_email',
+        'notes',
     ];
 
     public function user(): BelongsTo

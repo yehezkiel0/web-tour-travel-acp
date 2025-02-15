@@ -22,11 +22,6 @@
                 <span class="text-center">X <span id="group-visa-count">0</span></span>
                 <span id="group-visa-amount" class="text-right">0</span>
             </div>
-            <div class="grid grid-cols-3 items-center">
-                <span>Tour Tips</span>
-                <span class="text-center">X 5</span>
-                <span class="text-right">{{ formatIDR(3500000) }}</span>
-            </div>
         </div>
         <div class="space-y-4 text-gray-2">
             <div class="flex justify-between text-xs font-semibold">
@@ -45,6 +40,7 @@
             <input type="hidden" name="total_price" value="0">
             <input type="hidden" name="group_visa" value="0">
             <input type="hidden" name="individual_visa" value="0">
+            <input type="hidden" name="sub_total" value="0">
         </div>
     </div>
     <p class="font-medium text-xs text-gray-3 mb-1 text-center tracking-wider">By completing this booking,you accept and
@@ -64,7 +60,7 @@
         class="flex justify-center text-[#FF3B3B] font-semibold text-center">Cancel</a>
 </div>
 
-<div class="fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm hidden" id="loginModal">
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden" id="loginModal">
     <div class="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
         <button type="button"
             class="absolute right-4 top-4 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"

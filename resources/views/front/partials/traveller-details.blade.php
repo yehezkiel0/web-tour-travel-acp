@@ -10,7 +10,7 @@
             <div class="relative">
                 <select name="travellers[{{ $i }}][title]"
                     class="w-full py-3 px-5 bg-transparent border-0 border-b-2 border-gray-4 focus:outline-none focus:ring-0 focus:border-gray-200 appearance-none"
-                    value={{ old('title') }}>
+                    value={{ old('travellers.' . $i . '.title') }}>
                     <option value="Mr." selected>Mr.</option>
                     <option value="Mrs.">Mrs.</option>
                     <option value="Ms.">Ms.</option>
@@ -24,22 +24,22 @@
             <div>
                 <input type="text" name="travellers[{{ $i }}][age]" placeholder="Age"
                     class="w-full py-3 px-10 border-0 border-b-2 border-gray-4 focus:outline-none"
-                    value={{ old('age') }}>
+                    value={{ old('travellers.' . $i . '.age') }}>
             </div>
             <div class="col-span-2">
                 <input type="text" name="travellers[{{ $i }}][first_name]" placeholder="First Name"
                     class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
-                    value={{ old('first_name') }}>
+                    value={{ old('travellers.' . $i . '.first_name') }}>
             </div>
             <div class="col-span-2">
                 <input type="text" name="travellers[{{ $i }}][last_name]" placeholder="Last Name"
                     class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
-                    value={{ old('last_name') }}>
+                    value={{ old('travellers.' . $i . '.last_name') }}>
             </div>
             <div class="col-span-2 relative">
                 <select name="travellers[{{ $i }}][nationality]"
                     class="w-full py-3 px-5 bg-transparent border-0 border-b-2 border-gray-4 focus:outline-none focus:ring-0 focus:border-gray-200 appearance-none"
-                    value={{ old('nationality') }}>
+                    value={{ old('travellers.' . $i . '.nationality') }}>
                     <option value="" disabled selected>
                         Nationality
                     </option>
@@ -56,13 +56,13 @@
             <div class="col-span-2">
                 <input type="tel" name="travellers[{{ $i }}][phone]" placeholder="Phone"
                     class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
-                    value={{ old('phone') }}>
+                    value={{ old('travellers.' . $i . '.phone') }}>
             </div>
             <div class="col-span-2 row-start-3">
                 <input type="text" name="travellers[{{ $i }}][passport_number]"
                     placeholder="Passport Number"
                     class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
-                    value={{ old('passport_number') }}>
+                    value={{ old('travellers.' . $i . '.passport_number') }}>
             </div>
             <div class="col-span-2 row-start-3 relative">
                 <label for="passportExpiredDate_{{ $i }}"
@@ -70,7 +70,7 @@
                 <input type="date" id="passportExpiredDate_{{ $i }}"
                     name="travellers[{{ $i }}][passport_expiry]"
                     class="w-full py-3 pl-16 border-0 border-b-2 border-gray-4 focus:outline-none"
-                    value={{ old('passport_expiry') }}>
+                    value={{ old('travellers.' . $i . '.passport_expiry') }}>
             </div>
             <div class="row-start-3 inline-flex  items-center">
                 <div id="tooltip"

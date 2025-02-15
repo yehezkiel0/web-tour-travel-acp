@@ -43,7 +43,7 @@ class SearchResultController extends Controller
 
         $request->replace([]);
 
-        return view('front.search-filter', compact('results', 'maxPrice'));
+        return view('front.destination.search-filter', compact('results', 'maxPrice'));
     }
 
     public function filterSearch(Request $request)

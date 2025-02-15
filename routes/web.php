@@ -23,6 +23,7 @@ Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->n
 //BookingPage
 Route::post('/destination/{slug}/information', [BookingController::class, 'saveInformation'])->name('booking_form');
 Route::get('/destination/{slug}/booking', [BookingController::class, 'booking'])->name('booking_details');
+Route::get('/booking-success', [BookingController::class, 'success'])->name('booking_success');
 
 Route::middleware('auth')->group(function () {
     Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');

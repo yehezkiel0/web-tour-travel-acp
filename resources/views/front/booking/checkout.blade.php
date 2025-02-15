@@ -9,13 +9,17 @@
                     <x-stepper :steps="['Select Tour', 'Contact Details', 'Payment', 'Complete']" :current-step="3" />
                 </div>
             </header>
-            <form id="booking-payment" action="{{ route('booking_checkout', $destination->slug) }}" method="POST">
+            <form id="booking-payment" action="{{ route('booking_payment', $destination->slug) }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-1 font-medium">
                     <div class="col-span-2">
                         <div class="border border-gray-4 rounded-[10px] p-7 space-y-7 text-sm">
                             <div class="space-y-4 max-w-md">
                                 <h3 class="text-xl pb-2 font-semibold">Contact Details</h3>
+                                <div class="grid grid-cols-[80px,1fr] gap-4 mb-4">
+                                    <span>Name :</span>
+                                    <span>{{ $bookingData['contact_name'] }}</span>
+                                </div>
                                 <div class="grid grid-cols-[80px,1fr] gap-4 mb-4">
                                     <span>Email :</span>
                                     <span>{{ $bookingData['contact_email'] }}</span>
@@ -66,6 +70,25 @@
                     </div>
                     <div class="total-bill">
                         <div class="w-full border border-gray-4 rounded-[10px] p-7 text-gray-1 font-medium mb-7">
+                            <h4 class="text-lg font-semibold mb-7">{{ $destination->country }} - {{ $destination->city }},
+                                {{ $destination->title }}
+                            </h4>
+                            <div class="space-y-4 text-gray-2 text-xs mb-7">
+                                <div class="grid grid-cols-[80px,1fr] gap-4 mb-4">
+                                    <span>Travel Date :</span>
+                                    <span>{{ formatDate($destination->date_started, 'd F Y') }}</span>
+                                </div>
+                                <div class="grid grid-cols-[80px,1fr] gap-4 mb-4">
+                                    <span>End Date :</span>
+                                    <span>{{ formatDate($destination->date_ended, 'd F Y') }}</span>
+                                </div>
+                                <div class="grid grid-cols-[80px,1fr] gap-4">
+                                    <span>Duration :</span>
+                                    <span>{{ calculateDuration($destination->date_started, $destination->date_ended) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full border border-gray-4 rounded-[10px] p-7 text-gray-1 font-medium mb-7">
                             <h3 class="text-xl font-semibold mb-7">Bill Details</h3>
                             <div class="space-y-4 text-gray-2 text-xs border-b border-gray-4 pb-7 mb-7">
                                 <div class="grid grid-cols-3 items-center">
@@ -78,37 +101,37 @@
                                     <span class="text-center">X {{ $bookingData['child_count'] }}</span>
                                     <span class="text-right">{{ formatIDR($bookingData['child_price']) }}</span>
                                 </div>
-                                <div class="individual-visa grid grid-cols-3 items-center">
-                                    <span>Individual Visa</span>
-                                    <span class="text-center">X <span id="individual-visa-count">0</span></span>
-                                    <span id="individual-visa-amount" class="text-right">0</span>
-                                </div>
-                                <div class="group-visa grid-cols-3 items-center hidden">
-                                    <span>Group Visa</span>
-                                    <span class="text-center">X <span id="group-visa-count">0</span></span>
-                                    <span id="group-visa-amount" class="text-right">0</span>
-                                </div>
-                                <div class="grid grid-cols-3 items-center">
-                                    <span>Tour Tips</span>
-                                    <span class="text-center">X 5</span>
-                                    <span class="text-right">{{ formatIDR(3500000) }}</span>
-                                </div>
+                                @if ($bookingData['individual_visa'] > 0)
+                                    <div class="individual-visa grid grid-cols-3 items-center">
+                                        <span>Individual Visa</span>
+                                        <span class="text-center"></span>
+                                        <span id="individual-visa-amount"
+                                            class="text-right">{{ formatIDR($bookingData['individual_visa']) }}</span>
+                                    </div>
+                                @else
+                                    <div class="group-visa grid-cols-3 items-center hidden">
+                                        <span>Group Visa</span>
+                                        <span class="text-center">X <span id="group-visa-count">0</span></span>
+                                        <span id="group-visa-amount"
+                                            class="text-right">{{ formatIDR($bookingData['group_visa']) }}</span>
+                                    </div>
+                                @endif
                             </div>
                             <div class="space-y-4 text-gray-2">
                                 <div class="flex justify-between text-xs font-semibold">
                                     <span>Sub Total</span>
-                                    <span id="sub-total">0</span">
+                                    <span id="sub-total">{{ formatIDR($bookingData['sub_total']) }}</span">
                                 </div>
                                 <div class="tax grid grid-cols-3 items-center text-gray-2 text-xs font-medium">
                                     <span>Tax</span>
                                     <span class="text-center">{{ round($bookingData['tax_percentage']) }}%</span>
-                                    <span id= "tax-amount" class="text-right">0</span>
+                                    <span id= "tax-amount"
+                                        class="text-right">{{ formatIDR(($bookingData['tax_percentage'] * $bookingData['sub_total']) / 100) }}</span>
                                 </div>
                                 <div class="total flex justify-between text-xl font-semibold">
                                     <span>Total Price</span>
-                                    <span id="total-amount">0</span">
+                                    <span id="total-amount">{{ formatIDR($bookingData['total_price']) }}</span">
                                 </div>
-                                <input type="hidden" name="total_price" value="0">
                             </div>
                         </div>
                         <button type="submit" id="book-now"
@@ -117,7 +140,7 @@
                             Pay Now
                         </button>
                         <a href="{{ route('destination_detail', ['slug' => $destination->slug]) }}"
-                            class="flex justify-center text-[#FF3B3B] font-semibold text-center">Cancel</a>
+                            class="flex justify-center text-[#FF3B3B] font-semibold text-center mb-8">Cancel</a>
                     </div>
                 </div>
             </form>
