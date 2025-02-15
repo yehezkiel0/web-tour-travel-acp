@@ -21,12 +21,13 @@ Route::post('/search-result', [SearchResultController::class, 'searchResult'])->
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
 
 //BookingPage
-Route::post('/destination/{slug}', [BookingController::class, 'storeBookingDetails'])->name('booking_store_detail');
-Route::get('/destination/{slug}/order', [BookingController::class, 'showBookingDetails'])->name('booking_show_detail');
+Route::post('/destination/{slug}/information', [BookingController::class, 'saveInformation'])->name('booking_form');
+Route::get('/destination/{slug}/booking', [BookingController::class, 'booking'])->name('booking_details');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/destination/{slug}/booking', [BookingController::class, 'store'])->name('booking_store');
-    Route::get('/destination/{slug}/payment', [BookingController::class, 'indexPayment'])->name('booking_payment');
+    Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');
+    Route::get('/destination/{slug}/checkout', [BookingController::class, 'checkout'])->name('booking_checkout');
+    Route::post('/destination/{slug}/payment', [BookingController::class, 'payment'])->name('booking_payment');
 });
 
 //User Auth

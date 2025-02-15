@@ -23,7 +23,7 @@ return new class extends Migration
             $table->json('traveller_details');
             $table->string('contact_phone');
             $table->string('contact_email');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
             $table->timestamps();
         });

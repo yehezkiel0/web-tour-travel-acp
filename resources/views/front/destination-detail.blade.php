@@ -107,7 +107,7 @@
             <div class="bg-white rounded-2xl w-full border h-fit">
                 <h3 class="text-xl font-semibold text-gray-1 px-7 py-6">Start Booking</h3>
                 <hr>
-                <form action="{{ route('booking_store_detail', $destination->slug) }}" method="POST" class="booking-form">
+                <form action="{{ route('booking_form', $destination->slug) }}" method="POST" class="booking-form">
                     @csrf
                     <div class="space-y-6 px-7 py-6">
                         {{-- Date --}}

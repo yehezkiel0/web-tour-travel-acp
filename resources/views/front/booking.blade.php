@@ -39,9 +39,11 @@
                             </div>
                             <div class="grid grid-cols-2 gap-4 text-sm font-medium text-gray-3">
                                 <input type="tel" name="contact_phone" placeholder="Mobile Number"
-                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none" value="{{old('contact_phone')}}">
+                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
+                                    value="{{ old('contact_phone') }}">
                                 <input type="email" name="contact_email" placeholder="Email"
-                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none" value="{{old('contact_email')}}>
+                                    class="w-full py-3 px-5 border-0 border-b-2 border-gray-4 focus:outline-none"
+                                    value="{{ old('contact_email') }}">
                             </div>
                         </div>
                         <div class="notes w-full">

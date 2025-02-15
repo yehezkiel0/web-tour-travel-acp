@@ -1,11 +1,9 @@
 export const initBookingDetail = ($) => {
-    if ($("body").data("page") === "booking_show_detail") {
+    if ($("body").data("page") === "booking_details") {
         const $withVisaCheckboxes = $(".with-visa");
         const individualVisaRate = window.bookingData.individualVisaRate;
         const groupVisaRate = window.bookingData.groupVisaRate;
         const taxPercentage = window.bookingData.taxPercentage;
-
-        let total;
 
         const formatIDR = (price) => {
             if (!price) return "";
@@ -27,6 +25,7 @@ export const initBookingDetail = ($) => {
 
                 $("#group-visa-count").text(checkedVisas);
                 $("#group-visa-amount").text(formatIDR(visaTotal));
+                $('input[name="group_visa"]').val(visaTotal);
             } else {
                 visaTotal = checkedVisas * individualVisaRate;
                 $(".individual-visa").removeClass("hidden").addClass("grid");
@@ -34,6 +33,7 @@ export const initBookingDetail = ($) => {
 
                 $("#individual-visa-count").text(checkedVisas);
                 $("#individual-visa-amount").text(formatIDR(visaTotal));
+                $('input[name="individual_visa"]').val(visaTotal);
             }
 
             const subtotal =
@@ -42,30 +42,14 @@ export const initBookingDetail = ($) => {
                 visaTotal;
 
             const tax = (subtotal + visaTotal) * (taxPercentage / 100);
-            total = subtotal + tax;
+            const total = subtotal + tax;
 
             $("#sub-total").text(formatIDR(subtotal));
             $("#tax-amount").text(formatIDR(tax));
             $("#total-amount").text(formatIDR(total));
-        }
 
-        $("#book-now").submit(function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: '{{route("booking_store")}}',
-                method: "POST",
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                    total: total,
-                },
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (xhr, status, error) {
-                    console.error("Booking error:", error);
-                },
-            });
-        });
+            $('input[name="total_price"]').val(total);
+        }
 
         $withVisaCheckboxes.on("change", updateBillDetails);
     }
