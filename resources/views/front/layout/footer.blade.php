@@ -1,7 +1,7 @@
 <section class="footer lg:py-16 border-t border-[#E0E0E0]">
     <div class="container w-[90%] md:w-[80%] lg:w-[90%] xl:max-w-7xl mx-auto py-8">
         <div>
-            <img src="{{ asset('images/icon/Logo.svg') }}/" alt="Logo-Footer" class="mb-8" />
+            <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Footer" class="mb-8" />
             <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
                 <div class="col-span-1 md:col-span-2">
                     <h4 class="text-[#333333] text-normal font-medium px-0 md:px-5">

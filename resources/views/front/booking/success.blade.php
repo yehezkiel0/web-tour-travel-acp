@@ -12,10 +12,15 @@
                 booked
                 this
                 tour</h1>
-            <p class="text-center text-gray-3 mb-7">Thank you for your payment, the details of your booking have been sent to
+            <p class="text-center text-gray-3 mb-14">Thank you for your payment, the details of your booking have been sent
+                to
                 your
                 registered email address.
                 Please check your inbox for confirmation and further instructions.</p>
+            <a href=""
+                class="px-14 text-white py-4 rounded-[10px] font-bold mb-14  border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300">
+                See My Booking
+            </a>
         </div>
         </div>
     </section>

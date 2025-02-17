@@ -138,7 +138,10 @@ class BookingController extends Controller
 
             $destination = Destination::where('slug', $slug)->firstOrFail();
 
+            $code = 'ACP' . rand(100000, 999999);
+
             $booking = BookingTransaction::create([
+                'code' => $code,
                 'user_id' => Auth::user()->id,
                 'destination_id' => $destination->id,
                 'from_date' => $bookingData['from_date'],
@@ -169,7 +172,7 @@ class BookingController extends Controller
 
             $params = [
                 'transaction_details' => [
-                    'order_id' => $booking->id,
+                    'order_id' => $booking->code,
                     'gross_amount' => $booking->total_price,
                 ],
                 'customer_details' => [
@@ -190,7 +193,7 @@ class BookingController extends Controller
 
     public function success(Request $request)
     {
-        $transaction = BookingTransaction::where('id', $request->order_id)->first();
+        $transaction = BookingTransaction::where('code', $request->order_id)->first();
         if (!$transaction) {
             return redirect()->route('home')->with('error', 'Transaction not found.');
         }

@@ -10,7 +10,6 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
-    <link rel="stylesheet" href="{{ asset('dist/css/custom-hamburgers.css') }}">
 </head>
 
 <body class="font-poppins" data-page="{{ request()->route()->getName() }}">

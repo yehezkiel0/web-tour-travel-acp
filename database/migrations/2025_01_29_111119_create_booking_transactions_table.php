@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('booking_transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('destination_id')->constrained('destinations')->onDelete('cascade');
             $table->date('from_date');
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->string('contact_phone');
             $table->string('contact_email');
             $table->text('notes')->nullable();
-            $table->enum('status', ['pending', 'paid', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'paid', 'cancelled']);
             $table->timestamps();
         });
     }

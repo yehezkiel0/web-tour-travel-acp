@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class BookingTransaction extends Model
 {
     protected $fillable = [
+        'code',
         'user_id',
         'destination_id',
         'from_date',
