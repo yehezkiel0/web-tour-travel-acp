@@ -1,8 +1,6 @@
 @extends('front.layout.app')
 @section('content')
     @include('front.layout.nav')
-
-
     <div class="container mx-auto max-w-7xl px-4 py-8">
         {{-- Header --}}
         <nav class="flex-col mb-7 space-y-4" aria-label="Breadcrumb">
