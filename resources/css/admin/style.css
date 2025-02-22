@@ -73,3 +73,18 @@ aside ul a:hover {
     background-size: 1rem;
     padding-right: 2.5rem;
 }
+
+.status-paid {
+    color: #2bc155;
+    background-color: #daf5e6;
+}
+
+.status-pending {
+    color: #fe8024;
+    background-color: #fe802433;
+}
+
+.status-cancelled {
+    color: #ff2e2e;
+    background-color: #ff2e2e33;
+}

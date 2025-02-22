@@ -18,6 +18,13 @@
                     <span class="font-light text-sm">Destination</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin_transaction_index') }}"
+                    class="{{ Request::is('admin/transaction*') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span class="font-light text-sm">Transaction</span>
+                </a>
+            </li>
 
             {{-- <li>
                 <a href="#" class="flex justify-between items-center w-full p-2 text-slate-500"

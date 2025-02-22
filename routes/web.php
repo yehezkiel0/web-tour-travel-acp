@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminDestinationDetailController;
+use App\Http\Controllers\Admin\AdminTransactionController;
 use App\Http\Controllers\Front\BookingController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
@@ -63,6 +64,9 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     //DestinationDetails Section
     Route::get('/destination/{slug}/details', [AdminDestinationDetailController::class, 'details'])->name('admin_destination_details');
     Route::post('/destination/{slug}/details', [AdminDestinationDetailController::class, 'details_store'])->name('admin_destination_details_store');
+
+    //Transactions Section
+    Route::get('/transaction', [AdminTransactionController::class, 'index'])->name('admin_transaction_index');
 });
 // Admin Authentication
 Route::prefix('admin')->group(function () {

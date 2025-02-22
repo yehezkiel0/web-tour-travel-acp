@@ -1,6 +1,6 @@
 <div class="navbar-bg">
     <nav class="absolute left-[250px] right-[5px] flex py-2 items-center justify-between z-[890] h-[70px] transition-all ease-in-out duration-700"
-        id="navbar">
+        id="navbar-admin">
         <div class="px-4">
             <ul>
                 <li>

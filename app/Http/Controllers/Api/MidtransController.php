@@ -7,7 +7,9 @@ use App\Mail\TicketMail;
 use App\Models\BookingTransaction;
 use App\Models\Destination;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -39,11 +41,11 @@ class MidtransController extends Controller
                 if ($request->payment_type == 'credit_card') {
                     if ($request->fraud_status == 'challenge') {
                         $transaction->update([
-                            'status' => 'pending', // Sesuaikan dengan enum
+                            'status' => 'pending',
                         ]);
                     } else {
                         $transaction->update([
-                            'status' => 'paid', // Sesuaikan dengan enum
+                            'status' => 'paid',
                         ]);
                     }
                 }
@@ -52,7 +54,6 @@ class MidtransController extends Controller
                 try {
                     $transaction->update(['status' => 'paid']);
 
-                    // Load relations dalam satu query
                     $transaction->load(['user', 'destination']);
 
                     if (!$transaction->user || !$transaction->destination) {
@@ -84,24 +85,96 @@ class MidtransController extends Controller
                 break;
             case 'pending':
                 $transaction->update([
-                    'status' => 'pending', // Sesuaikan dengan enum
+                    'status' => 'pending',
                 ]);
                 break;
             case 'deny':
             case 'expire':
             case 'cancel':
                 $transaction->update([
-                    'status' => 'cancelled', // Sesuaikan dengan enum
+                    'status' => 'cancelled',
                 ]);
+                $bookingData = [
+                    'from_date' => $transaction->from_date,
+                    'to_date' => $transaction->to_date,
+                    'adult_count' => $transaction->adult_count,
+                    'child_count' => $transaction->child_count,
+                    'contact_name' => $transaction->contact_name,
+                    'contact_phone' => $transaction->contact_phone,
+                    'contact_email' => $transaction->contact_email,
+                    'notes' => $transaction->notes,
+                    'travellers' => json_decode($transaction->traveller_details, true),
+                    'total_price' => $transaction->total_price,
+                ];
+    
+                session()->put('booking', $bookingData);
+    
+                return redirect()->route('checkout', ['slug' => $transaction->destination->slug])
+                    ->with('error', 'Payment failed. Please try again.');
                 break;
             default:
                 $transaction->update([
-                    'status' => 'cancelled', // Sesuaikan dengan enum
+                    'status' => 'cancelled',
                 ]);
                 break;
         }
 
         Log::info('Midtrans callback data:', $request->all());
         return response()->json(['message' => 'Callback received successfully']);
+    }
+
+    public function getTransactionDetails($orderId): JsonResponse
+    {
+        try {
+            $serverKey = config('midtrans.serverKey');
+            $isProduction = config('midtrans.isProduction');
+
+            $url = $isProduction
+                ? "https://api.midtrans.com/v2/{$orderId}/status"
+                : "https://api.sandbox.midtrans.com/v2/{$orderId}/status";
+
+            $response = Http::timeout(30)
+                ->withBasicAuth($serverKey, '')
+                ->get($url);
+
+                if ($response->successful()) {
+                    $responseData = $response->json();
+        
+                    if (isset($responseData['status_code']) && $responseData['status_code'] == '404') {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Transaction not found',
+                            'error' => $responseData['status_message']
+                        ], 404);
+                    }
+        
+                    return response()->json([
+                        'status' => 'success',
+                        'data' => $responseData
+                    ], 200);
+                }
+        
+    
+            // Handle other errors
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to fetch transaction details',
+                'error' => $response->json()
+            ], $response->status());
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Connection timeout or network error',
+                'error' => $e->getMessage()
+            ], 504);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Internal server error',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
