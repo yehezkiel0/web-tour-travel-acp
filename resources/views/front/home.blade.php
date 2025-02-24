@@ -30,7 +30,7 @@
         </section>
         <!-- Popular Destination -->
         <section class="popular-destination relative">
-            <div class="max-w-7xl mx-auto py-[28px] px-6 md:px-7 lg:px-5 xl:px-0">
+            <div class="max-w-7xl mx-auto py-7 px-6 md:px-7 lg:px-5 xl:px-0">
                 <h6
                     class="flex justify-center gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
                     Explore <span class="text-primary">Destination </span>
@@ -42,7 +42,7 @@
                         @foreach ($popularDestinations as $destination)
                             <a href="{{ route('destination_detail', $destination->slug) }}" class="swiper-slide card">
                                 <div class="rounded-xl overflow-hidden relative flex flex-col cursor-pointer">
-                                    <img src="{{ asset('uploads/' . $destination->featured_photo) }}" alt="featured-photo"
+                                    <img src="{{ Storage::url($destination->featured_photo) }}" alt="featured-photo"
                                         loading="lazy" class="object-cover h-[220px] w-full" />
                                     <div
                                         class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
@@ -71,7 +71,7 @@
         </section>
         {{-- Search --}}
         <section>
-            <div class="max-w-7xl mx-auto py-[28px] scroll-m-10">
+            <div class="max-w-7xl mx-auto py-7 scroll-m-10">
                 <div
                     class="flex flex-col-reverse gap-y-5 md:flex-row md:items-center md:justify-center md:gap-x-5 lg:gap-x-10 px-6 md:px-7 lg:px-5 xl:px-0">
                     <div class="w-full md:w-1/2 mx-auto h-[568]">
@@ -96,7 +96,8 @@
                                             class="datepicker-container flex flex-row items-center cursor-pointer md:mr-2 lg:mr-8 xl:mr-6 lg:space-x-2 text-[#E0E0E0]">
                                             <img src="{{ asset('images/icon/time.svg') }}" alt="date"
                                                 class="md:w-3 md:h-3 lg:w-5 lg:h-5">
-                                            <p class="datepicker-text text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                            <p
+                                                class="datepicker-text text-[10px] md:text-xs lg:text-sm xl:text-base text-nowrap">
                                                 Date
                                             </p>
                                             <i
@@ -106,10 +107,10 @@
                                         <div class="h-4 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
 
                                         <div
-                                            class="flex items-center justify-center md:mr-2 lg:mr-1 xl:mr-3 lg:space-x-0 xl:space-x-2 text-[#E0E0E0]">
+                                            class="flex items-center justify-center md:mr-2 lg:mr-1 lg:space-x-0 xl:space-x-2 text-[#E0E0E0]">
                                             <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking">
                                             <select name="destination_type"
-                                                class="bg-transparent w-full xl:w-3/4 border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
+                                                class="bg-transparent w-full border-none outline-none text-[10px] md:text-xs lg:text-sm xl:text-base">
                                                 <option class="hidden" value="" disabled selected>
                                                     Type
                                                 </option>
@@ -188,7 +189,7 @@
         </section>
         <!-- Open Trip -->
         <section>
-            <div class="open-trip max-w-7xl mx-auto py-[28px]">
+            <div class="open-trip max-w-7xl mx-auto py-7">
                 <div
                     class="flex flex-col gap-y-[20px] sm:gap-x-8 sm:grid sm:grid-cols-2 lg:grid-cols-4 px-6 md:px-7 lg:px-5 xl:px-0">
                     <div
@@ -216,7 +217,7 @@
                                             <div class="tag font-bold text-[12px] text-primary-800">
                                                 <span>{{ $trip->type }}</span>
                                             </div>
-                                            <img src="{{ asset('uploads/' . $trip->featured_photo) }}" loading="lazy"
+                                            <img src="{{ Storage::url($trip->featured_photo) }}" loading="lazy"
                                                 alt="featured-photo" class="object-cover h-[360px] md:h-[420px] w-full" />
                                             <div
                                                 class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
@@ -265,7 +266,7 @@
         </section>
         <!-- Private Trip -->
         <section>
-            <div class="private-trip max-w-7xl mx-auto py-[28px] scroll-m-10">
+            <div class="private-trip max-w-7xl mx-auto py-7 scroll-m-10">
                 <div
                     class="flex flex-col gap-y-4 sm:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
                     <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center lg:leading-[60px]">
@@ -330,36 +331,7 @@
 
                     <div class="swiper-services w-full">
                         <div class="swiper-wrapper xl:flex-col">
-                            @php
-                                $services = [
-                                    [
-                                        'image' => 'medical-health.png',
-                                        'title' => 'Medical Health & Beauty',
-                                        'description' =>
-                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
-                                        'imageClass' => 'xl:rounded-e-[270px]',
-                                        'reverse' => false,
-                                    ],
-                                    [
-                                        'image' => 'Recruitment.png',
-                                        'title' => 'Job Recruitment',
-                                        'description' =>
-                                            'Buka peluang karir Anda di Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses mudah, mulai dari pencarian lowongan hingga pengurusan dokumen.',
-                                        'imageClass' => 'xl:rounded-s-[270px]',
-                                        'reverse' => true,
-                                    ],
-                                    [
-                                        'image' => 'Entertainment.png',
-                                        'title' => 'Event Entertainment',
-                                        'description' =>
-                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
-                                        'imageClass' => 'xl:rounded-e-[270px]',
-                                        'reverse' => false,
-                                    ],
-                                ];
-                            @endphp
-
-                            @foreach ($services as $service)
+                            @foreach (include resource_path('views/front/data/services.php') as $service)
                                 <div class="swiper-slide service">
                                     <div
                                         class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none {{ $service['reverse'] ? 'xl:flex-row-reverse' : 'xl:flex-row' }} items-center gap-y-3 xl:gap-x-14">
@@ -406,10 +378,10 @@
                 <div class="flex flex-row items-center justify-center">
                     <!-- Left Content -->
                     <div class="w-full md:w-2/5 flex flex-col justify-center gap-y-4 lg:gap-y-[30px]">
-                        <h1 class="text-2xl sm:text-4xl lg:text-[35px] font-bold text-gray-1 text-center sm:text-left">
+                        <h2 class="text-2xl sm:text-4xl lg:text-[35px] font-bold text-gray-1 text-center sm:text-left">
                             Reason for <br class="hidden sm:block">
                             <span class="text-primary">Choosing Us</span>
-                        </h1>
+                        </h2>
                         <p
                             class="text-xs font-normal text-gray-3 text-justify sm:w-[90%] lg:w-4/5 leading-5 mb-4 sm:mb-6 lg:mb-8 xl:mb-14">
                             Anugrah Cahaya Pelangi offers a safe and comfortable travel experience with professional tour
@@ -447,18 +419,22 @@
 
         <!-- Our Partners -->
         <section class="our-partners">
-            {{-- <div class="max-w-7xl mx-auto py-[100px]">
-                <div class="flex flex-col gap-y-8">
-                    <div class="scroll transition-all ease-in-out duration-300">
-                        <div class="item-logo">
-                            @for ($i = 0; $i < 6; $i++)
-                                <img src="{{ asset('images/home/Partner.png') }}" alt="partner"
-                                    class="w-[230px] h-[100px] object-contain rounded-xl" />
-                            @endfor
-                        </div>
-                    </div>
+            <div class="max-w-7xl mx-auto py-7">
+                <div class="text-center mb-7">
+                    <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center">
+                        Our <span class="font-semibold text-primary">Partners</span>
+                    </h2>
                 </div>
-            </div> --}}
+
+                <div class="flex flex-wrap items-center justify-evenly gap-8">
+                    @foreach (include resource_path('views/front/data/partners.php') as $partner)
+                        <div class="w-24 h-24 mb-2">
+                            <img src="{{ asset('images/home/' . $partner['logo']) }}" alt="{{ $partner['name'] }} logo"
+                                class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </section>
     </div>
     @include('front.layout.footer')

@@ -7,7 +7,7 @@ export const initAccordion = ($) => {
     updateTagBackground();
 
     // Use event delegation for better performance
-    $(".wrapper-accordion").on("click", ".accordion", function (e) {
+    $(".wrapper-accordion").on("mouseenter", ".accordion", function (e) {
         const clickedAccordion = $(this);
 
         if (clickedAccordion.hasClass("active")) {

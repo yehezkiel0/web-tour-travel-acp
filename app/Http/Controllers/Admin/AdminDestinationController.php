@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminDestinationController extends Controller
 {
@@ -28,10 +29,10 @@ class AdminDestinationController extends Controller
         ]);
 
         $finalName = 'destination_featured_' . time() . '.' . $request->featured_photo->extension();
-        $request->featured_photo->move(public_path('uploads'), $finalName);
+        $path = $request->file('featured_photo')->storeAs('destinations', $finalName, 'public');
 
         Destination::create([
-            'featured_photo' => $finalName,
+            'featured_photo' => $path,
             'title' => $request->title,
             'description' => $request->description,
             'country' => $request->country,
@@ -67,9 +68,9 @@ class AdminDestinationController extends Controller
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
                 $photoName = 'destination_photo_' . time() . '_' . uniqid() . '.' . $photo->getClientOriginalExtension();
-                $photo->move(public_path('uploads'), $photoName);
+                $path = $photo->storeAs('destination_photos', $photoName, 'public');
                 $destination->photos()->create([
-                    'photo' => $photoName,
+                    'photo' => $path,
                 ]);
             }
         }
@@ -101,13 +102,13 @@ class AdminDestinationController extends Controller
             ]);
 
             $finalName = 'destination_featured_' . time() . '.' . $request->featured_photo->extension();
-            $request->featured_photo->move(public_path('uploads'), $finalName);
+            $path = $request->file('featured_photo')->storeAs('destinations', $finalName, 'public');
 
-            if (file_exists(public_path('uploads/' . $destination->featured_photo))) {
-                unlink(public_path('uploads/' . $destination->featured_photo));
+            if ($destination->featured_photo && Storage::disk('public')->exists($destination->featured_photo)) {
+                Storage::disk('public')->delete($destination->featured_photo);
             }
 
-            $destination->featured_photo = $finalName;
+            $destination->featured_photo = $path;
         }
 
         $destination->update([
