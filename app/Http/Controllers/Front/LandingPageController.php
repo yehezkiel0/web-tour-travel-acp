@@ -15,7 +15,9 @@ class LandingPageController extends Controller
         $openTrips = Destination::where('type', 'Open Trip')->take(8)->get();
         $privateTrips = Destination::where('type', 'Private Trip')->take(6)->get();
 
-        return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips'));
+        $services = include resource_path('views/front/data/services.php');
+
+        return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips', 'services'));
     }
 
     public function destination_detail($slug)
@@ -29,5 +31,12 @@ class LandingPageController extends Controller
 
 
         return view('front.destination.destination-detail', compact('destination', 'destination_photos', 'itineraries'));
+    }
+
+    public function servicesMedical()
+    {
+        $data = include resource_path('views/front/data/medical.php');
+        $features = $data['medical'];
+        return view('front.our-services.medical', compact('features'));
     }
 }

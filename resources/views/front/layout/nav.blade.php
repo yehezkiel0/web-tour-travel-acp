@@ -47,7 +47,7 @@
                     <ul class="bg-white w-48 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
                         id="dropdown-services">
                         <li class="py-3 z-[1000] px-4">
-                            <a href="#" class="text-sm flex items-center gap-x-3">
+                            <a href="{{ route('services_medical') }}" class="text-sm flex items-center gap-x-3">
                                 Medical Health & Beauty
                             </a>
                         </li>

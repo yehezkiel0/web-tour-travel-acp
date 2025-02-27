@@ -15,7 +15,11 @@ use App\Http\Controllers\User\UserAuthController;
 //LandingPage
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
 
+//DestinationDetail
 Route::get('/destination/{slug}', [LandingPageController::class, 'destination_detail'])->name('destination_detail');
+
+//Services
+Route::get('/services/medical', [LandingPageController::class, 'servicesMedical'])->name('services_medical');
 
 //SearchPage
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');

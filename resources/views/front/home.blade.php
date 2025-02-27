@@ -201,7 +201,7 @@
                         <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">We make exploring with
                             <br class="hidden sm:block"> trips anyone can join
                         </p>
-                        <a href="#" class="">
+                        <a href="#">
                             <button
                                 class="bg-white py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-primary border border-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
                                 See More
@@ -331,7 +331,7 @@
 
                     <div class="swiper-services w-full">
                         <div class="swiper-wrapper xl:flex-col">
-                            @foreach (include resource_path('views/front/data/services.php') as $service)
+                            @foreach ($services as $service)
                                 <div class="swiper-slide service">
                                     <div
                                         class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none {{ $service['reverse'] ? 'xl:flex-row-reverse' : 'xl:flex-row' }} items-center gap-y-3 xl:gap-x-14">

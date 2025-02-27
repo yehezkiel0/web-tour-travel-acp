@@ -39,47 +39,47 @@ return [
   ],
   [
     'name' => 'partner 10',
-    'logo' => 'pakpohan.png'
+    'logo' => 'dwidaya.png'
   ],
   [
     'name' => 'partner 11',
-    'logo' => 'pakpohan.png'
+    'logo' => 'hangtuah.png'
   ],
   [
     'name' => 'partner 12',
-    'logo' => 'pakpohan.png'
+    'logo' => 'kemendikbud.png'
   ],
   [
     'name' => 'partner 13',
-    'logo' => 'pakpohan.png'
+    'logo' => 'panoramas.png'
   ],
   [
     'name' => 'partner 14',
-    'logo' => 'pakpohan.png'
+    'logo' => 'peruri.png'
   ],
   [
     'name' => 'partner 15',
-    'logo' => 'pakpohan.png'
+    'logo' => 'ristekdikti.png'
   ],
   [
     'name' => 'partner 16',
-    'logo' => 'pakpohan.png'
+    'logo' => 'rotama.png'
   ],
   [
     'name' => 'partner 17',
-    'logo' => 'pakpohan.png'
+    'logo' => 'universitasindonesia.png'
   ],
   [
     'name' => 'partner 18',
-    'logo' => 'pakpohan.png'
+    'logo' => 'paipaitravel.png'
   ],
   [
     'name' => 'partner 19',
-    'logo' => 'pakpohan.png'
+    'logo' => 'goldenrama.png'
   ],
   [
     'name' => 'partner 20',
-    'logo' => 'pakpohan.png'
+    'logo' => 'glow.png'
   ],
 
 ];

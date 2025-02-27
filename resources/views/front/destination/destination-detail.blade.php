@@ -29,7 +29,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-7">
             {{-- Main Image --}}
             <div class="relative md:col-span-2">
-                <img src="{{ asset('uploads/' . $destination->featured_photo) }}" alt="{{ $destination->title }}"
+                <img src="{{ Storage::url($destination->featured_photo) }}" alt="{{ $destination->title }}"
                     class="w-full h-[400px] object-cover rounded-lg" />
             </div>
 
@@ -38,13 +38,13 @@
                 @foreach ($destination_photos as $index => $photo)
                     @if ($index < 1)
                         <div class="relative">
-                            <img src="{{ asset('uploads/' . $photo->photo) }}"
+                            <img src="{{ Storage::url($photo->photo) }}"
                                 alt="{{ $destination->title }} gallery image {{ $index + 1 }}"
                                 class="w-full h-48 object-cover rounded-lg" />
                         </div>
                     @elseif ($index === 1)
                         <div class="relative cursor-pointer" id="openGalleryModal">
-                            <img src="{{ asset('uploads/' . $photo->photo) }}"
+                            <img src="{{ Storage::url($photo->photo) }}"
                                 alt="{{ $destination->title }} gallery image {{ $index + 1 }}"
                                 class="w-full h-48 object-cover rounded-lg brightness-50" />
                             <div class="absolute inset-0 flex items-center justify-center bg-opacity-50 rounded-lg">
@@ -178,6 +178,7 @@
             </div>
         </div>
     </div>
+
 
 
 
