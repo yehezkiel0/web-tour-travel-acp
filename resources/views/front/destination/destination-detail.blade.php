@@ -3,7 +3,7 @@
     @include('front.layout.nav')
     <div class="container mx-auto max-w-7xl px-4 py-8">
         {{-- Header --}}
-        <nav class="flex-col mb-7 space-y-4" aria-label="Breadcrumb">
+        <header class="flex-col mb-7 space-y-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
                     <a href="{{ route('home') }}"
@@ -23,7 +23,7 @@
                     </div>
                 </li>
             </ol>
-        </nav>
+        </header>
 
         {{-- Gallery Section --}}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-7">
