@@ -11,6 +11,16 @@
                         Home
                     </a>
                 </li>
+                <li class="inline-flex items-center">
+                    <span class="inline-flex gap-x-2 items-center font-medium text-gray-3">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        Services
+                    </span>
+                </li>
                 <li>
                     <div class="flex items-center">
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
@@ -52,7 +62,7 @@
                     <h2 class="text-3xl font-semibold text-primary-700 leading-tight">
                         We Provide Special Care for Your Health & Well-Being
                     </h2>
-                    <p class="text-gray-700">
+                    <p class="text-gray-1">
                         Your health is your greatest asset. Our medical services focus on early detection, expert
                         consultation, and continuous care to help you maintain a healthy and balanced life.
                     </p>

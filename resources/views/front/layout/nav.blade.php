@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
-                            <a href="#" class="text-sm flex items-center gap-x-3">
+                            <a href="{{ route('services_recruitment') }}" class="text-sm flex items-center gap-x-3">
                                 Recruitment
                             </a>
                         </li>

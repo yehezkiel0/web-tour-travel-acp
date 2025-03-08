@@ -2,7 +2,7 @@
     <div class="max-h-60 flex flex-row justify-between gap-x-6 p-5 bg-white border border-[#E0E0E0] rounded-lg cursor-pointer"
         onclick="window.location.href='{{ route('destination_detail', $result->slug) }}';">
         <div class="w-80 ">
-            <img src="{{ asset('uploads/' . $result->featured_photo) }}" alt="featured_photo"
+            <img src="{{ Storage::url($result->featured_photo) }}" alt="featured_photo"
                 class="w-full object-cover rounded-md">
         </div>
         <div class="w-2/5 flex flex-col gap-y-[10px]">

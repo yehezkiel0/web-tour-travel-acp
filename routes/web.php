@@ -20,6 +20,7 @@ Route::get('/destination/{slug}', [LandingPageController::class, 'destination_de
 
 //Services
 Route::get('/services/medical', [LandingPageController::class, 'servicesMedical'])->name('services_medical');
+Route::get('/services/recruitment', [LandingPageController::class, 'servicesRecruitment'])->name('services_recruitment');
 
 //SearchPage
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');

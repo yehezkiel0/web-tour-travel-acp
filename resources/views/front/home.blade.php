@@ -331,6 +331,34 @@
 
                     <div class="swiper-services w-full">
                         <div class="swiper-wrapper xl:flex-col">
+                            @php
+                                $services = [
+                                    [
+                                        'image' => 'medical-health.png',
+                                        'title' => 'Medical Health & Beauty',
+                                        'description' =>
+                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
+                                        'imageClass' => 'xl:rounded-e-[270px]',
+                                        'reverse' => false,
+                                    ],
+                                    [
+                                        'image' => 'Recruitment.png',
+                                        'title' => 'Job Recruitment',
+                                        'description' =>
+                                            'Buka peluang karir Anda di Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses mudah, mulai dari pencarian lowongan hingga pengurusan dokumen.',
+                                        'imageClass' => 'xl:rounded-s-[270px]',
+                                        'reverse' => true,
+                                    ],
+                                    [
+                                        'image' => 'Entertainment.png',
+                                        'title' => 'Event Entertainment',
+                                        'description' =>
+                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
+                                        'imageClass' => 'xl:rounded-e-[270px]',
+                                        'reverse' => false,
+                                    ],
+                                ];
+                            @endphp
                             @foreach ($services as $service)
                                 <div class="swiper-slide service">
                                     <div
@@ -339,7 +367,7 @@
                                             {{-- Optimasi gambar dengan width dan height yang spesifik --}}
                                             <img src="{{ asset('images/home/' . $service['image']) }}"
                                                 alt="{{ Str::slug($service['title']) }}"
-                                                class="w-full {{ $service['imageClass'] }} h-40 xl:h-[540px] xl:drop-shadow-xl object-cover"
+                                                class="w-full h-40 xl:h-[540px] xl:drop-shadow-xl object-cover {{ $service['imageClass'] }}"
                                                 loading="lazy" width="600" height="540" fetchpriority="high"
                                                 decoding="async">
                                         </div>
