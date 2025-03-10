@@ -23,6 +23,7 @@ Route::get('/services/medical', [LandingPageController::class, 'servicesMedical'
 Route::get('/services/recruitment', [LandingPageController::class, 'servicesRecruitment'])->name('services_recruitment');
 
 //SearchPage
+Route::get('/destination', [SearchResultController::class, 'index'])->name('destination');
 Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
 

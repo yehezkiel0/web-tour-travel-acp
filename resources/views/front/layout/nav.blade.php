@@ -18,13 +18,15 @@
                     <ul class="bg-white w-48 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
                         id="dropdown-travel">
                         <li class="py-3 z-[1000] px-4">
-                            <a href="#" class="text-sm flex items-center gap-x-3">
+                            <a href="{{ route('destination', ['type' => 'open-trip']) }}"
+                                class="text-sm flex items-center gap-x-3">
                                 <i class="fa-solid fa-person-walking-luggage text-lg"></i>
                                 Open Trip
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
-                            <a href="#" class="text-sm flex items-center gap-x-3">
+                            <a href="{{ route('destination', ['type' => 'private-trip']) }}"
+                                class="text-sm flex items-center gap-x-3">
                                 <i class="fa-solid fa-suitcase text-lg"></i>
                                 Private Tour
                             </a>

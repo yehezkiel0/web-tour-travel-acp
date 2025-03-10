@@ -7,9 +7,28 @@ use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Mews\Purifier\Facades\Purifier;
+use Illuminate\Support\Str;
 
 class SearchResultController extends Controller
 {
+    public function index(Request $request)
+    {
+        $query = Destination::query();
+        $maxPrice = Destination::max('price');
+
+        if ($request->filled('type')) {
+            $databaseType = Str::title(str_replace('-', ' ', $request->type));
+            $query->where('type', $databaseType);
+        }
+
+        $results = $query->get()->each(function ($result) {
+            $result->description_result = $result->description;
+            $result->duration = calculateDuration($result->date_started, $result->date_ended);
+        });
+
+        return view('front.destination.search-filter', compact('results', 'maxPrice'));
+    }
+
     public function searchResult(Request $request)
     {
         $request->validate([
