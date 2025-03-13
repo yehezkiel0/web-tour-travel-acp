@@ -32,6 +32,8 @@ Route::post('/destination/{slug}/information', [BookingController::class, 'saveI
 Route::get('/destination/{slug}/booking', [BookingController::class, 'booking'])->name('booking_details');
 Route::get('/booking-success', [BookingController::class, 'success'])->name('booking_success');
 
+//AboutPage
+Route::get('/about-us', [LandingPageController::class, 'about'])->name('about');
 
 Route::middleware('auth')->group(function () {
     Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');

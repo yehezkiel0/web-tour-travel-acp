@@ -42,4 +42,9 @@ class LandingPageController extends Controller
     {
         return view('front.our-services.recruitment');
     }
+
+    public function about()
+    {
+        return view('front.about');
+    }
 }
