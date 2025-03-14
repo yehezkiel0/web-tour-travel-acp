@@ -47,4 +47,9 @@ class LandingPageController extends Controller
     {
         return view('front.about');
     }
+
+    public function contact()
+    {
+        return view('front.contact');
+    }
 }

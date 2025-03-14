@@ -34,3 +34,14 @@ export const servicesBreakpoints = {
         spaceBetween: 30,
     },
 };
+
+export const aboutBreakpoints = {
+    640: {
+        slidesPerView: 1,
+        spaceBetween: 20,
+    },
+    1024: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+    },
+};

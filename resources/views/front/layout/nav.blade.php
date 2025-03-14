@@ -66,7 +66,7 @@
                     </ul>
                 </li>
                 <li><a href="{{ route('about') }}" class="flex pb-[26px] pt-7 custom-border">About Us</a></li>
-                <li><a href="#" class="flex pb-[26px] pt-7 custom-border">Contact Us</a></li>
+                <li><a href="{{ route('contact') }}" class="flex pb-[26px] pt-7 custom-border">Contact Us</a></li>
             </ul>
             <div class="hidden xl:flex flex-row gap-x-[30px]">
                 @guest

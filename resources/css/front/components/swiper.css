@@ -7,24 +7,35 @@
     transition: transform 0.6s ease-in-out;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
+.swiper-wrapper {
+    height: auto !important;
+}
+
+.navigation-popular-destination .swiper-button-next,
+.navigation-popular-destination .swiper-button-prev {
     position: absolute;
     transform: translateY(50%) !important;
     top: 65% !important;
 }
 
-.swiper-button-prev {
+.navigation-popular-destination .swiper-button-prev {
     display: none;
     left: 50px !important;
     background-repeat: no-repeat;
     background-size: 100% auto;
 }
 
-.swiper-button-next {
+.navigation-popular-destination .swiper-button-next {
     right: 50px !important;
     background-repeat: no-repeat;
     background-size: 100% auto;
+}
+
+.swiper-about-us .swiper-button-prev,
+.swiper-about-us .swiper-button-next {
+    width: auto !important; /* Menimpa pengaturan width dari Swiper */
+    height: auto !important; /* Menimpa pengaturan height dari Swiper */
+    margin-top: 0 !important; /* Menghapus margin atas */
 }
 
 .swiper-button-next::after,

@@ -63,7 +63,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="swiper-navigation">
+                <div class="swiper-navigation navigation-popular-destination">
                     <div class="swiper-button-prev" style="background-image: url('/images/icon/Prev.svg')"></div>
                     <div class="swiper-button-next" style="background-image: url('/images/icon/Next.svg')"></div>
                 </div>

@@ -2,13 +2,20 @@
 @section('content')
     @include('front.layout.nav')
     <section class="container mx-auto">
-        <div class="relative py-20 overflow-hidden bg-blue-50">
+        <div class="relative py-20 overflow-hidden bg-blue-100">
+            <div class="absolute inset-0 z-0">
+                <img src="{{ asset('images/home/about-2.jpg') }}" alt="hero-section-about"
+                    class="object-cover w-full h-auto opacity-20">
+            </div>
             <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
-                <h2 class="text-5xl font-bold text-primary md:mb-6">About Us</h2>
-                <p class="text-xl font-semibold text-primary-700 italic md:mb-8">“Fulfilling Your Dreams with Complete &
+                <h2 class="text-4xl md:text-5xl font-bold text-primary md:mb-6">About Us</h2>
+                <p class="text-lg md:text-xl font-semibold text-primary-700 italic md:mb-8">“Fulfilling Your Dreams with
+                    Complete &
                     Integrated
                     Business Solutions”</p>
-                <p class="text-xl text-gray-2">Anugerah Cahaya Pelangi is your trusted partner, delivering comprehensive
+                <p class="text-base md:text-lg text-gray-2 max-w-3xl mx-auto">Anugerah Cahaya Pelangi is your trusted
+                    partner, delivering
+                    comprehensive
                     solutions that
                     empower your
                     business and personal goals. We believe every dream deserves to be realized through innovative,
@@ -82,7 +89,7 @@
                     </p>
 
                     <div class="space-y-3">
-                        <a href="#tour-travel"
+                        <a href="{{ route('destination') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
                             <span>Tour and Travel</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
@@ -94,7 +101,7 @@
                                 </svg></span>
                         </a>
 
-                        <a href="#health-beauty"
+                        <a href="{{ route('services_medical') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
                             <span>Health & Beauty</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
@@ -107,7 +114,7 @@
                             </span>
                         </a>
 
-                        <a href="#recruitment"
+                        <a href="{{ route('services_recruitment') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
                             <span>Recruitment</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
@@ -245,6 +252,41 @@
                         </div>
                         <h4 class="text-xl font-semibold text-gray-1 mb-2.5">Satisfaction</h4>
                         <p class="text-gray-2">Your trust drives us, reflected in our testimonials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-4 mb-20">
+            <div class="text-center mb-5">
+                <h2 class="text-4xl font-semibold text-primary md:mb-3">Our Gallery</h2>
+                <p class="text-gray-2">see our latest updates</p>
+            </div>
+            <div class="swiper-about-us swiper-container relative">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
+                    </div>
+                </div>
+                <div
+                    class="swiper-navigation absolute top-1/2 transform -translate-y-1/2 w-full flex justify-between z-10 pointer-events-none">
+                    <div class="swiper-button-prev pointer-events-auto cursor-pointer">
+                        <div class="rounded-full w-10 h-10 bg-white flex items-center justify-center">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next pointer-events-auto cursor-pointer">
+                        <div class="rounded-full w-10 h-10 bg-white flex items-center justify-center">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
                     </div>
                 </div>
             </div>
