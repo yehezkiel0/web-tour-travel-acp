@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+    .datepicker {
+        font-size: 14px !important;
+    }
+
+    .datepicker table {
+        width: 100% !important;
+    }
+
+    .datepicker table tr td,
+    .datepicker table tr th {
+        width: 25px !important;
+        height: 25px !important;
+        line-height: 25px !important;
+        padding: 0 !important;
+    }
+
+    .datepicker-dropdown {
+        width: 220px !important;
+        max-width: 90vw !important;
+        font-size: 14px !important;
+    }
+}

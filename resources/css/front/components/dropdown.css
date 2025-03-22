@@ -11,3 +11,9 @@
     color: #1e40af;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+#destination_type select option {
+    background-color: #1f2937; /* Your dark gray background */
+    color: white;
+    font-size: inherit;
+}

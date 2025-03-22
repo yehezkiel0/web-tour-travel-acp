@@ -130,33 +130,39 @@
             class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 h-screen w-screen bg-white overflow-y-auto">
             <div class="flex flex-row gap-x-3 px-6 py-4 border-b w-full">
                 <div>
-                    <button
-                        class="border-[3px] border-primary w-[70px] h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
-                        Login
-                    </button>
+                    <a href="{{ route('login_register') }}">
+                        <button
+                            class="border-[3px] border-primary w-[70px] h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
+                            Login
+                        </button>
+                    </a>
                 </div>
                 <div>
-                    <button
-                        class="bg-primary w-[100px] h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
-                        Sign Up
-                    </button>
+                    <a href="{{ route('login_register') }}">
+                        <button
+                            class="bg-primary w-[100px] h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
+                            Sign Up
+                        </button>
+                    </a>
                 </div>
             </div>
             <ul class="flex flex-col w-full px-2 gap-y-5 text-[#687176]">
                 <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
+                    <a href="{{ route('home') }}" class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-house text-xl"></i>
                         Home
                     </a>
                 </li>
                 <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
+                    <a href="{{ route('destination', ['type' => 'open-trip']) }}"
+                        class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-person-walking-luggage text-xl"></i>
                         Open Trip
                     </a>
                 </li>
                 <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
+                    <a href="{{ route('destination', ['type' => 'private-trip']) }}"
+                        class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-suitcase text-xl"></i>
                         Private Tour
                     </a>
@@ -168,13 +174,13 @@
                     </a>
                 </li>
                 <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
+                    <a href="{{ route('services_medical') }}" class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-heart text-xl"></i>
                         Medical Health & Beauty
                     </a>
                 </li>
                 <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
+                    <a href="{{ route('services_recruitment') }}" class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-user-tie text-xl"></i>
                         Recruitment
                     </a>

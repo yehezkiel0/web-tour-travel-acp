@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
