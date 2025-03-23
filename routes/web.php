@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
 //User Auth
 Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
+Route::get('/login', [UserAuthController::class, 'login'])->name('login');
+Route::get('/register', [UserAuthController::class, 'register'])->name('register');
 Route::post('/login', [UserAuthController::class, 'login_submit'])->name('login_submit');
 Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
 Route::post('/register', [UserAuthController::class, 'register_submit'])->name('register_submit');

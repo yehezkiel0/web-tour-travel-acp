@@ -18,6 +18,16 @@ class UserAuthController extends Controller
         return view('front.auth.login-register');
     }
 
+    public function login()
+    {
+        return view('front.auth.login');
+    }
+
+    public function register()
+    {
+        return view('front.auth.register');
+    }
+
     public function login_submit(Request $request)
     {
         $request->validate([

@@ -458,9 +458,9 @@
                     </h2>
                 </div>
 
-                <div class="flex flex-wrap items-center justify-evenly gap-8">
+                <div class="flex flex-wrap items-center justify-evenly gap-10 px-4 md:px-0 lg:gap-8">
                     @foreach (include resource_path('views/front/data/partners.php') as $partner)
-                        <div class="w-24 h-24 mb-2">
+                        <div class="w-16 h-16 md:w-24 md:h-24 mb-2">
                             <img src="{{ asset('images/home/' . $partner['logo']) }}" alt="{{ $partner['name'] }} logo"
                                 class="w-full h-full object-contain grayscale hover:grayscale-0 transition-all duration-300">
                         </div>

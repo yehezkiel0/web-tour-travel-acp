@@ -130,7 +130,7 @@
             class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 h-screen w-screen bg-white overflow-y-auto">
             <div class="flex flex-row gap-x-3 px-6 py-4 border-b w-full">
                 <div>
-                    <a href="{{ route('login_register') }}">
+                    <a href="{{ route('login') }}">
                         <button
                             class="border-[3px] border-primary w-[70px] h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
                             Login
@@ -138,7 +138,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="{{ route('login_register') }}">
+                    <a href="{{ route('register') }}">
                         <button
                             class="bg-primary w-[100px] h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
                             Sign Up

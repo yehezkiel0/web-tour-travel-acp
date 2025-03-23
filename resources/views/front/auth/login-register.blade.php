@@ -1,8 +1,8 @@
 @extends('front.layout.app')
 
 @section('content')
-    <div class="grid h-screen place-items-center bg-slate-800">
-        <div class="container-slide w-[90%] max-w-full h-[600px] rounded-xl border shadow-xl bg-white relative">
+    <div class="container max-w-7xl mx-auto bg-white pt-14 px-8">
+        <div class="container-slide w-full max-w-full h-[600px] shadow-md rounded-xl border bg-white relative">
             <div
                 class="form-container container-login flex flex-col items-center gap-y-8 rounded-xl bg-white py-6 px-8 w-[50%] h-full z-[2] absolute">
                 <h1 class="text-5xl font-semibold text-primary text-center py-8">
