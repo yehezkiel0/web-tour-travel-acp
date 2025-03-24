@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class AdminAuthController extends Controller
 {
@@ -58,15 +59,25 @@ class AdminAuthController extends Controller
 
         $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first();
 
-        if ($request->photo) {
+        if ($request->hasFile('photo')) {
             $request->validate([
                 'photo' => 'mimes:jpg,jpeg,png|max:2048',
             ]);
-            $final_name = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('uploads'), $final_name);
-            unlink(public_path('uploads/' . $admin->photo));
-            $admin->photo = $final_name;
+
+            // Menyimpan file dengan storage
+            $photoName = time() . '.' . $request->photo->getClientOriginalExtension();
+            $path = $request->photo->storeAs('uploads', $photoName, 'public');
+
+            // Menghapus foto lama jika ada
+            if ($admin->photo) {
+                Storage::disk('public')->delete('uploads/' . $admin->photo);
+            }
+
+            // Menyimpan nama file di database
+            $admin->photo = basename($path);  // Ambil nama file saja (tanpa path)
+            $admin->save();
         }
+
 
         if ($request->password) {
             $request->validate([

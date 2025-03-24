@@ -16,7 +16,7 @@
                 <h3 class="font-medium text-xl text-center py-5">Latest Photos</h3>
                 <div class="grid grid-cols-1 px-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @foreach ($destination->photos as $photo)
-                        <img src="{{ asset('uploads/' . $photo->photo) }}" alt=""
+                        <img src="{{ Storage::url($photo->photo) }}" alt={{ $destination->title }}
                             class="object-cover w-full h-48 rounded-lg">
                     @endforeach
                 </div>

@@ -120,7 +120,7 @@
                                                     {{ $destination->title }}</td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border border-gray-300">
-                                                    <img src="{{ asset('uploads/' . $destination->featured_photo) }}"
+                                                    <img src="{{ Storage::url($destination->featured_photo) }}"
                                                         alt="destinations_image" class="w-[100px] object-cover">
                                                 </td>
                                                 <td

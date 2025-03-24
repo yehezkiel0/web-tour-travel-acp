@@ -13,7 +13,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="flex flex-col px-3 gap-y-2 col-span-3">
-                        <img src="{{ asset('uploads/' . Auth::guard('admin')->user()->photo) }}" alt="">
+                        <img src="{{ Storage::url('uploads/' . Auth::guard('admin')->user()->photo) }}" alt="profile-photo">
                         <input type="file" name="photo" class="text-sm text-slate-500">
                     </div>
                     <div class="gap-4 px-3 col-span-9">
