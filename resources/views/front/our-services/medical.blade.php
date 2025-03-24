@@ -4,14 +4,14 @@
     <section class="container mx-auto w-full pt-8">
         <header class="flex-col mb-7 space-y-4 max-w-7xl mx-auto px-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                <li class="inline-flex items-center">
+                <li class="inline-flex items-center text-xs md:text-base">
                     <a href="{{ route('home') }}"
                         class="inline-flex gap-x-2 items-center font-medium text-gray-3 hover:underline">
                         <img src="{{ asset('images/icon/Home.svg') }}" alt="home-icon">
                         Home
                     </a>
                 </li>
-                <li class="inline-flex items-center">
+                <li class="inline-flex items-center text-xs md:text-base">
                     <span class="inline-flex gap-x-2 items-center font-medium text-gray-3">
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -22,7 +22,7 @@
                     </span>
                 </li>
                 <li>
-                    <div class="flex items-center">
+                    <div class="flex items-center text-xs md:text-base">
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,13 +36,16 @@
         <div class="bg-[#DFE9FF] w-full">
             <div class="container mx-auto">
                 <div
-                    class="flex flex-col gap-8 py-6 md:flex-row justify-center md:py-0 md:gap-0 md:justify-normal md:items-center max-w-7xl mx-auto md:space-x-24">
-                    <figure class="w-full md:w-[395px] md:max-h-[391px]">
+                    class="flex flex-col gap-8 py-6 md:flex-row justify-center items-center md:py-0 md:gap-0 md:justify-normal md:items-center max-w-7xl mx-auto md:space-x-24">
+                    <figure class="w-3/4 h-auto md:w-[395px] md:max-h-[391px]">
                         <img src="{{ asset('images/services/service-medical-hero.png') }}" alt="medical-hero">
                     </figure>
                     <div class="text-center max-w-lg">
-                        <h1 class="text-4xl font-medium text-primary-700 mb-4">Medical & Beauty Care</h1>
-                        <p class="text-gray-2 text-sm mb-6">Anugerah Cahaya Pelangi presents The Best Medical & Beauty Care
+                        <h1 class="text-2xl md:text-4xl font-bold text-primary-700 mb-4">Medical & Beauty Care</h1>
+                        <p class="text-gray-2 text-[10px] md:text-sm mb-6 px-4 md:px-0">Anugerah Cahaya Pelangi presents The
+                            Best
+                            Medical
+                            & Beauty Care
                             for You with professional, safe, and technology-driven services, ensuring optimal health and
                             beauty in one integrated solution.</p>
                         <a href="#">
@@ -56,21 +59,21 @@
             </div>
         </div>
         <div
-            class="max-w-7xl mx-auto py-[100px] px-8 md:px-6 lg:px-14 flex flex-col md:flex-row items-center justify-between gap-8">
+            class="max-w-7xl mx-auto px-8 flex flex-col-reverse items-center justify-center gap-4 py-20 md:py-[100px] md:px-6 lg:px-14 md:gap-8 md:flex-row md:justify-between">
             <div class="w-full md:w-1/2 space-y-7">
-                <div class="space-y-7">
-                    <h2 class="text-3xl font-semibold text-primary-700 leading-tight">
+                <div class="space-y-4 md:space-y-7">
+                    <h2 class="text-xl text-center md:text-left md:text-3xl font-semibold text-primary md:leading-tight">
                         We Provide Special Care for Your Health & Well-Being
                     </h2>
-                    <p class="text-gray-1">
+                    <p class="text-gray-1 text-xs text-justify md:text-base md:text-left">
                         Your health is your greatest asset. Our medical services focus on early detection, expert
                         consultation, and continuous care to help you maintain a healthy and balanced life.
                     </p>
                 </div>
                 <div class="flex flex-col gap-y-6">
                     @foreach ($features as $feature)
-                        <div class="flex gap-7">
-                            <div class="flex-shrink-0">
+                        <div class="flex gap-4 md:gap-7">
+                            <div class="flex-shrink-0 scale-90 md:scale-100">
                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -79,8 +82,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-1">{{ $feature['title'] }}</h3>
-                                <p class="text-gray-2">{{ $feature['description'] }}</p>
+                                <h3 class="text-sm font-bold text-gray-1 md:text-xl">{{ $feature['title'] }}</h3>
+                                <p class="text-gray-2 text-xs md:text-base">{{ $feature['description'] }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -91,19 +94,28 @@
                     class="w-full h-auto">
             </div>
         </div>
-        <div class="bg-[#DFE9FF] w-full py-10">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-14 max-w-4xl mx-auto relative">
+        <div class="md:bg-[#DFE9FF] w-full md:py-10">
+            <div class="flex flex-col md:flex-row items-center justify-center max-w-4xl mx-auto relative gap-10 md:gap-14">
                 <div
-                    class="absolute bg-[#2554AF] w-full h-full md:h-[calc(100%-80px)] flex items-center justify-center z-0">
+                    class="absolute bg-[#2554AF] w-full h-full flex items-center justify-center z-0 top-6 md:top-10 md:h-[calc(100%-80px)]">
                 </div>
-                <figure class="w-[360px] max-h-[450px] z-10">
+                <figure class="w-1/2 h-auto md:w-[360px] md:max-h-[450px] z-10">
                     <img src="{{ asset('images/services/service-medical-2.png') }}" alt="medical-hero"
                         class="w-full object-cover">
                 </figure>
                 <div class="text-white max-w-sm z-10">
-                    <h1 class="text-3xl font-medium mb-4">It’s your gateway to premium medical and beauty care in Korea.
+                    <h1 class="font-bold mb-4 text-xl text-center md:text-left md:text-3xl md:leading-snug">It’s your
+                        gateway to premium
+                        medical and beauty
+                        care in
+                        Korea.
                     </h1>
-                    <p class="text-sm font-normal mb-6">We connect you with top specialists, combining advanced treatments
+                    <p class="font-normal text-[10px] text-justify px-4 md:text-left md:px-0 md:text-[13px] md:mb-6">We
+                        connect
+                        you with top specialists,
+                        combining
+                        advanced
+                        treatments
                         with a
                         personalized touch. Every experience is seamless, safe, and designed around your needs. With modern
                         facilities and the latest technology, we make world-class healthcare and beauty treatments
@@ -112,32 +124,48 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 py-[100px]">
-            <div class="flex flex-col items-center md:flex-row md:items-start md:gap-14">
-                <figure class="w-full md:max-w-[527px] h-auto relative">
-                    <img src="{{ asset('images/services/service-medical-3.png') }}" alt="Woman receiving facial treatment"
-                        class="w-full shadow-lg">
-                    {{-- Play button --}}
-                    {{-- <div class="absolute inset-0 flex items-center justify-center">
-                                <div
-                                    class="bg-white bg-opacity-80 rounded-full p-3 shadow-md cursor-pointer hover:bg-opacity-90 transition duration-300">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-700" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                            </div> --}}
+            <div class="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-14">
+                <div class="w-full overflow-hidden h-auto md:max-w-[527px]">
+                    <!-- Video container -->
+                    <div class="relative aspect-square" id="videoContainer">
+                        <!-- Video element (use your actual video source) -->
+                        <video id="videoPlayer" class="w-full h-full object-cover"
+                            poster="{{ asset('images/services/service-medical-3.png') }}">
+                            <source src="{{ asset('videos/demoACP.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
 
-                </figure>
+                        <!-- Play button overlay -->
+                        <div id="playButton"
+                            class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
+                            <button
+                                class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white/95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50">
+                                <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-800 ml-1"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="5 3 19 12 5 21 5 3" />
+                                </svg>
+                                <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg"
+                                    class="h-8 w-8 text-gray-800 hidden" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="6" y="4" width="4" height="16" />
+                                    <rect x="14" y="4" width="4" height="16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="w-full">
-                    <h2 class="text-3xl font-semibold text-primary-700 leading-tight mb-11">The Work Values We Thrive for
+                    <h2
+                        class="text-xl text-center font-semibold text-primary-700 leading-tight mb-11 md:text-left md:text-3xl">
+                        The Work Values We
+                        Thrive for
                         Your Beauty</h2>
-                    <div class="px-5 space-y-9">
+                    <div class="px-5 space-y-5 md:space-y-9">
                         <!-- Treatment 1 -->
-                        <div class="flex items-start space-x-8 border-b pb-9">
-                            <div>
+                        <div class="flex items-start gap-4 border-b pb-9 md:gap-8">
+                            <div class="scale-90 md:scale-100">
                                 <svg width="101" height="100" viewBox="0 0 101 100" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1" y="0.5" width="99" height="99" rx="4.5" fill="#EBF1FE"
@@ -163,16 +191,18 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-1 mb-2">Facial & Skin Care</h3>
-                                <p class="text-gray-2">Deep cleansing, chemical peels, and laser treatments using
+                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">Facial & Skin Care</h3>
+                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">Deep cleansing,
+                                    chemical peels, and laser
+                                    treatments using
                                     cutting-edge
                                     Korean skincare technology.</p>
                             </div>
                         </div>
 
                         <!-- Treatment 2 -->
-                        <div class="flex items-start space-x-8 border-b pb-9">
-                            <div>
+                        <div class="flex items-start gap-4 border-b pb-9 md:gap-8">
+                            <div class="scale-90 md:scale-100">
                                 <svg width="101" height="100" viewBox="0 0 101 100" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1" y="0.5" width="99" height="99" rx="4.5" fill="#EBF1FE"
@@ -183,15 +213,17 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-1 mb-2">Body Treatments</h3>
-                                <p class="text-gray-2">Luxurious body scrubs, massages, and full-body therapies inspired by
+                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">Body Treatments</h3>
+                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">Luxurious body
+                                    scrubs, massages, and full-body
+                                    therapies inspired by
                                     Korea's top wellness centers.</p>
                             </div>
                         </div>
 
                         <!-- Treatment 3 -->
-                        <div class="flex items-start space-x-8">
-                            <div>
+                        <div class="flex items-start gap-4 border-b pb-9 md:gap-8">
+                            <div class="scale-90 md:scale-100">
                                 <svg width="101" height="100" viewBox="0 0 101 100" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect x="1" y="0.5" width="99" height="99" rx="4.5" fill="#EBF1FE"
@@ -271,8 +303,11 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-1 mb-2">Personalized Beauty Therapy</h3>
-                                <p class="text-gray-2">Tailored consultations and treatments designed to meet your unique
+                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">Personalized Beauty Therapy</h3>
+                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">Tailored
+                                    consultations and
+                                    treatments designed
+                                    to meet your unique
                                     skin and beauty goals with the expertise of Korean specialists.</p>
                             </div>
                         </div>
@@ -285,17 +320,17 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
                 <!-- Testimonial Header -->
                 <div class="text-center mb-12">
-                    <p class="text-primary underline font-semibold mb-0.5">Testimonials</p>
-                    <h2 class="text-3xl font-semibold text-primary-700">What our Customers says...</h2>
+                    <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">Testimonials</p>
+                    <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">What our Customers says...</h2>
                 </div>
 
                 <!-- Testimonial Card -->
                 <div class="max-w-7xl mx-auto">
                     <div
                         class="bg-gradient-to-b from-[#1E4690] to-[#3477F6] rounded-3xl md:px-[140px] md:py-[72px] relative overflow-hidden">
-                        <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex flex-col md:flex-row items-center py-8 md:py-0">
                             <!-- Left side - Quote and Image -->
-                            <div class="w-full md:w-1/2 flex items-center justify-center relative mb-8 md:mb-0">
+                            <div class="w-full md:w-1/2 flex items-center justify-center relative mb-24 md:mb-0">
                                 <div class="absolute right-[56%] flex justify-center items-center text-white">
                                     <div class="flex gap-x-2">
                                         <svg width="53" height="172" viewBox="0 0 53 172" fill="none"
@@ -320,7 +355,7 @@
                             <!-- Right side - Testimonial Content -->
                             <div class="w-full md:w-1/2 text-white">
                                 <!-- Quote Icon -->
-                                <div class="mb-4">
+                                <div class="hidden mb-4 md:block">
                                     <svg width="35" height="31" viewBox="0 0 35 31" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -329,26 +364,27 @@
                                     </svg>
                                 </div>
 
-                                <div class="px-4 space-y-4 text-white mb-4">
+                                <div class="px-8 space-y-4 text-white mb-4 md:px-4">
                                     <!-- Customer Name and Location -->
                                     <div>
-                                        <h3 class="text-sm font-semibold">Yehezkel Imanuel</h3>
-                                        <p class="text-xs font-medium">Jakarta, Indonesia</p>
+                                        <h3 class="text-[10px] font-semibold md:text-sm">Yehezkel Imanuel</h3>
+                                        <p class="text-[8px] font-medium md:text-xs">Jakarta, Indonesia</p>
                                     </div>
 
                                     <!-- Testimonial Title -->
-                                    <h4 class="text-2xl font-semibold">Exceptional Service and Outstanding Results
+                                    <h4 class="text-lg font-semibold md:text-2xl">Exceptional Service and Outstanding
+                                        Results
                                     </h4>
 
                                     <!-- Testimonial Text -->
-                                    <p>
+                                    <p class="text-xs text-justify md:text-base md:text-left">
                                         The service at Anugerah Cahaya Pelangi is truly satisfying. I feel more confident,
                                         and my body feels healthier after receiving treatments here.
                                     </p>
                                 </div>
 
                                 <!-- End Quote -->
-                                <div class="flex justify-end">
+                                <div class="hidden justify-end md:flex">
                                     <svg width="35" height="31" viewBox="0 0 35 31" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

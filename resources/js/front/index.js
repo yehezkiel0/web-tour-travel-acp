@@ -12,6 +12,7 @@ import { initGallery } from "./modules/gallery-modals";
 import { initBookingForm } from "./modules/booking-form";
 import { initStepper } from "./modules/stepper";
 import { initBookingDetail } from "./modules/booking-detail";
+import { initVideoPlayer } from "./modules/video-player";
 
 // Wait for DOM to be ready
 $(() => {
@@ -28,4 +29,5 @@ $(() => {
     initBookingForm($);
     initStepper($);
     initBookingDetail($);
+    initVideoPlayer($);
 });

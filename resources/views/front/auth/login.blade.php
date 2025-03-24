@@ -36,7 +36,7 @@
                     </div>
                     <div class="flex items-center justify-center py-4 mb-2">
                         <button type="submit"
-                            class="text-sm bg-primary py-3 rounded-xl text-white font-semibold px-32 tracking-[1px] hover:tracking-[3px] active:scale-95 hover:bg-primary-400 transition-all ease-in-out duration-300">Login</button>
+                            class="text-sm bg-primary py-3 rounded-xl text-white font-semibold px-32 active:scale-95 hover:bg-primary-400 transition-all ease-in-out duration-300">Login</button>
                     </div>
                     <div class="items-center flex flex-col w-full gap-y-7">
                         <div class="w-full my-3">

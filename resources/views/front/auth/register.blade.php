@@ -1,7 +1,7 @@
 @extends('front.layout.app')
 
 @section('content')
-    <div class="min-h-screen flex items-center justify-center mx-auto bg-slate-800 px-4">
+    <div class="min-h-screen flex items-center justify-center mx-auto bg-slate-800 px-4 py-8">
         <div class="max-w-full rounded-xl border bg-white">
             <div class="flex flex-col items-center gap-y-8 py-6 px-8">
                 <h1 class="text-3xl font-semibold text-primary text-center mb-4 pt-4">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="flex items-center justify-center pb-5 py-10 mb-2">
                         <button type="submit"
-                            class="text-sm bg-primary py-3 rounded-xl text-white font-semibold px-28 tracking-[1px] hover:tracking-[3px] active:scale-95 hover:bg-primary-400 transition-all ease-in-out duration-300">Sign
+                            class="text-sm bg-primary py-3 rounded-xl text-white font-semibold px-28 active:scale-95 hover:bg-primary-400 transition-all ease-in-out duration-300">Sign
                             Up</button>
                     </div>
                     <div class="items-center flex flex-col w-full gap-y-7">
