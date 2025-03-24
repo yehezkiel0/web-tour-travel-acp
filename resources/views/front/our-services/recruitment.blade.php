@@ -4,14 +4,14 @@
     <section class="container mx-auto w-full pt-8">
         <header class="flex-col mb-7 space-y-4 max-w-7xl mx-auto px-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                <li class="inline-flex items-center">
+                <li class="inline-flex items-center text-xs md:text-base">
                     <a href="{{ route('home') }}"
                         class="inline-flex gap-x-2 items-center font-medium text-gray-3 hover:underline">
                         <img src="{{ asset('images/icon/Home.svg') }}" alt="home-icon">
                         Home
                     </a>
                 </li>
-                <li class="inline-flex items-center">
+                <li class="inline-flex items-center text-xs md:text-base">
                     <span class="inline-flex gap-x-2 items-center font-medium text-gray-3">
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -22,7 +22,7 @@
                     </span>
                 </li>
                 <li>
-                    <div class="flex items-center">
+                    <div class="flex items-center text-xs md:text-base">
                         <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -41,12 +41,15 @@
                         <figure class="w-full md:w-[395px] md:h-auto">
                             <img src="{{ asset('images/services/service-recruitment-hero.png') }}" alt="medical-hero">
                         </figure>
-                        <div class="text-center md:w-[calc(100%-395px)]">
-                            <h1 class="text-4xl font-bold text-primary-700 mb-6 leading-snug">Your Gateway to Top
+                        <div class="text-center w-full px-8 md:px-0 md:w-[calc(100%-395px)]">
+                            <h1 class="text-2xl md:text-4xl font-bold text-primary-700 mb-6 leading-snug">Your
+                                Gateway to
+                                Top
                                 Indonesian
                                 Talent for
                                 Opportunities in Korea</h1>
-                            <p class="text-gray-2 text-sm mb-6">We connect companies with exceptional Indonesian candidates,
+                            <p class="text-gray-2 text-[10px] md:text-sm mb-6">We connect companies with exceptional
+                                Indonesian candidates,
                                 whether university students or PMI Migrant Workers, Ready to make an impact in Korea!</p>
                             <a href="#">
                                 <button
@@ -65,18 +68,18 @@
             <div class="max-w-7xl mx-auto py-[60px] px-8 md:px-6 lg:px-0">
                 <div class="w-full space-y-16">
                     <div class="space-y-2 text-center">
-                        <h2 class="text-3xl font-semibold text-primary">
+                        <h2 class="text-xl md:text-3xl font-semibold text-primary">
                             Our Expertise & Process
                         </h2>
-                        <p class="text-gray-1">
+                        <p class="text-gray-1 text-xs md:text-base">
                             At ACP, we fuel growth by delivering top talent that excels and fits seamlessly into your
                             culture.
                         </p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-20 lg:gap-40">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-20 lg:gap-40">
                         <div
-                            class="flex flex-col justify-center items-center gap-4 rounded-lg shadow-[0px_2px_2px_0px_rgba(171,190,209,0.2)] md:px-10 md:py-6 hover:scale-105 transition-all ease-in-out duration-300">
-                            <svg width="65" height="56" viewBox="0 0 65 56" fill="none"
+                            class="flex flex-col justify-center items-center gap-2 rounded-lg shadow-[0px_2px_2px_0px_rgba(171,190,209,0.2)] py-8 px-6 md:gap-4 md:px-10 md:py-6 hover:scale-105 transition-all ease-in-out duration-300">
+                            <svg class="w-[45px] h-[46px] md:w-[65px] md:h-[56px]" viewBox="0 0 65 56" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M65 38C65 47.9411 56.9411 56 47 56L20 56C17.2386 56 15 53.7614 15 51L15 17C15 11.4772 19.4772 7 25 7L60 7C62.7614 7 65 9.23858 65 12L65 38Z"
@@ -86,10 +89,11 @@
                                     fill="#103E13" />
                             </svg>
                             <div class="space-y-2 text-center">
-                                <h4 class="text-2xl font-bold text-primary-800">
+                                <h4 class="text-lg md:text-2xl font-bold text-primary-800">
                                     Smart Sourcing
                                 </h4>
-                                <p class="text-sm font-normal text-gray-2">We target top university graduates and
+                                <p class="text-[10px] md:text-sm font-normal text-gray-2">We target top university graduates
+                                    and
                                     experienced
                                     PMI Migrant Workers,
                                     selecting talent that
@@ -97,8 +101,8 @@
                             </div>
                         </div>
                         <div
-                            class="flex flex-col justify-center items-center gap-4 rounded-lg shadow-[0px_2px_2px_0px_rgba(171,190,209,0.2)] md:px-10 md:py-6 hover:scale-105 transition-all ease-in-out duration-300">
-                            <svg width="66" height="56" viewBox="0 0 66 56" fill="none"
+                            class="flex flex-col justify-center items-center gap-2 rounded-lg shadow-[0px_2px_2px_0px_rgba(171,190,209,0.2)] py-8 px-6 md:gap-4 md:px-10 md:py-6 hover:scale-105 transition-all ease-in-out duration-300">
+                            <svg class="w-[45px] h-[46px] md:w-[65px] md:h-[56px]" viewBox="0 0 66 56" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M65.5 38C65.5 47.9411 57.4411 56 47.5 56L20.5 56C17.7386 56 15.5 53.7614 15.5 51L15.5 17C15.5 11.4772 19.9772 7 25.5 7L60.5 7C63.2614 7 65.5 9.23858 65.5 12L65.5 38Z"
@@ -153,17 +157,18 @@
                                     fill="#103E13" />
                             </svg>
                             <div class="space-y-2 text-center">
-                                <h4 class="text-2xl font-bold text-primary-800">
+                                <h4 class="text-lg md:text-2xl font-bold text-primary-800">
                                     Insightful Evaluations
                                 </h4>
-                                <p class="text-sm font-normal text-gray-2">Through rigorous tests and cultural interviews,
+                                <p class="text-[10px] md:text-sm font-normal text-gray-2">Through rigorous tests and
+                                    cultural interviews,
                                     we
                                     ensure every candidate is set for success in Korea.</p>
                             </div>
                         </div>
                         <div
-                            class="flex flex-col justify-center items-center gap-4 rounded-lg shadow-[0px_2px_2px_0px_rgba(171,190,209,0.2)] md:px-10 md:py-6 hover:scale-105 transition-all ease-in-out duration-300">
-                            <svg width="65" height="56" viewBox="0 0 65 56" fill="none"
+                            class="flex flex-col justify-center items-center gap-2 rounded-lg shadow-[0px_2px_2px_0px_rgba(171,190,209,0.2)] py-8 px-6 md:gap-4 md:px-10 md:py-6 hover:scale-105 transition-all ease-in-out duration-300">
+                            <svg class="w-[45px] h-[46px] md:w-[65px] md:h-[56px]" viewBox="0 0 65 56" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M65 38C65 47.9411 56.9411 56 47 56L20 56C17.2386 56 15 53.7614 15 51L15 17C15 11.4772 19.4772 7 25 7L60 7C62.7614 7 65 9.23858 65 12L65 38Z"
@@ -179,10 +184,11 @@
                                     fill="#103E13" />
                             </svg>
                             <div class="space-y-2 text-center">
-                                <h4 class="text-2xl font-bold text-primary-800">
+                                <h4 class="text-lg md:text-2xl font-bold text-primary-800">
                                     Perfect Pairing
                                 </h4>
-                                <p class="text-sm font-normal text-gray-2">We go beyond filling vacancies by matching the
+                                <p class="text-[10px] md:text-sm font-normal text-gray-2">We go beyond filling vacancies by
+                                    matching the
                                     right
                                     talent with the right opportunity, forging lasting partnerships for long-term success.
                                 </p>
@@ -192,15 +198,43 @@
                 </div>
             </div>
             <div class="bg-[#DFE9FF] w-full py-10 lg:px-[100px]">
-                <div class="flex flex-col items-center md:flex-row lg:gap-28">
-                    <figure class="w-full md:max-w-[527px] h-auto relative">
-                        <img src="{{ asset('images/services/service-recruitment-1.png') }}"
-                            alt="Woman receiving facial treatment" class="w-full shadow-lg">
-                    </figure>
-                    <div>
-                        <h2 class="text-3xl font-semibold text-primary mb-4">Bridging Cultures, Building
+                <div class="flex flex-col items-center gap-10 md:flex-row lg:gap-28">
+                    <div class="w-4/5 h-fit overflow-hidden md:h-auto md:max-w-[527px] md:rounded-3xl">
+                        <!-- Video container -->
+                        <div class="relative aspect-square" id="videoContainer">
+                            <!-- Video element (use your actual video source) -->
+                            <video id="videoPlayer" class="w-full h-full object-cover">
+                                <source src="{{ asset('videos/demoACP.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <!-- Play button overlay -->
+                            <div id="playButton"
+                                class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
+                                <button
+                                    class="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white/95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50">
+                                    <svg id="playIcon" xmlns="http://www.w3.org/2000/svg"
+                                        class="h-8 w-8 text-gray-800 ml-1" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polygon points="5 3 19 12 5 21 5 3" />
+                                    </svg>
+                                    <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg"
+                                        class="h-8 w-8 text-gray-800 hidden" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="6" y="4" width="4" height="16" />
+                                        <rect x="14" y="4" width="4" height="16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 md:px-0 text-center md:text-left">
+                        <h2 class="text-xl md:text-3xl font-semibold text-primary mb-4">Bridging
+                            Cultures, Building
                             Success</h2>
-                        <p class="text-gray-1 mb-7">
+                        <p class="text-gray-1 mb-7 text-xs text-justify md:text-base">
                             Finding the right talent is never easy.<br><br>
 
                             Especially when crossing cultural and geographical boundaries. At
@@ -220,15 +254,15 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full mx-auto px-4 sm:px-6 lg:px-0 py-[100px]">
+            <div class="w-full mx-auto px-4 py-10 sm:px-6 lg:px-0 md:py-[100px]">
                 <div class="flex flex-col items-center">
-                    <h2 class="text-3xl font-semibold text-primary mb-2">Who We Serve</h2>
-                    <p class="text-gray-1 mb-10">Who is ACP suitable for?
+                    <h2 class="text-xl md:text-3xl font-semibold text-primary mb-2">Who We Serve</h2>
+                    <p class="text-gray-1 mb-10 text-xs md:text-base">Who is ACP suitable for?
                     </p>
                     <div class="max-w-full relative">
                         {{-- icon eclipse --}}
-                        <div class="absolute bottom-0 -left-32 z-[1]">
-                            <svg width="364" height="182" viewBox="0 0 364 182" fill="none"
+                        <div class="absolute -bottom-10 md:bottom-0 md:-left-32 z-[1]">
+                            <svg class="w-40 h-32 md:w-[364px] md:h-[182px]" viewBox="0 0 364 182" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M364 182C364 158.099 359.292 134.433 350.146 112.352C341 90.2704 327.594 70.2068 310.693 53.3066C293.793 36.4063 273.73 23.0003 251.648 13.8539C229.567 4.70757 205.901 -1.04473e-06 182 0C158.099 1.04473e-06 134.433 4.70757 112.352 13.8539C90.2704 23.0003 70.2068 36.4063 53.3066 53.3066C36.4063 70.2068 23.0003 90.2704 13.8539 112.352C4.70756 134.433 -2.08945e-06 158.099 0 182L364 182Z"
@@ -243,8 +277,8 @@
                             </svg>
                         </div>
                         {{-- icon eclipse --}}
-                        <div class="absolute top-0 right-20 z-[1]">
-                            <svg width="313" height="313" viewBox="0 0 313 313" fill="none"
+                        <div class="absolute top-4 right-20 md:top-0 z-[1]">
+                            <svg class="w-24 h-24 md:w-[313px] md:h-[313px]" viewBox="0 0 313 313" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M153 264.131C153 294.987 178.748 320.901 207.741 310.344C219.714 305.985 231.185 300.189 241.891 293.035C268.203 275.454 288.711 250.466 300.821 221.229C312.931 191.993 316.099 159.823 309.926 128.786C303.752 97.7486 288.513 69.2393 266.137 46.8629C243.761 24.4865 215.251 9.24799 184.214 3.07436C153.177 -3.09928 121.007 0.0692538 91.7706 12.1793C62.5344 24.2893 37.5459 44.7969 19.9648 71.1088C12.8113 81.8147 7.01492 93.286 2.65557 105.259C-7.90086 134.252 18.0132 160 48.8686 160H76.3085C92.0093 160 104.148 146.241 112.871 133.187C118.174 125.25 125.712 119.064 134.531 115.411C143.349 111.758 153.054 110.802 162.416 112.665C171.778 114.527 180.377 119.123 187.127 125.873C193.877 132.623 198.473 141.222 200.335 150.584C202.198 159.946 201.242 169.651 197.589 178.469C193.936 187.288 187.75 194.826 179.813 200.129C166.759 208.852 153 220.991 153 236.691V264.131Z"
@@ -263,17 +297,17 @@
                                 alt="service-recruitment-2">
                         </figure>
                         {{-- icon 1 --}}
-                        <div class="rounded-full font-semibold text-white text-lg px-14 py-4 absolute top-0 -left-40"
+                        <div class="rounded-full font-semibold text-white text-[8px] md:text-lg px-4 py-2 md:px-14 md:py-4 absolute -top-6 left-10 md:top-0 md:-left-40"
                             style="background: linear-gradient(to right, rgba(52,119,246,1), rgba(29,65,135,1))">
                             Fresh Graduates
                         </div>
                         {{-- icon 2 --}}
-                        <div class="rounded-full font-semibold text-white text-lg px-14 py-4 absolute top-1/4 -left-1/3"
+                        <div class="rounded-full font-semibold text-white text-[8px] md:text-lg px-4 py-2 md:px-14 md:py-4 absolute top-4 -left-2 md:top-1/4 md:-left-1/3"
                             style="background: linear-gradient(to right, rgba(52,119,246,1), rgba(29,65,135,1))">
                             University Students
                         </div>
                         {{-- icon 3 --}}
-                        <div class="rounded-full font-semibold text-white text-lg px-14 py-4 absolute top-10 -right-56"
+                        <div class="rounded-full font-semibold text-white text-[8px] md:text-lg px-4 py-2 md:px-14 md:py-4 absolute top-0 -right-4 md:top-10 md:-right-56"
                             style="background: linear-gradient(to right, rgba(52,119,246,1), rgba(29,65,135,1))">
                             PMI Migrant Workers
                         </div>
@@ -282,22 +316,22 @@
                 </div>
             </div>
             <div
-                class="max-w-7xl mx-auto mb-[100px] px-8 md:px-6 lg:px-0 flex flex-col gap-8 md:flex-row md:gap-20 items-center justify-between">
+                class="max-w-7xl mx-auto mb-14 md:mb-[100px] px-8 md:px-6 lg:px-0 flex flex-col gap-8 md:flex-row md:gap-20 items-center justify-between">
                 <div class="w-full md:w-1/2 space-y-7">
-                    <div class="space-y-2">
-                        <h2 class="text-3xl font-semibold text-primary leading-tight">
+                    <div class="space-y-2 text-center md:text-left">
+                        <h2 class="text-xl md:text-3xl font-semibold text-primary leading-tight">
                             Our Comprehensive Services
                         </h2>
-                        <p class="text-gray-1">
+                        <p class="text-gray-1 text-xs md:text-base">
                             We offer an end-to-end recruitment solution that handles every detail, allowing you to focus on
                             your core business
                         </p>
                     </div>
                     <div class="flex flex-col gap-y-6">
-                        <div class="flex gap-10">
+                        <div class="flex gap-4 md:gap-10">
                             <div
-                                class="flex-shrink-0 rounded-full bg-[#FBFBFB] w-14 h-14 drop-shadow-md flex items-center justify-center">
-                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                class="flex-shrink-0 rounded-full bg-[#FBFBFB] w-10 h-10 md:w-14 md:h-14 drop-shadow-md flex items-center justify-center">
+                                <svg class="w-6 h-6 md:w-[30px] md:h-[30px]" viewBox="0 0 30 30" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M23.8393 10.3439C24.0436 10.3439 24.2467 10.2611 24.3949 10.0982L24.4051 10.0871C24.4709 10.0144 24.5217 9.92931 24.5546 9.83685C24.5874 9.7444 24.6016 9.64636 24.5963 9.54838C24.5911 9.45041 24.5665 9.35445 24.524 9.26602C24.4815 9.1776 24.4219 9.09846 24.3487 9.03318C24.0421 8.75448 23.5627 8.78328 23.2843 9.08958C23.1865 9.19706 23.122 9.33064 23.0987 9.47408C23.0754 9.61753 23.0943 9.76465 23.1531 9.89754C23.212 10.0304 23.3081 10.1434 23.4299 10.2226C23.5517 10.3019 23.694 10.344 23.8393 10.3439ZM21.7879 10.7357C21.654 10.8828 21.5841 11.0771 21.5934 11.2758C21.6028 11.4744 21.6907 11.6613 21.8378 11.7951C21.9849 11.929 22.1792 11.9989 22.3779 11.9896C22.5766 11.9802 22.7634 11.8923 22.8973 11.7452L22.9114 11.7296C23.1904 11.4233 23.161 10.9568 22.855 10.6778C22.5481 10.3994 22.0669 10.4294 21.7879 10.7357ZM6.40507 9.07848C6.12637 8.77218 5.65747 8.75478 5.35057 9.03318C5.04367 9.31158 5.02597 9.79128 5.30437 10.0982C5.37472 10.1757 5.46054 10.2376 5.55628 10.2799C5.65203 10.3223 5.75559 10.344 5.86027 10.3439C6.0055 10.3439 6.1476 10.3017 6.26932 10.2224C6.39103 10.1432 6.48713 10.0303 6.54593 9.89755C6.60473 9.76476 6.62372 9.61775 6.60058 9.47438C6.57744 9.331 6.51317 9.19743 6.41557 9.08988L6.40507 9.07848ZM7.35667 11.9906C7.50197 11.9905 7.64412 11.9483 7.76587 11.869C7.88761 11.7897 7.9837 11.6767 8.04245 11.5439C8.1012 11.411 8.12009 11.2639 8.09682 11.1205C8.07355 10.977 8.00913 10.8435 7.91137 10.736L7.89697 10.7204C7.61827 10.4141 7.15117 10.4003 6.84457 10.6781C6.53827 10.9571 6.52327 11.4392 6.80197 11.7455C6.87226 11.8227 6.95791 11.8844 7.05343 11.9266C7.14895 11.9688 7.25224 11.9906 7.35667 11.9906ZM13.5994 26.2886C10.0381 25.6724 7.53487 22.6598 7.47967 19.1678L8.96437 19.4243L6.98497 15.7556L3.88867 18.5465L5.38237 18.8048C5.25967 23.4614 8.52967 27.5429 13.2418 28.3583C17.1268 29.0297 20.9497 27.2789 22.9816 23.8985L21.1819 22.8167C19.6 25.4486 16.6234 26.8115 13.5994 26.2886ZM16.471 9.67638C12.6421 9.01518 8.72677 10.8101 6.72697 14.1425L8.52757 15.2234C10.0843 12.629 13.1332 11.2316 16.1131 11.7461C19.6756 12.3626 22.1776 15.3749 22.2331 18.8669L20.7478 18.6104L22.7278 22.2791L25.8241 19.4879L24.3304 19.2299C24.4525 14.5727 21.1846 10.4921 16.471 9.67638Z"
@@ -323,17 +357,20 @@
                                 </svg>
                             </div>
                             <div class="space-y-1 text-justify">
-                                <h3 class="text-xl font-bold text-primary-800">Integrated Recruitment Solutions</h3>
-                                <p class="text-gray-2">From strategic planning and candidate sourcing to placement and
+                                <h3 class="text-base md:text-xl font-bold text-primary-800">Integrated Recruitment
+                                    Solutions
+                                </h3>
+                                <p class="text-gray-2 text-xs md:text-base">From strategic planning and candidate sourcing
+                                    to placement and
                                     post-placement support, we manage the entire process with precision.</p>
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col gap-y-6">
-                        <div class="flex gap-10">
+                        <div class="flex gap-4 md:gap-10">
                             <div
-                                class="flex-shrink-0 rounded-full bg-[#FBFBFB] w-14 h-14 drop-shadow-md flex items-center justify-center">
-                                <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                                class="flex-shrink-0 rounded-full bg-[#FBFBFB] w-10 h-10 md:w-14 md:h-14 drop-shadow-md flex items-center justify-center">
+                                <svg class="w-6 h-6 md:w-[30px] md:h-[30px]" viewBox="0 0 30 30" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_7826_4356)">
                                         <path
@@ -354,8 +391,9 @@
                                 </svg>
                             </div>
                             <div class="space-y-1 text-justify">
-                                <h3 class="text-xl font-bold text-primary-800">HR Consulting Services</h3>
-                                <p class="text-gray-2">Beyond recruitment, we provide expert advice on developing
+                                <h3 class="text-base md:text-xl font-bold text-primary-800">HR Consulting Services</h3>
+                                <p class="text-gray-2 text-xs md:text-base">Beyond recruitment, we provide expert advice on
+                                    developing
                                     sustainable talent strategies, ensuring your workforce is prepared for global
                                     challenges.</p>
                             </div>
@@ -372,17 +410,17 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
                     <!-- Testimonial Header -->
                     <div class="text-center mb-12">
-                        <p class="text-primary underline font-semibold mb-0.5">Testimonials</p>
-                        <h2 class="text-3xl font-semibold text-primary-700">What our Customers says...</h2>
+                        <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">Testimonials</p>
+                        <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">What our Customers says...</h2>
                     </div>
 
                     <!-- Testimonial Card -->
                     <div class="max-w-7xl mx-auto">
                         <div
                             class="bg-gradient-to-b from-[#1E4690] to-[#3477F6] rounded-3xl md:px-[140px] md:py-[72px] relative overflow-hidden">
-                            <div class="flex flex-col md:flex-row items-center">
+                            <div class="flex flex-col md:flex-row items-center py-8 md:py-0">
                                 <!-- Left side - Quote and Image -->
-                                <div class="w-full md:w-1/2 flex items-center justify-center relative mb-8 md:mb-0">
+                                <div class="w-full md:w-1/2 flex items-center justify-center relative mb-24 md:mb-0">
                                     <div class="absolute right-[56%] flex justify-center items-center text-white">
                                         <div class="flex gap-x-2">
                                             <svg width="53" height="172" viewBox="0 0 53 172" fill="none"
@@ -407,7 +445,7 @@
                                 <!-- Right side - Testimonial Content -->
                                 <div class="w-full md:w-1/2 text-white">
                                     <!-- Quote Icon -->
-                                    <div class="mb-4">
+                                    <div class="hidden mb-4 md:block">
                                         <svg width="35" height="31" viewBox="0 0 35 31" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -416,19 +454,20 @@
                                         </svg>
                                     </div>
 
-                                    <div class="px-4 space-y-4 text-white mb-4">
+                                    <div class="px-8 space-y-4 text-white mb-4 md:px-4">
                                         <!-- Customer Name and Location -->
                                         <div>
-                                            <h3 class="text-sm font-semibold">Yehezkel Imanuel</h3>
-                                            <p class="text-xs font-medium">Jakarta, Indonesia</p>
+                                            <h3 class="text-[10px] font-semibold md:text-sm">Yehezkel Imanuel</h3>
+                                            <p class="text-[8px] font-medium md:text-xs">Jakarta, Indonesia</p>
                                         </div>
 
                                         <!-- Testimonial Title -->
-                                        <h4 class="text-2xl font-semibold">Exceptional Service and Outstanding Results
+                                        <h4 class="text-lg font-semibold md:text-2xl">Exceptional Service and Outstanding
+                                            Results
                                         </h4>
 
                                         <!-- Testimonial Text -->
-                                        <p>
+                                        <p class="text-xs text-justify md:text-base md:text-left">
                                             The service at Anugerah Cahaya Pelangi is truly satisfying. I feel more
                                             confident,
                                             and my body feels healthier after receiving treatments here.
@@ -436,7 +475,7 @@
                                     </div>
 
                                     <!-- End Quote -->
-                                    <div class="flex justify-end">
+                                    <div class="hidden justify-end md:flex">
                                         <svg width="35" height="31" viewBox="0 0 35 31" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path

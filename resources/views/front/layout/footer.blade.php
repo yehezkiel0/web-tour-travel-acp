@@ -3,7 +3,7 @@
         <div>
             <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Footer" class="w-28 md:w-40 h-auto" />
             <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
-                <div class="col-span-1 md:col-span-2 md:pt-10">
+                <div class="col-span-1 pt-4 md:col-span-2 md:pt-10">
                     <h4 class="text-[#333333] text-xs font-medium px-0 md:w-[90%] md:text-base md:px-4">
                         Turning Your Dreams Into Reality with Complete and Integrated Solutions
                     </h4>

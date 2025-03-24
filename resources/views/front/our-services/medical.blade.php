@@ -41,7 +41,8 @@
                         <img src="{{ asset('images/services/service-medical-hero.png') }}" alt="medical-hero">
                     </figure>
                     <div class="text-center max-w-lg">
-                        <h1 class="text-2xl md:text-4xl font-bold text-primary-700 mb-4">Medical & Beauty Care</h1>
+                        <h1 class="text-2xl md:text-4xl font-bold text-primary-700 mb-4">Medical & Beauty Care
+                        </h1>
                         <p class="text-gray-2 text-[10px] md:text-sm mb-6 px-4 md:px-0">Anugerah Cahaya Pelangi presents The
                             Best
                             Medical
