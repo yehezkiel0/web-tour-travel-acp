@@ -1,7 +1,7 @@
 <div class="navbar-container">
     <nav class="navbar" id="navbar-home">
         <div
-            class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-4 xl:pt-4 xl:px-0">
+            class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-2 overflow-hidden md:overflow-visible xl:pt-4 xl:px-0">
             <a href="{{ route('home') }}" class="cursor-pointer">
                 <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" class="w-28 xl:w-40" />
             </a>
@@ -123,11 +123,9 @@
                 </button>
             </div>
         </div>
-
-
         {{-- Sidebar --}}
         <div
-            class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 h-screen w-screen bg-white overflow-y-auto">
+            class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 h-dvh w-screen bg-white overflow-y-auto">
             <div class="flex flex-row gap-x-3 px-6 py-4 border-b w-full">
                 <div>
                     <a href="{{ route('login') }}">
