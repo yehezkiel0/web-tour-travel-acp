@@ -187,8 +187,20 @@
                 </li>
                 <li class="py-3 px-4">
                     <a href="#" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-champagne-glasses text-xl"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
                         Entertainment
+                    </a>
+                </li>
+                <li class="py-3 px-4">
+                    <a href="{{ route('about') }}" class="text-lg flex items-center gap-x-5">
+                        <i class="fa-solid fa-circle-info text-xl"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="py-3 px-4">
+                    <a href="{{ route('contact') }}" class="text-lg flex items-center gap-x-5">
+                        <i class="fa-solid fa-address-book text-xl"></i>
+                        Contact Us
                     </a>
                 </li>
             </ul>

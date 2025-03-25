@@ -2,24 +2,26 @@
 @section('content')
     @include('front.layout.nav')
     <section class="container mx-auto">
-        <div class="max-w-7xl mx-auto py-20">
-            <div class="text-center mb-[60px] space-y-[10px]">
-                <h2 class="text-[40px] font-bold text-primary">Contact Us</h2>
-                <p class="text-lg font-medium text-gray-2">Any question or remarks? Just write us a message!</p>
+        <div class="max-w-7xl mx-auto py-14 md:py-20">
+            <div class="text-center mb-6 md:mb-[60px] space-y-[10px]">
+                <h2 class="text-2xl md:text-[40px] font-bold text-primary">Contact Us</h2>
+                <p class="text-sm md:text-lg font-medium text-gray-2">Any question or remarks? Just write us a message!</p>
             </div>
-            <div class="flex flex-col md:flex-row items-center rounded-xl bg-white p-3 drop-shadow-lg">
-                <div class="w-full md:w-2/5">
-                    <div class="bg-gradient-to-r from-[#3477F6] to-[#1D4187] rounded-md p-10 relative overflow-hidden">
-                        <div class="space-y-2.5 text-white mb-[60px]">
-                            <h3 class="text-[28px] font-semibold">Contact Information</h3>
-                            <p>Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.
+            <div class="flex flex-col md:flex-row gap-4 md:gap-0 items-center md:rounded-xl bg-white p-3 md:drop-shadow-lg">
+                <div class="w-full px-4 md:px-0 md:w-2/5">
+                    <div
+                        class="bg-gradient-to-r from-[#3477F6] to-[#1D4187] rounded-md p-8 md:p-10 relative overflow-hidden">
+                        <div class="space-y-2.5 text-white mb-8 md:mb-[60px]">
+                            <h3 class="text-xl md:text-[28px] font-semibold">Contact Information</h3>
+                            <p class="text-xs md:text-base">Questions, comments, or suggestions? Simply fill in the form and
+                                we’ll be in touch shortly.
                             </p>
                         </div>
-                        <div class="flex flex-col gap-7 mb-28">
+                        <div class="flex flex-col gap-4 md:gap-7 mb-16 md:mb-28">
                             {{-- list contact --}}
                             <div class="flex gap-3">
                                 <div class="flex-shrink-0">
-                                    <svg width="24" height="27" viewBox="0 0 24 27" fill="none"
+                                    <svg class="w-5 h-6 md:w-6 md:h-7" viewBox="0 0 24 27" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M21 13C21 20 12 26 12 26C12 26 3 20 3 13C3 10.6131 3.94821 8.32387 5.63604 6.63604C7.32387 4.94821 9.61305 4 12 4C14.3869 4 16.6761 4.94821 18.364 6.63604C20.0518 8.32387 21 10.6131 21 13Z"
@@ -31,15 +33,16 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <div class="space-y-2.5 text-white font-medium">
-                                    <h4 class="text-xl">Address</h4>
-                                    <p class="text-sm">Jalan Balai Pustaka Timur No. 39, Rawamangun, Jakarta, Indonesia
+                                <div class="space-y-1 md:space-y-2.5 text-white font-medium">
+                                    <h4 class="text-base md:text-xl">Address</h4>
+                                    <p class="text-[10px] md:text-sm">Jalan Balai Pustaka Timur No. 39, Rawamangun, Jakarta,
+                                        Indonesia
                                     </p>
                                 </div>
                             </div>
                             <div class="flex gap-3">
                                 <div class="flex-shrink-0">
-                                    <svg width="24" height="27" viewBox="0 0 24 27" fill="none"
+                                    <svg class="w-5 h-6 md:w-6 md:h-7" viewBox="0 0 24 27" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M22.0004 19.92V22.92C22.0016 23.1985 21.9445 23.4742 21.8329 23.7293C21.7214 23.9845 21.5577 24.2136 21.3525 24.4019C21.1473 24.5901 20.905 24.7335 20.6412 24.8227C20.3773 24.9119 20.0978 24.9451 19.8204 24.92C16.7433 24.5856 13.7874 23.5341 11.1904 21.85C8.77425 20.3147 6.72576 18.2662 5.19042 15.85C3.5004 13.2412 2.44866 10.271 2.12042 7.18C2.09543 6.90346 2.1283 6.62476 2.21692 6.36162C2.30555 6.09849 2.44799 5.85669 2.63519 5.65162C2.82238 5.44655 3.05023 5.28271 3.30421 5.17052C3.5582 5.05833 3.83276 5.00026 4.11042 5H7.11042C7.59573 4.99522 8.06621 5.16708 8.43418 5.48353C8.80215 5.79998 9.0425 6.23944 9.11042 6.72C9.23704 7.68006 9.47187 8.62272 9.81042 9.53C9.94497 9.88792 9.97408 10.2769 9.89433 10.6509C9.81457 11.0248 9.62928 11.3681 9.36042 11.64L8.09042 12.91C9.51398 15.4135 11.5869 17.4864 14.0904 18.91L15.3604 17.64C15.6323 17.3711 15.9756 17.1858 16.3495 17.1061C16.7235 17.0263 17.1125 17.0555 17.4704 17.19C18.3777 17.5285 19.3204 17.7634 20.2804 17.89C20.7662 17.9585 21.2098 18.2032 21.527 18.5775C21.8441 18.9518 22.0126 19.4296 22.0004 19.92Z"
@@ -47,15 +50,15 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <div class="space-y-2.5 text-white font-medium">
-                                    <h4 class="text-xl">Phone</h4>
-                                    <p class="text-sm">(+62)812-8377-7765
+                                <div class="space-y-1 md:space-y-2.5 text-white font-medium">
+                                    <h4 class="text-base md:text-xl">Phone</h4>
+                                    <p class="text-[10px] md:text-sm">(+62)812-8377-7765
                                     </p>
                                 </div>
                             </div>
                             <div class="flex gap-3">
                                 <div class="flex-shrink-0">
-                                    <svg width="24" height="27" viewBox="0 0 24 27" fill="none"
+                                    <svg class="w-5 h-6 md:w-6 md:h-7" viewBox="0 0 24 27" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M4 7H20C21.1 7 22 7.9 22 9V21C22 22.1 21.1 23 20 23H4C2.9 23 2 22.1 2 21V9C2 7.9 2.9 7 4 7Z"
@@ -65,9 +68,9 @@
                                             stroke-linejoin="round" />
                                     </svg>
                                 </div>
-                                <div class="space-y-2.5 text-white font-medium">
-                                    <h4 class="text-xl">Email</h4>
-                                    <p class="text-sm">anugrahcahayapelangi@gmail.com
+                                <div class="space-y-1 md:space-y-2.5 text-white font-medium">
+                                    <h4 class="text-base md:text-xl">Email</h4>
+                                    <p class="text-[10px] md:text-sm">anugrahcahayapelangi@gmail.com
                                     </p>
                                 </div>
                             </div>
@@ -125,8 +128,9 @@
                 </div>
                 <div class="w-full md:w-3/5">
                     <div class="px-6 py-4 md:p-[60px] flex items-center">
-                        <form action="">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-11">
+                        <form action="{{ route('contact_submit') }}" method="POST">
+                            @csrf
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-11">
                                 <div>
                                     <label for="first_name" class="font-medium text-gray-3 text-xs">First Name<span
                                             class="text-[#FD2D2D]">*</span></label>
@@ -154,7 +158,7 @@
                             </div>
                             <div class="flex flex-col gap-4 mb-11">
                                 <h4 class="text-sm font-semibold text-gray-1">Select Subject?</h4>
-                                <div class="flex flex-wrap gap-5">
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-3">
                                     <!-- Tour & Travel -->
                                     <label class="flex items-center gap-2 cursor-pointer">
                                         <input type="radio" name="subject" value="tour-travel" class="hidden" checked>
@@ -216,11 +220,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="mb-[60px] text-[#8D8D8D]">
+                            <div class="mb-10 md:mb-[60px] text-[#8D8D8D]">
                                 <div class="flex flex-col gap-[10px]">
                                     <label for="message" class="font-medium text-xs">Message</label>
                                     <textarea name="message" id="message" cols="10" rows="1.5"
-                                        class="pb-2 border-b-2 border-[#8D8D8D] outline-none resize-none">Write your message..</textarea>
+                                        class="pb-2 border-b-2 border-[#8D8D8D] outline-none resize-none focus:text-black">Write your message..</textarea>
                                 </div>
                             </div>
                             <button type="submit"
