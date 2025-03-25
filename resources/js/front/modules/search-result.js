@@ -146,4 +146,18 @@ export const initSearchResult = ($) => {
             });
         }, 300);
     }
+
+    $(document).ready(function () {
+        $(".filter-toggle-btn").on("click", function () {
+            $(".mobile-filter-overlay")
+                .removeClass("translate-x-full")
+                .addClass("translate-x-0");
+        });
+
+        $(".close-filter-btn").on("click", function () {
+            $(".mobile-filter-overlay")
+                .removeClass("translate-x-0")
+                .addClass("translate-x-full");
+        });
+    });
 };
