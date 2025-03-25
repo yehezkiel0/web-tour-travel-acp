@@ -2,18 +2,19 @@
 @section('content')
     @include('front.layout.nav')
     <section class="container mx-auto">
-        <div class="relative py-20 overflow-hidden bg-blue-100">
-            <div class="absolute inset-0 z-0">
+        <div class="relative py-14 md:py-20 overflow-hidden bg-blue-100">
+            <div class="hidden md:block absolute inset-0 z-0">
                 <img src="{{ asset('images/home/about-2.jpg') }}" alt="hero-section-about"
                     class="object-cover w-full h-auto opacity-20">
             </div>
             <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
-                <h2 class="text-4xl md:text-5xl font-bold text-primary md:mb-6">About Us</h2>
-                <p class="text-lg md:text-xl font-semibold text-primary-700 italic md:mb-8">“Fulfilling Your Dreams with
+                <h2 class="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">About Us</h2>
+                <p class="text-base md:text-xl font-semibold text-primary-700 italic mb-6 md:mb-8">“Fulfilling Your Dreams
+                    with
                     Complete &
                     Integrated
                     Business Solutions”</p>
-                <p class="text-base md:text-lg text-gray-2 max-w-3xl mx-auto">Anugerah Cahaya Pelangi is your trusted
+                <p class="text-sm md:text-lg text-gray-2 max-w-3xl mx-auto">Anugerah Cahaya Pelangi is your trusted
                     partner, delivering
                     comprehensive
                     solutions that
@@ -23,11 +24,11 @@
                     bridging opportunities between Indonesia and South Korea, with our proven premium services.</p>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto py-20">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="max-w-7xl mx-auto py-14 md:py-20">
+            <div class="grid grid-cols-1 px-8 md:px-0 md:grid-cols-2 gap-6 md:gap-12">
                 <div class="rounded-2xl stroke-1 stroke-[#E5E7EB] drop-shadow-md bg-white p-8">
-                    <div class="mb-6">
-                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                    <div class="mb-4 md:mb-6">
+                        <svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M0 32C0 14.3269 14.3269 0 32 0C49.6731 0 64 14.3269 64 32C64 49.6731 49.6731 64 32 64C14.3269 64 0 49.6731 0 32Z"
@@ -47,14 +48,15 @@
                             </defs>
                         </svg>
                     </div>
-                    <h4 class="text-2xl font-bold text-gray-1 mb-4">Our Vision</h4>
-                    <p class="text-gray-2">To create a better world by inspiring positive change through innovative and
+                    <h4 class="text-lg md:text-2xl font-bold text-gray-1 mb-2 md:mb-4">Our Vision</h4>
+                    <p class="text-gray-2 text-xs md:text-base">To create a better world by inspiring positive change
+                        through innovative and
                         reliable business
                         solutions in South Korea.</p>
                 </div>
                 <div class="rounded-2xl stroke-1 stroke-[#E5E7EB] drop-shadow-md bg-white p-8">
-                    <div class="mb-6">
-                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                    <div class="mb-4 md:mb-6">
+                        <svg class="w-10 h-10 md:w-16 md:h-16" viewBox="0 0 64 64" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M0 32C0 14.3269 14.3269 0 32 0C49.6731 0 64 14.3269 64 32C64 49.6731 49.6731 64 32 64C14.3269 64 0 49.6731 0 32Z"
@@ -74,26 +76,30 @@
                             </defs>
                         </svg>
                     </div>
-                    <h4 class="text-2xl font-bold text-gray-1 mb-4">Our Mision</h4>
-                    <p class="text-gray-2">To provide integrated, professional solutions across various sectors while
+                    <h4 class="text-lg md:text-2xl font-bold text-gray-1 mb-2 md:mb-4">Our Mision</h4>
+                    <p class="text-gray-2 text-xs md:text-base">To provide integrated, professional solutions across various
+                        sectors while
                         embracing innovation and building lasting partnerships with our clients.</p>
                 </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-center gap-10">
+            <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-10">
                 <div class="w-full md:w-1/2 pr-0 md:pr-20 md:mb-0">
-                    <h2 class="text-5xl font-semibold text-primary mb-5">Our Business Lines</h2>
-                    <p class="text-xl text-gray-2 mb-10">
+                    <h2 class="text-3xl md:text-5xl text-center md:text-left font-semibold text-primary mb-3 md:mb-5">Our
+                        Business
+                        Lines</h2>
+                    <p class="text-base md:text-xl text-center md:text-left text-gray-2 mb-8 md:mb-10">
                         We offer a wide range of services tailored to meet your diverse needs:
                     </p>
 
-                    <div class="space-y-3">
+                    <div class="space-y-3 px-6 md:px-0">
                         <a href="{{ route('destination') }}"
-                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span>Tour and Travel</span>
-                            <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
+                            <span class="text-xs md:text-base">Tour and Travel</span>
+                            <span class="arrow-icon transform transition-transform duration-300"><svg
+                                    class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                     <path d="M12 5L19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round"
@@ -102,10 +108,11 @@
                         </a>
 
                         <a href="{{ route('services_medical') }}"
-                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span>Health & Beauty</span>
-                            <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
+                            <span class="text-xs md:text-base">Health & Beauty</span>
+                            <span class="arrow-icon transform transition-transform duration-300"><svg
+                                    class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                     <path d="M12 5L19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round"
@@ -115,10 +122,11 @@
                         </a>
 
                         <a href="{{ route('services_recruitment') }}"
-                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span>Recruitment</span>
-                            <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
+                            <span class="text-xs md:text-base">Recruitment</span>
+                            <span class="arrow-icon transform transition-transform duration-300"><svg
+                                    class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                     <path d="M12 5L19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round"
@@ -127,10 +135,10 @@
                         </a>
 
                         <a href="#entertainment"
-                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-6 py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span>Entertainment</span>
-                            <span class="arrow-icon transform transition-transform duration-300"><svg width="24"
-                                    height="24" viewBox="0 0 24 24" fill="none"
+                            class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
+                            <span class="text-xs md:text-base">Entertainment</span>
+                            <span class="arrow-icon transform transition-transform duration-300"><svg
+                                    class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round" />
@@ -142,23 +150,23 @@
                 </div>
 
                 <!-- Right Content with Image -->
-                <div class="w-full md:w-1/2 relative">
+                <div class="w-4/5 md:w-1/2 relative">
                     <div class="p-4 max-w-full mx-auto">
                         <img src="{{ asset('images/home/about-1.png') }}" alt="Business professionals" />
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-[#F9FAFB] py-20">
+        <div class="bg-[#F9FAFB] py-14 md:py-20">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center space-y-3 mb-16">
-                    <h2 class="text-4xl font-semibold text-primary">Our Core Values</h2>
-                    <p class="text-gray-2">The principles that guide everything we do</p>
+                <div class="text-center space-y-3 mb-8 md:mb-16">
+                    <h2 class="text-2xl md:text-4xl font-semibold text-primary">Our Core Values</h2>
+                    <p class="text-gray-2 text-xs md:text-base">The principles that guide everything we do</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5 px-4 md:px-0">
                     <div class="flex flex-col items-center text-center">
-                        <div class="mb-6">
-                            <svg width="65" height="64" viewBox="0 0 65 64" fill="none"
+                        <div class="mb-4 md:mb-6">
+                            <svg class="w-14 h-14 md:w-16 md:h-16" viewBox="0 0 65 64" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M0.5 32C0.5 14.3269 14.8269 0 32.5 0C50.1731 0 64.5 14.3269 64.5 32C64.5 49.6731 50.1731 64 32.5 64C14.8269 64 0.5 49.6731 0.5 32Z"
@@ -179,12 +187,12 @@
                                 </defs>
                             </svg>
                         </div>
-                        <h4 class="text-xl font-semibold text-gray-1 mb-2.5">Experience</h4>
-                        <p class="text-gray-2">Our experts deliver top-quality services.</p>
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Experience</h4>
+                        <p class="text-gray-2 text-xs md:text-base">Our experts deliver top-quality services.</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
-                        <div class="mb-6">
-                            <svg width="65" height="64" viewBox="0 0 65 64" fill="none"
+                        <div class="mb-4 md:mb-6">
+                            <svg class="w-14 h-14 md:w-16 md:h-16" viewBox="0 0 65 64" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M0.5 32C0.5 14.3269 14.8269 0 32.5 0C50.1731 0 64.5 14.3269 64.5 32C64.5 49.6731 50.1731 64 32.5 64C14.8269 64 0.5 49.6731 0.5 32Z"
@@ -197,12 +205,12 @@
                                     fill="#3477F6" />
                             </svg>
                         </div>
-                        <h4 class="text-xl font-semibold text-gray-1 mb-2.5">Innovation</h4>
-                        <p class="text-gray-2">We leverage trends for unique interactions.</p>
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Innovation</h4>
+                        <p class="text-gray-2 text-xs md:text-base">We leverage trends for unique interactions.</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
-                        <div class="mb-6">
-                            <svg width="65" height="64" viewBox="0 0 65 64" fill="none"
+                        <div class="mb-4 md:mb-6">
+                            <svg class="w-14 h-14 md:w-16 md:h-16" viewBox="0 0 65 64" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M0.5 32C0.5 14.3269 14.8269 0 32.5 0C50.1731 0 64.5 14.3269 64.5 32C64.5 49.6731 50.1731 64 32.5 64C14.8269 64 0.5 49.6731 0.5 32Z"
@@ -223,13 +231,13 @@
                                 </defs>
                             </svg>
                         </div>
-                        <h4 class="text-xl font-semibold text-gray-1 mb-2.5">Integrated</h4>
-                        <p class="text-gray-2">Our approach offers an
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Integrated</h4>
+                        <p class="text-gray-2 text-xs md:text-base">Our approach offers an
                             all-in-one experience.</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
-                        <div class="mb-6">
-                            <svg width="65" height="64" viewBox="0 0 65 64" fill="none"
+                        <div class="mb-4 md:mb-6">
+                            <svg class="w-14 h-14 md:w-16 md:h-16" viewBox="0 0 65 64" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M0.5 32C0.5 14.3269 14.8269 0 32.5 0C50.1731 0 64.5 14.3269 64.5 32C64.5 49.6731 50.1731 64 32.5 64C14.8269 64 0.5 49.6731 0.5 32Z"
@@ -250,45 +258,43 @@
                                 </defs>
                             </svg>
                         </div>
-                        <h4 class="text-xl font-semibold text-gray-1 mb-2.5">Satisfaction</h4>
-                        <p class="text-gray-2">Your trust drives us, reflected in our testimonials.</p>
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Satisfaction</h4>
+                        <p class="text-gray-2 text-xs md:text-base">Your trust drives us, reflected in our testimonials.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-4 mb-20">
+        <div class="max-w-7xl mx-auto mt-4 mb-14 md:mb-20">
             <div class="text-center mb-5">
-                <h2 class="text-4xl font-semibold text-primary md:mb-3">Our Gallery</h2>
-                <p class="text-gray-2">see our latest updates</p>
+                <h2 class="text-2xl md:text-4xl font-semibold text-primary md:mb-3">Our Gallery</h2>
+                <p class="text-gray-2 text-xs md:text-base">see our latest updates</p>
             </div>
-            <div class="swiper-about-us swiper-container relative">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
+            <div class="pb-10 relative">
+                <div class="swiper-about-us swiper-container relative px-4 md:px-0">
+                    <div class="swiper-wrapper">
+                        @for ($i = 0; $i < 4; $i++)
+                            <div class="swiper-slide">
+                                <img src="{{ asset('images/home/Diamond-Beach.png') }}"
+                                    class="w-full h-56 md:h-[398px] object-cover">
+                            </div>
+                        @endfor
                     </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="{{ asset('images/home/Diamond-Beach.png') }}" class="w-full h-[398px] object-cover">
-                    </div>
-                </div>
-                <div
-                    class="swiper-navigation absolute top-1/2 transform -translate-y-1/2 w-full flex justify-between z-10 pointer-events-none">
-                    <div class="swiper-button-prev pointer-events-auto cursor-pointer">
-                        <div class="rounded-full w-10 h-10 bg-white flex items-center justify-center">
-                            <i class="fa-solid fa-arrow-left"></i>
+                    <div
+                        class="swiper-navigation absolute top-1/2 transform -translate-y-1/2 w-full flex justify-between z-10 pointer-events-none">
+                        <div class="swiper-button-prev pointer-events-auto cursor-pointer">
+                            <div class="rounded-full w-10 h-10 bg-white flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-button-next pointer-events-auto cursor-pointer">
-                        <div class="rounded-full w-10 h-10 bg-white flex items-center justify-center">
-                            <i class="fa-solid fa-arrow-right"></i>
+                        <div class="swiper-button-next pointer-events-auto cursor-pointer">
+                            <div class="rounded-full w-10 h-10 bg-white flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
