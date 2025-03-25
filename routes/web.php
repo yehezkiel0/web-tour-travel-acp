@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminDestinationDetailController;
 use App\Http\Controllers\Admin\AdminTransactionController;
+use App\Http\Controllers\front\AboutController;
 use App\Http\Controllers\Front\BookingController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
@@ -35,6 +36,7 @@ Route::get('/booking-success', [BookingController::class, 'success'])->name('boo
 //InformationsPage
 Route::get('/about-us', [LandingPageController::class, 'about'])->name('about');
 Route::get('/contact-us', [LandingPageController::class, 'contact'])->name('contact');
+Route::post('/contact-us', [AboutController::class, 'store'])->name('contact_submit');
 
 Route::middleware('auth')->group(function () {
     Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');
