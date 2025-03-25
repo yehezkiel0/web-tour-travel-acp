@@ -6,7 +6,9 @@ export function createSwiper(
     breakpoints,
     nextEl,
     prevEl,
-    disableOnLargeScreen = false
+    disableOnLargeScreen = false,
+    autoplayOptions = null,
+    loop = false
 ) {
     let swiperInstance = null;
     function initSwiper() {
@@ -16,11 +18,12 @@ export function createSwiper(
                 swiperInstance = null;
             }
         } else if (!swiperInstance) {
-            swiperInstance = new Swiper(container, {
+            const swiperConfig = {
                 slidesPerView: 1,
                 spaceBetween: 10,
                 preloadImages: false,
                 lazy: true,
+                loop: loop,
                 navigation: {
                     nextEl: nextEl,
                     prevEl: prevEl,
@@ -39,7 +42,14 @@ export function createSwiper(
                         }
                     },
                 },
-            });
+            };
+
+            // Tambahkan autoplay jika parameter disediakan
+            if (autoplayOptions) {
+                swiperConfig.autoplay = autoplayOptions;
+            }
+
+            swiperInstance = new Swiper(container, swiperConfig);
         }
     }
     initSwiper();
