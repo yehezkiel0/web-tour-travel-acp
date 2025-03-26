@@ -1,13 +1,23 @@
 export const initGallery = ($) => {
-    if (!$("#gallery")) {
+    const $gallery = $("#gallery");
+    if (!$gallery.length) {
         return;
     }
-    let photos = $("#gallery").data("photos");
+
+    const photos = $gallery.data("photos");
+    if (!photos || photos.length === 0) {
+        console.warn("No photos found in gallery");
+        return;
+    }
+
     let currentIndex = 0;
 
     $("#openGalleryModal").on("click", function () {
         currentIndex = 1;
-        $("#currentPhoto").attr("src", `/uploads/${photos[currentIndex]}`);
+        $("#currentPhoto").attr(
+            "src",
+            window.location.origin + "/storage/" + photos[currentIndex]
+        );
         $("#galleryModal").removeClass("hidden");
         $("#galleryModal").addClass("flex");
     });
@@ -20,14 +30,20 @@ export const initGallery = ($) => {
     $("#prevPhoto").on("click", function () {
         if (currentIndex > 0) {
             currentIndex--;
-            $("#currentPhoto").attr("src", `/uploads/${photos[currentIndex]}`);
+            $("#currentPhoto").attr(
+                "src",
+                window.location.origin + "/storage/" + photos[currentIndex]
+            );
         }
     });
 
     $("#nextPhoto").on("click", function () {
         if (currentIndex < photos.length - 1) {
             currentIndex++;
-            $("#currentPhoto").attr("src", `/uploads/${photos[currentIndex]}`);
+            $("#currentPhoto").attr(
+                "src",
+                window.location.origin + "/storage/" + photos[currentIndex]
+            );
         }
     });
 };
