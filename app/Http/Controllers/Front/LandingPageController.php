@@ -41,6 +41,11 @@ class LandingPageController extends Controller
         return view('front.our-services.recruitment');
     }
 
+    public function servicesEntertainment()
+    {
+        return view('front.our-services.entertainment');
+    }
+
     public function about()
     {
         return view('front.about');

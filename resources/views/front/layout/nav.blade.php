@@ -59,7 +59,7 @@
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
-                            <a href="#" class="text-sm flex items-center gap-x-3">
+                            <a href="{{ route('services_entertainment') }}" class="text-sm flex items-center gap-x-3">
                                 Entertainment
                             </a>
                         </li>
@@ -184,7 +184,7 @@
                     </a>
                 </li>
                 <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
+                    <a href="{{ route('services_entertainment') }}" class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
                         Entertainment
                     </a>
