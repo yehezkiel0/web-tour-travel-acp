@@ -42,7 +42,9 @@
                             <img src="{{ asset('images/services/service-recruitment-hero.png') }}" alt="medical-hero">
                         </figure>
                         <div class="text-center w-full px-8 md:px-0 md:w-[calc(100%-395px)]">
-                            <h1 class="text-2xl md:text-4xl font-bold text-primary-700 mb-6 leading-snug">Your
+                            <h1
+                                class="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#3477F6] to-[#1E4690] mb-6 md:leading-snug">
+                                Your
                                 Gateway to
                                 Top
                                 Indonesian
