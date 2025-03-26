@@ -37,6 +37,14 @@ class SearchResultController extends Controller
             'destination_type' => 'nullable|string'
         ]);
 
+        // Simpan parameter pencarian ke session
+        $searchParams = [
+            'destination_input' => $request->destination_input,
+            'destination_date' => $request->destination_date,
+            'destination_type' => $request->destination_type
+        ];
+        session()->put('destination_search_params', $searchParams);
+
         $query = Destination::query();
         $maxPrice = Destination::max('price');
 
@@ -104,5 +112,41 @@ class SearchResultController extends Controller
         });
 
         return view('front.partials.search-result', compact('results'));
+    }
+
+    public function searchAll(Request $request)
+    {
+        $searchParams = session('destination_search_params', []);
+
+        $maxPrice = Destination::max('price');
+
+        if (empty($searchParams)) {
+            $results = collect();
+            return view('front.destination.search-filter', compact('results', 'maxPrice'));
+        }
+
+        $query = Destination::query();
+
+        if (!empty($searchParams['destination_input'])) {
+            $query->where(function ($q) use ($searchParams) {
+                $q->where('title', 'LIKE', '%' . $searchParams['destination_input'] . '%')
+                    ->orWhere('description', 'LIKE', '%' . $searchParams['destination_input'] . '%');
+            });
+        }
+
+        if (!empty($searchParams['destination_date'])) {
+            $query->whereDate('date_started', $searchParams['destination_date']);
+        }
+
+        if (!empty($searchParams['destination_type'])) {
+            $query->where('type', $searchParams['destination_type']);
+        }
+
+        $results = $query->get()->each(function ($result) {
+            $result->description_result = $result->description;
+            $result->duration = calculateDuration($result->date_started, $result->date_ended);
+        });
+
+        return view('front.destination.search-filter', compact('results', 'maxPrice'));
     }
 }

@@ -26,7 +26,8 @@ Route::get('/services/entertainment', [LandingPageController::class, 'servicesEn
 
 //SearchPage
 Route::get('/destination', [SearchResultController::class, 'index'])->name('destination');
-Route::post('/search-result', [SearchResultController::class, 'searchResult'])->name('search_result');
+Route::post('/search', [SearchResultController::class, 'searchResult'])->name('search_result');
+Route::get('/search', [SearchResultController::class, 'searchAll'])->name('search_all');
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
 
 //BookingPage

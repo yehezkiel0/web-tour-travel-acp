@@ -188,7 +188,7 @@
                 @endif
             </div>
             <button
-                class="block md:hidden bottom-3 left-1/2 transform -translate-x-1/2 fixed z-50 bg-primary text-white py-2 px-4 text-xs flex items-center gap-4 rounded-full shadow-lg filter-toggle-btn">
+                class="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-50 bg-primary text-white py-2 px-4 text-xs inline-flex items-center gap-4 rounded-full shadow-lg filter-toggle-btn">
                 <i class="fa-solid fa-filter"></i>
                 Filter Destinasi
             </button>
