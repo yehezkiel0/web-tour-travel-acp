@@ -300,13 +300,27 @@
                                             <i class="fa-solid fa-arrow-right text-lg"></i>
                                         </div>
 
-                                        <div class="card-content text-white p-5">
-                                            <h4 class="text-2xl font-semibold pb-[10px]">
+                                        <div class="card-content text-white px-3 py-7">
+                                            <h4 class="text-lg md:text-2xl font-semibold mb-3">
                                                 K-POP Fan Tour
                                             </h4>
-                                            <p class="description">
+                                            <p class="text-xs mb-2 md:mb-1 md:text-base">
                                                 Visit stunning coastal views, fresh seafood markets, and cultural sites.
                                             </p>
+                                            <div
+                                                class="description text-white text-lg sm:text-base lg:text-sm xl:text-base">
+                                                <div class="flex flex-row items-center gap-x-1 sm:gap-x-2 mb-1 md:mb-3">
+                                                    <i class="fa-solid fa-location-dot text-xs md:text-base"></i>
+                                                    <p class="text-xs md:text-base font-normal">Seoul</p>
+                                                </div>
+                                                <div class="text-white text-[10px] md:text-[13px]">
+                                                    <p>Start From</p>
+                                                    <p class="font-bold text-sm md:text-[20px] text-secondary">
+                                                        {{ formatIDR(1400000) }} <span
+                                                            class="text-[13px] text-white font-normal">/person</span>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
