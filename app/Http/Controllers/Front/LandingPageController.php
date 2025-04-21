@@ -11,7 +11,7 @@ class LandingPageController extends Controller
     {
         $popularDestinations = Destination::orderBy('view_count', 'desc')->take(10)->get();
         $openTrips = Destination::where('type', 'Open Trip')->take(8)->get();
-        $privateTrips = Destination::where('type', 'Private Trip')->take(6)->get();
+        $privateTrips = Destination::where('type', 'Private Trip')->take(4)->get();
 
         return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips'));
     }

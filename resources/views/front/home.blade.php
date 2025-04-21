@@ -282,11 +282,11 @@
                         tailored to your preferences
                     </p>
                     <div class="wrapper-accordion xl:gap-x-4">
-                        @for ($i = 0; $i < 4; $i++)
+                        @foreach ($privateTrips as $trip)
                             <div class="accordion rounded-[20px] overflow-hidden cursor-pointer">
                                 <div class="card-container">
                                     <div class="image-layer">
-                                        <img src="{{ asset('images/home/NightCity.png') }}" alt="private trip"
+                                        <img src="{{ Storage::url($trip->featured_photo) }}" alt="private trip"
                                             loading="lazy" class="object-cover" />
                                         <div class="gradient-overlay"></div>
                                     </div>
@@ -302,21 +302,21 @@
 
                                         <div class="card-content text-white px-3 py-7">
                                             <h4 class="text-lg md:text-2xl font-semibold mb-3">
-                                                K-POP Fan Tour
+                                                {{ $trip->title }}
                                             </h4>
                                             <p class="text-xs mb-2 md:mb-1 md:text-base">
-                                                Visit stunning coastal views, fresh seafood markets, and cultural sites.
+                                                {!! $trip->description !!}
                                             </p>
                                             <div
                                                 class="description text-white text-lg sm:text-base lg:text-sm xl:text-base">
                                                 <div class="flex flex-row items-center gap-x-1 sm:gap-x-2 mb-1 md:mb-3">
                                                     <i class="fa-solid fa-location-dot text-xs md:text-base"></i>
-                                                    <p class="text-xs md:text-base font-normal">Seoul</p>
+                                                    <p class="text-xs md:text-base font-normal">{{ $trip->city }}</p>
                                                 </div>
                                                 <div class="text-white text-[10px] md:text-[13px]">
                                                     <p>Start From</p>
                                                     <p class="font-bold text-sm md:text-[20px] text-secondary">
-                                                        {{ formatIDR(1400000) }} <span
+                                                        {{ formatIDR($trip->price) }} <span
                                                             class="text-[13px] text-white font-normal">/person</span>
                                                     </p>
                                                 </div>
@@ -325,7 +325,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                     <a class="py-[20px] md:py-[50px]" href="#">
                         <button
