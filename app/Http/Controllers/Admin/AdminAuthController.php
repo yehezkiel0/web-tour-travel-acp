@@ -64,17 +64,19 @@ class AdminAuthController extends Controller
                 'photo' => 'mimes:jpg,jpeg,png|max:2048',
             ]);
 
-            // Menyimpan file dengan storage
-            $photoName = time() . '.' . $request->photo->getClientOriginalExtension();
-            $path = $request->photo->storeAs('uploads', $photoName, 'public');
-
-            // Menghapus foto lama jika ada
-            if ($admin->photo) {
-                Storage::disk('public')->delete('uploads/' . $admin->photo);
+            $uploadPath = 'uploads';
+            if (!Storage::disk('public')->exists($uploadPath)) {
+                Storage::disk('public')->makeDirectory($uploadPath);
             }
 
-            // Menyimpan nama file di database
-            $admin->photo = basename($path);  // Ambil nama file saja (tanpa path)
+            $photoName = 'upload_profile_' . time() . '.' . $request->photo->extension();
+            $path = $request->file('photo')->storeAs($uploadPath, $photoName, 'public');
+
+            if ($admin->photo && Storage::disk('public')->exists($admin->photo)) {
+                Storage::disk('public')->delete($uploadPath . $admin->photo);
+            }
+
+            $admin->photo = $path;
             $admin->save();
         }
 
