@@ -40,7 +40,7 @@ Route::get('/about-us', [LandingPageController::class, 'about'])->name('about');
 Route::get('/contact-us', [LandingPageController::class, 'contact'])->name('contact');
 Route::post('/contact-us', [AboutController::class, 'store'])->name('contact_submit');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('user')->group(function () {
     Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');
     Route::get('/destination/{slug}/checkout', [BookingController::class, 'checkout'])->name('booking_checkout');
     Route::post('/destination/{slug}/payment', [BookingController::class, 'payment'])->name('booking_payment');

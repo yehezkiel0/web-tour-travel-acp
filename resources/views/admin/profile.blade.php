@@ -13,21 +13,19 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="flex flex-col px-3 gap-y-2 col-span-3">
-                        <img src="{{ Storage::url(Auth::guard('admin')->user()->photo) }}" alt="profile-photo">
+                        <img src="{{ Storage::url(Auth::user()->photo) }}" alt="profile-photo">
                         <input type="file" name="photo" class="text-sm text-slate-500">
                     </div>
                     <div class="gap-4 px-3 col-span-9">
                         <div class="flex flex-col gap-y-3 text-sm mb-4">
                             <label for="name">Name *</label>
                             <input type="text" id="name" name="name" placeholder="John Doe"
-                                class="bg-white border py-3 px-4 rounded-md"
-                                value="{{ Auth::guard('admin')->user()->name }}">
+                                class="bg-white border py-3 px-4 rounded-md" value="{{ Auth::user()->name }}">
                         </div>
                         <div class="flex flex-col gap-y-3 text-sm mb-4">
                             <label for="email">Email *</label>
                             <input type="email" id="email" name="email" placeholder="John@example.com"
-                                class="bg-white border py-3 px-4 rounded-md"
-                                value="{{ Auth::guard('admin')->user()->email }}">
+                                class="bg-white border py-3 px-4 rounded-md" value="{{ Auth::user()->email }}">
                         </div>
                         <div class="flex flex-col gap-y-3 text-sm mb-4">
                             <label for="password">Password</label>

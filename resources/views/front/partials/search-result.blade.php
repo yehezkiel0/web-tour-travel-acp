@@ -1,9 +1,9 @@
 @forelse ($results as $result)
     <div class="max-h-60 flex flex-row md:justify-between gap-2 md:gap-6 p-3 md:p-5 bg-white border border-[#E0E0E0] rounded-lg cursor-pointer"
         onclick="window.location.href='{{ route('destination_detail', $result->slug) }}';">
-        <div class="w-40 md:w-80">
+        <div class="w-40 md:w-80 h-auto">
             <img src="{{ Storage::url($result->featured_photo) }}" alt="featured_photo"
-                class="w-full object-cover rounded-md" loading="lazy">
+                class="w-full max-h-full object-cover rounded-md" loading="lazy">
         </div>
         <div class="w-full md:w-2/3">
             <div class="flex flex-col gap-y-[10px]">

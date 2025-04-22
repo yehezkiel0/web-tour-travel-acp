@@ -19,7 +19,7 @@
             </li>
             <li class="relative px-4">
                 <a href="#" class="text-white text-xl flex flex-row gap-x-3 items-center" data-dropdown="admin">
-                    <img src="{{ Storage::url(Auth::guard('admin')->user()->photo) }}" alt=""
+                    <img src="{{ Storage::url(Auth::user()->photo) }}" alt="photo-profile"
                         class="w-[40px] h-[40px] rounded-full">
                     <i class="fa-solid fa-caret-down text-xs text-slate-200"></i>
                 </a>

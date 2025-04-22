@@ -16,8 +16,8 @@ class User
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::guard('web')->check()) {
-            return redirect()->route('login')->with('You are not authorized as user!');
+        if (!Auth::check() || !Auth::user()->role === 'user') {
+            return redirect()->route('login')->with('error', 'Unauthorized access.');
         }
         return $next($request);
     }

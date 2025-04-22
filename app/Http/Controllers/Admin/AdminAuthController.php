@@ -7,7 +7,7 @@ use App\Mail\Websitemail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -32,16 +32,24 @@ class AdminAuthController extends Controller
             'password' => $check['password'],
         ];
 
-        if (Auth::guard('admin')->attempt($data)) {
-            return redirect()->route('admin_dashboard')->with('success', 'Login is successful!');
+        if (Auth::attempt($data)) {
+            $user = Auth::user();
+
+            // Cek role user
+            if ($user->role === 'admin') { // Sesuaikan dengan nilai role di database
+                return redirect()->route('admin_dashboard')->with('success', 'Login admin berhasil!');
+            } else {
+                Auth::logout(); // Logout jika bukan admin
+                return redirect()->back()->with('error', 'Akses hanya untuk admin.');
+            }
         } else {
-            return redirect()->back()->with('error', 'Invalid email or password');
+            return redirect()->back()->with('error', 'Email atau password salah.');
         }
     }
 
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::logout();
         return redirect()->route('admin_login')->with('success', 'Logout is successful!');
     }
 
@@ -57,7 +65,7 @@ class AdminAuthController extends Controller
             'email' => 'required|email',
         ]);
 
-        $admin = Admin::where('id', Auth::guard('admin')->user()->id)->first();
+        $admin = User::where('id', Auth::id())->where('role', 'admin')->first();
 
         if ($request->hasFile('photo')) {
             $request->validate([
@@ -106,7 +114,7 @@ class AdminAuthController extends Controller
             'email' => 'required|email',
         ]);
 
-        $admin = Admin::where('email', $request->email)->first();
+        $admin = User::where('email', $request->email)->first();
         if (!$admin) {
             return redirect()->back()->with('error', 'Email is not found');
         }
@@ -172,7 +180,7 @@ class AdminAuthController extends Controller
             return redirect()->route('admin_login')->with('error', 'Token has expired. Please request a new password reset link.');
         }
 
-        $admin = Admin::where('email', $email)->first();
+        $admin = User::where('email', $email)->first();
         if ($admin) {
             $admin->password = Hash::make($request->password);
             $admin->update();
