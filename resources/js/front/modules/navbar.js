@@ -7,15 +7,24 @@ export const initNavbar = ($) => {
     let ticking = false;
 
     const setNavbarHeight = () => {
-        const height = $navbar.outerHeight();
-        document.documentElement.style.setProperty(
-            "--navbar-height",
-            `${height}px`
-        );
+        if ($navbar.length) {
+            try {
+                // Check if the element exists
+                const height = $navbar.outerHeight();
+                document.documentElement.style.setProperty(
+                    "--navbar-height",
+                    `${height}px`
+                );
+            } catch (error) {
+                console.error("Error setting navbar height:", error);
+            }
+        } else {
+            console.error("Navbar element not found!");
+        }
     };
 
     const handleScroll = () => {
-        if (!ticking) {
+        if (!ticking && $navbar.length) {
             requestAnimationFrame(() => {
                 const currentScroll = window.scrollY;
                 const shouldFix = currentScroll > 0;
@@ -45,31 +54,44 @@ export const initNavbar = ($) => {
             $navHome.removeClass("sidebar-fixed");
             $body.removeClass("body-lock");
         }
+        setNavbarHeight();
     };
 
-    $(".nav-menu a").on("click", function (e) {
-        $(".nav-menu a").removeClass("is-active");
-        $(this).addClass("is-active");
-        localStorage.setItem("activeMenu", $(this).attr("href"));
-    });
+    // Only attach event handlers if elements exist
+    if ($(".nav-menu a").length) {
+        $(".nav-menu a").on("click", function (e) {
+            $(".nav-menu a").removeClass("is-active");
+            $(this).addClass("is-active");
+            localStorage.setItem("activeMenu", $(this).attr("href"));
+        });
+    }
 
     $(document).ready(() => {
         const activeMenu = localStorage.getItem("activeMenu");
         const currentPath = window.location.pathname;
 
-        if (activeMenu && activeMenu === currentPath) {
-            $(".nav-menu a").removeClass("is-active");
-            $(`.nav-menu a[href="${activeMenu}"]`).addClass("is-active");
-        } else {
-            $(".nav-menu a").removeClass("is-active");
+        const $menuLinks = $(".nav-menu a");
+        if ($menuLinks.length) {
+            if (activeMenu && activeMenu === currentPath) {
+                $menuLinks.removeClass("is-active");
+                $(`.nav-menu a[href="${activeMenu}"]`).addClass("is-active");
+            } else {
+                $menuLinks.removeClass("is-active");
+            }
         }
 
         setNavbarHeight();
         handleScroll();
     });
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", setNavbarHeight, { passive: true });
-    window.addEventListener("resize", handleResize, { passive: true });
-    $hamburger.on("click", handleHamburgerClick);
+    // Only add event listeners if required elements exist
+    if ($navbar.length) {
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("resize", setNavbarHeight, { passive: true });
+        window.addEventListener("resize", handleResize, { passive: true });
+    }
+
+    if ($hamburger.length) {
+        $hamburger.on("click", handleHamburgerClick);
+    }
 };
