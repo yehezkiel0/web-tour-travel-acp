@@ -11,7 +11,7 @@ export default defineConfig({
     // server: {
     //     host: "0.0.0.0",
     //     hmr: {
-    //         host: "192.168.110.251",
+    //         host: "bs-local.com",
     //     },
     // },
 });

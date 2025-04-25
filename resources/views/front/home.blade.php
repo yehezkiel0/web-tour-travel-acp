@@ -291,7 +291,8 @@
                                         <div class="gradient-overlay"></div>
                                     </div>
 
-                                    <div class="content-layer">
+                                    <div class="content-layer"
+                                        style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(52, 119, 246, 0.25));">
                                         <div class="tag font-bold text-[12px] text-primary-800 px-5">
                                             <span>Private Trip</span>
                                         </div>
