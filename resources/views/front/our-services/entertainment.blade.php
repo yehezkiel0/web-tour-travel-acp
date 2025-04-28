@@ -1,7 +1,8 @@
 @extends('front.layout.app')
+@section('title', 'Entertainment - ACP Tours & Travel')
 @section('content')
     @include('front.layout.nav')
-    <section class="container mx-auto w-full pt-8">
+    <div class="container mx-auto w-full pt-8">
         <header class="flex-col mb-7 space-y-4 max-w-7xl mx-auto px-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center text-xs md:text-base">
@@ -45,15 +46,14 @@
                                 to South Korea’s Entertainment Scene</h1>
                             <p class="text-gray-2 text-[10px] md:text-sm mb-6">Creating unforgettable moments with
                                 innovation, creativity, and passion.</p>
-                            <a href="#">
-                                <button
-                                    class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
-                                    Contact Us
-                                </button>
+                            <a href="#"
+                                class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
+                                Contact Us
                             </a>
                         </div>
                         <figure class="w-3/4 md:w-[476px] md:h-auto">
-                            <img src="{{ asset('images/services/service-entertainment-hero.png') }}" alt="medical-hero">
+                            <img src="{{ asset('images/services/service-entertainment-hero.png') }}"
+                                alt="entertainment-hero">
                         </figure>
                     </div>
                 </div>
@@ -366,6 +366,6 @@
                 </div>
             </div>
         </main>
-    </section>
+    </div>
     @include('front.layout.footer')
 @endsection

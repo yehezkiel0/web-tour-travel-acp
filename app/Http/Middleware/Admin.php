@@ -17,7 +17,7 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check() || !Auth::user()->role === 'admin') {
-            return redirect()->route('login')->with('error', 'Unauthorized access.');
+            return redirect()->route('admin_login')->with('error', 'Unauthorized access.');
         }
         return $next($request);
     }

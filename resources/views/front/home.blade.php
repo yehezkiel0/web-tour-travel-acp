@@ -42,8 +42,9 @@
                         @foreach ($popularDestinations as $destination)
                             <a href="{{ route('destination_detail', $destination->slug) }}" class="swiper-slide card">
                                 <div class="rounded-xl overflow-hidden relative flex flex-col cursor-pointer">
-                                    <img src="{{ Storage::url($destination->featured_photo) }}" alt="featured-photo"
-                                        loading="lazy" class="object-cover h-[220px] w-full" />
+                                    <img src="{{ Storage::url($destination->featured_photo) }}"
+                                        alt="{{ $destination->title }}" loading="lazy"
+                                        class="object-cover h-[220px] w-full" />
                                     <div
                                         class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                         <div
@@ -94,7 +95,7 @@
 
                                         <div
                                             class="datepicker-container flex flex-row items-center cursor-pointer gap-2 md:mr-2 lg:mr-8 xl:mr-6 lg:gap-2 text-[#E0E0E0]">
-                                            <img src="{{ asset('images/icon/time.svg') }}" alt="date"
+                                            <img src="{{ asset('images/icon/time.svg') }}" alt="time"
                                                 class="w-3 h-3 lg:w-5 lg:h-5">
                                             <p
                                                 class="datepicker-text text-[9px] md:text-xs lg:text-sm xl:text-base text-nowrap">
@@ -158,7 +159,7 @@
                             </div>
                             <div
                                 class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 xl:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 xl:py-9 xl:px-10 cursor-pointer">
-                                <img src="{{ asset('images/icon/flight.svg') }}" alt="date"
+                                <img src="{{ asset('images/icon/flight.svg') }}" alt="flight"
                                     class="icon-container w-10 md:w-11 lg:w-[52px]">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
                                     <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Select Your
@@ -173,7 +174,7 @@
                             </div>
                             <div
                                 class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 xl:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 xl:py-9 xl:px-10 cursor-pointer">
-                                <img src="{{ asset('images/icon/search.svg') }}" alt="date"
+                                <img src="{{ asset('images/icon/search.svg') }}" alt="search"
                                     class="icon-container w-10 md:w-11 lg:w-[52px]">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
                                     <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Choose Your Trip
@@ -205,29 +206,29 @@
                         <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">We make exploring with
                             <br class="hidden sm:block"> trips anyone can join
                         </p>
-                        <a href="#">
-                            <button
-                                class="bg-white py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-primary border border-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                                See More
-                            </button>
+                        <a href="{{ route('destination', ['type' => 'open-trip']) }}"
+                            class="bg-white py-2 px-5 text-xs text-center sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-primary border border-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                            See More
+
                         </a>
                     </div>
                     <div class="lg:col-span-3 lg:px-0">
                         <div class="swiper-open-trip swiper-container">
                             <div class="swiper-wrapper">
                                 @foreach ($openTrips as $trip)
-                                    <div class="swiper-slide card">
-                                        <div class="rounded-[20px] overflow-hidden relative flex flex-col cursor-pointer">
+                                    <a href="{{ route('destination_detail', $trip->slug) }}" class="swiper-slide card">
+                                        <div class="rounded-3xl overflow-hidden relative flex flex-col cursor-pointer">
                                             <div class="tag font-bold text-[12px] text-primary-800">
                                                 <span>{{ $trip->type }}</span>
                                             </div>
                                             <img src="{{ Storage::url($trip->featured_photo) }}" loading="lazy"
-                                                alt="featured-photo" class="object-cover h-[360px] md:h-[420px] w-full" />
+                                                alt="{{ $trip->title }}"
+                                                class="object-cover h-[360px] md:h-[420px] w-full" />
                                             <div
                                                 class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                                 <div
                                                     class="background-transparent absolute bottom-0 border-t-2 border-white  bg-gradient-to-b from-radialCardStart via-radialCardMid to-radialCardEnd 
-                                                    backdrop-blur-sm w-full md:h-auto h-36">
+                                                    backdrop-blur-sm w-full md:h-auto h-36 rounded-3xl">
                                                     <div class="px-4 py-2 md:px-5 md:py-5">
                                                         <h4
                                                             class="text-[15px] md:text-lg font-bold text-white md:pb-[10px]">
@@ -236,16 +237,19 @@
                                                         <div
                                                             class="flex flex-col gap-x-1 py-[5px] md:py-[10px] gap-y-1 text-white text-[10px] md:text-[13px]">
                                                             <div class="flex flex-row gap-x-2">
-                                                                <img src="{{ asset('images/icon/time.svg') }}" />
+                                                                <img src="{{ asset('images/icon/time.svg') }}"
+                                                                    alt="time" />
                                                                 <p>{{ formatDate($trip->date_started) }} -
                                                                     {{ formatDate($trip->date_ended) }}</p>
                                                             </div>
                                                             <div class="flex flex-row gap-x-2">
-                                                                <img src="{{ asset('images/icon/location.svg') }}" />
+                                                                <img src="{{ asset('images/icon/location.svg') }}"
+                                                                    alt="location" />
                                                                 <p>{{ $trip->city }}</p>
                                                             </div>
                                                             <div class="flex flex-row gap-x-2">
-                                                                <img src="{{ asset('images/icon/person.svg') }}" />
+                                                                <img src="{{ asset('images/icon/person.svg') }}"
+                                                                    alt="person" />
                                                                 <p>10 - 20</p>
                                                             </div>
                                                         </div>
@@ -260,7 +264,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
@@ -283,10 +287,11 @@
                     </p>
                     <div class="wrapper-accordion xl:gap-x-4">
                         @foreach ($privateTrips as $trip)
-                            <div class="accordion rounded-[20px] overflow-hidden cursor-pointer">
+                            <a href="{{ route('destination_detail', $trip->slug) }}"
+                                class="accordion rounded-[20px] overflow-hidden cursor-pointer">
                                 <div class="card-container">
                                     <div class="image-layer">
-                                        <img src="{{ Storage::url($trip->featured_photo) }}" alt="private trip"
+                                        <img src="{{ Storage::url($trip->featured_photo) }}" alt="{{ $trip->title }}"
                                             loading="lazy" class="object-cover" />
                                         <div class="gradient-overlay"></div>
                                     </div>
@@ -305,9 +310,9 @@
                                             <h4 class="text-lg md:text-2xl font-semibold mb-3">
                                                 {{ $trip->title }}
                                             </h4>
-                                            <p class="text-xs mb-2 md:mb-1 md:text-base">
+                                            <div class="text-description text-xs mb-2 md:mb-1 md:text-base">
                                                 {!! $trip->description !!}
-                                            </p>
+                                            </div>
                                             <div
                                                 class="description text-white text-lg sm:text-base lg:text-sm xl:text-base">
                                                 <div class="flex flex-row items-center gap-x-1 sm:gap-x-2 mb-1 md:mb-3">
@@ -325,14 +330,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
-                    <a class="py-[20px] md:py-[50px]" href="#">
-                        <button
-                            class="bg-button-custom1 py-2 px-5 sm:py-[10px] sm:px-10 w-40 md:w-52 rounded-[10px] text-xs md:text-base text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
+                    <a class="py-[20px] md:py-[50px]" href="{{ route('destination', ['type' => 'private-trip']) }}">
+                        <p
+                            class="bg-button-custom1 text-center py-2 px-5 sm:py-[10px] sm:px-10 w-40 md:w-52 rounded-[10px] text-xs md:text-base text-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
                             See all
-                        </button>
+                        </p>
                     </a>
                 </div>
             </div>

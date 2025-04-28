@@ -1,10 +1,11 @@
 @extends('front.layout.app')
+@section('title', 'Contact Us - ACP Tours & Travel')
 @section('content')
     @include('front.layout.nav')
     <section class="container mx-auto">
         <div class="max-w-7xl mx-auto py-14 md:py-20">
             <div class="text-center mb-6 md:mb-[60px] space-y-[10px]">
-                <h2 class="text-2xl md:text-[40px] font-bold text-primary">Contact Us</h2>
+                <h1 class="text-2xl md:text-[40px] font-bold text-primary">Contact Us</h1>
                 <p class="text-sm md:text-lg font-medium text-gray-2">Any question or remarks? Just write us a message!</p>
             </div>
             <div class="flex flex-col md:flex-row gap-4 md:gap-0 items-center md:rounded-xl bg-white p-3 md:drop-shadow-lg">
@@ -76,7 +77,7 @@
                             </div>
                         </div>
                         <div class="flex gap-4">
-                            <a href="#">
+                            <a href="#" aria-label="Facebook" target="_blank">
                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect width="30" height="30" rx="15" fill="#FFCB55" />
@@ -85,7 +86,7 @@
                                         fill="white" />
                                 </svg>
                             </a>
-                            <a href="#">
+                            <a href="#" aria-label="Instagram" target="_blank">
                                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <rect width="30" height="30" rx="15" fill="#FFCB55" />

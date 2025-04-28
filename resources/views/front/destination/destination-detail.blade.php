@@ -67,7 +67,7 @@
 
                         <!-- Navigasi Foto -->
                         <div class="relative flex justify-center text-gray-4">
-                            <img id="currentPhoto" src="" alt="Current gallery image"
+                            <img id="currentPhoto" alt="Current gallery image"
                                 class="w-full h-56  md:h-96 object-cover rounded-md">
                             <button id="prevPhoto" class="absolute top-1/2 -left-10 transform -translate-y-1/2 text-3xl">
                                 <i class="fa-solid fa-circle-chevron-left"></i>
@@ -115,7 +115,8 @@
                                 <div class="relative">
                                     <input type="text" name="from_date" id="from_date"
                                         class="w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
-                                    <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
+                                    <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon"
+                                        alt="calendar">
                                 </div>
                             </div>
                             <div>
@@ -123,7 +124,8 @@
                                 <div class="relative">
                                     <input type="text" name="to_date" id="to_date"
                                         class="w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
-                                    <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon">
+                                    <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon"
+                                        alt="calendar">
                                 </div>
                             </div>
                         </div>

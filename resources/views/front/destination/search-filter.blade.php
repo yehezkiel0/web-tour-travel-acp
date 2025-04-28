@@ -97,7 +97,7 @@
             {{-- Overlay Desktop --}}
             <div class="hidden md:block max-w-md py-[30px] bg-white rounded-xl shadow-lg">
                 <div class="flex justify-between items-center mb-[30px] px-7">
-                    <h2 class="text-base font-medium text-gray-2">Advance Search</h2>
+                    <h1 class="text-base font-medium text-gray-2">Advance Search</h1>
                     <button class="clear-all-btn text-gray-3 text-xs hover:text-gray-500">Clear All</button>
                 </div>
                 <hr class="border-[#E0E0E0]">

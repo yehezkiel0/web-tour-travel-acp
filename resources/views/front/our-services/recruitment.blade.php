@@ -1,7 +1,8 @@
 @extends('front.layout.app')
+@section('title', 'Recruitment - ACP Tours & Travel')
 @section('content')
     @include('front.layout.nav')
-    <section class="container mx-auto w-full pt-8">
+    <div class="container mx-auto w-full pt-8">
         <header class="flex-col mb-7 space-y-4 max-w-7xl mx-auto px-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center text-xs md:text-base">
@@ -39,9 +40,9 @@
                     <div
                         class="flex flex-col gap-8 py-6 md:flex-row justify-center md:py-0 md:gap-0 md:justify-normal md:items-center max-w-7xl mx-auto md:space-x-24">
                         <figure class="w-full md:w-[395px] md:h-auto">
-                            <img src="{{ asset('images/services/service-recruitment-hero.png') }}" alt="medical-hero">
+                            <img src="{{ asset('images/services/service-recruitment-hero.png') }}" alt="recruitment-hero">
                         </figure>
-                        <div class="text-center w-full px-8 md:px-0 md:w-[calc(100%-395px)]">
+                        <div class="text-center w-full px-8 md:px-0 md:w-[calc(100%-395px)] z-20">
                             <h1
                                 class="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#3477F6] to-[#1E4690] mb-6 md:leading-snug">
                                 Your
@@ -53,15 +54,13 @@
                             <p class="text-gray-2 text-[10px] md:text-sm mb-6">We connect companies with exceptional
                                 Indonesian candidates,
                                 whether university students or PMI Migrant Workers, Ready to make an impact in Korea!</p>
-                            <a href="#">
-                                <button
-                                    class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
-                                    Contact Us
-                                </button>
+                            <a href="#"
+                                class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
+                                Contact Us
                             </a>
                         </div>
                     </div>
-                    <div class="absolute inset-0 flex items-end justify-end">
+                    <div class="absolute inset-0 flex items-end justify-end z-10">
                         <img src="{{ asset('images/services/recruitment-icon-1.png') }}" alt="icon-recruitment-1"
                             class="max-w-96 h-auto">
                     </div>
@@ -247,11 +246,9 @@
                             ensure a seamless transition for candidates into the Korean work
                             environment, so your business can grow and thrive on the global stage.
                         </p>
-                        <a href="#">
-                            <button
-                                class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
-                                Learn More
-                            </button>
+                        <a href="#"
+                            class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
+                            Learn More
                         </a>
                     </div>
                 </div>
@@ -403,7 +400,7 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 relative">
-                    <img src="{{ asset('images/services/service-recruitment-3.png') }}" alt="Medical Professional"
+                    <img src="{{ asset('images/services/service-recruitment-3.png') }}" alt="Recruitment Professional"
                         class="w-full h-auto">
                 </div>
             </div>
@@ -511,6 +508,6 @@
                 </div>
             </div>
         </main>
-    </section>
+    </div>
     @include('front.layout.footer')
 @endsection

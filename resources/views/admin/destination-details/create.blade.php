@@ -70,7 +70,7 @@
 
                         <div class="flex flex-col gap-y-2">
                             <label class="text-sm font-medium">Google Maps URL</label>
-                            <input type="url" name="map_url" class="border rounded-md p-3"
+                            <input type="text" name="map_url" class="border rounded-md p-3"
                                 value="{{ old('map_url') }}">
                         </div>
                     </div>

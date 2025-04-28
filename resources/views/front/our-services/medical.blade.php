@@ -1,7 +1,8 @@
 @extends('front.layout.app')
+@section('title', 'Medical Health and Beauty - ACP Tours & Travel')
 @section('content')
     @include('front.layout.nav')
-    <section class="container mx-auto w-full pt-8">
+    <div class="container mx-auto w-full pt-8">
         <header class="flex-col mb-7 space-y-4 max-w-7xl mx-auto px-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center text-xs md:text-base">
@@ -33,7 +34,7 @@
                 </li>
             </ol>
         </header>
-        <div class="bg-[#DFE9FF] w-full">
+        <main class="bg-[#DFE9FF] w-full">
             <div class="container mx-auto">
                 <div
                     class="flex flex-col gap-8 py-6 md:flex-row justify-center items-center md:py-0 md:gap-0 md:justify-normal md:items-center max-w-7xl mx-auto md:space-x-24">
@@ -45,22 +46,20 @@
                             class="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#3477F6] to-[#1E4690] mb-4">
                             Medical & Beauty Care
                         </h1>
-                        <p class="text-gray-2 text-[10px] md:text-sm mb-6 px-4 md:px-0">Anugerah Cahaya Pelangi presents The
+                        <p class="text-gray-2 text-[10px] md:text-sm mb-8 px-4 md:px-0">Anugerah Cahaya Pelangi presents The
                             Best
                             Medical
                             & Beauty Care
                             for You with professional, safe, and technology-driven services, ensuring optimal health and
                             beauty in one integrated solution.</p>
-                        <a href="#">
-                            <button
-                                class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
-                                Contact Us
-                            </button>
+                        <a href="#"
+                            class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
+                            Contact Us
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
         <div
             class="max-w-7xl mx-auto px-8 flex flex-col-reverse items-center justify-center gap-4 py-20 md:py-[100px] md:px-6 lg:px-14 md:gap-8 md:flex-row md:justify-between">
             <div class="w-full md:w-1/2 space-y-7">
@@ -418,6 +417,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     @include('front.layout.footer')
 @endsection

@@ -47,17 +47,19 @@ Route::middleware('user')->group(function () {
 });
 
 //User Auth
-Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
-Route::get('/login', [UserAuthController::class, 'login'])->name('login');
-Route::get('/register', [UserAuthController::class, 'register'])->name('register');
-Route::post('/login', [UserAuthController::class, 'login_submit'])->name('login_submit');
-Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
-Route::post('/register', [UserAuthController::class, 'register_submit'])->name('register_submit');
-Route::get('/register-verify', [UserAuthController::class, 'register_verify'])->name('register_verify');
-Route::get('/forget-password', [UserAuthController::class, 'forget_password'])->name('forget_password');
-Route::post('/forget-password', [UserAuthController::class, 'forget_password_submit'])->name('forget_password_submit');
-Route::get('/reset-password', [UserAuthController::class, 'reset_password'])->name('reset_password');
-Route::post('/reset-password', [UserAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
+Route::prefix('user')->group(function () {
+    Route::get('/login-register', [UserAuthController::class, 'login_register'])->name('login_register');
+    Route::get('/login', [UserAuthController::class, 'login'])->name('login');
+    Route::get('/register', [UserAuthController::class, 'register'])->name('register');
+    Route::post('/login', [UserAuthController::class, 'login_submit'])->name('login_submit');
+    Route::post('/logout', [UserAuthController::class, 'logout'])->name('logout');
+    Route::post('/register', [UserAuthController::class, 'register_submit'])->name('register_submit');
+    Route::get('/register-verify', [UserAuthController::class, 'register_verify'])->name('register_verify');
+    Route::get('/forget-password', [UserAuthController::class, 'forget_password'])->name('forget_password');
+    Route::post('/forget-password', [UserAuthController::class, 'forget_password_submit'])->name('forget_password_submit');
+    Route::get('/reset-password', [UserAuthController::class, 'reset_password'])->name('reset_password');
+    Route::post('/reset-password', [UserAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
+});
 
 //Admin dashboard
 Route::middleware('admin')->prefix('admin')->group(function () {

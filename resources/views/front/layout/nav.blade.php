@@ -71,19 +71,15 @@
             <div class="hidden xl:flex flex-row gap-x-[30px]">
                 @guest
                     <div>
-                        <a href="{{ route('login_register') }}">
-                            <button
-                                class="border-[3px] border-primary w-[70px] xl:w-[122px] h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
-                                Login
-                            </button>
+                        <a href="{{ route('login_register') }}"
+                            class="border-[3px] border-primary px-10 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
+                            Login
                         </a>
                     </div>
                     <div>
-                        <a href="{{ route('login_register') }}">
-                            <button
-                                class="bg-primary w-[70px] xl:w-[122px] h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
-                                Sign Up
-                            </button>
+                        <a href="{{ route('login_register') }}"
+                            class="bg-primary px-10 py-2 h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
+                            Sign Up
                         </a>
                     </div>
                 @endguest
@@ -125,22 +121,18 @@
         </div>
         {{-- Sidebar --}}
         <div
-            class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 h-dvh w-screen bg-white overflow-y-auto">
+            class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 max-h-dvh w-screen bg-white overflow-y-auto">
             <div class="flex flex-row gap-x-3 px-6 py-4 border-b w-full">
                 <div>
-                    <a href="{{ route('login') }}">
-                        <button
-                            class="border-[3px] border-primary w-[70px] h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
-                            Login
-                        </button>
+                    <a href="{{ route('login') }}"
+                        class="border-[3px] border-primary px-6 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
+                        Sign In
                     </a>
                 </div>
                 <div>
-                    <a href="{{ route('register') }}">
-                        <button
-                            class="bg-primary w-[100px] h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
-                            Sign Up
-                        </button>
+                    <a href="{{ route('register') }}"
+                        class="bg-primary px-6 py-2 h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
+                        Sign Up
                     </a>
                 </div>
             </div>

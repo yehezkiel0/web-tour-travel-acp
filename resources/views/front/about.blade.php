@@ -1,4 +1,5 @@
 @extends('front.layout.app')
+@section('title', 'About Us - ACP Tours & Travel')
 @section('content')
     @include('front.layout.nav')
     <section class="container mx-auto">
@@ -8,7 +9,7 @@
                     class="object-cover w-full h-auto opacity-20">
             </div>
             <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
-                <h2 class="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">About Us</h2>
+                <h1 class="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">About Us</h1>
                 <p class="text-base md:text-xl font-semibold text-primary-700 italic mb-6 md:mb-8">“Fulfilling Your Dreams
                     with
                     Complete &
@@ -134,7 +135,7 @@
                                 </svg></span>
                         </a>
 
-                        <a href="#entertainment"
+                        <a href="{{ route('services_entertainment') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
                             <span class="text-xs md:text-base">Entertainment</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg
@@ -276,7 +277,7 @@
                         @for ($i = 0; $i < 4; $i++)
                             <div class="swiper-slide">
                                 <img src="{{ asset('images/home/Diamond-Beach.png') }}"
-                                    class="w-full h-56 md:h-[398px] object-cover">
+                                    class="w-full h-56 md:h-[398px] object-cover" alt="Gallery Image" />
                             </div>
                         @endfor
                     </div>

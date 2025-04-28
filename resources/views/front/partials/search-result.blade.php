@@ -2,7 +2,7 @@
     <div class="max-h-60 flex flex-row md:justify-between gap-2 md:gap-6 p-3 md:p-5 bg-white border border-[#E0E0E0] rounded-lg cursor-pointer"
         onclick="window.location.href='{{ route('destination_detail', $result->slug) }}';">
         <div class="w-40 md:w-80 h-auto">
-            <img src="{{ Storage::url($result->featured_photo) }}" alt="featured_photo"
+            <img src="{{ Storage::url($result->featured_photo) }}" alt="{{ $result->title }}"
                 class="w-full max-h-full object-cover rounded-md" loading="lazy">
         </div>
         <div class="w-full md:w-2/3">
@@ -34,10 +34,9 @@
                             <span class="flex md:justify-end text-gray-2 font-normal text-[8px] md:text-xs">/pax</span>
                         </div>
                     </div>
-                    <a href="">
-                        <button
-                            class="text-white bg-primary font-medium text-[8px] md:text-xs text-center rounded-md py-1 md:py-2 px-6 md:px-8 md:w-[140px] hover:bg-primary-400 transition-all ease-in-out duration-300">
-                            Book Now</button>
+                    <a href="{{ route('destination_detail', $result->slug) }}"
+                        class="text-white bg-primary font-medium text-[8px] md:text-xs text-center rounded-md py-1 md:py-2 px-6 md:px-8 md:w-[140px] hover:bg-primary-400 transition-all ease-in-out duration-300">
+                        Book Now
                     </a>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 @extends('front.layout.app')
-
+@section('title', 'Register - ACP Tours & Travel')
 @section('content')
     <div class="min-h-screen flex items-center justify-center mx-auto bg-slate-800 px-4 py-8">
         <div class="max-w-full rounded-xl border bg-white">
@@ -12,7 +12,7 @@
                         <div class="relative text-xs">
                             <label for="name-register"
                                 class="text-[#757575] absolute left-14 -top-3 font-light bg-white px-2">Name</label>
-                            <img src="{{ asset('images/icon/Mail.svg') }}" class="absolute py-4 px-[32px]">
+                            <img src="{{ asset('images/icon/Mail.svg') }}" class="absolute py-4 px-[32px]" alt="mail">
                             <input
                                 class="border border-gray-300 hover:border-gray-400 rounded-full w-full py-4 pl-16 text-[#616161]"
                                 type="text" id="name-register" name="name" placeholder="Enter your name"
@@ -21,7 +21,7 @@
                         <div class="relative text-xs">
                             <label for="email-register"
                                 class="text-[#757575] absolute left-14 -top-3 font-light bg-white px-2">Email</label>
-                            <img src="{{ asset('images/icon/Mail.svg') }}" class="absolute py-4 px-[32px]">
+                            <img src="{{ asset('images/icon/Mail.svg') }}" class="absolute py-4 px-[32px]" alt="mail">
                             <input
                                 class="border border-gray-300 hover:border-gray-400 rounded-full w-full py-4 pl-16 text-[#616161]"
                                 type="email" id="email-register" name="email" placeholder="email@gmail.com"
@@ -30,7 +30,7 @@
                         <div class="relative text-xs">
                             <label for="password-register"
                                 class="text-[#757575] absolute left-14 -top-3 font-light bg-white px-2">Password</label>
-                            <img src="{{ asset('images/icon/Lock.svg') }}" class="absolute py-4 px-[32px]">
+                            <img src="{{ asset('images/icon/Lock.svg') }}" class="absolute py-4 px-[32px]" alt="lock">
                             <input
                                 class="border border-gray-300 hover:border-gray-400 rounded-full w-full py-4 pl-16 text-[#616161]"
                                 type="password" id="password-register" name="password" placeholder="Enter your password"
@@ -41,7 +41,7 @@
                             <label for="password-register-confirmation"
                                 class="text-[#757575] absolute left-14 -top-3 font-light bg-white px-2">Confirm
                                 Password</label>
-                            <img src="{{ asset('images/icon/Lock.svg') }}" class="absolute py-4 px-[32px]">
+                            <img src="{{ asset('images/icon/Lock.svg') }}" class="absolute py-4 px-[32px]" alt="lock">
                             <input
                                 class="border border-gray-300 hover:border-gray-400 rounded-full w-full py-4 pl-16 text-[#616161]"
                                 type="password" id="password-register-confirmation" name="password_confirmation"
@@ -63,17 +63,17 @@
                         </div>
                         <div class="flex gap-x-12">
                             <a href="#">
-                                <img src="images/icon/Google.svg"
-                                    class="bg-white border  w-8 p-2 rounded-full hover:ring-1 hover:ring-primary hover:scale-110 transition-all ease-in-out duration-300"
+                                <img src="{{ asset('images/icon/Google.svg') }}"
+                                    class="bg-white border w-8 p-2 rounded-full hover:ring-1 hover:ring-primary hover:scale-110 transition-all ease-in-out duration-300"
                                     alt="google">
                             </a>
                             <a href="#">
-                                <img src="images/icon/Facebook.svg"
+                                <img src="{{ asset('images/icon/Facebook.svg') }}"
                                     class="bg-[#1877F2] w-8 p-2 rounded-full mx-4 hover:ring-1 hover:ring-primary-900 hover:scale-110 transition-all ease-in-out duration-300"
                                     alt="facebook">
                             </a>
                             <a href="#">
-                                <img src="images/icon/Apple.svg"
+                                <img src="{{ asset('images/icon/Apple.svg') }}"
                                     class="bg-black w-8 p-2 rounded-full hover:ring-1 hover:ring-primary hover:scale-110 transition-all ease-in-out duration-300"
                                     alt="apple">
                             </a>

@@ -80,7 +80,7 @@ export const initNavbar = ($) => {
             }
         }
 
-        setNavbarHeight();
+        setTimeout(() => setNavbarHeight(), 100);
         handleScroll();
     });
 

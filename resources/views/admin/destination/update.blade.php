@@ -95,8 +95,8 @@
                         <div class="flex flex-col gap-y-3 text-sm mb-4 w-fit">
                             <label for="file_input">Existing Image</label>
                             <div>
-                                <img src="{{ Storage::url($destination->featured_photo) }}" alt="destinations_image"
-                                    class="w-[200px] object-cover">
+                                <img src="{{ Storage::url($destination->featured_photo) }}"
+                                    alt="{{ $destination->title }}" class="w-[200px] object-cover">
                             </div>
                         </div>
                         <div class="flex flex-col gap-y-3 text-sm mb-4 w-fit">

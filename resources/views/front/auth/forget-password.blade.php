@@ -3,9 +3,9 @@
 @section('content')
     <section class="container mx-auto mt-[100px] max-w-[450px] px-4">
         <div class="w-full flex flex-col bg-white border border-gray-200 rounded-lg py-6 px-8">
-            <h4 class="text-center text-blue-500 text-xl font-medium mb-4">
+            <h1 class="text-center text-blue-500 text-xl font-medium mb-4">
                 Forget Password
-            </h4>
+            </h1>
             <div class="py-3">
                 <form method="POST" action="{{ route('forget_password_submit') }}">
                     @csrf
