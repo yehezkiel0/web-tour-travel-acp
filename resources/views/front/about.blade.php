@@ -2,7 +2,7 @@
 @section('title', 'About Us - ACP Tours & Travel')
 @section('content')
     @include('front.layout.nav')
-    <section class="container mx-auto">
+    <main class="container mx-auto">
         <div class="relative py-14 md:py-20 overflow-hidden bg-blue-100">
             <div class="hidden md:block absolute inset-0 z-0">
                 <img src="{{ asset('images/home/about-2.jpg') }}" alt="hero-section-about"
@@ -298,24 +298,24 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-    </section>
-    @include('front.layout.footer')
-@endsection
+        </section>
+        @include('front.layout.footer')
+    @endsection
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const businessLineItems = document.querySelectorAll('.business-line-item');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const businessLineItems = document.querySelectorAll('.business-line-item');
 
-        businessLineItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                const arrow = this.querySelector('.arrow-icon');
-                arrow.classList.add('translate-x-1');
-            });
+            businessLineItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const arrow = this.querySelector('.arrow-icon');
+                    arrow.classList.add('translate-x-1');
+                });
 
-            item.addEventListener('mouseleave', function() {
-                const arrow = this.querySelector('.arrow-icon');
-                arrow.classList.remove('translate-x-1');
+                item.addEventListener('mouseleave', function() {
+                    const arrow = this.querySelector('.arrow-icon');
+                    arrow.classList.remove('translate-x-1');
+                });
             });
         });
-    });
-</script>
+    </script>

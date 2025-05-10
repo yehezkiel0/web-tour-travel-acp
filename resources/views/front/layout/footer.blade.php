@@ -1,4 +1,4 @@
-<section class="footer lg:py-16 border-t border-[#E0E0E0]">
+<footer class="footer lg:py-16 border-t border-[#E0E0E0]">
     <div class="container w-[90%] md:w-[80%] lg:w-[90%] xl:max-w-7xl mx-auto py-8">
         <div>
             <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Footer" class="w-32 md:w-40 h-auto" />
@@ -78,4 +78,4 @@
             </div>
         </div>
     </div>
-</section>
+</footer>

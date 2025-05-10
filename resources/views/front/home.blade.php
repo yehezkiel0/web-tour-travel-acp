@@ -1,7 +1,7 @@
 @extends('front.layout.app')
 @section('content')
     @include('front.layout.nav')
-    <div class="container mx-auto">
+    <main class="container mx-auto">
         <!-- Hero Section -->
         <section>
             <div class="hero max-w-7xl mx-auto pb-8">
@@ -23,8 +23,12 @@
                             Discover Now
                         </button>
                     </div>
-                    <img src="{{ asset('images/home/Hero_Image.png') }}" alt="Hero-Image"
-                        class="hero-image h-auto sm:w-[450px] xl:w-[600px]" />
+                    <picture>
+                        <source srcset="{{ asset('images/home/Hero_Image.webp') }}" type="image/webp">
+
+                        <img src="{{ asset('images/home/Hero_Image.png') }}" alt="Hero-Image" width="600" height="400"
+                            class="hero-image h-auto sm:w-[450px] xl:w-[600px]" fetchpriority="high" decoding="async" />
+                    </picture>
                 </div>
             </div>
         </section>
@@ -149,7 +153,8 @@
                                 <img src="{{ asset('images/icon/date.svg') }}" alt="date"
                                     class="icon-container w-10 md:w-11 lg:w-[52px] h-auto">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Set Your Date</h3>
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Set Your Date
+                                    </h3>
                                     <p class="text-gray-1 text-[10px] xl:text-xs">Choose the perfect date to
                                         start your
                                         unforgettable
@@ -358,7 +363,7 @@
                             @php
                                 $services = [
                                     [
-                                        'image' => 'medical-health.png',
+                                        'image' => 'Medical-health.webp',
                                         'title' => 'Medical Health & Beauty',
                                         'description' =>
                                             'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
@@ -366,7 +371,7 @@
                                         'reverse' => false,
                                     ],
                                     [
-                                        'image' => 'Recruitment.png',
+                                        'image' => 'Recruitment.webp',
                                         'title' => 'Recruitment',
                                         'description' =>
                                             'Buka peluang karir Anda di Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses mudah, mulai dari pencarian lowongan hingga pengurusan dokumen.',
@@ -374,7 +379,7 @@
                                         'reverse' => true,
                                     ],
                                     [
-                                        'image' => 'Entertainment.png',
+                                        'image' => 'Entertainment.webp',
                                         'title' => 'Entertainment',
                                         'description' =>
                                             'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
@@ -388,12 +393,19 @@
                                     <div
                                         class="flex flex-col rounded-xl overflow-hidden border border-[#E0E0E0] xl:rounded-none xl:border-none {{ $service['reverse'] ? 'xl:flex-row-reverse' : 'xl:flex-row' }} items-center gap-y-3 xl:gap-x-14">
                                         <div class="w-full xl:w-3/5">
-                                            {{-- Optimasi gambar dengan width dan height yang spesifik --}}
-                                            <img src="{{ asset('images/home/' . $service['image']) }}"
-                                                alt="{{ Str::slug($service['title']) }}"
-                                                class="w-full h-40 xl:h-[540px] xl:drop-shadow-xl object-cover {{ $service['imageClass'] }}"
-                                                loading="lazy" width="600" height="540" fetchpriority="high"
-                                                decoding="async">
+                                            {{-- Optimized responsive image with proper loading strategy --}}
+                                            <picture>
+                                                <!-- Modern format for browsers that support it -->
+                                                <source
+                                                    srcset="{{ asset('images/home/' . pathinfo($service['image'], PATHINFO_FILENAME) . '.webp') }}"
+                                                    type="image/webp">
+                                                <!-- Original format fallback -->
+                                                <img src="{{ asset('images/home/' . $service['image']) }}"
+                                                    alt="{{ Str::slug($service['title']) }}"
+                                                    class="w-full h-40 xl:h-[540px] xl:drop-shadow-xl object-cover {{ $service['imageClass'] }}"
+                                                    {{ $loop->first ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"' }}
+                                                    width="600" height="540">
+                                            </picture>
                                         </div>
                                         <div
                                             class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] {{ $service['reverse'] ? 'xl:pl-[130px]' : '' }} flex flex-col justify-center text-primary-800">
@@ -488,6 +500,6 @@
                 </div>
             </div>
         </section>
-    </div>
+    </main>
     @include('front.layout.footer')
 @endsection

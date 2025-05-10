@@ -8,6 +8,20 @@
 
     <title>@yield('title', 'ACP Tours & Travel')</title>
 
+    <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.webp') }}" fetchpriority="high"
+        type="image/webp">
+    <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.png') }}" fetchpriority="high"
+        type="image/png">
+
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    </noscript>
+
+    <link rel="preload" href="https://kit.fontawesome.com/7fa26d577c.js" as="script" crossorigin="anonymous">
+
     <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') }}" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}" />
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
@@ -16,7 +30,6 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
 </head>
 
 <body class="font-poppins" data-page="{{ request()->route()->getName() }}">

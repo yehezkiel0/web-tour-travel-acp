@@ -1,9 +1,11 @@
-<div class="navbar-container">
+<header class="navbar-container">
     <nav class="navbar" id="navbar-home">
         <div
             class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-2 overflow-hidden md:overflow-visible xl:pt-4 xl:px-0">
             <a href="{{ route('home') }}" class="cursor-pointer">
-                <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" class="w-28 xl:w-40" />
+                <div class="w-28 md:w-full">
+                    <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" />
+                </div>
             </a>
             <ul class="nav-menu hidden xl:flex flex-row gap-x-6 xl:gap-x-10 items-center">
                 <li><a href="{{ route('home') }}"
@@ -197,4 +199,4 @@
         </div>
     </nav>
     <div class="navbar-placeholder"></div>
-</div>
+</header>
