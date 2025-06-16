@@ -14,7 +14,7 @@
                                 <h1 class="text-primary">Destination</h1>
                             </div>
                             <p class="text-[12px] sm:text-[14px] md:text-base text-[#4F4F4F]">
-                                Makeded your dream trip to South Korea come true with <br />
+                                Make your dream trip to South Korea come true with <br />
                                 unforgettable experiences from ACP Tour & Travel.
                             </p>
                         </div>
