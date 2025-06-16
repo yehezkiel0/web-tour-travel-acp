@@ -8,10 +8,13 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    // server: {
-    //     host: "0.0.0.0",
-    //     hmr: {
-    //         host: "bs-local.com",
-    //     },
-    // },
+    build: {
+        rollupOptions: {
+            external: [],
+            output: {
+                // Pastikan CSS dari node_modules ikut ter-bundle
+                manualChunks: undefined,
+            },
+        },
+    },
 });
