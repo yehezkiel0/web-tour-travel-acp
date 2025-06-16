@@ -182,7 +182,7 @@
                 </div>
             </div>
             <div id="search-results"
-                class="w-full flex flex-col gap-y-4 md:overflow-y-scroll max-h-dvh mb-10 px-4 md:mb-0 md:px-0 md:max-h-screen relative">
+                class="w-full flex flex-col gap-y-4 overflow-y-scroll max-h-dvh mb-10 px-4 md:mb-0 md:px-0 md:max-h-screen relative">
                 @if (@isset($results) && count($results) > 0)
                     @include('front.partials.search-result', ['results' => $results])
                 @endif
