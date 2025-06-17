@@ -10,7 +10,7 @@
 
     <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.webp') }}" fetchpriority="high"
         type="image/webp">
-    <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.png') }}" fetchpriority="high"
+    <link loading="lazy" as="image" href="{{ asset('images/home/Hero_Image.png') }}" fetchpriority="high"
         type="image/png">
 
 

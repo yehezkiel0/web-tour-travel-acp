@@ -61,15 +61,19 @@ class AdminAuthController extends Controller
     public function profile_submit(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
         ]);
 
         $admin = User::where('id', Auth::id())->where('role', 'admin')->first();
 
+        if (!$admin) {
+            return redirect()->back()->with('error', 'User not found or unauthorized.');
+        }
+
         if ($request->hasFile('photo')) {
             $request->validate([
-                'photo' => 'mimes:jpg,jpeg,png|max:2048',
+                'photo' => 'image|mimes:jpg,jpeg,png|max:2048',
             ]);
 
             $uploadPath = 'uploads';
@@ -80,25 +84,24 @@ class AdminAuthController extends Controller
             $photoName = 'upload_profile_' . time() . '.' . $request->photo->extension();
             $path = $request->file('photo')->storeAs($uploadPath, $photoName, 'public');
 
+            // Perbaikan: hapus foto lama dengan path yang benar
             if ($admin->photo && Storage::disk('public')->exists($admin->photo)) {
-                Storage::disk('public')->delete($uploadPath . $admin->photo);
+                Storage::disk('public')->delete($admin->photo);
             }
 
             $admin->photo = $path;
-            $admin->save();
         }
-
 
         if ($request->password) {
             $request->validate([
-                'password' => 'required|confirmed',
+                'password' => 'required|confirmed|min:8',
             ]);
             $admin->password = Hash::make($request->password);
         }
 
         $admin->name = $request->name;
         $admin->email = $request->email;
-        $admin->update();
+        $admin->save();
 
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
