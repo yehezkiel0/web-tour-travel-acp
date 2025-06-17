@@ -156,7 +156,7 @@
                 class="overlay-container absolute top-0 left-[50%] w-[50%] overflow-hidden h-full z-[100] rounded-xl">
                 <div class="overlay relative left-[-100%] h-full w-[200%] translate-x-0">
                     <div class="overlay-panel overlay-right absolute top-0 right-0 h-full w-[50%] px-10 flex flex-col gap-y-10 justify-center items-center text-center translate-x-0"
-                        style="background-image: url('/videos/login_slide.gif')">
+                        style="background-image: url('{{ asset('videos/login_slide.gif') }}')">
                         <h1 class="text-white text-4xl font-bold outline-1 leading-snug text-stroke-100">
                             Your
                             Korean <br>
@@ -171,7 +171,7 @@
                         </div>
                     </div>
                     <div class="overlay-panel overlay-left absolute top-0 h-full w-[50%] px-10 flex flex-col gap-y-10 justify-center items-center text-center translate-x-[-20%]"
-                        style="background-image: url('/videos/register_slide.gif')">
+                        style="background-image: url('{{ asset('videos/register_slide.gif') }}')">
                         <h1 class="text-white text-4xl font-bold outline-1 leading-snug text-stroke-100">Welcome, <br>
                             <span>Ready for Your </span> <br>
                             <span>Next Journey?</span>
