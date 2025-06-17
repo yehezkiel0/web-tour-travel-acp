@@ -62,7 +62,7 @@ class AdminAuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . Auth::id(),
+            'email' => 'required|email'
         ]);
 
         $admin = User::where('id', Auth::id())->where('role', 'admin')->first();
