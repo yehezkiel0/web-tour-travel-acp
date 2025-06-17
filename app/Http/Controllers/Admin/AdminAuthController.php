@@ -55,6 +55,10 @@ class AdminAuthController extends Controller
 
     public function profile()
     {
+        // Pastikan user yang login adalah admin
+        if (Auth::user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
         return view('admin.profile');
     }
 
