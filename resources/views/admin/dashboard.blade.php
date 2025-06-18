@@ -86,7 +86,7 @@
             </div>
 
             <!-- Recent Transactions & Popular Destinations -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Recent Transactions -->
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Bookings</h3>
@@ -134,7 +134,7 @@
                     <div class="space-y-4">
                         @forelse($popularDestinations as $destination)
                             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <div class="flex items-center">
+                                <div class="flex items-center gap-3">
                                     @if ($destination->featured_photo)
                                         <img src="{{ Storage::url($destination->featured_photo) }}"
                                             alt="{{ $destination->title }}" class="w-10 h-10 rounded-lg object-cover mr-3">
