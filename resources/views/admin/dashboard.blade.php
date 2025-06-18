@@ -148,7 +148,7 @@
                     <div class="space-y-4">
                         @forelse($popularDestinations as $destination)
                             <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <div class="flex items-center">
+                                <div class="flex items-center gap-3">
                                     @if ($destination->featured_photo)
                                         <img src="{{ Storage::url($destination->featured_photo) }}"
                                             alt="{{ $destination->title }}"
