@@ -84,7 +84,7 @@
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search" loading="lazy"
                                 class="rounded-lg w-full" />
                             <form action="{{ route('search_result') }}" method="POST"
-                                class="absolute bottom-6 flex flex-row items-center space-x-6 w-[320px] md:w-[340px] lg:w-[432px] xl:w-[520px] bg-gray-3 rounded-full border-[3px] border-gray-400">
+                                class="absolute bottom-6 flex flex-row justify-between space-x-6 w-[320px] md:w-[340px] lg:w-[432px] xl:w-[520px] bg-gray-3 rounded-full border-[3px] border-gray-400">
                                 @csrf
                                 <div class="w-3/4 h-12 md:h-14 flex items-center">
                                     <div class="flex flex-row relative items-center justify-center xl:gap-x-2">
