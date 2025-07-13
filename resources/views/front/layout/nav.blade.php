@@ -80,7 +80,7 @@
                     </div>
                     <div>
                         <a href="{{ route('login_register') }}"
-                            class="bg-primary px-10 py-2 h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
+                            class="border-[3px] border-primary bg-primary px-10 py-2 h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
                             Sign Up
                         </a>
                     </div>

@@ -83,10 +83,10 @@
                         <div class="w-full flex flex-col items-center relative" id="image-search">
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search" loading="lazy"
                                 class="rounded-lg w-full" />
-                            <div
-                                class="absolute bottom-6 w-[320px] md:w-[340px] lg:w-[432px] xl:w-[520px] px-2 md:px-4 xl:px-6 h-12 md:h-14 bg-gray-3 rounded-full border-[3px] border-gray-400 flex items-center">
-                                <form action="{{ route('search_result') }}" method="POST">
-                                    @csrf
+                            <form action="{{ route('search_result') }}" method="POST"
+                                class="absolute bottom-6 flex space-x-6 w-[320px] md:w-[340px] lg:w-[432px] xl:w-[520px] bg-gray-3 rounded-full border-[3px] border-gray-400">
+                                @csrf
+                                <div class="w-3/4 h-12 md:h-14 flex items-center">
                                     <div class="flex flex-row relative items-center justify-center xl:gap-x-2">
                                         <div class="flex items-center gap-1 lg:gap-2 text-[#E0E0E0]">
                                             <i
@@ -112,12 +112,12 @@
                                         </div>
                                         <div class="h-4 md:ml-0 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
 
-                                        <div class="flex flex-row items-center gap-2 md:justify-center md:gap-0 md:mr-2 lg:mr-1 lg:space-x-0 xl:space-x-2 text-[#E0E0E0]"
+                                        <div class="flex flex-row items-center gap-1 md:justify-center text-[#E0E0E0]"
                                             id="destination_type">
                                             <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking"
-                                                class="ml-2 md:ml-0">
+                                                class="ml-2 md:ml-0 md:mr-2">
                                             <select name="destination_type"
-                                                class="bg-transparent w-1/3 md:w-full border-none outline-none text-[9px] md:text-xs lg:text-sm xl:text-base appearance-none">
+                                                class="bg-transparent w-1/3 md:w-1/2 border-none outline-none text-[9px] md:text-xs lg:text-sm xl:text-base appearance-none">
                                                 <option class="hidden" value="" disabled selected>
                                                     Type
                                                 </option>
@@ -133,11 +133,11 @@
                                             <i
                                                 class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
                                         </div>
-                                        <button type="submit"
-                                            class="font-semibold text-[10px] sm:text-[11px] lg:text-sm text-gray-1 rounded-3xl bg-secondary py-1 px-2 lg:py-2 lg:px-4 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                                <button type="submit"
+                                    class="font-semibold text-[10px] sm:text-[11px] lg:text-sm w-1/4 text-gray-1 rounded-full bg-secondary py-1 px-2 lg:py-2 lg:px-6 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
+                            </form>
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 mx-auto">
@@ -302,7 +302,7 @@
                                     </div>
 
                                     <div class="content-layer"
-                                        style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(52, 119, 246, 0.25));">
+                                        style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 45%, rgba(52, 119, 246, 1) 120%);">
                                         <div class="tag font-bold text-[12px] text-primary-800 px-5">
                                             <span>Private Trip</span>
                                         </div>
