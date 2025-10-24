@@ -1,10 +1,14 @@
-<script src="https://cdn.tiny.cloud/1/ow8kgftbwqvls0snpzqdn303r946qs227bxnrtk4mws32kh8/tinymce/7/tinymce.min.js"
-    referrerpolicy="origin"></script>
+{{-- TinyMCE is now loaded via Vite/JS bundle --}}
+{{-- Configuration is in resources/js/admin/tinymce-config.js --}}
 <script>
-    tinymce.init({
-        selector: '#textarea',
-        height: 300,
-        plugins: 'lists',
-        toolbar: 'undo redo | styles | bold italic | bullist numlist | alignleft aligncenter alignright alignjustify | outdent indent'
+    // Additional custom configuration can be added here if needed
+    document.addEventListener('DOMContentLoaded', function() {
+        // Wait for TinyMCE to be available
+        const checkTinyMCE = setInterval(function() {
+            if (typeof tinymce !== 'undefined') {
+                clearInterval(checkTinyMCE);
+                console.log('TinyMCE is ready');
+            }
+        }, 100);
     });
 </script>

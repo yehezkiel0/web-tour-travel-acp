@@ -8,14 +8,11 @@
 
     <title>@yield('title', 'ACP Tours & Travel')</title>
 
-    <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.webp') }}" fetchpriority="high"
-        type="image/webp">
-    <link loading="lazy" as="image" href="{{ asset('images/home/Hero_Image.png') }}" fetchpriority="high"
-        type="image/png">
+    {{-- Page-specific preloads --}}
+    @yield('preloads')
 
-
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
     </noscript>

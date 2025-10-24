@@ -1,4 +1,10 @@
 @extends('front.layout.app')
+
+@section('preloads')
+    <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.webp') }}" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="{{ asset('images/home/Hero_Image.png') }}" fetchpriority="high" type="image/png">
+@endsection
+
 @section('content')
     @include('front.layout.nav')
     <main class="container mx-auto">

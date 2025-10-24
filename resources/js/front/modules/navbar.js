@@ -1,5 +1,11 @@
 export const initNavbar = ($) => {
     const $navbar = $("#navbar-home");
+
+    // Exit early if navbar doesn't exist (e.g., on admin pages)
+    if (!$navbar.length) {
+        return;
+    }
+
     const $hamburger = $(".hamburger");
     const $sidebar = $(".sidebar-home");
     const $navHome = $(".nav-home");
@@ -18,8 +24,6 @@ export const initNavbar = ($) => {
             } catch (error) {
                 console.error("Error setting navbar height:", error);
             }
-        } else {
-            console.error("Navbar element not found!");
         }
     };
 

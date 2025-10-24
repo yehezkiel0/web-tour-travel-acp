@@ -1,4 +1,10 @@
 import $ from "jquery";
+
+// Lazy load TinyMCE only when textarea exists
+if (document.querySelector("#textarea")) {
+    import("./tinymce-config");
+}
+
 window.$ = window.jQuery = $;
 $(function () {
     $("#sidebar a").on("click", function (e) {

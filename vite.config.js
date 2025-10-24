@@ -12,9 +12,22 @@ export default defineConfig({
         rollupOptions: {
             external: [],
             output: {
-                // Pastikan CSS dari node_modules ikut ter-bundle
-                manualChunks: undefined,
+                manualChunks: (id) => {
+                    // Split TinyMCE into separate chunk
+                    if (id.includes("node_modules/tinymce")) {
+                        return "tinymce";
+                    }
+                    // Split jQuery and other large libraries
+                    if (id.includes("node_modules/jquery")) {
+                        return "jquery";
+                    }
+                    // Split Swiper into separate chunk
+                    if (id.includes("node_modules/swiper")) {
+                        return "swiper";
+                    }
+                },
             },
         },
+        chunkSizeWarningLimit: 1000,
     },
 });
