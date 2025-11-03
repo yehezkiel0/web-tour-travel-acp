@@ -34,7 +34,7 @@ export default defineConfig({
     },
 
     build: {
-        manifest: true,
+        manifest: "manifest.json", // Put manifest in root of build folder, not in .vite subfolder
         outDir: "public/build",
 
         rollupOptions: {
@@ -99,5 +99,11 @@ export default defineConfig({
     optimizeDeps: {
         include: ["jquery", "swiper"],
         exclude: ["tinymce"], // TinyMCE loaded separately
+    },
+
+    // Define global constants
+    define: {
+        // Ensure jQuery is available as global
+        global: "window",
     },
 });
