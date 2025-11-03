@@ -5,7 +5,7 @@ import path from "path";
 export default defineConfig({
     plugins: [
         laravel({
-            input: ["resources/css/app.css", "resources/js/app.js"],
+            input: ["resources/js/app.js"], // Only JS, CSS will be imported in JS
             refresh: true,
         }),
     ],
@@ -39,44 +39,17 @@ export default defineConfig({
 
         rollupOptions: {
             output: {
-                manualChunks: (id) => {
-                    // Vendor chunks - separate by library
-                    if (id.includes("node_modules")) {
-                        // TinyMCE - Large editor (1.2MB)
-                        if (id.includes("tinymce")) {
-                            return "vendor-tinymce";
-                        }
-                        // jQuery - Legacy support
-                        if (id.includes("jquery")) {
-                            return "vendor-jquery";
-                        }
-                        // Swiper - Slider library
-                        if (id.includes("swiper")) {
-                            return "vendor-swiper";
-                        }
-                        // All other vendor packages
-                        return "vendor";
-                    }
+                // No code splitting - bundle everything into single files
+                manualChunks: undefined,
 
-                    // Separate admin modules
-                    if (id.includes("resources/js/admin")) {
-                        return "admin";
-                    }
-
-                    // Separate front modules
-                    if (id.includes("resources/js/front")) {
-                        return "front";
-                    }
-                },
-
-                // Better file naming for cache busting
+                // Simple file naming
                 chunkFileNames: "assets/[name]-[hash].js",
                 entryFileNames: "assets/[name]-[hash].js",
                 assetFileNames: "assets/[name]-[hash].[ext]",
             },
         },
 
-        chunkSizeWarningLimit: 1000,
+        chunkSizeWarningLimit: 2000, // Increase limit since we're bundling everything
 
         // Minification with Terser for better compression
         minify: "terser",
@@ -88,8 +61,8 @@ export default defineConfig({
             },
         },
 
-        // Enable CSS code splitting
-        cssCodeSplit: true,
+        // Disable CSS code splitting - bundle all CSS into one file
+        cssCodeSplit: false,
 
         // Source maps for debugging (only in development)
         sourcemap: process.env.NODE_ENV !== "production",

@@ -3,6 +3,9 @@
  * Load order is critical: bootstrap (jQuery, Axios) must load before modules
  */
 
+// Import CSS first
+import "../css/app.css";
+
 // 1. Load bootstrap first (sets up jQuery and Axios globally)
 import "./bootstrap";
 

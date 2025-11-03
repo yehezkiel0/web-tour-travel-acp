@@ -33,18 +33,22 @@
 
     @php
         $isProduction = app()->environment('production');
-        $manifestPath = $isProduction ? public_path('../public_html/build/manifest.json') : public_path('build/manifest.json');
+        $manifestPath = $isProduction
+            ? public_path('../public_html/build/manifest.json')
+            : public_path('build/manifest.json');
     @endphp
 
     @if ($isProduction && file_exists($manifestPath))
         @php
             $manifest = json_decode(file_get_contents($manifestPath), true);
             $buildUrl = rtrim(config('app.url'), '/') . '/build';
+            $appJs = $manifest['resources/js/app.js']['file'] ?? 'assets/app.js';
+            $appCss = $manifest['style.css']['file'] ?? 'assets/style.css';
         @endphp
-        <link rel="stylesheet" href="{{ $buildUrl }}/{{ $manifest['resources/css/app.css']['file'] }}">
-        <script type="module" src="{{ $buildUrl }}/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+        <link rel="stylesheet" href="{{ $buildUrl }}/{{ $appCss }}">
+        <script type="module" src="{{ $buildUrl }}/{{ $appJs }}"></script>
     @else
-        @vite(['resources/js/app.js', 'resources/css/app.css'])
+        @vite(['resources/js/app.js'])
     @endif
 </head>
 

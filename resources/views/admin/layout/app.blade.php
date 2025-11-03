@@ -18,11 +18,14 @@
     @if ($isProduction && file_exists($manifestPath))
         @php
             $manifest = json_decode(file_get_contents($manifestPath), true);
+            $buildUrl = rtrim(config('app.url'), '/') . '/build';
+            $appJs = $manifest['resources/js/app.js']['file'] ?? 'assets/app.js';
+            $appCss = $manifest['style.css']['file'] ?? 'assets/style.css';
         @endphp
-        <link rel="stylesheet" href="{{ config('app.url') }}/build/{{ $manifest['resources/css/app.css']['file'] }}">
-        <script type="module" src="{{ config('app.url') }}/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+        <link rel="stylesheet" href="{{ $buildUrl }}/{{ $appCss }}">
+        <script type="module" src="{{ $buildUrl }}/{{ $appJs }}"></script>
     @else
-        @vite(['resources/js/app.js', 'resources/css/app.css'])
+        @vite(['resources/js/app.js'])
     @endif
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
