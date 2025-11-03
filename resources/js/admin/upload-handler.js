@@ -1,4 +1,4 @@
-import $ from "jquery";
+// jQuery is already available globally from bootstrap.js
 $(function () {
     const dropZone = $("#image_input").parent();
     const progressContainer = $("#progress-container");

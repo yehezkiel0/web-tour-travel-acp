@@ -25,6 +25,7 @@
         @vite(['resources/js/app.js', 'resources/css/app.css'])
     @endif
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 
 <body class="bg-gray-100 font-poppins h-full">
@@ -33,7 +34,6 @@
         @yield('content')
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-    <script src="https://kit.fontawesome.com/7fa26d577c.js" crossorigin="anonymous"></script>
     <x-alert-notification />
     <x-text-area-config />
 </body>

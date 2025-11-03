@@ -1,4 +1,4 @@
-import $ from "jquery";
+// jQuery is already available globally from bootstrap.js
 import { debounce } from "./utils/eventUtils";
 import { initDropdown } from "./modules/dropdown";
 import { initNavbar } from "./modules/navbar";
@@ -14,7 +14,7 @@ import { initBookingDetail } from "./modules/booking-detail";
 import { initVideoPlayer } from "./modules/video-player";
 import { initMapErrorHandler } from "./modules/map-handler";
 
-// Wait for DOM to be ready
+// Wait for DOM to be ready - jQuery ($) is available globally
 $(() => {
     debounce(() => {}, 1000);
     initDropdown($);

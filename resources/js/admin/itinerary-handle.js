@@ -1,4 +1,4 @@
-import $ from "jquery";
+// jQuery is already available globally from bootstrap.js
 $(function () {
     let itineraryCount = 0;
 

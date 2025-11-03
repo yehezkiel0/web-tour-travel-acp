@@ -1,11 +1,11 @@
-import $ from "jquery";
+// jQuery is already available globally from bootstrap.js
 
 // Lazy load TinyMCE only when textarea exists
 if (document.querySelector("#textarea")) {
     import("./tinymce-config");
 }
 
-window.$ = window.jQuery = $;
+// jQuery ($) is available globally from bootstrap.js
 $(function () {
     $("#sidebar a").on("click", function (e) {
         $("#sidebar a").removeClass("active");
