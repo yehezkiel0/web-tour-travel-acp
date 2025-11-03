@@ -3,19 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BookingTransaction;
+use App\Repositories\BookingTransactionRepository;
+use App\Services\BookingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class AdminTransactionController extends Controller
 {
+    protected $bookingRepo;
+    protected $bookingService;
+
+    public function __construct(
+        BookingTransactionRepository $bookingRepo,
+        BookingService $bookingService
+    ) {
+        $this->bookingRepo = $bookingRepo;
+        $this->bookingService = $bookingService;
+    }
+
     public function index()
     {
+        // Use repository with eager loading to prevent N+1 queries
+        $transactions = $this->bookingRepo->getAllWithRelations();
 
-
-        $transactions = BookingTransaction::with(['user', 'destination'])->get();
-
+        // Fetch payment details for each transaction
         $transactions->each(function ($transaction) {
             try {
                 $response = Http::get(route('api.transaction.details', ['orderId' => $transaction->code]));

@@ -13,9 +13,42 @@
     font-size: 1.4em;
 }
 
-.location-map > iframe {
+/* Responsive iframe container */
+.location-map iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 400px;
+    height: 100%;
+    border: 0;
+    border-radius: 8px;
+}
+
+/* Fallback untuk error Google Maps */
+.location-map iframe[src*="google.com"] {
+    background: #f3f4f6;
+}
+
+/* Loading state untuk iframe */
+.location-map::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f4f6;
+    border-top-color: #ffcb55;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: -1;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .notes-list > ul {

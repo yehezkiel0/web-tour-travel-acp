@@ -3,67 +3,57 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\BookingTransaction;
-use App\Models\Destination;
-use App\Models\User;
+use App\Repositories\BookingTransactionRepository;
+use App\Repositories\DestinationRepository;
+use App\Repositories\UserRepository;
+use App\Services\CacheService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
 {
+    protected $bookingRepo;
+    protected $destinationRepo;
+    protected $userRepo;
+    protected $cacheService;
+
+    public function __construct(
+        BookingTransactionRepository $bookingRepo,
+        DestinationRepository $destinationRepo,
+        UserRepository $userRepo,
+        CacheService $cacheService
+    ) {
+        $this->bookingRepo = $bookingRepo;
+        $this->destinationRepo = $destinationRepo;
+        $this->userRepo = $userRepo;
+        $this->cacheService = $cacheService;
+    }
+
     public function dashboard()
     {
-        $totalDestinations = Destination::count();
-        $totalTransactions = BookingTransaction::count();
-        $totalUsers = User::where('role', 'user')->count();
-        $totalRevenue = BookingTransaction::where('status', 'paid')->sum('total_price');
+        // Get cached dashboard statistics
+        $stats = $this->cacheService->getDashboardStats();
 
-        // Statistik tambahan
-        $pendingTransactions = BookingTransaction::where('status', 'pending')->count();
-        $paidTransactions = BookingTransaction::where('status', 'paid')->count();
-        $cancelledTransactions = BookingTransaction::where('status', 'cancelled')->count();
+        // Get additional statistics
+        $pendingTransactions = $this->bookingRepo->countByStatus('pending');
+        $paidTransactions = $this->bookingRepo->countByStatus('success');
+        $cancelledTransactions = $this->bookingRepo->countByStatus('cancelled');
 
-        // Recent transactions
-        $recentTransactions = BookingTransaction::with(['user', 'destination'])
-            ->latest()
-            ->take(5)
-            ->get();
+        // Get recent transactions with relations (N+1 optimized)
+        $recentTransactions = $this->bookingRepo->getRecentBookings(5);
 
-        // Data untuk chart (transaksi per bulan)
-        $monthlyTransactions = BookingTransaction::select(
-            DB::raw('MONTH(created_at) as month'),
-            DB::raw('COUNT(*) as total'),
-            DB::raw('SUM(total_price) as revenue')
-        )
-            ->whereYear('created_at', date('Y'))
-            ->groupBy('month')
-            ->get()
-            ->pluck('total', 'month')
-            ->toArray();
+        // Get popular destinations from cache
+        $popularDestinations = $this->cacheService->getPopularDestinations(5);
 
-        // Destinasi paling populer berdasarkan jumlah booking
-        $popularDestinations = Destination::select('destinations.*')
-            ->selectRaw('(SELECT COUNT(*) FROM booking_transactions WHERE booking_transactions.destination_id = destinations.id) as bookings_count')
-            ->orderBy('bookings_count', 'desc')
-            ->take(5)
-            ->get();
-
-        // Statistik tambahan
-        $totalTravellers = BookingTransaction::where('status', 'paid')
-            ->sum(DB::raw('adult_count + child_count'));
-
-        return view('admin.dashboard', compact(
-            'totalDestinations',
-            'totalTransactions',
-            'totalUsers',
-            'totalRevenue',
-            'pendingTransactions',
-            'paidTransactions',
-            'cancelledTransactions',
-            'recentTransactions',
-            'monthlyTransactions',
-            'popularDestinations',
-            'totalTravellers'
-        ));
+        return view('admin.dashboard', [
+            'totalDestinations' => $stats['total_destinations'],
+            'totalTransactions' => $stats['total_bookings'],
+            'totalUsers' => $stats['total_customers'],
+            'totalRevenue' => $stats['total_revenue'],
+            'pendingTransactions' => $pendingTransactions,
+            'paidTransactions' => $paidTransactions,
+            'cancelledTransactions' => $cancelledTransactions,
+            'recentTransactions' => $recentTransactions,
+            'popularDestinations' => $popularDestinations,
+        ]);
     }
 }

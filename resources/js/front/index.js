@@ -12,6 +12,7 @@ import { initBookingForm } from "./modules/booking-form";
 import { initStepper } from "./modules/stepper";
 import { initBookingDetail } from "./modules/booking-detail";
 import { initVideoPlayer } from "./modules/video-player";
+import { initMapErrorHandler } from "./modules/map-handler";
 
 // Wait for DOM to be ready
 $(() => {
@@ -28,4 +29,5 @@ $(() => {
     initStepper($);
     initBookingDetail($);
     initVideoPlayer($);
+    initMapErrorHandler();
 });

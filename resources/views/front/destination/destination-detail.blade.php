@@ -1,15 +1,15 @@
 @extends('front.layout.app')
 @section('content')
     @include('front.layout.nav')
-    <div class="container mx-auto max-w-7xl px-4 py-8">
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {{-- Header --}}
-        <header class="flex-col mb-7 space-y-4" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+        <header class="flex-col mb-4 sm:mb-6 lg:mb-7 space-y-2 sm:space-y-4" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse text-xs sm:text-sm">
                 <li class="inline-flex items-center">
                     <a href="{{ route('home') }}"
-                        class="inline-flex gap-x-2 items-center font-medium text-gray-3 hover:underline">
-                        <img src="{{ asset('images/icon/Home.svg') }}" alt="home-icon">
-                        Home
+                        class="inline-flex gap-x-1 sm:gap-x-2 items-center font-medium text-gray-3 hover:underline">
+                        <img src="{{ asset('images/icon/Home.svg') }}" alt="home-icon" class="w-3 h-3 sm:w-4 sm:h-4">
+                        <span class="hidden sm:inline">Home</span>
                     </a>
                 </li>
                 <li>
@@ -19,36 +19,38 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="#" class="ms-1 font-medium text-primary md:ms-2">{{ $destination->title }}</a>
+                        <a href="#"
+                            class="ms-1 font-medium text-primary md:ms-2 truncate max-w-[200px] sm:max-w-none">{{ $destination->title }}</a>
                     </div>
                 </li>
             </ol>
         </header>
 
         {{-- Gallery Section --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-7">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-6 lg:mb-7">
             {{-- Main Image --}}
             <div class="relative md:col-span-2">
                 <img src="{{ Storage::url($destination->featured_photo) }}" alt="{{ $destination->title }}"
-                    class="w-full h-[400px] object-cover rounded-lg" />
+                    class="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover rounded-lg" />
             </div>
 
             {{-- Gallery Grid --}}
-            <div id="gallery" class="grid grid-cols-1 gap-4" data-photos='@json($destination_photos->pluck('photo'))'>
+            <div id="gallery" class="grid grid-cols-2 md:grid-cols-1 gap-2 sm:gap-3 lg:gap-4"
+                data-photos='@json($destination_photos->pluck('photo'))'>
                 @foreach ($destination_photos as $index => $photo)
                     @if ($index < 1)
                         <div class="relative">
                             <img src="{{ Storage::url($photo->photo) }}"
                                 alt="{{ $destination->title }} gallery image {{ $index + 1 }}"
-                                class="w-full h-48 object-cover rounded-lg" />
+                                class="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg" />
                         </div>
                     @elseif ($index === 1)
                         <div class="relative cursor-pointer" id="openGalleryModal">
                             <img src="{{ Storage::url($photo->photo) }}"
                                 alt="{{ $destination->title }} gallery image {{ $index + 1 }}"
-                                class="w-full h-48 object-cover rounded-lg brightness-50" />
+                                class="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg brightness-50" />
                             <div class="absolute inset-0 flex items-center justify-center bg-opacity-50 rounded-lg">
-                                <span class="text-white text-xl font-semibold">See All Photos </span>
+                                <span class="text-white text-sm sm:text-base lg:text-xl font-semibold">See All Photos</span>
                             </div>
                         </div>
                     @endif
@@ -56,23 +58,25 @@
             </div>
             <!-- Modal untuk Galeri -->
             <div id="galleryModal"
-                class="hidden fixed inset-0 bg-gray-1 bg-opacity-80 items-center justify-center z-50 transition-all ease-in-out duration-300">
+                class="hidden fixed inset-0 bg-gray-1 bg-opacity-80 items-center justify-center z-50 transition-all ease-in-out duration-300 p-4">
                 <div class="relative w-full max-h-full max-w-xl md:max-w-4xl">
                     <div class="bg-opacity-100">
                         <!-- Tombol Close -->
                         <button id="closeGalleryModal"
-                            class="absolute -top-10 -right-3 text-gray-4 text-xl px-2 py-1 rounded-md z-10">
+                            class="absolute -top-8 sm:-top-10 -right-2 sm:-right-3 text-gray-4 text-xl sm:text-2xl px-2 py-1 rounded-md z-10">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
 
                         <!-- Navigasi Foto -->
                         <div class="relative flex justify-center text-gray-4">
                             <img id="currentPhoto" alt="Current gallery image"
-                                class="w-full h-56  md:h-96 object-cover rounded-md">
-                            <button id="prevPhoto" class="absolute top-1/2 -left-10 transform -translate-y-1/2 text-3xl">
+                                class="w-full h-48 sm:h-56 md:h-96 object-cover rounded-md">
+                            <button id="prevPhoto"
+                                class="absolute top-1/2 -left-6 sm:-left-10 transform -translate-y-1/2 text-2xl sm:text-3xl">
                                 <i class="fa-solid fa-circle-chevron-left"></i>
                             </button>
-                            <button id="nextPhoto" class="absolute top-1/2 -right-10 transform -translate-y-1/2 text-3xl">
+                            <button id="nextPhoto"
+                                class="absolute top-1/2 -right-6 sm:-right-10 transform -translate-y-1/2 text-2xl sm:text-3xl">
                                 <i class="fa-solid fa-circle-chevron-right"></i>
                             </button>
                         </div>
@@ -82,19 +86,23 @@
         </div>
 
         {{-- Tab Navigation --}}
-        <div class="border-b mb-10">
-            <nav class="flex gap-x-8 z-10 text-sm font-medium text-gray-1" id="destinationTabs">
-                <button data-tab="overview" class="tab-btn active py-4 px-2 custom-border">Overview</button>
-                <button data-tab="price" class="tab-btn py-4 px-2 custom-border">Price</button>
-                <button data-tab="itinerary" class="tab-btn py-4 px-2 custom-border">Itinerary</button>
-                <button data-tab="location" class="tab-btn py-4 px-2 custom-border">Location</button>
-                <button data-tab="notes" class="tab-btn py-4 px-2 custom-border">Notes</button>
+        <div class="border-b mb-6 lg:mb-10 overflow-x-auto scrollbar-hide">
+            <nav class="flex gap-x-4 sm:gap-x-6 lg:gap-x-8 z-10 text-xs sm:text-sm font-medium text-gray-1 min-w-max"
+                id="destinationTabs">
+                <button data-tab="overview"
+                    class="tab-btn active py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Overview</button>
+                <button data-tab="price" class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Price</button>
+                <button data-tab="itinerary"
+                    class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Itinerary</button>
+                <button data-tab="location"
+                    class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Location</button>
+                <button data-tab="notes" class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Notes</button>
             </nav>
         </div>
 
         {{-- Tab Content --}}
-        <div class="tab-content grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="space-y-8 text-gray-1 md:col-span-2">
+        <div class="tab-content grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="space-y-6 lg:space-y-8 text-gray-1 lg:col-span-2 order-2 lg:order-1">
                 @include('front.partials.overview')
                 @include('front.partials.price')
                 @include('front.partials.itinerary')
@@ -102,28 +110,30 @@
                 @include('front.partials.notes')
             </div>
 
-            <div class="bg-white rounded-2xl w-full border h-fit">
-                <h3 class="text-xl font-semibold text-gray-1 px-7 py-6">Start Booking</h3>
+            <div class="bg-white rounded-2xl w-full border h-fit order-1 lg:order-2 sticky top-20 lg:top-24">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-1 px-5 sm:px-7 py-4 sm:py-6">Start Booking</h3>
                 <hr>
                 <form action="{{ route('booking_form', $destination->slug) }}" method="POST" class="booking-form">
                     @csrf
-                    <div class="space-y-6 px-7 py-6">
+                    <div class="space-y-4 sm:space-y-6 px-5 sm:px-7 py-4 sm:py-6">
                         {{-- Date --}}
-                        <div class="space-y-4">
+                        <div class="space-y-3 sm:space-y-4">
                             <div>
-                                <label id="from-date" class="block text-gray-1 font-medium mb-2">From</label>
+                                <label id="from-date"
+                                    class="block text-gray-1 text-sm sm:text-base font-medium mb-2">From</label>
                                 <div class="relative">
                                     <input type="text" name="from_date" id="from_date"
-                                        class="w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
+                                        class="w-full px-3 sm:px-[18px] py-2.5 sm:py-3 text-sm sm:text-base bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
                                     <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon"
                                         alt="calendar">
                                 </div>
                             </div>
                             <div>
-                                <label id="to-date" class="block text-gray-1 font-medium  mb-2">To</label>
+                                <label id="to-date"
+                                    class="block text-gray-1 text-sm sm:text-base font-medium mb-2">To</label>
                                 <div class="relative">
                                     <input type="text" name="to_date" id="to_date"
-                                        class="w-full px-[18px] py-3 bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
+                                        class="w-full px-3 sm:px-[18px] py-2.5 sm:py-3 text-sm sm:text-base bg-gray-6 border border-gray-5 rounded-md text-gray-4 focus:outline-primary-400">
                                     <img src="{{ asset('images/icon/calender.svg') }}" class="calender-icon"
                                         alt="calendar">
                                 </div>
@@ -131,48 +141,51 @@
                         </div>
 
                         <div class="space-y-3">
-                            <h3 class="text-gray-1 font-medium">Add Traveller</h3>
+                            <h3 class="text-gray-1 text-sm sm:text-base font-medium">Add Traveller</h3>
 
-                            <div class="flex items-center gap-4">
-                                <div class="space-y-2">
+                            <div class="flex items-center gap-3 sm:gap-4">
+                                <div class="space-y-2 flex-1">
                                     <span class="text-gray-2 text-xs font-medium">Adult</span>
                                     <div class="flex items-center relative">
                                         <button type="button"
-                                            class="decrease-adult absolute top-0 left-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">-</button>
+                                            class="decrease-adult absolute top-0 left-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary text-white text-sm sm:text-base rounded-lg flex items-center justify-center">-</button>
                                         <input type="number" name="adult_count" id="adult-count" value="1"
-                                            class="w-full h-8 text-center bg-primary-50 rounded-lg" disabled>
+                                            class="w-full h-7 sm:h-8 text-sm sm:text-base text-center bg-primary-50 rounded-lg"
+                                            disabled>
                                         <button type="button"
-                                            class="increase-adult absolute top-0 right-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">+</button>
+                                            class="increase-adult absolute top-0 right-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary text-white text-sm sm:text-base rounded-lg flex items-center justify-center">+</button>
                                     </div>
                                 </div>
 
-                                <div class="space-y-2">
+                                <div class="space-y-2 flex-1">
                                     <span class="text-gray-2 text-xs font-medium">Child</span>
                                     <div class="relative">
                                         <button type="button"
-                                            class="decrease-child absolute top-0 left-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">-</button>
+                                            class="decrease-child absolute top-0 left-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary text-white text-sm sm:text-base rounded-lg flex items-center justify-center">-</button>
                                         <input type="number" name="child_count" id="child-count" value="0"
-                                            class="w-full h-8 text-center bg-primary-50 rounded-lg" disabled>
+                                            class="w-full h-7 sm:h-8 text-sm sm:text-base text-center bg-primary-50 rounded-lg"
+                                            disabled>
                                         <button type="button"
-                                            class="increase-child absolute top-0 right-0 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center">+</button>
+                                            class="increase-child absolute top-0 right-0 w-7 h-7 sm:w-8 sm:h-8 bg-primary text-white text-sm sm:text-base rounded-lg flex items-center justify-center">+</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="pt-4 flex flex-col items-center">
-                            <span class="text-gray-3 font-medium text-sm mb-2">Subtotal</span>
-                            <p id="total-price" class="text-4xl font-bold text-primary w-fit"
+                        <div class="pt-3 sm:pt-4 flex flex-col items-center">
+                            <span class="text-gray-3 font-medium text-xs sm:text-sm mb-2">Subtotal</span>
+                            <p id="total-price" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary w-fit"
                                 data-total-price="{{ $destination->price }}">
                             </p>
                         </div>
 
                         <button type="submit"
-                            class="w-full text-white py-4 rounded-[10px] font-bold  border border-primary bg-primary hover:bg-primary-400 transition-all ease-in-out duration-300">
+                            class="w-full text-white text-sm sm:text-base py-3 sm:py-4 rounded-[10px] font-bold border border-primary bg-primary hover:bg-primary-400 transition-all ease-in-out duration-300">
                             Book Now
                         </button>
 
-                        <p class="text-gray-3 text-[8px] text-center">*The price shown is an estimate and subject to
+                        <p class="text-gray-3 text-[8px] sm:text-[9px] text-center">*The price shown is an estimate and
+                            subject to
                             change.
                         </p>
                     </div>

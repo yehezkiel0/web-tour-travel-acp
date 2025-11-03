@@ -17,3 +17,21 @@ html {
         scroll-behavior: auto;
     }
 }
+
+/* Custom Scrollbar Hide */
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Responsive adjustments for 1200x800 */
+@media (min-width: 1024px) and (max-width: 1280px) {
+    .container {
+        max-width: 1200px;
+    }
+}
