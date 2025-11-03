@@ -1,39 +1,41 @@
-<div class="bill-details">
-    <div class="w-full border border-gray-4 rounded-[10px] p-7 text-gray-1 font-medium mb-7">
-        <h3 class="text-xl font-semibold mb-7">Bill Details</h3>
-        <div class="space-y-4 text-gray-2 text-xs border-b border-gray-4 pb-7 mb-7">
-            <div class="grid grid-cols-3 items-center">
-                <span>Adult(s)</span>
-                <span class="text-center">X {{ $bookingData['adult_count'] }}</span>
-                <span class="text-right">{{ formatIDR($bookingData['adult_price']) }}</span>
+<div class="bill-details lg:sticky lg:top-24">
+    <div
+        class="w-full border border-gray-4 rounded-[10px] p-4 sm:p-5 lg:p-7 text-gray-1 font-medium mb-5 sm:mb-6 lg:mb-7">
+        <h3 class="text-lg sm:text-xl font-semibold mb-5 sm:mb-6 lg:mb-7">Bill Details</h3>
+        <div
+            class="space-y-3 sm:space-y-4 text-gray-2 text-xs sm:text-sm border-b border-gray-4 pb-5 sm:pb-6 lg:pb-7 mb-5 sm:mb-6 lg:mb-7">
+            <div class="grid grid-cols-3 items-center gap-2">
+                <span class="text-xs sm:text-sm">Adult(s)</span>
+                <span class="text-center text-xs sm:text-sm">X {{ $bookingData['adult_count'] }}</span>
+                <span class="text-right text-xs sm:text-sm">{{ formatIDR($bookingData['adult_price']) }}</span>
             </div>
-            <div class="grid grid-cols-3 items-center">
-                <span>Child(s)</span>
-                <span class="text-center">X {{ $bookingData['child_count'] }}</span>
-                <span class="text-right">{{ formatIDR($bookingData['child_price']) }}</span>
+            <div class="grid grid-cols-3 items-center gap-2">
+                <span class="text-xs sm:text-sm">Child(s)</span>
+                <span class="text-center text-xs sm:text-sm">X {{ $bookingData['child_count'] }}</span>
+                <span class="text-right text-xs sm:text-sm">{{ formatIDR($bookingData['child_price']) }}</span>
             </div>
-            <div class="individual-visa grid grid-cols-3 items-center">
-                <span>Individual Visa</span>
-                <span class="text-center">X <span id="individual-visa-count">0</span></span>
-                <span id="individual-visa-amount" class="text-right">0</span>
+            <div class="individual-visa grid grid-cols-3 items-center gap-2">
+                <span class="text-xs sm:text-sm">Individual Visa</span>
+                <span class="text-center text-xs sm:text-sm">X <span id="individual-visa-count">0</span></span>
+                <span id="individual-visa-amount" class="text-right text-xs sm:text-sm">0</span>
             </div>
-            <div class="group-visa grid-cols-3 items-center hidden">
-                <span>Group Visa</span>
-                <span class="text-center">X <span id="group-visa-count">0</span></span>
-                <span id="group-visa-amount" class="text-right">0</span>
+            <div class="group-visa grid-cols-3 items-center gap-2 hidden">
+                <span class="text-xs sm:text-sm">Group Visa</span>
+                <span class="text-center text-xs sm:text-sm">X <span id="group-visa-count">0</span></span>
+                <span id="group-visa-amount" class="text-right text-xs sm:text-sm">0</span>
             </div>
         </div>
-        <div class="space-y-4 text-gray-2">
-            <div class="flex justify-between text-xs font-semibold">
+        <div class="space-y-3 sm:space-y-4 text-gray-2">
+            <div class="flex justify-between text-xs sm:text-sm font-semibold">
                 <span>Sub Total</span>
                 <span id="sub-total">0</span">
             </div>
-            <div class="tax grid grid-cols-3 items-center text-gray-2 text-xs font-medium">
+            <div class="tax grid grid-cols-3 items-center text-gray-2 text-xs sm:text-sm font-medium gap-2">
                 <span>Tax</span>
                 <span class="text-center">{{ round($bookingData['tax_percentage']) }}%</span>
                 <span id= "tax-amount" class="text-right">0</span>
             </div>
-            <div class="total flex justify-between text-xl font-semibold">
+            <div class="total flex justify-between text-lg sm:text-xl font-semibold">
                 <span>Total Price</span>
                 <span id="total-amount">0</span">
             </div>
@@ -43,21 +45,22 @@
             <input type="hidden" name="sub_total" value="0">
         </div>
     </div>
-    <p class="font-medium text-xs text-gray-3 mb-1 text-center tracking-wider">By completing this booking,you accept and
-        agree to Our
+    <p class="font-medium text-[10px] sm:text-xs text-gray-3 mb-1 text-center tracking-wider px-2">
+        By completing this booking, you accept and agree to Our
     </p>
-    <div class="flex justify-around items-center text-[10px] font-normal text-[#808080] mb-7">
+    <div
+        class="flex flex-wrap justify-center sm:justify-around items-center text-[9px] sm:text-[10px] font-normal text-[#808080] mb-5 sm:mb-6 lg:mb-7 gap-2 sm:gap-0">
         <a href="#" class="underline hover:text-gray-2">Cancelation Policy</a>
         <a href="#" class="underline hover:text-gray-2">Terms & Condition</a>
         <a href="#" class="underline hover:text-gray-2">Travel Insurance</a>
     </div>
     <button type="submit" id="book-now"
-        class="w-full text-white py-4 rounded-[10px] font-bold mb-9  border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300"
+        class="w-full text-white text-sm sm:text-base py-3 sm:py-4 rounded-[10px] font-bold mb-6 sm:mb-7 lg:mb-9 border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300"
         data-authenticated="{{ auth()->check() ? 'true' : 'false' }}">
         Book Now
     </button>
     <a href="{{ route('destination_detail', ['slug' => $destination->slug]) }}"
-        class="flex justify-center text-[#FF3B3B] font-semibold text-center">Cancel</a>
+        class="flex justify-center text-[#FF3B3B] font-semibold text-center text-sm sm:text-base">Cancel</a>
 </div>
 
 <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden" id="loginModal">

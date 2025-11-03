@@ -33,10 +33,9 @@
 
     @php
         $isProduction = app()->environment('production');
-        $manifestPath = $isProduction
-            ? public_path('../public_html/build/manifest.json')
-            : public_path('build/manifest.json');
+        $manifestPath = $_SERVER['DOCUMENT_ROOT'] . '/build/manifest.json';
     @endphp
+
 
     @if ($isProduction && file_exists($manifestPath))
         @php
