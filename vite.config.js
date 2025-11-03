@@ -5,12 +5,11 @@ import path from "path";
 export default defineConfig({
     plugins: [
         laravel({
-            input: ["resources/js/app.js"], // Only JS, CSS will be imported in JS
+            input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
         }),
     ],
 
-    // Path aliases for cleaner imports
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./resources/js"),
@@ -23,60 +22,52 @@ export default defineConfig({
 
     // Server configuration for mobile simulator and HMR
     server: {
-        host: "0.0.0.0", // Allow external access
+        host: "0.0.0.0",
         port: 5173,
         hmr: {
             host: "localhost",
         },
         watch: {
-            usePolling: true, // Better compatibility
+            usePolling: true,
         },
     },
 
     build: {
-        manifest: "manifest.json", // Put manifest in root of build folder, not in .vite subfolder
+        manifest: "manifest.json",
         outDir: "public/build",
 
         rollupOptions: {
             output: {
-                // No code splitting - bundle everything into single files
                 manualChunks: undefined,
 
-                // Simple file naming
                 chunkFileNames: "assets/[name]-[hash].js",
                 entryFileNames: "assets/[name]-[hash].js",
                 assetFileNames: "assets/[name]-[hash].[ext]",
             },
         },
 
-        chunkSizeWarningLimit: 2000, // Increase limit since we're bundling everything
-
+        chunkSizeWarningLimit: 2000,
         // Minification with Terser for better compression
         minify: "terser",
         terserOptions: {
             compress: {
-                drop_console: process.env.NODE_ENV === "production", // Remove console.log in production
+                drop_console: process.env.NODE_ENV === "production",
                 drop_debugger: true,
-                pure_funcs: ["console.log", "console.info"], // Remove specific console methods
+                pure_funcs: ["console.log", "console.info"],
             },
         },
 
-        // Disable CSS code splitting - bundle all CSS into one file
-        cssCodeSplit: false,
-
-        // Source maps for debugging (only in development)
         sourcemap: process.env.NODE_ENV !== "production",
     },
 
     // Optimize dependencies
     optimizeDeps: {
         include: ["jquery", "swiper"],
-        exclude: ["tinymce"], // TinyMCE loaded separately
+        exclude: ["tinymce"],
     },
 
     // Define global constants
     define: {
-        // Ensure jQuery is available as global
         global: "window",
     },
 });
