@@ -33,12 +33,22 @@ class Destination extends Model
         return $this->hasMany(DestinationPhoto::class);
     }
 
+    public function destinationPhotos(): HasMany
+    {
+        return $this->hasMany(DestinationPhoto::class);
+    }
+
     public function destination_detail(): HasOne
     {
         return $this->hasOne(DestinationDetail::class);
     }
 
     public function bookings(): HasMany
+    {
+        return $this->hasMany(BookingTransaction::class);
+    }
+
+    public function bookingTransactions(): HasMany
     {
         return $this->hasMany(BookingTransaction::class);
     }

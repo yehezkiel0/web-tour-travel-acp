@@ -84,7 +84,7 @@ class BookingTransactionRepository extends BaseRepository
       'destination:id,title,slug',
       'user:id,name,email'
     ])
-      ->where('payment_status', $status)
+      ->where('status', $status)
       ->latest()
       ->get();
   }
@@ -94,7 +94,19 @@ class BookingTransactionRepository extends BaseRepository
    */
   public function getTotalRevenue(): float
   {
-    return $this->model->where('payment_status', 'success')->sum('total_amount');
+    return $this->model->where('status', 'paid')->sum('total_price');
+  }
+
+  /**
+   * Get total travellers (sum of adult_count + child_count)
+   */
+  public function getTotalTravellers(): int
+  {
+    return $this->model->where('status', 'paid')
+      ->get()
+      ->sum(function ($booking) {
+        return $booking->adult_count + $booking->child_count;
+      });
   }
 
   /**
@@ -103,9 +115,9 @@ class BookingTransactionRepository extends BaseRepository
   public function getRevenueByDateRange(string $startDate, string $endDate): float
   {
     return $this->model
-      ->where('payment_status', 'success')
+      ->where('status', 'paid')
       ->whereBetween('created_at', [$startDate, $endDate])
-      ->sum('total_amount');
+      ->sum('total_price');
   }
 
   /**
@@ -113,7 +125,7 @@ class BookingTransactionRepository extends BaseRepository
    */
   public function countByStatus(string $status): int
   {
-    return $this->model->where('payment_status', $status)->count();
+    return $this->model->where('status', $status)->count();
   }
 
   /**
@@ -136,6 +148,6 @@ class BookingTransactionRepository extends BaseRepository
   public function updatePaymentStatus(int $id, string $status): bool
   {
     $booking = $this->findOrFail($id);
-    return $booking->update(['payment_status' => $status]);
+    return $booking->update(['status' => $status]);
   }
 }

@@ -49,10 +49,10 @@ class BookingService
         'email' => $data['email'],
         'phone_number' => $data['phone_number'],
         'quantity' => $data['quantity'] ?? 1,
-        'total_amount' => $totalAmount,
+        'total_price' => $totalAmount,
         'start_date' => $data['start_date'],
         'end_date' => $data['end_date'] ?? null,
-        'payment_status' => 'pending',
+        'status' => 'pending',
         'notes' => $data['notes'] ?? null,
       ]);
 
@@ -78,7 +78,7 @@ class BookingService
       // Recalculate if quantity changed
       if (isset($data['quantity']) && $data['quantity'] != $booking->quantity) {
         $destination = $this->destinationRepo->findOrFail($booking->destination_id);
-        $data['total_amount'] = $this->calculateTotalAmount(
+        $data['total_price'] = $this->calculateTotalAmount(
           $destination->price,
           $data['quantity']
         );

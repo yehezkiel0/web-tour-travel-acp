@@ -35,8 +35,11 @@ class AdminDashboardController extends Controller
 
         // Get additional statistics
         $pendingTransactions = $this->bookingRepo->countByStatus('pending');
-        $paidTransactions = $this->bookingRepo->countByStatus('success');
+        $paidTransactions = $this->bookingRepo->countByStatus('paid');
         $cancelledTransactions = $this->bookingRepo->countByStatus('cancelled');
+
+        // Calculate total travellers (adult + child)
+        $totalTravellers = $this->bookingRepo->getTotalTravellers();
 
         // Get recent transactions with relations (N+1 optimized)
         $recentTransactions = $this->bookingRepo->getRecentBookings(5);
@@ -52,6 +55,7 @@ class AdminDashboardController extends Controller
             'pendingTransactions' => $pendingTransactions,
             'paidTransactions' => $paidTransactions,
             'cancelledTransactions' => $cancelledTransactions,
+            'totalTravellers' => $totalTravellers,
             'recentTransactions' => $recentTransactions,
             'popularDestinations' => $popularDestinations,
         ]);
