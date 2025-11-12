@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 use App\Mail\TicketMail;
+use App\Jobs\SendBookingConfirmationEmail;
 
 class BookingService
 {
@@ -178,15 +179,21 @@ class BookingService
   }
 
   /**
-   * Send booking confirmation email
+   * Send booking confirmation email using queue
    */
   protected function sendBookingConfirmation(BookingTransaction $booking): void
   {
     try {
-      Mail::to($booking->email)->send(new TicketMail($booking));
+      // Dispatch job to queue for async processing
+      SendBookingConfirmationEmail::dispatch($booking);
+      
+      Log::info('Booking confirmation email job dispatched', [
+        'booking_id' => $booking->id,
+        'email' => $booking->email
+      ]);
     } catch (\Exception $e) {
       // Log error but don't throw exception
-      Log::error('Failed to send booking confirmation email: ' . $e->getMessage());
+      Log::error('Failed to dispatch booking confirmation email job: ' . $e->getMessage());
     }
   }
 }

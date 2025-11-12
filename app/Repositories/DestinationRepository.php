@@ -128,4 +128,40 @@ class DestinationRepository extends BaseRepository
     $destination = $this->findOrFail($id);
     return $destination->increment('views');
   }
+
+  /**
+   * Get paginated destinations with filters
+   */
+  public function paginateWithFilters(int $perPage = 15, array $filters = []): LengthAwarePaginator
+  {
+    $query = $this->model->with([
+      'destinationPhotos',
+      'destinationDetails'
+    ]);
+
+    // Apply search filter
+    if (!empty($filters['search'])) {
+      $query->where(function ($q) use ($filters) {
+        $q->where('title', 'like', "%{$filters['search']}%")
+          ->orWhere('description', 'like', "%{$filters['search']}%");
+      });
+    }
+
+    // Apply category filter
+    if (!empty($filters['category'])) {
+      $query->whereHas('destinationDetails', function ($subQuery) use ($filters) {
+        $subQuery->where('category', $filters['category']);
+      });
+    }
+
+    // Apply price range filter
+    if (isset($filters['min_price']) && isset($filters['max_price'])) {
+      $query->whereBetween('price', [$filters['min_price'], $filters['max_price']]);
+    }
+
+    // Apply active filter
+    $query->where('is_active', true);
+
+    return $query->latest()->paginate($perPage);
+  }
 }

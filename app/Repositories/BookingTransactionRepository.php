@@ -150,4 +150,35 @@ class BookingTransactionRepository extends BaseRepository
     $booking = $this->findOrFail($id);
     return $booking->update(['status' => $status]);
   }
+
+  /**
+   * Get paginated bookings with relations and filters
+   */
+  public function paginateWithRelationsAndFilters(int $perPage = 15, string $search = '', string $status = ''): LengthAwarePaginator
+  {
+    $query = $this->model->with([
+      'destination:id,title,slug,price',
+      'destination.destinationPhotos:id,destination_id,photo',
+      'user:id,name,email'
+    ]);
+
+    // Apply search filter
+    if (!empty($search)) {
+      $query->where(function ($q) use ($search) {
+        $q->where('code', 'like', "%{$search}%")
+          ->orWhere('name', 'like', "%{$search}%")
+          ->orWhere('email', 'like', "%{$search}%")
+          ->orWhereHas('destination', function ($subQuery) use ($search) {
+            $subQuery->where('title', 'like', "%{$search}%");
+          });
+      });
+    }
+
+    // Apply status filter
+    if (!empty($status)) {
+      $query->where('status', $status);
+    }
+
+    return $query->latest()->paginate($perPage);
+  }
 }

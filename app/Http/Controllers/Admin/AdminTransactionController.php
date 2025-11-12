@@ -22,13 +22,17 @@ class AdminTransactionController extends Controller
         $this->bookingService = $bookingService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // Use repository with eager loading to prevent N+1 queries
-        $transactions = $this->bookingRepo->getAllWithRelations();
+        $perPage = $request->get('per_page', 15);
+        $search = $request->get('search', '');
+        $status = $request->get('status', '');
 
-        // Fetch payment details for each transaction
-        $transactions->each(function ($transaction) {
+        // Use pagination instead of loading all records
+        $transactions = $this->bookingRepo->paginateWithRelationsAndFilters($perPage, $search, $status);
+
+        // Only fetch payment details for the current page to reduce API calls
+        $transactions->getCollection()->each(function ($transaction) {
             try {
                 $response = Http::get(route('api.transaction.details', ['orderId' => $transaction->code]));
 
