@@ -126,7 +126,8 @@ class DestinationRepository extends BaseRepository
   public function incrementViews(int $id): bool
   {
     $destination = $this->findOrFail($id);
-    return $destination->increment('views');
+    $destination->views = ($destination->views ?? 0) + 1;
+    return $destination->save();
   }
 
   /**

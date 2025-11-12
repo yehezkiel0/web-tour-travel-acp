@@ -18,7 +18,7 @@ class ApiRateLimit
    * @param string $decayMinutes
    * @return \Symfony\Component\HttpFoundation\Response
    */
-  public function handle($request, $next, $maxAttempts = '60', $decayMinutes = '1')
+  public function handle(Request $request, Closure $next, string $maxAttempts = '60', string $decayMinutes = '1'): Response
   {
     $key = 'api:' . $request->ip() . ':' . ($request->user()?->id ?? 'guest');
 

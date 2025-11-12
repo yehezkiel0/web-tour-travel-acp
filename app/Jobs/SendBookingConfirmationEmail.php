@@ -56,7 +56,21 @@ class SendBookingConfirmationEmail implements ShouldQueue
   public function handle(): void
   {
     try {
-      Mail::to($this->booking->email)->send(new TicketMail($this->booking));
+      // Load user and destination relations if not loaded
+      if (!$this->booking->relationLoaded('user')) {
+        $this->booking->load('user');
+      }
+      if (!$this->booking->relationLoaded('destination')) {
+        $this->booking->load('destination');
+      }
+
+      Mail::to($this->booking->email)->send(
+        new TicketMail(
+          $this->booking->user,
+          $this->booking,
+          $this->booking->destination
+        )
+      );
 
       Log::info('Booking confirmation email sent successfully', [
         'booking_id' => $this->booking->id,

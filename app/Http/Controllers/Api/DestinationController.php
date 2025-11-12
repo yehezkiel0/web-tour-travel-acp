@@ -33,7 +33,7 @@ class DestinationController extends Controller
    * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\JsonResponse
    */
-  public function index($request)
+  public function index(Request $request)
   {
     $page = $request->get('page', 1);
     $perPage = $request->get('per_page', 15);
@@ -76,7 +76,7 @@ class DestinationController extends Controller
    * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\JsonResponse
    */
-  public function popular($request)
+  public function popular(Request $request)
   {
     $limit = $request->get('limit', 6);
 
@@ -97,7 +97,7 @@ class DestinationController extends Controller
    * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\JsonResponse
    */
-  public function featured($request)
+  public function featured(Request $request)
   {
     $limit = $request->get('limit', 6);
 
@@ -150,7 +150,7 @@ class DestinationController extends Controller
    * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\JsonResponse
    */
-  public function search($request)
+  public function search(Request $request)
   {
     $keyword = $request->get('q', '');
 

@@ -11,40 +11,65 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::table('destinations', function (Blueprint $table) {
-      $table->index(['title'], 'idx_destinations_title');
-      $table->index(['slug'], 'idx_destinations_slug');
-      $table->index(['is_active'], 'idx_destinations_is_active');
-      $table->index(['is_featured'], 'idx_destinations_is_featured');
-      $table->index(['price'], 'idx_destinations_price');
-      $table->index(['created_at'], 'idx_destinations_created_at');
-    });
+    // Destinations indexes - only add for existing columns
+    $this->addIndexIfNotExists('destinations', 'title', 'idx_destinations_title');
+    $this->addIndexIfNotExists('destinations', 'slug', 'idx_destinations_slug');
+    $this->addIndexIfNotExists('destinations', 'price', 'idx_destinations_price');
+    $this->addIndexIfNotExists('destinations', 'type', 'idx_destinations_type');
+    $this->addIndexIfNotExists('destinations', 'created_at', 'idx_destinations_created_at');
 
-    Schema::table('booking_transactions', function (Blueprint $table) {
-      $table->index(['status'], 'idx_booking_transactions_status');
-      $table->index(['user_id'], 'idx_booking_transactions_user_id');
-      $table->index(['destination_id'], 'idx_booking_transactions_destination_id');
-      $table->index(['code'], 'idx_booking_transactions_code');
-      $table->index(['email'], 'idx_booking_transactions_email');
-      $table->index(['created_at'], 'idx_booking_transactions_created_at');
-      $table->index(['status', 'created_at'], 'idx_booking_transactions_status_created');
-    });
+    // Booking transactions indexes
+    $this->addIndexIfNotExists('booking_transactions', 'status', 'idx_booking_transactions_status');
+    $this->addIndexIfNotExists('booking_transactions', 'user_id', 'idx_booking_transactions_user_id');
+    $this->addIndexIfNotExists('booking_transactions', 'destination_id', 'idx_booking_transactions_destination_id');
+    $this->addIndexIfNotExists('booking_transactions', 'code', 'idx_booking_transactions_code');
+    $this->addIndexIfNotExists('booking_transactions', 'contact_email', 'idx_booking_transactions_contact_email');
+    $this->addIndexIfNotExists('booking_transactions', 'created_at', 'idx_booking_transactions_created_at');
+    $this->addMultiColumnIndexIfNotExists('booking_transactions', ['status', 'created_at'], 'idx_booking_transactions_status_created');
 
-    Schema::table('users', function (Blueprint $table) {
-      $table->index(['email'], 'idx_users_email');
-      $table->index(['role'], 'idx_users_role');
-      $table->index(['is_active'], 'idx_users_is_active');
-      $table->index(['last_login_at'], 'idx_users_last_login');
-    });
+    // Users indexes
+    $this->addIndexIfNotExists('users', 'email', 'idx_users_email');
+    $this->addIndexIfNotExists('users', 'role', 'idx_users_role');
 
-    Schema::table('destination_photos', function (Blueprint $table) {
-      $table->index(['destination_id'], 'idx_destination_photos_destination_id');
-    });
+    // Destination photos indexes
+    $this->addIndexIfNotExists('destination_photos', 'destination_id', 'idx_destination_photos_destination_id');
 
-    Schema::table('destination_details', function (Blueprint $table) {
-      $table->index(['destination_id'], 'idx_destination_details_destination_id');
-      $table->index(['category'], 'idx_destination_details_category');
-    });
+    // Destination details indexes
+    $this->addIndexIfNotExists('destination_details', 'destination_id', 'idx_destination_details_destination_id');
+  }
+
+  /**
+   * Add index if it doesn't exist
+   */
+  private function addIndexIfNotExists(string $table, string $column, string $indexName): void
+  {
+    try {
+      Schema::table($table, function (Blueprint $table) use ($column, $indexName) {
+        $table->index([$column], $indexName);
+      });
+    } catch (\Exception $e) {
+      // Index already exists, skip
+      if (!str_contains($e->getMessage(), 'Duplicate key name')) {
+        throw $e;
+      }
+    }
+  }
+
+  /**
+   * Add multi-column index if it doesn't exist
+   */
+  private function addMultiColumnIndexIfNotExists(string $table, array $columns, string $indexName): void
+  {
+    try {
+      Schema::table($table, function (Blueprint $table) use ($columns, $indexName) {
+        $table->index($columns, $indexName);
+      });
+    } catch (\Exception $e) {
+      // Index already exists, skip
+      if (!str_contains($e->getMessage(), 'Duplicate key name')) {
+        throw $e;
+      }
+    }
   }
 
   /**
@@ -55,9 +80,8 @@ return new class extends Migration
     Schema::table('destinations', function (Blueprint $table) {
       $table->dropIndex('idx_destinations_title');
       $table->dropIndex('idx_destinations_slug');
-      $table->dropIndex('idx_destinations_is_active');
-      $table->dropIndex('idx_destinations_is_featured');
       $table->dropIndex('idx_destinations_price');
+      $table->dropIndex('idx_destinations_type');
       $table->dropIndex('idx_destinations_created_at');
     });
 
@@ -66,7 +90,7 @@ return new class extends Migration
       $table->dropIndex('idx_booking_transactions_user_id');
       $table->dropIndex('idx_booking_transactions_destination_id');
       $table->dropIndex('idx_booking_transactions_code');
-      $table->dropIndex('idx_booking_transactions_email');
+      $table->dropIndex('idx_booking_transactions_contact_email');
       $table->dropIndex('idx_booking_transactions_created_at');
       $table->dropIndex('idx_booking_transactions_status_created');
     });
@@ -74,8 +98,6 @@ return new class extends Migration
     Schema::table('users', function (Blueprint $table) {
       $table->dropIndex('idx_users_email');
       $table->dropIndex('idx_users_role');
-      $table->dropIndex('idx_users_is_active');
-      $table->dropIndex('idx_users_last_login');
     });
 
     Schema::table('destination_photos', function (Blueprint $table) {
@@ -84,7 +106,6 @@ return new class extends Migration
 
     Schema::table('destination_details', function (Blueprint $table) {
       $table->dropIndex('idx_destination_details_destination_id');
-      $table->dropIndex('idx_destination_details_category');
     });
   }
 };
