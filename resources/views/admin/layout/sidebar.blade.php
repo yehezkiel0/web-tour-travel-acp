@@ -25,6 +25,33 @@
                     <span class="font-light text-sm">Transaction</span>
                 </a>
             </li>
+            <li>
+                <a href="#"
+                    class="flex justify-between items-center w-full p-2 rounded-lg text-slate-500 hover:bg-gray-100 transition"
+                    data-dropdown="hotel">
+                    <div class="flex gap-x-3">
+                        <i class="fa-solid fa-hotel"></i>
+                        <span class="font-light text-sm">Hotel Management</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-slate-500 transition-transform duration-300"></i>
+                </a>
+                <ul id="dropdown-hotel">
+                    <li>
+                        <a href="{{ route('admin_hotel_index') }}"
+                            class="{{ Request::is('admin/hotel') || Request::is('admin/hotel/create') || Request::is('admin/hotel/*/edit') || Request::is('admin/hotel/*/rooms') || Request::is('admin/hotel/*/amenities') ? 'active' : '' }} flex items-center w-full p-2 gap-x-2 rounded-lg text-slate-500 pl-10">
+                            <i class="fa-solid fa-chevron-right text-[12px]"></i>
+                            <span class="font-light text-sm">Hotels</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin_hotel_bookings') }}"
+                            class="{{ Request::is('admin/hotel-bookings*') ? 'active' : '' }} flex items-center w-full p-2 gap-x-2 rounded-lg text-slate-500 pl-10">
+                            <i class="fa-solid fa-chevron-right text-[12px]"></i>
+                            <span class="font-light text-sm">Bookings</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
             {{-- <li>
                 <a href="#" class="flex justify-between items-center w-full p-2 text-slate-500"

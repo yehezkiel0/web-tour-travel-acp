@@ -85,6 +85,39 @@
                 </div>
             </div>
 
+            <!-- Hotel Statistics -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Hotel Booking Statistics</h3>
+                    <a href="{{ route('admin_hotel_bookings') }}"
+                        class="text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium">
+                        View All <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Total Hotels</p>
+                        <p class="text-2xl font-bold text-blue-600">{{ number_format($totalHotels) }}</p>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Total Bookings</p>
+                        <p class="text-2xl font-bold text-green-600">{{ number_format($totalHotelBookings) }}</p>
+                    </div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Pending</p>
+                        <p class="text-2xl font-bold text-yellow-600">{{ number_format($pendingHotelBookings) }}</p>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Confirmed</p>
+                        <p class="text-2xl font-bold text-green-600">{{ number_format($confirmedHotelBookings) }}</p>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Revenue</p>
+                        <p class="text-lg font-bold text-purple-600">Rp {{ number_format($hotelRevenue, 0, ',', '.') }}</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Recent Transactions & Popular Destinations -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Recent Transactions -->

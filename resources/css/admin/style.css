@@ -1,6 +1,9 @@
 #dropdown-items {
     display: none;
 }
+#dropdown-hotel {
+    display: none;
+}
 #dropdown-profile {
     display: none;
 }
@@ -12,6 +15,15 @@ aside ul a {
 aside ul a:hover {
     background-color: #f5f5f5;
     color: #1e40af;
+}
+
+/* Chevron rotation for dropdowns */
+.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.fa-chevron-down.rotate-180 {
+    transform: rotate(180deg);
 }
 
 #sidebar ul a.active {

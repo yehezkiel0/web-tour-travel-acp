@@ -1,6 +1,6 @@
 // jQuery is already available globally from bootstrap.js
 $(function () {
-    let itineraryCount = 0;
+    let itineraryCount = $("#itineraryContainer .itinerary-item").length || 0;
 
     // Add new itinerary item
     $("#addItinerary").on("click", function () {
@@ -21,6 +21,12 @@ $(function () {
                     }
                 });
 
+            // Set the day number
+            const dayInput = $(clone).find('input[type="number"]');
+            if (dayInput.length) {
+                dayInput.val(itineraryCount + 1);
+            }
+
             $("#itineraryContainer").append(clone);
             itineraryCount++;
         }
@@ -37,20 +43,23 @@ $(function () {
 
         // Collect itinerary data
         const itineraryData = [];
-        $(".itinerary-item").each(function () {
+        $(".itinerary-item").each(function (index) {
+            const day = $(this).find('input[name*="[day]"]').val() || index + 1;
+            const title = $(this).find('input[name*="[title]"]').val();
+            const duration = $(this).find('input[name*="[duration]"]').val();
+            const alternative = $(this)
+                .find('input[name*="[alternative]"]')
+                .val();
+            const description = $(this)
+                .find('textarea[name*="[description]"]')
+                .val();
+
             itineraryData.push({
-                title: $(this)
-                    .find('input[name^="itinerary["][name$="[title]"]')
-                    .val(),
-                alternative: $(this)
-                    .find('input[name^="itinerary["][name$="[alternative]"]')
-                    .val(),
-                duration: $(this)
-                    .find('input[name^="itinerary["][name$="[duration]"]')
-                    .val(),
-                description: $(this)
-                    .find('textarea[name^="itinerary["][name$="[description]"]')
-                    .val(),
+                day: parseInt(day),
+                title: title,
+                duration: duration,
+                alternative: alternative,
+                description: description,
             });
         });
 
@@ -65,8 +74,8 @@ $(function () {
         this.submit();
     });
 
-    // Add initial itinerary item if we're on the correct page
-    if ($("#addItinerary").length) {
+    // Add initial itinerary item if we're on the correct page and no items exist
+    if ($("#addItinerary").length && itineraryCount === 0) {
         $("#addItinerary").trigger("click");
     }
 });

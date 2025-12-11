@@ -7,8 +7,11 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminDestinationDetailController;
 use App\Http\Controllers\Admin\AdminTransactionController;
+use App\Http\Controllers\Admin\AdminHotelController;
+use App\Http\Controllers\Admin\AdminHotelBookingController;
 use App\Http\Controllers\front\AboutController;
 use App\Http\Controllers\Front\BookingController;
+use App\Http\Controllers\Front\HotelController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
 use App\Http\Controllers\User\UserAuthController;
@@ -30,6 +33,12 @@ Route::post('/search', [SearchResultController::class, 'searchResult'])->name('s
 Route::get('/search', [SearchResultController::class, 'searchAll'])->name('search_all');
 Route::get('/search-result', [SearchResultController::class, 'filterSearch'])->name('filter_search');
 
+//HotelPages
+Route::get('/hotel', [HotelController::class, 'index'])->name('hotel.index');
+Route::get('/hotel/filter', [HotelController::class, 'filter'])->name('hotel.filter');
+Route::get('/hotel/{slug}', [HotelController::class, 'show'])->name('hotel.show');
+Route::get('/hotel-booking-success', [HotelController::class, 'success'])->name('hotel.success');
+
 //BookingPage
 Route::post('/destination/{slug}/information', [BookingController::class, 'saveInformation'])->name('booking_form');
 Route::get('/destination/{slug}/booking', [BookingController::class, 'booking'])->name('booking_details');
@@ -44,6 +53,11 @@ Route::middleware('user')->group(function () {
     Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');
     Route::get('/destination/{slug}/checkout', [BookingController::class, 'checkout'])->name('booking_checkout');
     Route::post('/destination/{slug}/payment', [BookingController::class, 'payment'])->name('booking_payment');
+
+    // Hotel booking routes (requires authentication)
+    Route::post('/hotel/{slug}/booking', [HotelController::class, 'booking'])->name('hotel.booking');
+    Route::get('/hotel/{slug}/checkout', [HotelController::class, 'checkout'])->name('hotel.checkout');
+    Route::post('/hotel/{slug}/payment', [HotelController::class, 'payment'])->name('hotel.payment');
 });
 
 //User Auth
@@ -81,9 +95,36 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     //DestinationDetails Section
     Route::get('/destination/{slug}/details', [AdminDestinationDetailController::class, 'details'])->name('admin_destination_details');
     Route::post('/destination/{slug}/details', [AdminDestinationDetailController::class, 'details_store'])->name('admin_destination_details_store');
+    Route::get('/destination/{slug}/details/edit', [AdminDestinationDetailController::class, 'edit'])->name('admin_destination_details_edit');
+    Route::put('/destination/{slug}/details', [AdminDestinationDetailController::class, 'update'])->name('admin_destination_details_update');
 
     //Transactions Section
     Route::get('/transaction', [AdminTransactionController::class, 'index'])->name('admin_transaction_index');
+
+    //Hotel Section
+    Route::get('/hotel', [AdminHotelController::class, 'index'])->name('admin_hotel_index');
+    Route::get('/hotel/create', [AdminHotelController::class, 'create'])->name('admin_hotel_create');
+    Route::post('/hotel', [AdminHotelController::class, 'store'])->name('admin_hotel_store');
+    Route::get('/hotel/edit/{id}', [AdminHotelController::class, 'edit'])->name('admin_hotel_edit');
+    Route::put('/hotel/{id}', [AdminHotelController::class, 'update'])->name('admin_hotel_update');
+    Route::delete('/hotel/{id}', [AdminHotelController::class, 'delete'])->name('admin_hotel_delete');
+    Route::delete('/hotel/photo/{id}', [AdminHotelController::class, 'deletePhoto'])->name('admin_hotel_delete_photo');
+
+    // Hotel Rooms
+    Route::get('/hotel/{id}/rooms', [AdminHotelController::class, 'rooms'])->name('admin_hotel_rooms');
+    Route::post('/hotel/{id}/rooms', [AdminHotelController::class, 'storeRoom'])->name('admin_hotel_store_room');
+    Route::delete('/hotel/{hotelId}/rooms/{roomId}', [AdminHotelController::class, 'deleteRoom'])->name('admin_hotel_delete_room');
+
+    // Hotel Amenities
+    Route::get('/hotel/{id}/amenities', [AdminHotelController::class, 'amenities'])->name('admin_hotel_amenities');
+    Route::post('/hotel/{id}/amenities', [AdminHotelController::class, 'storeAmenity'])->name('admin_hotel_store_amenity');
+    Route::delete('/hotel/{hotelId}/amenities/{amenityId}', [AdminHotelController::class, 'deleteAmenity'])->name('admin_hotel_delete_amenity');
+
+    // Hotel Bookings
+    Route::get('/hotel-bookings', [AdminHotelBookingController::class, 'index'])->name('admin_hotel_bookings');
+    Route::get('/hotel-bookings/{id}', [AdminHotelBookingController::class, 'show'])->name('admin_hotel_booking_show');
+    Route::put('/hotel-bookings/{id}/status', [AdminHotelBookingController::class, 'updateStatus'])->name('admin_hotel_booking_update_status');
+    Route::delete('/hotel-bookings/{id}', [AdminHotelBookingController::class, 'delete'])->name('admin_hotel_booking_delete');
 });
 // Admin Authentication
 Route::prefix('admin')->group(function () {

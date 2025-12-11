@@ -1,0 +1,51 @@
+/* Counter Button Styles */
+.counter-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+}
+
+.counter-btn:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+    transform: scale(1.05);
+}
+
+.counter-btn-add:hover {
+    border-color: #3b82f6;
+}
+
+.counter-btn:active {
+    transform: scale(0.95);
+}
+
+.counter-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.counter-btn:disabled:hover {
+    transform: scale(1);
+    border-color: #d1d5db;
+}
+
+/* City Filter Styles */
+.city-filter-btn.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.hotel-card {
+    transition: all 0.3s ease;
+}
+
+.hotel-card:hover {
+    transform: translateY(-8px);
+}

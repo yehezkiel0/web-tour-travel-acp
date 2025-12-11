@@ -13,10 +13,10 @@
                         <div class="relative shadow-md sm:rounded-lg overflow-hidden">
                             <div
                                 class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                                <div class="w-full md:w-1/2">
-                                    <form class="flex items-center">
-                                        <label for="simple-search" class="sr-only">Search</label>
-                                        <div class="relative w-full">
+                                <div class="w-full md:w-2/3">
+                                    <form method="GET" action="{{ route('admin_destination_index') }}"
+                                        class="flex items-center gap-3">
+                                        <div class="relative flex-1">
                                             <div
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor"
@@ -26,10 +26,39 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </div>
-                                            <input type="text" id="simple-search"
+                                            <input type="text" name="search" value="{{ request('search') }}"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2"
-                                                placeholder="Search" required="">
+                                                placeholder="Search destinations by title, city, or country...">
                                         </div>
+
+                                        <!-- Filter by Country -->
+                                        <select name="country"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2">
+                                            <option value="">All Countries</option>
+                                            <option value="South Korea"
+                                                {{ request('country') == 'South Korea' ? 'selected' : '' }}>South Korea
+                                            </option>
+                                            <option value="Japan" {{ request('country') == 'Japan' ? 'selected' : '' }}>
+                                                Japan</option>
+                                            <option value="Thailand"
+                                                {{ request('country') == 'Thailand' ? 'selected' : '' }}>Thailand</option>
+                                            <option value="Indonesia"
+                                                {{ request('country') == 'Indonesia' ? 'selected' : '' }}>Indonesia</option>
+                                        </select>
+
+                                        <button type="submit"
+                                            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+                                            <i class="fa-solid fa-filter mr-1"></i>
+                                            Filter
+                                        </button>
+
+                                        @if (request('search') || request('country'))
+                                            <a href="{{ route('admin_destination_index') }}"
+                                                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">
+                                                <i class="fa-solid fa-times mr-1"></i>
+                                                Clear
+                                            </a>
+                                        @endif
                                     </form>
                                 </div>
                                 <div
@@ -45,40 +74,6 @@
                                             Add product
                                         </button>
                                     </a>
-                                    <div class="flex items-center space-x-3 w-full md:w-auto">
-                                        <div id="actionsDropdown"
-                                            class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow">
-                                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                                aria-labelledby="actionsDropdownButton">
-                                                <li>
-                                                    <a href="#"
-                                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mass
-                                                        Edit</a>
-                                                </li>
-                                            </ul>
-                                            <div class="py-1">
-                                                <a href="#"
-                                                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete
-                                                    all</a>
-                                            </div>
-                                        </div>
-                                        <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                            class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
-                                            type="button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                                class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            Filter
-                                            <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                            </svg>
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
 
@@ -134,13 +129,17 @@
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                                                     <div class="flex justify-center items-center space-x-2">
-                                                        <a
-                                                            href="{{ route('admin_destination_details', ['slug' => $destination->slug]) }}">
-                                                            <button type="button"
-                                                                class="inline-flex items-center px-3 py-2 border border-yellow-400 rounded-md shadow-sm text-sm font-medium text-yellow-700 bg-yellow-100 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
-                                                                <i class="fas fa-eye"></i>
-                                                            </button>
-                                                        </a>
+                                                        @if ($destination->destination_detail)
+                                                            <a href="{{ route('admin_destination_details_edit', ['slug' => $destination->slug]) }}"
+                                                                class="inline-flex items-center px-3 py-2 border border-blue-400 rounded-md shadow-sm text-sm font-medium text-blue-700 bg-blue-100 hover:bg-blue-200">
+                                                                <i class="fas fa-list mr-1"></i> Details
+                                                            </a>
+                                                        @else
+                                                            <a href="{{ route('admin_destination_details', ['slug' => $destination->slug]) }}"
+                                                                class="inline-flex items-center px-3 py-2 border border-green-400 rounded-md shadow-sm text-sm font-medium text-green-700 bg-green-100 hover:bg-green-200">
+                                                                <i class="fas fa-plus mr-1"></i> Add Details
+                                                            </a>
+                                                        @endif
                                                         <a
                                                             href="{{ route('admin_destination_edit', ['slug' => $destination->slug]) }}">
                                                             <button type="button"
@@ -170,29 +169,14 @@
 
                             <!-- Pagination -->
                             <div class="px-4 py-3 border-t border-gray-200">
-                                <div class="flex items-center justify-between">
+                                <div class="flex items-center justify-between flex-wrap gap-3">
                                     <div class="text-sm text-gray-700">
-                                        Showing <span class="font-medium">1</span> to <span class="font-medium">10</span>
-                                        of
-                                        <span class="font-medium">20</span> results
+                                        Showing <span class="font-medium">{{ $destinations->firstItem() ?? 0 }}</span> to
+                                        <span class="font-medium">{{ $destinations->lastItem() ?? 0 }}</span> of
+                                        <span class="font-medium">{{ $destinations->total() }}</span> results
                                     </div>
-                                    <div class="flex space-x-1">
-                                        <button
-                                            class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                                            Previous
-                                        </button>
-                                        <button
-                                            class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
-                                            1
-                                        </button>
-                                        <button
-                                            class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                                            2
-                                        </button>
-                                        <button
-                                            class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50">
-                                            Next
-                                        </button>
+                                    <div>
+                                        {{ $destinations->appends(request()->query())->links() }}
                                     </div>
                                 </div>
                             </div>

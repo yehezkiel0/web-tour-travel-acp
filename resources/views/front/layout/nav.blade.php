@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#" class=" flex pb-[26px] pt-7 custom-border">Hotel</a></li>
+                <li><a href="{{ route('hotel.index') }}" class=" flex pb-[26px] pt-7 custom-border">Hotel</a></li>
                 <li class="relative">
                     <a href="#" class="flex flex-row items-center gap-x-2 pb-[26px] pt-7 "
                         data-dropdown="services">
@@ -163,6 +163,12 @@
                     <a href="#" class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-briefcase text-xl"></i>
                         Various Package
+                    </a>
+                </li>
+                <li class="py-3 px-4">
+                    <a href="{{ route('hotel.index') }}" class="text-lg flex items-center gap-x-5">
+                        <i class="fa-solid fa-hotel text-xl"></i>
+                        Hotel
                     </a>
                 </li>
                 <li class="py-3 px-4">

@@ -59,13 +59,14 @@ APP_URL=https://yourdomain.com
 
 1. Upload semua file ke public_html atau subdomain folder
 2. Pastikan folder permissions:
-   - `storage/` → 755
-   - `bootstrap/cache/` → 755
+    - `storage/` → 755
+    - `bootstrap/cache/` → 755
 
 ### Step 2: Database Configuration
 
 1. Buat database MySQL di Hostinger
 2. Import migrations:
+
 ```bash
 php artisan migrate --force
 ```
@@ -86,8 +87,9 @@ Hostinger shared hosting tidak support long-running processes, jadi gunakan cron
 ```
 
 **Penjelasan:**
-- `--stop-when-empty`: Stop setelah semua jobs selesai
-- `--max-time=50`: Stop setelah 50 detik (sebelum cron berikutnya)
+
+-   `--stop-when-empty`: Stop setelah semua jobs selesai
+-   `--max-time=50`: Stop setelah 50 detik (sebelum cron berikutnya)
 
 3. **Alternatif - Schedule Queue:**
 
@@ -105,7 +107,7 @@ protected function schedule(Schedule $schedule)
     $schedule->command('queue:work --stop-when-empty --max-time=50')
         ->everyMinute()
         ->withoutOverlapping();
-        
+
     // Retry failed jobs setiap 5 menit
     $schedule->command('queue:retry all')->everyFiveMinutes();
 }
@@ -201,6 +203,7 @@ grep "queue" storage/logs/laravel.log
 ### Queue Not Processing
 
 **Solusi:**
+
 ```bash
 # 1. Restart queue worker
 php artisan queue:restart
@@ -216,6 +219,7 @@ php artisan config:clear
 ### Email Not Sending
 
 **Cek:**
+
 1. SMTP credentials di `.env` benar
 2. Port dan encryption sesuai
 3. Email from_address valid
@@ -228,6 +232,7 @@ php artisan queue:failed
 ### Hostinger Specific Issues
 
 **Memory Limit:**
+
 ```php
 // config/queue.php
 'connections' => [
@@ -241,6 +246,7 @@ php artisan queue:failed
 ```
 
 **Timeout Issues:**
+
 ```bash
 # Reduce max execution time
 php artisan queue:work --timeout=30 --tries=3
@@ -313,10 +319,10 @@ class QueueMonitor extends Command
     {
         $pending = DB::table('jobs')->count();
         $failed = DB::table('failed_jobs')->count();
-        
+
         $this->info("Pending Jobs: {$pending}");
         $this->info("Failed Jobs: {$failed}");
-        
+
         if ($failed > 0) {
             $this->warn("You have failed jobs. Run: php artisan queue:retry all");
         }
@@ -325,22 +331,23 @@ class QueueMonitor extends Command
 ```
 
 Jalankan:
+
 ```bash
 php artisan queue:monitor
 ```
 
 ## Status Checklist
 
-- [x] Queue tables migrated
-- [x] Job class created (SendBookingConfirmationEmail)
-- [x] Event created (BookingCreated)
-- [x] Listener created (SendBookingNotification)
-- [x] Mail class configured (TicketMail)
-- [x] Error handling implemented
-- [x] Retry logic configured
-- [ ] Setup cron job di Hostinger
-- [ ] Test email sending
-- [ ] Monitor in production
+-   [x] Queue tables migrated
+-   [x] Job class created (SendBookingConfirmationEmail)
+-   [x] Event created (BookingCreated)
+-   [x] Listener created (SendBookingNotification)
+-   [x] Mail class configured (TicketMail)
+-   [x] Error handling implemented
+-   [x] Retry logic configured
+-   [ ] Setup cron job di Hostinger
+-   [ ] Test email sending
+-   [ ] Monitor in production
 
 ## Next Steps
 
@@ -354,5 +361,5 @@ php artisan queue:monitor
 
 ---
 
-**Note:** Hostinger shared hosting biasanya tidak support Redis dan long-running processes. 
+**Note:** Hostinger shared hosting biasanya tidak support Redis dan long-running processes.
 Gunakan **database queue** dengan **cron job** untuk hasil terbaik.

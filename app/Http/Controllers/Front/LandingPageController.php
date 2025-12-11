@@ -23,8 +23,13 @@ class LandingPageController extends Controller
         $destination->duration = calculateDuration($destination->date_started, $destination->date_ended);
 
         $destination_photos = $destination->photos;
-        $itineraries = json_decode($destination->destination_detail->itinerary);
+        $itineraries = json_decode($destination->destination_detail->itinerary, true);
 
+        if (is_array($itineraries)) {
+            usort($itineraries, function ($a, $b) {
+                return ($a['day'] ?? 0) <=> ($b['day'] ?? 0);
+            });
+        }
 
         return view('front.destination.destination-detail', compact('destination', 'destination_photos', 'itineraries'));
     }

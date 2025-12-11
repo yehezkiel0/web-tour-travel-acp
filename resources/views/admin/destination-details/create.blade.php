@@ -96,18 +96,23 @@
             </button>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-y-2">
+                    <label class="text-sm font-medium">Day</label>
+                    <input type="number" name="itinerary[0][day]" class="border rounded-md p-2" value="1" required>
+                </div>
+                <div class="flex flex-col gap-y-2">
                     <label class="text-sm font-medium">Title</label>
                     <input type="text" name="itinerary[0][title]" class="border rounded-md p-2" required>
+                </div>
+                <div class="flex flex-col gap-y-2">
+                    <label class="text-sm font-medium">Duration</label>
+                    <input type="text" name="itinerary[0][duration]" class="border rounded-md p-2"
+                        placeholder="e.g., 70 mins">
                 </div>
                 <div class="flex flex-col gap-y-2">
                     <label class="text-sm font-medium">Alternative</label>
                     <input type="text" name="itinerary[0][alternative]" class="border rounded-md p-2">
                 </div>
-                <div class="flex flex-col gap-y-2">
-                    <label class="text-sm font-medium">Duration</label>
-                    <input type="text" name="itinerary[0][duration]" class="border rounded-md p-2" required>
-                </div>
-                <div class="flex flex-col gap-y-2">
+                <div class="flex flex-col gap-y-2 md:col-span-2">
                     <label class="text-sm font-medium">Description</label>
                     <textarea name="itinerary[0][description]" rows="3" class="border rounded-md p-2" required></textarea>
                 </div>

@@ -9,9 +9,28 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminDestinationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $destinations = Destination::get();
+        $query = Destination::with('destination_detail');
+
+        // Search functionality
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('city', 'like', '%' . $search . '%')
+                    ->orWhere('country', 'like', '%' . $search . '%')
+                    ->orWhere('slug', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Filter by country
+        if ($request->has('country') && $request->country != '') {
+            $query->where('country', $request->country);
+        }
+
+        $destinations = $query->orderBy('created_at', 'desc')->paginate(10);
+
         return view('admin.destination.index', compact('destinations'));
     }
 
@@ -37,6 +56,8 @@ class AdminDestinationController extends Controller
             'description' => $request->description,
             'country' => $request->country,
             'city' => $request->city,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'price' => $request->price,
             'date_started' => $request->date_started,
             'date_ended' => $request->date_ended,
@@ -116,6 +137,8 @@ class AdminDestinationController extends Controller
             'description' => $request->description,
             'country' => $request->country,
             'city' => $request->city,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
             'price' => $request->price,
             'date_started' => $request->date_started,
             'date_ended' => $request->date_ended,

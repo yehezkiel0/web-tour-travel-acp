@@ -1,11 +1,5 @@
-// jQuery is already available globally from bootstrap.js
+import "./tinymce-config";
 
-// Lazy load TinyMCE only when textarea exists
-if (document.querySelector("#textarea")) {
-    import("./tinymce-config");
-}
-
-// jQuery ($) is available globally from bootstrap.js
 $(function () {
     $("#sidebar a").on("click", function (e) {
         $("#sidebar a").removeClass("active");
@@ -23,6 +17,15 @@ $(function () {
         $(this).next("#dropdown-items").slideToggle(300);
     });
 
+    $('[data-dropdown="hotel"]').on("click", function (e) {
+        e.preventDefault();
+        const $dropdown = $(this).next("#dropdown-hotel");
+        const $chevron = $(this).find(".fa-chevron-down");
+
+        $dropdown.slideToggle(300);
+        $chevron.toggleClass("rotate-180");
+    });
+
     $('[data-dropdown="admin"]').on("click", function (e) {
         e.preventDefault();
         $("#dropdown-profile").slideToggle(300);
@@ -31,7 +34,11 @@ $(function () {
     $(document).on("click", function (e) {
         if (!$(e.target).closest("[data-dropdown]").length) {
             $("#dropdown-items").slideUp(300);
+            $("#dropdown-hotel").slideUp(300);
             $("#dropdown-profile").slideUp(300);
+            $('[data-dropdown="hotel"] .fa-chevron-down').removeClass(
+                "rotate-180"
+            );
         }
     });
 

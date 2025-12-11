@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,19 +16,20 @@ return new class extends Migration
             $table->string('photo')->nullable()->after('email');
         });
 
-        // Migrate admin users to the users table
-        $admins = DB::table('admins')->get();
-        foreach ($admins as $admin) {
-            DB::table('users')->insert([
-                'name' => $admin->name,
-                'email' => $admin->email,
-                'photo' => $admin->photo,
-                'password' => $admin->password,
-                'role' => 'admin',
-                'status' => 1,
-                'created_at' => $admin->created_at ?? now(),
-                'updated_at' => $admin->updated_at ?? now(),
-            ]);
+        if (Schema::hasTable('admins')) {
+            $admins = DB::table('admins')->get();
+            foreach ($admins as $admin) {
+                DB::table('users')->insert([
+                    'name' => $admin->name,
+                    'email' => $admin->email,
+                    'photo' => $admin->photo,
+                    'password' => $admin->password,
+                    'role' => 'admin',
+                    'status' => 1,
+                    'created_at' => $admin->created_at ?? now(),
+                    'updated_at' => $admin->updated_at ?? now(),
+                ]);
+            }
         }
     }
 

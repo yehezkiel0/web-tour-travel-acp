@@ -8,6 +8,8 @@ use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Repositories\BookingTransactionRepository;
 use App\Repositories\DestinationRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\HotelRepository;
+use App\Repositories\HotelBookingRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -32,6 +34,10 @@ class RepositoryServiceProvider extends ServiceProvider
       UserRepositoryInterface::class,
       UserRepository::class
     );
+
+    // Bind Hotel repositories
+    $this->app->singleton(HotelRepository::class);
+    $this->app->singleton(HotelBookingRepository::class);
   }
 
   /**

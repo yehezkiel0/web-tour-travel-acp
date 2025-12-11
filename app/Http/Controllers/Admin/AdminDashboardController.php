@@ -7,6 +7,8 @@ use App\Repositories\BookingTransactionRepository;
 use App\Repositories\DestinationRepository;
 use App\Repositories\UserRepository;
 use App\Services\CacheService;
+use App\Models\Hotel;
+use App\Models\HotelBooking;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -47,6 +49,13 @@ class AdminDashboardController extends Controller
         // Get popular destinations from cache
         $popularDestinations = $this->cacheService->getPopularDestinations(5);
 
+        // Hotel statistics
+        $totalHotels = Hotel::where('is_active', true)->count();
+        $totalHotelBookings = HotelBooking::count();
+        $pendingHotelBookings = HotelBooking::where('status', 'pending')->count();
+        $confirmedHotelBookings = HotelBooking::where('status', 'confirmed')->count();
+        $hotelRevenue = HotelBooking::whereIn('status', ['confirmed', 'completed'])->sum('total_price');
+
         return view('admin.dashboard', [
             'totalDestinations' => $stats['total_destinations'],
             'totalTransactions' => $stats['total_bookings'],
@@ -58,6 +67,11 @@ class AdminDashboardController extends Controller
             'totalTravellers' => $totalTravellers,
             'recentTransactions' => $recentTransactions,
             'popularDestinations' => $popularDestinations,
+            'totalHotels' => $totalHotels,
+            'totalHotelBookings' => $totalHotelBookings,
+            'pendingHotelBookings' => $pendingHotelBookings,
+            'confirmedHotelBookings' => $confirmedHotelBookings,
+            'hotelRevenue' => $hotelRevenue,
         ]);
     }
 }

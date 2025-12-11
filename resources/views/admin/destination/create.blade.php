@@ -42,6 +42,20 @@
                         </div>
                         <div class="flex flex-row gap-x-5">
                             <div class="flex flex-col gap-y-3 text-sm mb-4 w-full">
+                                <label for="latitude">Latitude</label>
+                                <input type="number" step="0.00000001" id="latitude" name="latitude"
+                                    class="bg-white border py-3 px-4 rounded-md text-slate-500"
+                                    value="{{ old('latitude') }}" placeholder="37.5665" autocomplete="off">
+                            </div>
+                            <div class="flex flex-col gap-y-3 text-sm mb-4 w-full">
+                                <label for="longitude">Longitude</label>
+                                <input type="number" step="0.00000001" id="longitude" name="longitude"
+                                    class="bg-white border py-3 px-4 rounded-md text-slate-500"
+                                    value="{{ old('longitude') }}" placeholder="126.9780" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="flex flex-row gap-x-5">
+                            <div class="flex flex-col gap-y-3 text-sm mb-4 w-full">
                                 <label for="date_started">Start Date</label>
                                 <input type="date" id="date_started" name="date_started"
                                     class="bg-white border py-3 px-4 rounded-md text-slate-500"

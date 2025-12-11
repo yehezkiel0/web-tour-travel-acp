@@ -18,6 +18,8 @@ class Destination extends Model
         'description',
         'country',
         'city',
+        'latitude',
+        'longitude',
         'price',
         'date_started',
         'date_ended',
