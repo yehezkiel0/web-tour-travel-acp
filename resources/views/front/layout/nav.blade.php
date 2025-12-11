@@ -1,7 +1,7 @@
 <header class="navbar-container">
     <nav class="navbar" id="navbar-home">
         <div
-            class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-2 overflow-hidden md:overflow-visible xl:pt-4 xl:px-0">
+            class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-2 xl:pt-4 xl:px-0">
             <a href="{{ route('home') }}" class="cursor-pointer">
                 <div class="w-28 md:w-full">
                     <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" />
@@ -86,67 +86,84 @@
                     </div>
                 @endguest
                 @auth('web')
-                    <ul>
-                        <li class="relative">
-                            <a href="#" data-dropdown="profile-user" class="flex items-center gap-2">
-                                @if (Auth::user()->photo)
-                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}"
-                                        alt="{{ Auth::user()->name }}"
-                                        class="w-10 h-10 rounded-full object-cover border-2 border-primary">
-                                @else
-                                    <i class="fa-regular fa-circle-user text-4xl font-light text-primary"></i>
-                                @endif
-                            </a>
-                            <ul class="hidden flex-col justify-center bg-white text-[#687176] shadow-xl border w-52 -left-16 absolute top-14 rounded-xl z-[1000] overflow-hidden"
-                                id="dropdown-user-profile">
-                                <!-- User Info -->
-                                <li class="z-[1000] py-3 px-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b">
-                                    <div class="flex items-center gap-3">
-                                        @if (Auth::user()->photo)
-                                            <img src="{{ asset('storage/' . Auth::user()->photo) }}"
-                                                alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full object-cover">
-                                        @else
-                                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                                                <i class="fa-solid fa-user text-white"></i>
+                    @if (Auth::guard('web')->user() && Auth::guard('web')->user()->role !== 'admin')
+                        <ul>
+                            <li class="relative">
+                                <a href="#" data-dropdown="profile-user" class="flex items-center gap-2">
+                                    @if (Auth::guard('web')->user()->photo)
+                                        <img src="{{ asset('storage/' . Auth::guard('web')->user()->photo) }}"
+                                            alt="{{ Auth::guard('web')->user()->name }}"
+                                            class="w-10 h-10 rounded-full object-cover border-2 border-primary">
+                                    @else
+                                        <i class="fa-regular fa-circle-user text-4xl font-light text-primary"></i>
+                                    @endif
+                                </a>
+                                <ul class="hidden flex-col justify-center bg-white text-[#687176] shadow-xl border w-52 -left-16 absolute top-14 rounded-xl z-[1000] overflow-hidden"
+                                    id="dropdown-user-profile">
+                                    <!-- User Info -->
+                                    <li class="z-[1000] py-3 px-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b">
+                                        <div class="flex items-center gap-3">
+                                            @if (Auth::guard('web')->user()->photo)
+                                                <img src="{{ asset('storage/' . Auth::guard('web')->user()->photo) }}"
+                                                    alt="{{ Auth::guard('web')->user()->name }}"
+                                                    class="w-10 h-10 rounded-full object-cover">
+                                            @else
+                                                <div
+                                                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                                    <i class="fa-solid fa-user text-white"></i>
+                                                </div>
+                                            @endif
+                                            <div class="overflow-hidden">
+                                                <p class="font-semibold text-gray-800 text-sm truncate">
+                                                    {{ Auth::guard('web')->user()->name }}</p>
+                                                <p class="text-xs text-gray-500 truncate">
+                                                    {{ Auth::guard('web')->user()->email }}</p>
                                             </div>
-                                        @endif
-                                        <div class="overflow-hidden">
-                                            <p class="font-semibold text-gray-800 text-sm truncate">
-                                                {{ Auth::user()->name }}</p>
-                                            <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
                                         </div>
-                                    </div>
-                                </li>
-                                <!-- My Bookings -->
-                                <li class="z-[1000] hover:bg-gray-50 transition-colors">
-                                    <a href="{{ route('profile.bookings') }}"
-                                        class="text-sm flex items-center gap-x-3 py-3 px-4">
-                                        <i class="fa-solid fa-ticket text-primary"></i>
-                                        My Bookings
-                                    </a>
-                                </li>
-                                <!-- Edit Profile -->
-                                <li class="z-[1000] hover:bg-gray-50 transition-colors">
-                                    <a href="{{ route('profile.edit') }}"
-                                        class="text-sm flex items-center gap-x-3 py-3 px-4">
-                                        <i class="fa-solid fa-gear text-primary"></i>
-                                        Edit Profile
-                                    </a>
-                                </li>
-                                <!-- Logout -->
-                                <li class="z-[1000] border-t">
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="text-sm flex items-center gap-x-3 py-3 px-4 w-full text-left hover:bg-red-50 text-red-600 transition-colors">
-                                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                            Logout
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                                    </li>
+                                    <!-- My Bookings -->
+                                    <li class="z-[1000] hover:bg-gray-50 transition-colors">
+                                        <a href="{{ route('profile.bookings') }}"
+                                            class="text-sm flex items-center gap-x-3 py-3 px-4">
+                                            <i class="fa-solid fa-ticket text-primary"></i>
+                                            My Bookings
+                                        </a>
+                                    </li>
+                                    <!-- Edit Profile -->
+                                    <li class="z-[1000] hover:bg-gray-50 transition-colors">
+                                        <a href="{{ route('profile.edit') }}"
+                                            class="text-sm flex items-center gap-x-3 py-3 px-4">
+                                            <i class="fa-solid fa-gear text-primary"></i>
+                                            Edit Profile
+                                        </a>
+                                    </li>
+                                    <!-- Logout -->
+                                    <li class="z-[1000] border-t">
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="text-sm flex items-center gap-x-3 py-3 px-4 w-full text-left hover:bg-red-50 text-red-600 transition-colors">
+                                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    @else
+                        {{-- Admin logged in - show login/register buttons instead --}}
+                        <div class="flex flex-row gap-x-3">
+                            <a href="{{ route('login_register') }}"
+                                class="border-[3px] border-primary px-6 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary transition-all ease-in-out duration-300">
+                                Login
+                            </a>
+                            <a href="{{ route('login_register') }}"
+                                class="bg-primary text-white px-6 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary transition-all ease-in-out duration-300">
+                                Sign Up
+                            </a>
+                        </div>
+                    @endif
                 @endauth
             </div>
             <div class="xl:hidden">

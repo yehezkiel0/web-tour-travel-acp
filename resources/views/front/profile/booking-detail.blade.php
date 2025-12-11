@@ -124,7 +124,9 @@
 
                         @if ($booking->traveller_details)
                             @php
-                                $travelers = json_decode($booking->traveller_details, true);
+                                $travelers = is_array($booking->traveller_details)
+                                    ? $booking->traveller_details
+                                    : json_decode($booking->traveller_details, true);
                             @endphp
                             @if (is_array($travelers) && count($travelers) > 0)
                                 <div class="mt-4">
@@ -136,8 +138,13 @@
                                                     class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
                                                     {{ $index + 1 }}
                                                 </span>
-                                                <span
-                                                    class="font-medium text-gray-800">{{ $traveler['name'] ?? $traveler }}</span>
+                                                <span class="font-medium text-gray-800">
+                                                    @if (is_array($traveler))
+                                                        {{ $traveler['name'] ?? ($traveler['full_name'] ?? 'Traveler ' . ($index + 1)) }}
+                                                    @else
+                                                        {{ $traveler }}
+                                                    @endif
+                                                </span>
                                             </div>
                                         @endforeach
                                     </div>

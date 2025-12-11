@@ -30,7 +30,7 @@ class BookingController extends Controller
         }
 
         $adult_price = ($destination_price * $request->adult_count);
-        $child_price =  ($destination_price * 0.5 * $request->child_count);
+        $child_price = ($destination_price * 0.5 * $request->child_count);
 
         session()->put('booking', [
             'slug' => $slug,
@@ -179,6 +179,9 @@ class BookingController extends Controller
                     'first_name' => $booking->contact_name,
                     'email' => $booking->contact_email,
                     'phone' => $booking->contact_phone,
+                ],
+                'callbacks' => [
+                    'finish' => route('booking_success', ['order_id' => $booking->code]),
                 ],
             ];
             $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;

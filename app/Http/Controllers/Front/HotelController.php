@@ -201,6 +201,9 @@ class HotelController extends Controller
           'email' => $booking->guest_email,
           'phone' => $booking->guest_phone,
         ],
+        'callbacks' => [
+          'finish' => route('hotel.success', ['order_id' => $booking->booking_code]),
+        ],
       ];
 
       $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
