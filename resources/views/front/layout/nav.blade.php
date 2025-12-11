@@ -88,21 +88,57 @@
                 @auth('web')
                     <ul>
                         <li class="relative">
-                            <a href="#" data-dropdown="profile-user">
-                                <i class="fa-regular fa-circle-user text-4xl font-light text-primary"></i>
+                            <a href="#" data-dropdown="profile-user" class="flex items-center gap-2">
+                                @if (Auth::user()->photo)
+                                    <img src="{{ asset('storage/' . Auth::user()->photo) }}"
+                                        alt="{{ Auth::user()->name }}"
+                                        class="w-10 h-10 rounded-full object-cover border-2 border-primary">
+                                @else
+                                    <i class="fa-regular fa-circle-user text-4xl font-light text-primary"></i>
+                                @endif
                             </a>
-                            <ul class="flex flex-col justify-center bg-white text-[#687176] shadow-lg border w-40 -left-4 absolute top-14 rounded-md z-[1000]"
+                            <ul class="hidden flex-col justify-center bg-white text-[#687176] shadow-xl border w-52 -left-16 absolute top-14 rounded-xl z-[1000] overflow-hidden"
                                 id="dropdown-user-profile">
-                                <li class="z-[1000] py-3 px-4">
-                                    <a href="#" class="text-sm flex items-center gap-x-3">
-                                        <i class="fa-solid fa-gear"></i>
+                                <!-- User Info -->
+                                <li class="z-[1000] py-3 px-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b">
+                                    <div class="flex items-center gap-3">
+                                        @if (Auth::user()->photo)
+                                            <img src="{{ asset('storage/' . Auth::user()->photo) }}"
+                                                alt="{{ Auth::user()->name }}" class="w-10 h-10 rounded-full object-cover">
+                                        @else
+                                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                                <i class="fa-solid fa-user text-white"></i>
+                                            </div>
+                                        @endif
+                                        <div class="overflow-hidden">
+                                            <p class="font-semibold text-gray-800 text-sm truncate">
+                                                {{ Auth::user()->name }}</p>
+                                            <p class="text-xs text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- My Bookings -->
+                                <li class="z-[1000] hover:bg-gray-50 transition-colors">
+                                    <a href="{{ route('profile.bookings') }}"
+                                        class="text-sm flex items-center gap-x-3 py-3 px-4">
+                                        <i class="fa-solid fa-ticket text-primary"></i>
+                                        My Bookings
+                                    </a>
+                                </li>
+                                <!-- Edit Profile -->
+                                <li class="z-[1000] hover:bg-gray-50 transition-colors">
+                                    <a href="{{ route('profile.edit') }}"
+                                        class="text-sm flex items-center gap-x-3 py-3 px-4">
+                                        <i class="fa-solid fa-gear text-primary"></i>
                                         Edit Profile
                                     </a>
                                 </li>
-                                <li class="z-[1000] pb-2 px-4">
+                                <!-- Logout -->
+                                <li class="z-[1000] border-t">
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="text-sm flex items-center gap-x-3">
+                                        <button type="submit"
+                                            class="text-sm flex items-center gap-x-3 py-3 px-4 w-full text-left hover:bg-red-50 text-red-600 transition-colors">
                                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                             Logout
                                         </button>

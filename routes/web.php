@@ -15,6 +15,7 @@ use App\Http\Controllers\Front\HotelController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
 use App\Http\Controllers\User\UserAuthController;
+use App\Http\Controllers\User\ProfileController;
 
 //LandingPage
 Route::get('/', [LandingPageController::class, 'home'])->name('home');
@@ -58,6 +59,12 @@ Route::middleware('user')->group(function () {
     Route::post('/hotel/{slug}/booking', [HotelController::class, 'booking'])->name('hotel.booking');
     Route::get('/hotel/{slug}/checkout', [HotelController::class, 'checkout'])->name('hotel.checkout');
     Route::post('/hotel/{slug}/payment', [HotelController::class, 'payment'])->name('hotel.payment');
+
+    // User Profile routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/my-bookings', [ProfileController::class, 'bookings'])->name('profile.bookings');
+    Route::get('/my-bookings/{code}', [ProfileController::class, 'bookingDetail'])->name('profile.booking.detail');
 });
 
 //User Auth

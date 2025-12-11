@@ -187,8 +187,10 @@
                             <!-- Pagination -->
                             <div class="px-6 py-4 bg-gradient-to-r from-gray-50 to-white border-t border-gray-200">
                                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                                    <div class="text-sm text-gray-600 bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm">
-                                        Showing <span class="font-semibold text-blue-600">{{ $hotels->firstItem() ?? 0 }}</span> to
+                                    <div
+                                        class="text-sm text-gray-600 bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm">
+                                        Showing <span
+                                            class="font-semibold text-blue-600">{{ $hotels->firstItem() ?? 0 }}</span> to
                                         <span class="font-semibold text-blue-600">{{ $hotels->lastItem() ?? 0 }}</span> of
                                         <span class="font-semibold text-gray-800">{{ $hotels->total() }}</span> results
                                     </div>
