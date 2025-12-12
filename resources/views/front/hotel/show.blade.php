@@ -35,10 +35,7 @@
             <!-- Main Image -->
             <div class="col-span-2 row-span-2 relative group cursor-pointer">
                 @if ($mainPhoto)
-                    <img src="{{ asset('uploads/' . $mainPhoto->photo_path) }}" alt="{{ $hotel->name }}"
-                        class="w-full h-full object-cover rounded-l-xl">
-                @else
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" alt="{{ $hotel->name }}"
+                    <img src="{{ Storage::url($mainPhoto->featured_photo) }}" alt="{{ $hotel->name }}"
                         class="w-full h-full object-cover rounded-l-xl">
                 @endif
                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-l-xl"></div>
@@ -48,7 +45,7 @@
             @foreach ($sidePhotos as $index => $photo)
                 <div
                     class="col-span-2 relative group cursor-pointer {{ $index == 2 ? 'rounded-tr-xl' : '' }} {{ $index == 1 ? 'rounded-br-xl' : '' }}">
-                    <img src="{{ asset('uploads/' . $photo->photo_path) }}" alt="{{ $hotel->name }}"
+                    <img src="{{ Storage::url($photo->photo_path) }}" alt="{{ $photo->caption }}"
                         class="w-full h-full object-cover {{ $index == 2 ? 'rounded-tr-xl' : '' }} {{ $index == 1 ? 'rounded-br-xl' : '' }}">
                     <div
                         class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition {{ $index == 2 ? 'rounded-tr-xl' : '' }} {{ $index == 1 ? 'rounded-br-xl' : '' }}">
@@ -155,7 +152,7 @@
                                         <!-- Room Image -->
                                         <div class="md:col-span-1">
                                             @if ($room->room_photo)
-                                                <img src="{{ asset('uploads/' . $room->room_photo) }}"
+                                                <img src="{{ Storage::url($room->room_photo) }}"
                                                     alt="{{ $room->room_name }}"
                                                     class="w-full h-32 object-cover rounded-lg">
                                             @else
