@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use App\Models\Destination;
 use App\Models\Hotel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,7 @@ class WishlistController extends Controller
 {
     public function index()
     {
-        $wishlists = Auth::user()->wishlists()->with('wishlistable')->latest()->get();
+        $wishlists = User::find(Auth::id())->wishlists()->with('wishlistable')->latest()->get();
         return view('front.wishlist.index', compact('wishlists'));
     }
 

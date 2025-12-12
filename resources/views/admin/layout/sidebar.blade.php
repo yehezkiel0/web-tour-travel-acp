@@ -53,6 +53,38 @@
                 </ul>
             </li>
 
+            <li>
+                <a href="{{ route('admin_testimonials_index') }}"
+                    class="{{ Request::is('admin/testimonials*') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span class="font-light text-sm">Testimonials</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin_reviews_index') }}"
+                    class="{{ Request::is('admin/reviews*') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
+                    <i class="fa-solid fa-star"></i>
+                    <span class="font-light text-sm">Reviews & Ratings</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin_promo_codes_index') }}"
+                    class="{{ Request::is('admin/promo-codes*') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
+                    <i class="fa-solid fa-tag"></i>
+                    <span class="font-light text-sm">Promo Codes</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('admin_newsletters_index') }}"
+                    class="{{ Request::is('admin/newsletters*') ? 'active' : '' }} flex items-center gap-x-3 p-2 rounded-lg text-slate-500">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span class="font-light text-sm">Newsletter</span>
+                </a>
+            </li>
+
             {{-- <li>
                 <a href="#" class="flex justify-between items-center w-full p-2 text-slate-500"
                     data-dropdown="items">

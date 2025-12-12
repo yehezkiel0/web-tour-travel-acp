@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use App\Services\CacheService;
 use App\Models\Hotel;
 use App\Models\HotelBooking;
+use App\Models\ServiceTestimonial;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -56,6 +57,11 @@ class AdminDashboardController extends Controller
         $confirmedHotelBookings = HotelBooking::where('status', 'confirmed')->count();
         $hotelRevenue = HotelBooking::whereIn('status', ['confirmed', 'completed'])->sum('total_price');
 
+        // Testimonials statistics
+        $totalTestimonials = ServiceTestimonial::count();
+        $pendingTestimonials = ServiceTestimonial::where('is_approved', false)->count();
+        $recentTestimonials = ServiceTestimonial::with('user')->latest()->take(5)->get();
+
         return view('admin.dashboard', [
             'totalDestinations' => $stats['total_destinations'],
             'totalTransactions' => $stats['total_bookings'],
@@ -72,6 +78,9 @@ class AdminDashboardController extends Controller
             'pendingHotelBookings' => $pendingHotelBookings,
             'confirmedHotelBookings' => $confirmedHotelBookings,
             'hotelRevenue' => $hotelRevenue,
+            'totalTestimonials' => $totalTestimonials,
+            'pendingTestimonials' => $pendingTestimonials,
+            'recentTestimonials' => $recentTestimonials,
         ]);
     }
 }

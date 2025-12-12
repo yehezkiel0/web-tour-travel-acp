@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DestinationReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminReviewController extends Controller
 {
@@ -49,7 +50,7 @@ class AdminReviewController extends Controller
         // Delete photos
         if ($review->photos) {
             foreach ($review->photos as $photo) {
-                \Storage::disk('public')->delete($photo);
+                Storage::disk('public')->delete($photo);
             }
         }
 

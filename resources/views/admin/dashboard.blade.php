@@ -193,6 +193,114 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Testimonials Section -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Service Testimonials</h3>
+                    <a href="{{ route('admin_testimonials_index') }}"
+                        class="text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium">
+                        View All <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Total Testimonials</p>
+                        <p class="text-2xl font-bold text-blue-600">{{ number_format($totalTestimonials) }}</p>
+                    </div>
+                    <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Pending Review</p>
+                        <p class="text-2xl font-bold text-yellow-600">{{ number_format($pendingTestimonials) }}</p>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <p class="text-sm text-gray-600 mb-1">Approved</p>
+                        <p class="text-2xl font-bold text-green-600">
+                            {{ number_format($totalTestimonials - $pendingTestimonials) }}</p>
+                    </div>
+                </div>
+
+                <!-- Recent Testimonials Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    User</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Service</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Testimonial</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Rating</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse($recentTestimonials as $testimonial)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                @if ($testimonial->photo)
+                                                    <img src="{{ asset('storage/' . $testimonial->photo) }}"
+                                                        alt="{{ $testimonial->name }}"
+                                                        class="h-10 w-10 rounded-full object-cover">
+                                                @else
+                                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($testimonial->name) }}&size=100&background=3477F6&color=fff"
+                                                        alt="{{ $testimonial->name }}" class="h-10 w-10 rounded-full">
+                                                @endif
+                                            </div>
+                                            <div class="ml-3">
+                                                <div class="text-sm font-medium text-gray-900">{{ $testimonial->name }}
+                                                </div>
+                                                <div class="text-xs text-gray-500">{{ $testimonial->location }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <span
+                                            class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full {{ $testimonial->service_type == 'medical' ? 'bg-blue-100 text-blue-800' : ($testimonial->service_type == 'recruitment' ? 'bg-green-100 text-green-800' : 'bg-purple-100 text-purple-800') }}">
+                                            {{ ucfirst($testimonial->service_type) }}
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <div class="text-sm font-medium text-gray-900">{{ $testimonial->title }}</div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ Str::limit($testimonial->message, 80) }}</div>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        <div class="flex gap-1">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i
+                                                    class="fa{{ $i <= $testimonial->rating ? 's' : 'r' }} fa-star text-yellow-400 text-xs"></i>
+                                            @endfor
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        @if ($testimonial->is_approved)
+                                            <span
+                                                class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Approved
+                                            </span>
+                                        @else
+                                            <span
+                                                class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Pending
+                                            </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="px-4 py-6 text-center text-gray-500">No testimonials yet
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

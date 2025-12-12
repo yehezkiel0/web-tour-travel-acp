@@ -9,11 +9,13 @@ use App\Http\Controllers\Admin\AdminDestinationDetailController;
 use App\Http\Controllers\Admin\AdminTransactionController;
 use App\Http\Controllers\Admin\AdminHotelController;
 use App\Http\Controllers\Admin\AdminHotelBookingController;
+use App\Http\Controllers\Admin\AdminTestimonialController;
 use App\Http\Controllers\front\AboutController;
 use App\Http\Controllers\Front\BookingController;
 use App\Http\Controllers\Front\HotelController;
 use App\Http\Controllers\Front\LandingPageController;
 use App\Http\Controllers\Front\SearchResultController;
+use App\Http\Controllers\Front\TestimonialController;
 use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\User\ProfileController;
 
@@ -49,6 +51,26 @@ Route::get('/booking-success', [BookingController::class, 'success'])->name('boo
 Route::get('/about-us', [LandingPageController::class, 'about'])->name('about');
 Route::get('/contact-us', [LandingPageController::class, 'contact'])->name('contact');
 Route::post('/contact-us', [AboutController::class, 'store'])->name('contact_submit');
+
+//Testimonials
+Route::post('/testimonial', [TestimonialController::class, 'store'])->name('testimonial.store');
+Route::get('/testimonials/{serviceType}', [TestimonialController::class, 'getApproved'])->name('testimonial.get');
+
+// Reviews & Ratings
+Route::post('/destination/{destinationId}/review', [\App\Http\Controllers\Front\ReviewController::class, 'store'])->middleware('auth')->name('review.store');
+Route::get('/destination/{destinationId}/reviews', [\App\Http\Controllers\Front\ReviewController::class, 'getReviews'])->name('review.get');
+Route::post('/review/{reviewId}/helpful', [\App\Http\Controllers\Front\ReviewController::class, 'markHelpful'])->middleware('auth')->name('review.helpful');
+
+// Wishlist
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', [\App\Http\Controllers\Front\WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/toggle', [\App\Http\Controllers\Front\WishlistController::class, 'toggle'])->name('wishlist.toggle');
+    Route::post('/wishlist/check', [\App\Http\Controllers\Front\WishlistController::class, 'check'])->name('wishlist.check');
+});
+
+// Newsletter
+Route::post('/newsletter/subscribe', [\App\Http\Controllers\Front\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\Front\NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
 Route::middleware('user')->group(function () {
     Route::post('/destination/{slug}/booking', [BookingController::class, 'storeBooking'])->name('booking_store');
@@ -132,6 +154,32 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/hotel-bookings/{id}', [AdminHotelBookingController::class, 'show'])->name('admin_hotel_booking_show');
     Route::put('/hotel-bookings/{id}/status', [AdminHotelBookingController::class, 'updateStatus'])->name('admin_hotel_booking_update_status');
     Route::delete('/hotel-bookings/{id}', [AdminHotelBookingController::class, 'delete'])->name('admin_hotel_booking_delete');
+
+    // Testimonials Section
+    Route::get('/testimonials', [AdminTestimonialController::class, 'index'])->name('admin_testimonials_index');
+    Route::post('/testimonials/{id}/approve', [AdminTestimonialController::class, 'approve'])->name('admin_testimonial_approve');
+    Route::post('/testimonials/{id}/unapprove', [AdminTestimonialController::class, 'unapprove'])->name('admin_testimonial_unapprove');
+    Route::delete('/testimonials/{id}', [AdminTestimonialController::class, 'destroy'])->name('admin_testimonial_delete');
+
+    // Reviews Section  
+    Route::get('/reviews', [\App\Http\Controllers\Admin\AdminReviewController::class, 'index'])->name('admin_reviews_index');
+    Route::post('/reviews/{id}/approve', [\App\Http\Controllers\Admin\AdminReviewController::class, 'approve'])->name('admin_review_approve');
+    Route::post('/reviews/{id}/unapprove', [\App\Http\Controllers\Admin\AdminReviewController::class, 'unapprove'])->name('admin_review_unapprove');
+    Route::delete('/reviews/{id}', [\App\Http\Controllers\Admin\AdminReviewController::class, 'destroy'])->name('admin_review_delete');
+
+    // Promo Codes Section
+    Route::get('/promo-codes', [\App\Http\Controllers\Admin\AdminPromoCodeController::class, 'index'])->name('admin_promo_codes_index');
+    Route::get('/promo-codes/create', [\App\Http\Controllers\Admin\AdminPromoCodeController::class, 'create'])->name('admin_promo_codes_create');
+    Route::post('/promo-codes', [\App\Http\Controllers\Admin\AdminPromoCodeController::class, 'store'])->name('admin_promo_codes_store');
+    Route::get('/promo-codes/{id}/edit', [\App\Http\Controllers\Admin\AdminPromoCodeController::class, 'edit'])->name('admin_promo_codes_edit');
+    Route::put('/promo-codes/{id}', [\App\Http\Controllers\Admin\AdminPromoCodeController::class, 'update'])->name('admin_promo_codes_update');
+    Route::delete('/promo-codes/{id}', [\App\Http\Controllers\Admin\AdminPromoCodeController::class, 'destroy'])->name('admin_promo_codes_delete');
+
+    // Newsletter Section
+    Route::get('/newsletters', function () {
+        $subscribers = \App\Models\NewsletterSubscriber::latest()->paginate(15);
+        return view('admin.newsletters.index', compact('subscribers'));
+    })->name('admin_newsletters_index');
 });
 // Admin Authentication
 Route::prefix('admin')->group(function () {

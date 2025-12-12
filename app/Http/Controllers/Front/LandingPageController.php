@@ -38,17 +38,29 @@ class LandingPageController extends Controller
     {
         $data = include resource_path('views/front/data/medical.php');
         $features = $data['medical'];
-        return view('front.our-services.medical', compact('features'));
+        $testimonials = \App\Models\ServiceTestimonial::where('service_type', 'medical')
+            ->where('is_approved', true)
+            ->latest()
+            ->get();
+        return view('front.our-services.medical', compact('features', 'testimonials'));
     }
 
     public function servicesRecruitment()
     {
-        return view('front.our-services.recruitment');
+        $testimonials = \App\Models\ServiceTestimonial::where('service_type', 'recruitment')
+            ->where('is_approved', true)
+            ->latest()
+            ->get();
+        return view('front.our-services.recruitment', compact('testimonials'));
     }
 
     public function servicesEntertainment()
     {
-        return view('front.our-services.entertainment');
+        $testimonials = \App\Models\ServiceTestimonial::where('service_type', 'entertainment')
+            ->where('is_approved', true)
+            ->latest()
+            ->get();
+        return view('front.our-services.entertainment', compact('testimonials'));
     }
 
     public function about()

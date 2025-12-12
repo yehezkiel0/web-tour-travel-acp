@@ -406,108 +406,188 @@
             </div>
             <div class="py-12 w-full"
                 style="background: linear-gradient(to right, rgba(253, 253, 253, 1), rgba(240, 240, 240, 1));">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Testimonial Header -->
                     <div class="text-center mb-12">
                         <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">Testimonials</p>
                         <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">What our Customers says...</h2>
+                        <button onclick="openTestimonialModal()"
+                            class="mt-4 px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
+                            Share Your Experience
+                        </button>
                     </div>
 
-                    <!-- Testimonial Card -->
-                    <div class="max-w-7xl mx-auto">
+                    @if (session('success'))
                         <div
-                            class="bg-gradient-to-b from-[#1E4690] to-[#3477F6] rounded-3xl md:px-[140px] md:py-[72px] relative overflow-hidden">
-                            <div class="flex flex-col md:flex-row items-center py-8 md:py-0">
-                                <!-- Left side - Quote and Image -->
-                                <div class="w-full md:w-1/2 flex items-center justify-center relative mb-24 md:mb-0">
-                                    <div class="absolute right-[56%] flex justify-center items-center text-white">
-                                        <div class="flex gap-x-2">
-                                            <svg width="53" height="172" viewBox="0 0 53 172" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="0.25" y="0.5" width="52.5" height="171" rx="26.25"
-                                                    fill="white" />
-                                            </svg>
-                                            <svg width="53" height="333" viewBox="0 0 53 333" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect x="0.25" y="0.5" width="52.5" height="332.25" rx="26.25"
-                                                    fill="white" />
-                                            </svg>
+                            class="max-w-4xl mx-auto mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <!-- Testimonial Swiper -->
+                    <div class="max-w-7xl mx-auto">
+                        @if ($testimonials->count() > 0)
+                            <div class="swiper testimonialSwiper">
+                                <div class="swiper-wrapper">
+                                    @foreach ($testimonials as $testimonial)
+                                        <div class="swiper-slide">
+                                            <div
+                                                class="bg-gradient-to-b from-[#1E4690] to-[#3477F6] rounded-3xl md:px-[140px] md:py-[72px] py-8 px-6 relative overflow-hidden">
+                                                <div class="flex flex-col md:flex-row items-center">
+                                                    <!-- Left side - Quote and Image -->
+                                                    <div
+                                                        class="w-full md:w-1/2 flex items-center justify-center relative mb-24 md:mb-0">
+                                                        <div
+                                                            class="absolute right-[56%] flex justify-center items-center text-white">
+                                                            <div class="flex gap-x-2">
+                                                                <svg width="53" height="172" viewBox="0 0 53 172"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <rect x="0.25" y="0.5" width="52.5" height="171"
+                                                                        rx="26.25" fill="white" />
+                                                                </svg>
+                                                                <svg width="53" height="333" viewBox="0 0 53 333"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <rect x="0.25" y="0.5" width="52.5" height="332.25"
+                                                                        rx="26.25" fill="white" />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Customer Image -->
+                                                        <figure
+                                                            class="z-10 rounded-full overflow-hidden border-4 border-white w-40 h-40">
+                                                            @if ($testimonial->photo)
+                                                                <img src="{{ asset('storage/' . $testimonial->photo) }}"
+                                                                    alt="{{ $testimonial->name }}"
+                                                                    class="w-full h-full object-cover">
+                                                            @else
+                                                                <img src="https://ui-avatars.com/api/?name={{ urlencode($testimonial->name) }}&size=300&background=3477F6&color=fff"
+                                                                    alt="{{ $testimonial->name }}"
+                                                                    class="w-full h-full object-cover">
+                                                            @endif
+                                                        </figure>
+                                                    </div>
+
+                                                    <!-- Right side - Testimonial Content -->
+                                                    <div class="w-full md:w-1/2 text-white">
+                                                        <!-- Quote Icon -->
+                                                        <div class="hidden mb-4 md:block">
+                                                            <svg width="35" height="31" viewBox="0 0 35 31"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M0.75 21.707C0.75 15.819 4.27 8.875 11.31 0.875L15.822 3.659C12.494 8.779 10.638 12.683 10.254 15.371L15.918 18.827C15.918 21.067 15.374 23.275 14.286 25.451C13.262 27.627 12.206 29.323 11.118 30.539C7.534 30.539 4.686 29.579 2.574 27.659C1.358 26.571 0.75 24.587 0.75 21.707ZM19.47 21.707C19.47 15.819 22.99 8.875 30.03 0.875L34.542 3.659C31.214 8.779 29.358 12.683 28.974 15.371L34.638 18.827C34.638 21.067 34.094 23.275 33.006 25.451C31.982 27.627 30.926 29.323 29.838 30.539C26.254 30.539 23.406 29.579 21.294 27.659C20.078 26.571 19.47 24.587 19.47 21.707Z"
+                                                                    fill="white" />
+                                                            </svg>
+                                                        </div>
+
+                                                        <div class="px-8 space-y-4 text-white mb-4 md:px-4">
+                                                            <!-- Customer Name and Location -->
+                                                            <div>
+                                                                <h3 class="text-[10px] font-semibold md:text-sm">
+                                                                    {{ $testimonial->name }}</h3>
+                                                                <p class="text-[8px] font-medium md:text-xs">
+                                                                    {{ $testimonial->location }}</p>
+                                                                <!-- Rating Stars -->
+                                                                <div class="flex gap-1 mt-1">
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        <span
+                                                                            class="text-yellow-400 text-sm">{{ $i <= $testimonial->rating ? '★' : '☆' }}</span>
+                                                                    @endfor
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Testimonial Title -->
+                                                            <h4 class="text-lg font-semibold md:text-2xl">
+                                                                {{ $testimonial->title }}</h4>
+
+                                                            <!-- Testimonial Text -->
+                                                            <p class="text-xs text-justify md:text-base md:text-left">
+                                                                {{ $testimonial->message }}
+                                                            </p>
+                                                        </div>
+
+                                                        <!-- End Quote -->
+                                                        <div class="hidden justify-end md:flex">
+                                                            <svg width="35" height="31" viewBox="0 0 35 31"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M34.6377 21.707C34.6377 15.819 31.1177 8.875 24.0777 0.875L19.5657 3.659C22.8937 8.779 24.7497 12.683 25.1337 15.371L19.4697 18.827C19.4697 21.067 20.0137 23.275 21.1017 25.451C22.1257 27.627 23.1817 29.323 24.2697 30.539C27.8537 30.539 30.7017 29.579 32.8137 27.659C34.0297 26.571 34.6377 24.587 34.6377 21.707ZM15.9177 21.707C15.9177 15.819 12.3977 8.875 5.35769 0.875L0.845695 3.659C4.17369 8.779 6.02969 12.683 6.4137 15.371L0.749695 18.827C0.749695 21.067 1.29369 23.275 2.38169 25.451C3.40569 27.627 4.46169 29.323 5.54969 30.539C9.13369 30.539 11.9817 29.579 14.0937 27.659C15.3097 26.571 15.9177 24.587 15.9177 21.707Z"
+                                                                    fill="white" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- Customer Image -->
-                                    <figure class="z-10 rounded-full overflow-hidden border-4 border-white w-40 h-40">
-                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
-                                            alt="Yehezkel Imanuel" class="w-full h-full object-cover">
-                                    </figure>
+                                    @endforeach
                                 </div>
 
-                                <!-- Right side - Testimonial Content -->
-                                <div class="w-full md:w-1/2 text-white">
-                                    <!-- Quote Icon -->
-                                    <div class="hidden mb-4 md:block">
-                                        <svg width="35" height="31" viewBox="0 0 35 31" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M0.75 21.707C0.75 15.819 4.27 8.875 11.31 0.875L15.822 3.659C12.494 8.779 10.638 12.683 10.254 15.371L15.918 18.827C15.918 21.067 15.374 23.275 14.286 25.451C13.262 27.627 12.206 29.323 11.118 30.539C7.534 30.539 4.686 29.579 2.574 27.659C1.358 26.571 0.75 24.587 0.75 21.707ZM19.47 21.707C19.47 15.819 22.99 8.875 30.03 0.875L34.542 3.659C31.214 8.779 29.358 12.683 28.974 15.371L34.638 18.827C34.638 21.067 34.094 23.275 33.006 25.451C31.982 27.627 30.926 29.323 29.838 30.539C26.254 30.539 23.406 29.579 21.294 27.659C20.078 26.571 19.47 24.587 19.47 21.707Z"
-                                                fill="white" />
+                                <!-- Navigation Arrows -->
+                                <div class="flex justify-between items-center mt-8 max-w-md mx-auto relative z-10">
+                                    <button
+                                        class="swiper-button-prev-custom bg-blue-500 hover:bg-blue-400 text-white rounded-full p-3 focus:outline-none shadow-lg transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 19l-7-7 7-7" />
                                         </svg>
-                                    </div>
-
-                                    <div class="px-8 space-y-4 text-white mb-4 md:px-4">
-                                        <!-- Customer Name and Location -->
-                                        <div>
-                                            <h3 class="text-[10px] font-semibold md:text-sm">Yehezkel Imanuel</h3>
-                                            <p class="text-[8px] font-medium md:text-xs">Jakarta, Indonesia</p>
-                                        </div>
-
-                                        <!-- Testimonial Title -->
-                                        <h4 class="text-lg font-semibold md:text-2xl">Exceptional Service and Outstanding
-                                            Results
-                                        </h4>
-
-                                        <!-- Testimonial Text -->
-                                        <p class="text-xs text-justify md:text-base md:text-left">
-                                            The service at Anugerah Cahaya Pelangi is truly satisfying. I feel more
-                                            confident,
-                                            and my body feels healthier after receiving treatments here.
-                                        </p>
-                                    </div>
-
-                                    <!-- End Quote -->
-                                    <div class="hidden justify-end md:flex">
-                                        <svg width="35" height="31" viewBox="0 0 35 31" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M34.6377 21.707C34.6377 15.819 31.1177 8.875 24.0777 0.875L19.5657 3.659C22.8937 8.779 24.7497 12.683 25.1337 15.371L19.4697 18.827C19.4697 21.067 20.0137 23.275 21.1017 25.451C22.1257 27.627 23.1817 29.323 24.2697 30.539C27.8537 30.539 30.7017 29.579 32.8137 27.659C34.0297 26.571 34.6377 24.587 34.6377 21.707ZM15.9177 21.707C15.9177 15.819 12.3977 8.875 5.35769 0.875L0.845695 3.659C4.17369 8.779 6.02969 12.683 6.4137 15.371L0.749695 18.827C0.749695 21.067 1.29369 23.275 2.38169 25.451C3.40569 27.627 4.46169 29.323 5.54969 30.539C9.13369 30.539 11.9817 29.579 14.0937 27.659C15.3097 26.571 15.9177 24.587 15.9177 21.707Z"
-                                                fill="white" />
+                                    </button>
+                                    <button
+                                        class="swiper-button-next-custom bg-blue-500 hover:bg-blue-400 text-white rounded-full p-3 focus:outline-none shadow-lg transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7" />
                                         </svg>
-                                    </div>
+                                    </button>
                                 </div>
+
+                                <!-- Pagination -->
+                                <div class="swiper-pagination mt-8"></div>
                             </div>
-
-                            <!-- Navigation Arrows -->
-                        </div>
-                        <div class="flex justify-center mt-8">
-                            <button
-                                class="bg-blue-500 hover:bg-blue-400 text-white rounded-full p-2 mx-1 focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-                            <button class="bg-white text-blue-600 rounded-full p-2 mx-1 focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                        </div>
+                        @else
+                            <div class="text-center py-12 bg-white rounded-2xl shadow-lg">
+                                <p class="text-gray-500 text-lg mb-4">No testimonials yet. Be the first to share your
+                                    experience!</p>
+                                <button onclick="openTestimonialModal()"
+                                    class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
+                                    Write a Testimonial
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
+
+            <!-- Include Testimonial Modal -->
+            @include('front.components.testimonial-modal', ['serviceType' => 'recruitment'])
         </main>
     </div>
     @include('front.layout.footer')
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.testimonialSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next-custom',
+                prevEl: '.swiper-button-prev-custom',
+            },
+        });
+    </script>
+@endpush

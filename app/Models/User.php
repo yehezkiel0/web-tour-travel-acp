@@ -60,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(BookingTransaction::class);
     }
+
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(DestinationReview::class);
+    }
 }

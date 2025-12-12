@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\DestinationReview;
 use App\Models\Destination;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,7 @@ class ReviewController extends Controller
         }
 
         // Check if user has booked this destination
-        $booking = Auth::user()->bookingTransactions()
+        $booking = User::find(Auth::id())->bookingTransactions()
             ->where('destination_id', $destinationId)
             ->where('status', 'paid')
             ->first();

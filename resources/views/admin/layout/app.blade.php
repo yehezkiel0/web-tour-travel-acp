@@ -28,9 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <!-- TinyMCE CDN with API Key -->
-    <script src="https://cdn.tiny.cloud/1/rvzuxw8ad6nq8y34fv4yof385m5nyzf1sqs4z6baybpxffmk/tinymce/7/tinymce.min.js"
-        referrerpolicy="origin"></script>
+    @stack('styles')
 </head>
 
 <body class="bg-gray-100 font-poppins h-full">
@@ -41,6 +39,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <x-alert-notification />
     <x-text-area-config />
+
+    @stack('scripts')
 </body>
 
 </html>

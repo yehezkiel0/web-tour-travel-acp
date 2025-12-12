@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Str;
 
 class Destination extends Model
@@ -53,6 +54,26 @@ class Destination extends Model
     public function bookingTransactions(): HasMany
     {
         return $this->hasMany(BookingTransaction::class);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(DestinationReview::class);
+    }
+
+    public function wishlists(): MorphMany
+    {
+        return $this->morphMany(Wishlist::class, 'wishlistable');
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->where('is_approved', true)->avg('rating') ?? 0;
+    }
+
+    public function totalReviews()
+    {
+        return $this->reviews()->where('is_approved', true)->count();
     }
 
     public function sluggable(): array
