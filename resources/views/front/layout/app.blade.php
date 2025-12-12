@@ -50,18 +50,26 @@
     @else
         @vite(['resources/js/app.js', 'resources/css/app.css'])
     @endif
+
+    @stack('styles')
 </head>
 
 <body class="font-poppins" data-page="{{ request()->route()->getName() }}">
     <div class="main-wrapper bg-white">
         @yield('content')
     </div>
+
+    <!-- WhatsApp Floating Button -->
+    @include('front.components.whatsapp-button')
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     {{-- Leaflet JS for OpenStreetMap --}}
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <x-tooltip />
     <x-alert-notification />
+
+    @stack('scripts')
 </body>
 
 </html>
