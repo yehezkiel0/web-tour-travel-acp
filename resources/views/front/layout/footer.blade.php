@@ -53,6 +53,10 @@
             </div>
         </div>
     </div>
+
+    {{-- Newsletter Subscription Section --}}
+    @include('front.components.newsletter-form')
+
     <div class="container w-[90%] md:w-[80%] lg:w-[90%] xl:max-w-7xl mx-auto pt-12 px-4">
         <div class="flex flex-col-reverse gap-y-4 md:flex-row md:justify-between items-center">
             <p class="text-[#333333] text-xs mb-4 md:mb-0 md:text-base md:font-normal">
