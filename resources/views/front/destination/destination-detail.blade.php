@@ -192,7 +192,202 @@
                 </form>
             </div>
         </div>
+
+        {{-- Reviews Section --}}
+        <div class="mt-12 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Reviews & Ratings</h2>
+                    @if ($destination->totalReviews() > 0)
+                        <div class="flex items-center gap-2 mt-2">
+                            <div class="flex">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <i
+                                        class="fa{{ $i <= round($destination->averageRating()) ? 's' : 'r' }} fa-star text-yellow-400"></i>
+                                @endfor
+                            </div>
+                            <span
+                                class="text-lg font-semibold">{{ number_format($destination->averageRating(), 1) }}</span>
+                            <span class="text-gray-600">({{ $destination->totalReviews() }} reviews)</span>
+                        </div>
+                    @endif
+                </div>
+                @auth
+                    <button onclick="openReviewModal()"
+                        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all">
+                        <i class="fas fa-star mr-2"></i>Write a Review
+                    </button>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all">
+                        <i class="fas fa-star mr-2"></i>Login to Review
+                    </a>
+                @endauth
+            </div>
+
+            {{-- Reviews List --}}
+            <div class="space-y-4" id="reviewsList">
+                @forelse($destination->reviews()->where('is_approved', true)->latest()->take(5)->get() as $review)
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="https://ui-avatars.com/api/?name={{ urlencode($review->user->name) }}&size=100&background=3477F6&color=fff"
+                                    alt="{{ $review->user->name }}" class="w-12 h-12 rounded-full">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">{{ $review->user->name }}</h4>
+                                    <div class="flex items-center gap-2">
+                                        <div class="flex">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <i
+                                                    class="fa{{ $i <= $review->rating ? 's' : 'r' }} fa-star text-yellow-400 text-sm"></i>
+                                            @endfor
+                                        </div>
+                                        @if ($review->is_verified)
+                                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">Verified
+                                                Purchase</span>
+                                        @endif
+                                    </div>
+                                    <p class="text-xs text-gray-500">{{ $review->created_at->diffForHumans() }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="font-semibold text-gray-900 mb-2">{{ $review->title }}</h5>
+                        <p class="text-gray-700 mb-3">{{ $review->review }}</p>
+
+                        @if ($review->photos && count($review->photos) > 0)
+                            <div class="flex gap-2 mb-3">
+                                @foreach ($review->photos as $photo)
+                                    <img src="{{ asset('storage/' . $photo) }}" alt="Review photo"
+                                        class="w-20 h-20 object-cover rounded-lg cursor-pointer hover:opacity-75"
+                                        onclick="window.open('{{ asset('storage/' . $photo) }}', '_blank')">
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <button onclick="markHelpful({{ $review->id }}, this)"
+                            class="text-sm text-gray-600 hover:text-blue-600">
+                            <i class="far fa-thumbs-up mr-1"></i>
+                            Helpful (<span class="helpful-count">{{ $review->helpful_count }}</span>)
+                        </button>
+                    </div>
+                @empty
+                    <div class="bg-gray-50 rounded-lg p-8 text-center">
+                        <i class="fas fa-star text-4xl text-gray-300 mb-3"></i>
+                        <p class="text-gray-600">No reviews yet. Be the first to review!</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
     </div>
+
+    {{-- Review Modal --}}
+    <div id="reviewModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-2xl font-bold text-gray-900">Write a Review</h3>
+                    <button onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <form action="{{ route('review.store', $destination->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Rating *</label>
+                            <div class="flex gap-2">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <button type="button" onclick="setRating({{ $i }})"
+                                        class="rating-star text-3xl text-gray-300 hover:text-yellow-400 transition-colors">
+                                        <i class="far fa-star"></i>
+                                    </button>
+                                @endfor
+                            </div>
+                            <input type="hidden" name="rating" id="ratingInput" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Title *</label>
+                            <input type="text" name="title" required
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                                placeholder="Summarize your experience">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Review *</label>
+                            <textarea name="review" rows="4" required class="w-full border border-gray-300 rounded-lg px-4 py-2"
+                                placeholder="Share your experience with others..."></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Photos (Optional, max 5)</label>
+                            <input type="file" name="photos[]" multiple accept="image/*"
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                            <p class="text-xs text-gray-500 mt-1">Max 2MB per image</p>
+                        </div>
+
+                        <div class="flex gap-3 pt-4">
+                            <button type="submit"
+                                class="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-semibold">
+                                Submit Review
+                            </button>
+                            <button type="button" onclick="closeReviewModal()"
+                                class="px-6 bg-gray-200 text-gray-700 py-3 rounded-lg hover:bg-gray-300">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+        <script>
+            function openReviewModal() {
+                document.getElementById('reviewModal').classList.remove('hidden');
+            }
+
+            function closeReviewModal() {
+                document.getElementById('reviewModal').classList.add('hidden');
+            }
+
+            function setRating(rating) {
+                document.getElementById('ratingInput').value = rating;
+                const stars = document.querySelectorAll('.rating-star');
+                stars.forEach((star, index) => {
+                    const icon = star.querySelector('i');
+                    if (index < rating) {
+                        icon.classList.remove('far', 'text-gray-300');
+                        icon.classList.add('fas', 'text-yellow-400');
+                    } else {
+                        icon.classList.remove('fas', 'text-yellow-400');
+                        icon.classList.add('far', 'text-gray-300');
+                    }
+                });
+            }
+
+            function markHelpful(reviewId, button) {
+                fetch(`/review/${reviewId}/helpful`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.querySelector('.helpful-count').textContent = data.count;
+                            button.disabled = true;
+                            button.classList.add('text-blue-600');
+                        }
+                    });
+            }
+        </script>
+    @endpush
 
 
 
