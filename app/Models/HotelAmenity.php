@@ -11,8 +11,6 @@ class HotelAmenity extends Model
 
   protected $fillable = [
     'hotel_id',
-    'amenity_name',
-    'amenity_icon',
     'name',
     'icon_class',
     'category',

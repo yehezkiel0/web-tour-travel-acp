@@ -264,14 +264,8 @@
                     <div class="hotel-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                         data-city="{{ $hotel->city }}">
                         <div class="relative">
-                            @php
-                                $photo = $hotel->photos->first();
-                            @endphp
-                            @if ($photo)
-                                <img src="{{ asset('uploads/' . $photo->photo) }}" class="w-full h-48 object-cover"
-                                    alt="{{ $hotel->name }}">
-                            @else
-                                <img src="{{ asset('uploads/default-hotel.jpg') }}" class="w-full h-48 object-cover"
+                            @if ($hotel->featured_photo)
+                                <img src="{{ Storage::url($hotel->featured_photo) }}" class="w-full h-48 object-cover"
                                     alt="{{ $hotel->name }}">
                             @endif
                         </div>
@@ -373,8 +367,8 @@
                     <a href="{{ route('destination_detail', $destination->slug) }}" class="block">
                         <div
                             class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                            <img src="{{ asset('uploads/' . $destination->featured_photo) }}"
-                                class="w-full h-40 object-cover" alt="{{ $destination->city }}">
+                            <img src="{{ Storage::url($destination->featured_photo) }}" class="w-full h-40 object-cover"
+                                alt="{{ $destination->city }}">
                             <div class="p-4 text-center">
                                 <h6 class="font-bold text-gray-800 mb-1">{{ $destination->city }}</h6>
                                 <small class="text-gray-500">{{ $destination->view_count }} accommodations</small>

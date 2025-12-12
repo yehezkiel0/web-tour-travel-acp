@@ -89,6 +89,13 @@
                         </div>
 
                         <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Gallery Photos</label>
+                            <input type="file" name="gallery_photos[]" accept="image/*" multiple
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary">
+                            <p class="mt-1 text-sm text-gray-500">You can select multiple photos</p>
+                        </div>
+
+                        <div class="md:col-span-2">
                             <label class="flex items-center">
                                 <input type="checkbox" name="is_active" value="1" checked
                                     class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary">

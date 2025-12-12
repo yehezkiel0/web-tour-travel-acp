@@ -25,40 +25,66 @@
 
     <!-- Hotel Gallery -->
     <div class="container mx-auto px-4 py-6">
-        <div class="grid grid-cols-4 gap-2 h-96">
-            @php
-                $photos = $hotel->photos;
-                $mainPhoto = $photos->first();
-                $sidePhotos = $photos->skip(1)->take(3);
-            @endphp
-
-            <!-- Main Image -->
-            <div class="col-span-2 row-span-2 relative group cursor-pointer">
-                @if ($mainPhoto)
-                    <img src="{{ Storage::url($mainPhoto->featured_photo) }}" alt="{{ $hotel->name }}"
-                        class="w-full h-full object-cover rounded-l-xl">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4">
+            {{-- Main Image --}}
+            <div class="relative md:col-span-2">
+                @if ($hotel->featured_photo)
+                    <img src="{{ Storage::url($hotel->featured_photo) }}" alt="{{ $hotel->name }}"
+                        class="w-full h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] object-cover rounded-lg">
                 @endif
-                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition rounded-l-xl"></div>
             </div>
 
-            <!-- Side Images -->
-            @foreach ($sidePhotos as $index => $photo)
-                <div
-                    class="col-span-2 relative group cursor-pointer {{ $index == 2 ? 'rounded-tr-xl' : '' }} {{ $index == 1 ? 'rounded-br-xl' : '' }}">
-                    <img src="{{ Storage::url($photo->photo_path) }}" alt="{{ $photo->caption }}"
-                        class="w-full h-full object-cover {{ $index == 2 ? 'rounded-tr-xl' : '' }} {{ $index == 1 ? 'rounded-br-xl' : '' }}">
-                    <div
-                        class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition {{ $index == 2 ? 'rounded-tr-xl' : '' }} {{ $index == 1 ? 'rounded-br-xl' : '' }}">
+            {{-- Gallery Grid --}}
+            @php
+                $allPhotos = collect([$hotel->featured_photo])->merge($hotel->photos->pluck('photo_path'));
+            @endphp
+            <div id="gallery" class="grid grid-cols-2 md:grid-cols-1 gap-2 sm:gap-3 lg:gap-4"
+                data-photos='@json($allPhotos)'>
+                @foreach ($hotel->photos->take(2) as $index => $photo)
+                    @if ($index < 1)
+                        <div class="relative">
+                            <img src="{{ Storage::url($photo->photo_path) }}" alt="{{ $hotel->name }}"
+                                class="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg" />
+                        </div>
+                    @elseif ($index === 1)
+                        <div class="relative cursor-pointer" id="openGalleryModal">
+                            <img src="{{ Storage::url($photo->photo_path) }}" alt="{{ $hotel->name }}"
+                                class="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg brightness-50" />
+                            <div class="absolute inset-0 flex items-center justify-center bg-opacity-50 rounded-lg">
+                                <span class="text-white text-sm sm:text-base lg:text-xl font-semibold">See All Photos</span>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+
+            <!-- Modal untuk Galeri -->
+            <div id="galleryModal"
+                class="hidden fixed inset-0 bg-gray-1 bg-opacity-80 items-center justify-center z-50 transition-all ease-in-out duration-300 p-4">
+                <div class="relative w-full max-h-full max-w-xl md:max-w-4xl">
+                    <div class="bg-opacity-100">
+                        <!-- Tombol Close -->
+                        <button id="closeGalleryModal"
+                            class="absolute -top-8 sm:-top-10 -right-2 sm:-right-3 text-gray-4 text-xl sm:text-2xl px-2 py-1 rounded-md z-10">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                        <!-- Navigasi Foto -->
+                        <div class="relative flex justify-center text-gray-4">
+                            <img id="currentPhoto" alt="Current gallery image"
+                                class="w-full h-48 sm:h-56 md:h-96 object-cover rounded-md">
+                            <button id="prevPhoto"
+                                class="absolute top-1/2 -left-6 sm:-left-10 transform -translate-y-1/2 text-2xl sm:text-3xl">
+                                <i class="fa-solid fa-circle-chevron-left"></i>
+                            </button>
+                            <button id="nextPhoto"
+                                class="absolute top-1/2 -right-6 sm:-right-10 transform -translate-y-1/2 text-2xl sm:text-3xl">
+                                <i class="fa-solid fa-circle-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            @endforeach
-
-            <!-- Show All Photos Button -->
-            <button
-                class="absolute bottom-4 right-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-6 py-2 rounded-lg shadow-lg transition flex items-center gap-2">
-                <i class="fas fa-images"></i>
-                See All Photos
-            </button>
+            </div>
         </div>
     </div>
 
@@ -132,9 +158,9 @@
                                     <div class="flex items-center gap-3">
                                         <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
                                             <i
-                                                class="{{ $amenity->amenity_icon ?? 'fas fa-check' }} text-blue-600 text-xl"></i>
+                                                class="{{ $amenity->icon_class ?? 'fa-solid fa-check' }} text-blue-600 text-xl"></i>
                                         </div>
-                                        <span class="text-gray-700 font-medium">{{ $amenity->amenity_name }}</span>
+                                        <span class="text-gray-700 font-medium">{{ $amenity->name }}</span>
                                     </div>
                                 @empty
                                     <p class="col-span-3 text-gray-500">No amenities listed</p>
@@ -153,10 +179,6 @@
                                         <div class="md:col-span-1">
                                             @if ($room->room_photo)
                                                 <img src="{{ Storage::url($room->room_photo) }}"
-                                                    alt="{{ $room->room_name }}"
-                                                    class="w-full h-32 object-cover rounded-lg">
-                                            @else
-                                                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400"
                                                     alt="{{ $room->room_name }}"
                                                     class="w-full h-32 object-cover rounded-lg">
                                             @endif

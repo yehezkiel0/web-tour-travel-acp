@@ -81,6 +81,19 @@ class AdminHotelController extends Controller
 
     $hotel->save();
 
+    // Handle gallery photos upload
+    if ($request->hasFile('gallery_photos')) {
+      foreach ($request->file('gallery_photos') as $index => $file) {
+        $path = $file->store('hotels/gallery', 'public');
+        HotelPhoto::create([
+          'hotel_id' => $hotel->id,
+          'photo_path' => $path,
+          'caption' => null,
+          'order' => $index
+        ]);
+      }
+    }
+
     return redirect()->route('admin_hotel_index')->with('success', 'Hotel created successfully!');
   }
 
@@ -125,6 +138,19 @@ class AdminHotelController extends Controller
     }
 
     $hotel->save();
+
+    // Handle gallery photos upload
+    if ($request->hasFile('gallery_photos')) {
+      foreach ($request->file('gallery_photos') as $index => $file) {
+        $path = $file->store('hotels/gallery', 'public');
+        HotelPhoto::create([
+          'hotel_id' => $hotel->id,
+          'photo_path' => $path,
+          'caption' => null,
+          'order' => $index
+        ]);
+      }
+    }
 
     return redirect()->route('admin_hotel_index')->with('success', 'Hotel updated successfully!');
   }
@@ -224,14 +250,16 @@ class AdminHotelController extends Controller
   public function storeAmenity(Request $request, $id)
   {
     $request->validate([
-      'amenity_name' => 'required|string|max:255',
-      'amenity_icon' => 'nullable|string|max:255',
+      'name' => 'required|string|max:255',
+      'icon_class' => 'nullable|string|max:255',
+      'category' => 'nullable|string|max:255',
     ]);
 
     HotelAmenity::create([
       'hotel_id' => $id,
-      'amenity_name' => $request->amenity_name,
-      'amenity_icon' => $request->amenity_icon,
+      'name' => $request->name,
+      'icon_class' => $request->icon_class,
+      'category' => $request->category,
     ]);
 
     return redirect()->route('admin_hotel_amenities', $id)->with('success', 'Amenity added successfully!');
