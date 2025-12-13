@@ -42,7 +42,7 @@ class PromoCode extends Model
         }
 
         $now = now();
-        if ($now < $this->start_date || $now > $this->end_date) {
+        if ($now->format('Y-m-d') < $this->start_date->format('Y-m-d') || $now->format('Y-m-d') > $this->end_date->format('Y-m-d')) {
             return false;
         }
 

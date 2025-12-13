@@ -25,6 +25,7 @@ class HotelBooking extends Model
     'guest_phone',
     'special_request',
     'status',
+    'promo_code_id',
   ];
 
   protected $casts = [

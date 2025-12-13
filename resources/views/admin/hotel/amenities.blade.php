@@ -33,7 +33,7 @@
         <!-- Add Amenity Form -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Add New Amenity</h2>
-            <form action="{{ route('admin_hotel_store_amenity', $hotel->id) }}" method="POST">
+            <form action="{{ route('admin_hotel_store_amenity', $hotel->slug) }}" method="POST">
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -112,7 +112,7 @@
                                         @endif
                                         <span class="text-sm text-gray-800">{{ $amenity->name }}</span>
                                     </div>
-                                    <form action="{{ route('admin_hotel_delete_amenity', [$hotel->id, $amenity->id]) }}"
+                                    <form action="{{ route('admin_hotel_delete_amenity', [$hotel->slug, $amenity->id]) }}"
                                         method="POST"
                                         onsubmit="return confirm('Are you sure you want to delete this amenity?');"
                                         class="inline">
@@ -170,7 +170,7 @@
                     @endphp
 
                     @if (!$exists)
-                        <form action="{{ route('admin_hotel_store_amenity', $hotel->id) }}" method="POST">
+                        <form action="{{ route('admin_hotel_store_amenity', $hotel->slug) }}" method="POST">
                             @csrf
                             <input type="hidden" name="name" value="{{ $amenity['name'] }}">
                             <input type="hidden" name="icon_class" value="{{ $amenity['icon'] }}">

@@ -15,6 +15,7 @@ class SearchResultController extends Controller
     {
         $query = Destination::query();
         $maxPrice = Destination::max('price');
+        $cities = Destination::select('city')->distinct()->orderBy('city')->pluck('city');
 
         if ($request->filled('type')) {
             $databaseType = Str::title(str_replace('-', ' ', $request->type));
@@ -26,7 +27,7 @@ class SearchResultController extends Controller
             $result->duration = calculateDuration($result->date_started, $result->date_ended);
         });
 
-        return view('front.destination.search-filter', compact('results', 'maxPrice'));
+        return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
     }
 
     public function searchResult(Request $request)
@@ -47,6 +48,7 @@ class SearchResultController extends Controller
 
         $query = Destination::query();
         $maxPrice = Destination::max('price');
+        $cities = Destination::select('city')->distinct()->orderBy('city')->pluck('city');
 
         if ($request->filled('destination_input')) {
             $query->where(function ($q) use ($request) {
@@ -70,7 +72,7 @@ class SearchResultController extends Controller
 
         $request->replace([]);
 
-        return view('front.destination.search-filter', compact('results', 'maxPrice'));
+        return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
     }
 
     public function filterSearch(Request $request)
@@ -119,10 +121,11 @@ class SearchResultController extends Controller
         $searchParams = session('destination_search_params', []);
 
         $maxPrice = Destination::max('price');
+        $cities = Destination::select('city')->distinct()->orderBy('city')->pluck('city');
 
         if (empty($searchParams)) {
             $results = collect();
-            return view('front.destination.search-filter', compact('results', 'maxPrice'));
+            return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
         }
 
         $query = Destination::query();
@@ -147,6 +150,6 @@ class SearchResultController extends Controller
             $result->duration = calculateDuration($result->date_started, $result->date_ended);
         });
 
-        return view('front.destination.search-filter', compact('results', 'maxPrice'));
+        return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
     }
 }

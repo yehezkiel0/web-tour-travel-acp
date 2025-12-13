@@ -33,14 +33,14 @@
         <!-- Add Room Form -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Add New Room</h2>
-            <form action="{{ route('admin_hotel_store_room', $hotel->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin_hotel_store_room', $hotel->slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <!-- Room Type -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Room Type *</label>
-                        <input type="text" name="room_type" value="{{ old('room_type') }}" required
+                        <input type="text" name="room_name" value="{{ old('room_name') }}" required
                             placeholder="e.g., Deluxe Double Room"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
                     </div>
@@ -71,10 +71,10 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
                     </div>
 
-                    <!-- Room Size (sqm) -->
+                    <!-- Bed Count -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Room Size (sqm) *</label>
-                        <input type="number" name="room_size" value="{{ old('room_size') }}" required min="1"
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Bed Count *</label>
+                        <input type="number" name="bed_count" value="{{ old('bed_count', 1) }}" required min="1"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
                     </div>
 
@@ -94,22 +94,42 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
                     </div>
 
-                    <!-- Available Rooms -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Available Rooms *</label>
-                        <input type="number" name="available_rooms" value="{{ old('available_rooms', 10) }}" required
-                            min="0"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
-                    </div>
 
-                    <!-- Status -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Status *</label>
-                        <select name="is_available" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
-                            <option value="1" {{ old('is_available', 1) == 1 ? 'selected' : '' }}>Available</option>
-                            <option value="0" {{ old('is_available') == 0 ? 'selected' : '' }}>Not Available</option>
-                        </select>
+
+                    <!-- Amenities Checkboxes -->
+                    <div class="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="has_breakfast" class="rounded text-blue-600 focus:ring-blue-500"
+                                {{ old('has_breakfast') ? 'checked' : '' }}>
+                            <span class="text-sm text-gray-700">Breakfast Included</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="free_cancellation"
+                                class="rounded text-blue-600 focus:ring-blue-500"
+                                {{ old('free_cancellation') ? 'checked' : '' }}>
+                            <span class="text-sm text-gray-700">Free Cancellation</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="pay_at_hotel" class="rounded text-blue-600 focus:ring-blue-500"
+                                {{ old('pay_at_hotel') ? 'checked' : '' }}>
+                            <span class="text-sm text-gray-700">Pay at Hotel</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="smoking_allowed" class="rounded text-blue-600 focus:ring-blue-500"
+                                {{ old('smoking_allowed') ? 'checked' : '' }}>
+                            <span class="text-sm text-gray-700">Smoking Allowed</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="has_wifi" class="rounded text-blue-600 focus:ring-blue-500"
+                                {{ old('has_wifi') ? 'checked' : '' }}>
+                            <span class="text-sm text-gray-700">Free WiFi</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="has_air_conditioning"
+                                class="rounded text-blue-600 focus:ring-blue-500"
+                                {{ old('has_air_conditioning') ? 'checked' : '' }}>
+                            <span class="text-sm text-gray-700">Air Conditioning</span>
+                        </label>
                     </div>
 
                     <!-- Description -->
@@ -122,7 +142,7 @@
                     <!-- Room Photo -->
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Room Photo</label>
-                        <input type="file" name="photo" accept="image/*"
+                        <input type="file" name="room_photo" accept="image/*"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
                         <small class="text-gray-500">Max size: 2MB. Format: JPG, PNG</small>
                     </div>
@@ -149,11 +169,9 @@
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Photo</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Room Type</th>
+                                    Room Details</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Bed Type</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Size</th>
+                                    Bed Config</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Max Guests</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -161,9 +179,7 @@
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Price (With Breakfast)</th>
                                 <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Available</th>
-                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status</th>
+                                    Amenities</th>
                                 <th
                                     class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Actions</th>
@@ -173,8 +189,8 @@
                             @foreach ($hotel->rooms as $room)
                                 <tr>
                                     <td class="px-4 py-3">
-                                        @if ($room->photo)
-                                            <img src="{{ asset('storage/' . $room->photo) }}"
+                                        @if ($room->room_photo)
+                                            <img src="{{ Storage::url($room->room_photo) }}"
                                                 alt="{{ $room->room_type }}" class="w-16 h-16 object-cover rounded">
                                         @else
                                             <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
@@ -183,32 +199,37 @@
                                         @endif
                                     </td>
                                     <td class="px-4 py-3">
-                                        <div class="text-sm font-medium text-gray-900">{{ $room->room_type }}</div>
+                                        <div class="text-sm font-medium text-gray-900">{{ $room->room_name }}</div>
                                         @if ($room->description)
                                             <div class="text-xs text-gray-500">{{ Str::limit($room->description, 50) }}
                                             </div>
                                         @endif
                                     </td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $room->bed_type }}</td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $room->room_size }} m²</td>
+                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $room->bed_count }}
+                                        {{ $room->bed_type }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">{{ $room->max_guests }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ formatIDR($room->price_without_breakfast) }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900">
                                         {{ formatIDR($room->price_with_breakfast) }}</td>
-                                    <td class="px-4 py-3 text-sm text-gray-900">{{ $room->available_rooms }}</td>
                                     <td class="px-4 py-3">
-                                        @if ($room->is_available)
-                                            <span
-                                                class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Available</span>
-                                        @else
-                                            <span
-                                                class="px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Not
-                                                Available</span>
-                                        @endif
+                                        <div class="flex flex-col gap-1">
+                                            @if ($room->has_breakfast)
+                                                <span
+                                                    class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">Breakfast</span>
+                                            @endif
+                                            @if ($room->free_cancellation)
+                                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded">Free
+                                                    Cancel</span>
+                                            @endif
+                                        </div>
                                     </td>
                                     <td class="px-4 py-3 text-center">
-                                        <form action="{{ route('admin_hotel_delete_room', [$hotel->id, $room->id]) }}"
+                                        <button type="button" onclick="openEditModal({{ json_encode($room) }})"
+                                            class="text-blue-600 hover:text-blue-900 mr-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <form action="{{ route('admin_hotel_delete_room', [$hotel->slug, $room->id]) }}"
                                             method="POST"
                                             onsubmit="return confirm('Are you sure you want to delete this room?');"
                                             class="inline">
@@ -230,3 +251,48 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function openEditModal(room) {
+            const modal = document.getElementById('editRoomModal');
+            const form = document.getElementById('editRoomForm');
+
+            // Construct the update URL dynamically
+            form.action = "{{ route('admin_hotel_update_room', ['hotel' => $hotel->slug, 'room' => ':id']) }}".replace(
+                ':id', room.id);
+
+            // Populate fields
+            form.querySelector('[name="room_name"]').value = room.room_name;
+
+            // Handle select fields
+            const bedTypeSelect = form.querySelector('[name="bed_type"]');
+            bedTypeSelect.value = room.bed_type;
+
+            // If value doesn't exist in select (dynamic values?), might need logic, but standard selects should work
+
+            form.querySelector('[name="max_guests"]').value = room.max_guests;
+            form.querySelector('[name="bed_count"]').value = room.bed_count;
+            form.querySelector('[name="room_description"]').value = room.room_description || '';
+            form.querySelector('[name="price_without_breakfast"]').value = room.price_without_breakfast;
+            form.querySelector('[name="price_with_breakfast"]').value = room.price_with_breakfast;
+
+            // Checkboxes
+            form.querySelector('[name="has_breakfast"]').checked = !!room.has_breakfast;
+            form.querySelector('[name="free_cancellation"]').checked = !!room.free_cancellation;
+            form.querySelector('[name="pay_at_hotel"]').checked = !!room.pay_at_hotel;
+            form.querySelector('[name="smoking_allowed"]').checked = !!room.smoking_allowed;
+            form.querySelector('[name="has_wifi"]').checked = !!room.has_wifi;
+            form.querySelector('[name="has_air_conditioning"]').checked = !!room.has_air_conditioning;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editRoomModal').classList.add('hidden');
+        }
+    </script>
+
+    <!-- Edit Room Modal -->
+    @include('admin.hotel.partials.edit-room-modal')
+@endpush

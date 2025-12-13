@@ -126,7 +126,7 @@ class BookingController extends Controller
         return view('front.booking.checkout', compact('bookingData', 'destination', 'travellers'));
     }
 
-    public function payment($slug)
+    public function payment(Request $request, $slug)
     {
         $bookingData = session('booking');
         if (!$bookingData) {
@@ -137,8 +137,22 @@ class BookingController extends Controller
             DB::beginTransaction();
 
             $destination = Destination::where('slug', $slug)->firstOrFail();
-
             $code = 'ACP' . rand(100000, 999999);
+
+            Log::info('Booking Payment Request:', $request->all());
+
+            // Calculate final price with promo code
+            $totalPrice = $bookingData['total_price'];
+            $discountAmount = 0;
+
+            if ($request->has('promo_code_id') && $request->promo_code_id) {
+                $promoCode = \App\Models\PromoCode::find($request->promo_code_id);
+                if ($promoCode && $promoCode->isValid()) {
+                    $discountAmount = $promoCode->calculateDiscount($totalPrice);
+                }
+            }
+
+            $finalTotal = max(0, $totalPrice - $discountAmount);
 
             $booking = BookingTransaction::create([
                 'code' => $code,
@@ -148,14 +162,19 @@ class BookingController extends Controller
                 'to_date' => $bookingData['to_date'],
                 'adult_count' => $bookingData['adult_count'],
                 'child_count' => $bookingData['child_count'],
-                'total_price' => $bookingData['total_price'],
+                'total_price' => $finalTotal, // Use discounted price
                 'traveller_details' => json_encode($bookingData['travellers']),
                 'contact_name' => $bookingData['contact_name'],
                 'contact_phone' => $bookingData['contact_phone'],
                 'contact_email' => $bookingData['contact_email'],
                 'notes' => $bookingData['notes'],
-                'status' => 'pending'
+                'status' => 'pending',
+                'promo_code_id' => $request->promo_code_id ?? null,
             ]);
+
+            if (isset($promoCode)) {
+                $promoCode->increment('usage_count');
+            }
 
             session()->forget('booking');
 

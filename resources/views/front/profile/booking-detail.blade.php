@@ -53,8 +53,8 @@
                     <!-- Destination Info -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                         <div class="relative h-48">
-                            @if ($booking->destination && $booking->destination->photos->first())
-                                <img src="{{ asset('storage/' . $booking->destination->photos->first()->photo) }}"
+                            @if ($booking->destination && $booking->destination->featured_photo)
+                                <img src="{{ Storage::url($booking->destination->featured_photo) }}"
                                     alt="{{ $booking->destination->title }}" class="w-full h-full object-cover">
                             @else
                                 <div

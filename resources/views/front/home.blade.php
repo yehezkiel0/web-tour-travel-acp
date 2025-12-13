@@ -90,54 +90,58 @@
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search" loading="lazy"
                                 class="rounded-lg w-full" />
                             <form action="{{ route('search_result') }}" method="POST"
-                                class="absolute bottom-6 flex flex-row justify-between space-x-6 w-[320px] md:w-[340px] lg:w-[432px] xl:w-[520px] bg-gray-3 rounded-full border-[3px] border-gray-400">
+                                class="absolute bottom-6 z-50 flex flex-row items-center justify-between w-[95%] xl:w-[90%] left-1/2 -translate-x-1/2 bg-gray-3 rounded-full border border-gray-400 p-1 md:p-2 shadow-lg glass">
                                 @csrf
-                                <div class="w-3/4 h-12 md:h-14 pl-2 md:pl-4 lg:pl-6 flex items-center">
-                                    <div class="flex flex-row relative items-center justify-center xl:gap-x-2">
-                                        <div class="flex items-center gap-1 lg:gap-2 text-[#E0E0E0]">
-                                            <i
-                                                class="fa-solid fa-location-dot text-[10px] sm:text-xs lg:text-sm xl:text-base"></i>
-                                            <input type="text" id="destination_input" name="destination_input"
-                                                placeholder="Destination"
-                                                class="w-14 md:w-3/5 xl:w-full bg-transparent border-none outline-none text-[9px] md:text-xs lg:text-sm xl:text-base">
-                                        </div>
-                                        <div class="h-4 mr-2 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
+                                <div class="flex-1 flex items-center justify-between px-2 md:px-4 gap-2">
+                                    <!-- Destination -->
+                                    <div class="flex items-center gap-2 flex-1 min-w-0">
+                                        <i class="fa-solid fa-location-dot text-gray-400 text-xs md:text-sm"></i>
+                                        <input type="text" id="destination_input" name="destination_input"
+                                            placeholder="Destination"
+                                            class="w-full bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 placeholder-gray-500 truncate focus:ring-0">
+                                    </div>
 
-                                        <div
-                                            class="datepicker-container flex flex-row items-center cursor-pointer gap-2 md:mr-2 lg:mr-8 xl:mr-6 lg:gap-2 text-[#E0E0E0]">
-                                            <img src="{{ asset('images/icon/time.svg') }}" alt="time"
-                                                class="w-3 h-3 lg:w-5 lg:h-5">
-                                            <p
-                                                class="datepicker-text text-[9px] md:text-xs lg:text-sm xl:text-base text-nowrap">
-                                                Date
-                                            </p>
-                                            <i
-                                                class="fa-solid fa-chevron-down text-[10px] mr-4 md:mr-0 md:text-[8px] lg:text-[10px]"></i>
-                                            <input type="text" name="destination_date" class="datepicker hidden"
-                                                class="w-14 md:w-3/5 xl:w-full">
-                                        </div>
-                                        <div class="h-4 md:ml-0 md:h-6 lg:mr-4 xl:mr-0 xl:h-8 w-px bg-gray-300"></div>
+                                    <div class="h-4 md:h-6 w-px bg-gray-300 mx-1"></div>
 
-                                        <div class="flex flex-row items-center gap-1 md:justify-center text-[#E0E0E0]"
-                                            id="destination_type">
-                                            <img src="{{ asset('images/icon/hiking.svg') }}" alt="hiking"
-                                                class="ml-2 md:ml-0 md:mr-2">
-                                            <select name="destination_type"
-                                                class="bg-transparent w-1/3 md:w-1/2 border-none outline-none text-[9px] md:text-xs lg:text-sm xl:text-base appearance-none">
-                                                <option class="hidden" value="" disabled selected>
-                                                    Type
-                                                </option>
-                                                <option
-                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                    Open Trip
-                                                </option>
-                                                <option
-                                                    class="bg-gray-1 text-white text-[10px] md:text-xs lg:text-sm xl:text-base">
-                                                    Private Trip
-                                                </option>
-                                            </select>
-                                            <i
-                                                class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px]"></i>
+                                    <!-- Date -->
+                                    <div
+                                        class="datepicker-container flex items-center gap-2 cursor-pointer relative group flex-1 min-w-0">
+                                        <i class="fa-regular fa-calendar text-gray-400 text-xs md:text-sm"></i>
+                                        <input type="text" name="destination_date" id="destination_date"
+                                            class="datepicker w-full bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 placeholder-gray-500 cursor-pointer focus:ring-0 p-0"
+                                            placeholder="Date" readonly>
+                                        <i class="fa-solid fa-chevron-down text-[10px] text-gray-400"></i>
+                                    </div>
+
+                                    <div class="h-4 md:h-6 w-px bg-gray-300 mx-1"></div>
+
+                                    <!-- Type -->
+                                    <div class="flex items-center gap-2 relative flex-1 min-w-0">
+                                        <i class="fa-solid fa-person-hiking text-gray-400 text-xs md:text-sm"></i>
+
+                                        <!-- Hidden Input for Form Submission -->
+                                        <input type="hidden" name="destination_type" id="destination_type_input">
+
+                                        <!-- Custom Dropdown Trigger -->
+                                        <div id="dropdown-trigger"
+                                            class="cursor-pointer flex items-center justify-between w-full">
+                                            <span id="selected-type"
+                                                class="text-[9px] md:text-xs lg:text-sm xl:text-base text-gray-400 truncate">Type</span>
+                                            <i class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px] transition-transform duration-200 ml-1"
+                                                id="dropdown-icon"></i>
+                                        </div>
+
+                                        <!-- Custom Dropdown Options -->
+                                        <div id="dropdown-options"
+                                            class="hidden absolute top-full left-0 mt-2 w-full min-w-[120px] bg-white rounded-lg shadow-xl z-50 overflow-hidden border border-gray-100">
+                                            <div class="option-item px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer text-[10px] md:text-xs lg:text-sm transition-colors"
+                                                data-value="Open Trip">
+                                                Open Trip
+                                            </div>
+                                            <div class="option-item px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer text-[10px] md:text-xs lg:text-sm transition-colors"
+                                                data-value="Private Trip">
+                                                Private Trip
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -508,4 +512,49 @@
         </section>
     </main>
     @include('front.layout.footer')
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const trigger = document.getElementById('dropdown-trigger');
+                const options = document.getElementById('dropdown-options');
+                const icon = document.getElementById('dropdown-icon');
+                const selectedText = document.getElementById('selected-type');
+                const hiddenInput = document.getElementById('destination_type_input');
+                const optionItems = document.querySelectorAll('.option-item');
+
+                // Toggle Dropdown
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    options.classList.toggle('hidden');
+                    icon.style.transform = options.classList.contains('hidden') ? 'rotate(0deg)' :
+                        'rotate(180deg)';
+                });
+
+                // Select Option
+                optionItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const value = this.getAttribute('data-value');
+                        selectedText.textContent = value;
+                        selectedText.classList.remove('text-gray-400');
+                        selectedText.classList.add(
+                            'text-white'); // Change to white or desired color when selected
+                        hiddenInput.value = value;
+
+                        // Close dropdown
+                        options.classList.add('hidden');
+                        icon.style.transform = 'rotate(0deg)';
+                    });
+                });
+
+                // Close when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!trigger.contains(e.target) && !options.contains(e.target)) {
+                        options.classList.add('hidden');
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection

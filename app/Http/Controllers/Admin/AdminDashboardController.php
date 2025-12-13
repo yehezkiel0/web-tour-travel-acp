@@ -62,6 +62,9 @@ class AdminDashboardController extends Controller
         $pendingTestimonials = ServiceTestimonial::where('is_approved', false)->count();
         $recentTestimonials = ServiceTestimonial::with('user')->latest()->take(5)->get();
 
+        // Get recent hotel bookings
+        $recentHotelBookings = HotelBooking::with(['hotel', 'user'])->latest()->take(5)->get();
+
         return view('admin.dashboard', [
             'totalDestinations' => $stats['total_destinations'],
             'totalTransactions' => $stats['total_bookings'],
@@ -81,6 +84,7 @@ class AdminDashboardController extends Controller
             'totalTestimonials' => $totalTestimonials,
             'pendingTestimonials' => $pendingTestimonials,
             'recentTestimonials' => $recentTestimonials,
+            'recentHotelBookings' => $recentHotelBookings,
         ]);
     }
 }

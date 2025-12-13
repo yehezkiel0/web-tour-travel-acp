@@ -25,9 +25,9 @@
                             <select
                                 class="location-select appearance-none w-full p-3 bg-[#EBF1FE] rounded-lg text-gray-3 text-xs focus:outline-none">
                                 <option value="">Place to Go</option>
-                                <option value="seoul">Seoul</option>
-                                <option value="jeju">Jeju</option>
-                                <option value="yogyakarta">Yogyakarta</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city }}">{{ $city }}</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
@@ -114,9 +114,9 @@
                             <select
                                 class="location-select appearance-none w-full p-3 bg-[#EBF1FE] rounded-lg text-gray-3 text-xs focus:outline-none">
                                 <option value="">Place to Go</option>
-                                <option value="seoul">Seoul</option>
-                                <option value="jeju">Jeju</option>
-                                <option value="yogyakarta">Yogyakarta</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city }}">{{ $city }}</option>
+                                @endforeach
                             </select>
                             <div
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
@@ -140,8 +140,7 @@
                     <div class="mb-6">
                         <label class="text-gray-2 font-semibold text-sm block mb-2">Price Range</label>
                         <div class="space-y-4">
-                            <input type="range" class="price-range w-full" min="0" max="0"
-                                step="100000">
+                            <input type="range" class="price-range w-full" min="0" max="0" step="100000">
                             <div class="flex items-center space-x-4">
                                 <input type="text"
                                     class="min-price w-1/2 py-2 px-4 border border-[#8B8B8B] rounded-full font-normal text-[#3C3C3C] text-sm"

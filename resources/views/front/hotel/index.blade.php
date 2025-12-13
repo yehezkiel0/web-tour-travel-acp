@@ -258,62 +258,33 @@
                 </div>
             </div>
 
-            <!-- Hotel Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="hotelResults">
-                @forelse($hotels as $hotel)
-                    <div class="hotel-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                        data-city="{{ $hotel->city }}">
-                        <div class="relative">
-                            @if ($hotel->featured_photo)
-                                <img src="{{ Storage::url($hotel->featured_photo) }}" class="w-full h-48 object-cover"
-                                    alt="{{ $hotel->name }}">
-                            @endif
-                        </div>
-                        <div class="p-4">
-                            <h5 class="font-bold text-lg mb-2 text-gray-800">{{ $hotel->name }}</h5>
-                            <p class="text-gray-600 text-sm mb-2 flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>{{ $hotel->city }},
-                                {{ $hotel->country }}
-                            </p>
-                            <div class="flex items-center mb-3">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <= $hotel->star_rating)
-                                        <i class="fas fa-star text-yellow-400 text-sm"></i>
-                                    @else
-                                        <i class="far fa-star text-yellow-400 text-sm"></i>
-                                    @endif
-                                @endfor
-                                <span class="text-gray-500 text-xs ml-2">({{ $hotel->star_rating }}.0 (1,527
-                                    reviews))</span>
-                            </div>
-                            <div class="flex justify-between items-end mb-3">
-                                <div>
-                                    <span class="text-blue-600 font-bold text-xl">Rp
-                                        {{ number_format($hotel->min_price, 0, ',', '.') }}</span>
-                                    <p class="text-gray-500 text-xs">per malam</p>
-
-                                    @if (isset($nights) && $nights > 0)
-                                        <div class="mt-2 pt-2 border-t border-gray-200">
-                                            <p class="text-sm font-semibold text-gray-700">Total {{ $nights }}
-                                                malam:</p>
-                                            <p class="text-lg font-bold text-green-600">Rp
-                                                {{ number_format($hotel->min_price * $nights, 0, ',', '.') }}</p>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                            <a href="{{ route('hotel.show', $hotel->slug) }}"
-                                class="block w-full text-center bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-2 rounded-lg transition">
-                                View Details
-                            </a>
-                        </div>
+            <!-- Hotel List Container -->
+            <div id="hotelResults" class="mb-8">
+                @if ($hotels->count() > 0)
+                    <!-- Desktop Grid -->
+                    <div class="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
+                        @foreach ($hotels as $hotel)
+                            @include('front.hotel.partials.hotel-card', ['hotel' => $hotel])
+                        @endforeach
                     </div>
-                @empty
-                    <div class="col-span-full text-center py-12">
+
+                    <!-- Mobile Swiper -->
+                    <div class="md:hidden swiper-hotel-list overflow-hidden relative pb-10">
+                        <div class="swiper-wrapper">
+                            @foreach ($hotels as $hotel)
+                                <div class="swiper-slide h-auto">
+                                    @include('front.hotel.partials.hotel-card', ['hotel' => $hotel])
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-pagination !bottom-0"></div>
+                    </div>
+                @else
+                    <div class="text-center py-12">
                         <i class="fas fa-hotel text-gray-300 text-6xl mb-4"></i>
                         <p class="text-gray-500 text-lg">No hotels found</p>
                     </div>
-                @endforelse
+                @endif
             </div>
 
             <!-- Pagination -->

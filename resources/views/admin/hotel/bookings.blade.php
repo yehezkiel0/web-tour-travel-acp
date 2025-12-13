@@ -195,6 +195,7 @@
                                             <form action="{{ route('admin_hotel_booking_update_status', $booking->id) }}"
                                                 method="POST" class="inline">
                                                 @csrf
+                                                @method('PUT')
                                                 <select name="status" onchange="this.form.submit()"
                                                     class="text-xs border border-gray-300 rounded px-2 py-1">
                                                     <option value="pending"

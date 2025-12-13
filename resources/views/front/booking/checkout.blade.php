@@ -89,6 +89,16 @@
                             </div>
                         </div>
                         <div class="w-full border border-gray-4 rounded-[10px] p-7 text-gray-1 font-medium mb-7">
+                            <h3 class="text-xl font-semibold mb-4">Promo Code</h3>
+                            <div class="flex gap-2">
+                                <input type="text" id="promo_code" name="promo_code" placeholder="Enter promo code"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all">
+                                <button type="button" id="apply-promo-btn"
+                                    class="bg-gray-800 text-white px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors">Apply</button>
+                            </div>
+                            <p id="promo-message" class="text-xs mt-2 hidden"></p>
+                        </div>
+                        <div class="w-full border border-gray-4 rounded-[10px] p-7 text-gray-1 font-medium mb-7">
                             <h3 class="text-xl font-semibold mb-7">Bill Details</h3>
                             <div class="space-y-4 text-gray-2 text-xs border-b border-gray-4 pb-7 mb-7">
                                 <div class="grid grid-cols-3 items-center">
@@ -143,9 +153,75 @@
                             class="flex justify-center text-[#FF3B3B] font-semibold text-center mb-8">Cancel</a>
                     </div>
                 </div>
+                <input type="hidden" name="promo_code_id" id="applied_promo_id">
             </form>
         </div>
         </div>
     </section>
     @include('front.layout.footer')
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#apply-promo-btn').click(function() {
+                var code = $('#promo_code').val();
+                var total = {{ $bookingData['total_price'] }};
+                var btn = $(this);
+
+                if (!code) {
+                    alert('Please enter a promo code');
+                    return;
+                }
+
+                btn.text('Applying...').prop('disabled', true);
+
+                $.ajax({
+                    url: "{{ route('promo_code_check') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        code: code,
+                        total_amount: total
+                    },
+                    success: function(response) {
+                        btn.text('Apply').prop('disabled', false);
+                        var msg = $('#promo-message');
+
+                        if (response.success) {
+                            msg.removeClass('hidden text-red-500').addClass('text-green-500')
+                                .text(
+                                    response.message);
+
+                            // Visual update
+                            $('#discount-row').remove(); // Remove existing if any
+                            var discountRow = `
+                                <div id="discount-row" class="tax grid grid-cols-3 items-center text-green-600 font-medium text-xs">
+                                    <span>Discount (${response.code})</span>
+                                    <span class="text-center"></span>
+                                    <span class="text-right">- Rp ${new Intl.NumberFormat('id-ID').format(response.discount)}</span>
+                                </div>
+                            `;
+                            $('.space-y-4 .tax').after(discountRow);
+
+                            // Update Total
+                            $('#total-amount').text('Rp ' + new Intl.NumberFormat('id-ID')
+                                .format(response.new_total));
+
+                            // Update hidden input
+                            $('#applied_promo_id').val(response.promo_id);
+
+                        } else {
+                            msg.removeClass('hidden text-green-500').addClass('text-red-500')
+                                .text(
+                                    response.message);
+                        }
+                    },
+                    error: function() {
+                        btn.text('Apply').prop('disabled', false);
+                        alert('Something went wrong. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

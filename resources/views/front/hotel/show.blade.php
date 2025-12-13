@@ -567,12 +567,113 @@
                     return;
                 }
 
-                // Store in session/local storage or submit form
-                console.log('Selected rooms:', selectedRooms);
-                // TODO: Implement checkout flow
-                alert('Booking functionality will be implemented');
+                // Check if user is logged in
+                const isLoggedIn = {{ auth()->check() ? 'true' : 'false' }};
+
+                if (!isLoggedIn) {
+                    document.getElementById('permissionModal').classList.remove('hidden');
+                    return;
+                }
+
+                // Show loading state
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+                this.disabled = true;
+
+                fetch("{{ route('hotel.booking.store', $hotel->slug) }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                            rooms: selectedRooms.map(room => ({
+                                id: room.id,
+                                quantity: room.quantity,
+                                price: room.price
+                            })),
+                            check_in: "{{ $checkIn ?? now()->toDateString() }}",
+                            check_out: "{{ $checkOut ?? now()->addDay()->toDateString() }}"
+                        })
+                    })
+                    .then(response => {
+                        return response.text().then(text => {
+                            // Check if response is valid JSON
+                            try {
+                                const data = JSON.parse(text);
+                                if (!response.ok) {
+                                    throw new Error(data.message ||
+                                        'Network response was not ok');
+                                }
+                                return data;
+                            } catch (e) {
+                                // If parsing fails, it's likely HTML (Login page or Error page)
+                                if (text.includes('<!DOCTYPE html>') || text.includes(
+                                    '<html')) {
+                                    // Assuming session expired or middleware redirect
+                                    document.getElementById('permissionModal').classList.remove(
+                                        'hidden');
+                                    throw new Error('Please login to continue');
+                                }
+                                throw new Error('Server returned invalid response: ' + text
+                                    .substring(0, 50) + '...');
+                            }
+                        });
+                    })
+                    .then(data => {
+                        if (data.redirect_url) {
+                            window.location.href = data.redirect_url;
+                        } else {
+                            // fallback
+                            window.location.reload();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Reset button
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        if (error.message !== 'Please login to continue') {
+                            alert('Failed to process booking. Please try again.');
+                        }
+                    });
+            });
+
+            // Login Redirect Logic
+            document.getElementById('loginRedirectBtn').addEventListener('click', function() {
+                const isMobile = window.innerWidth <= 768; // Standard mobile breakpoint
+                const loginRoute = isMobile ? "{{ route('login') }}" : "{{ route('login_register') }}";
+                window.location.href = loginRoute;
+            });
+
+            document.getElementById('closePermissionModal').addEventListener('click', function() {
+                document.getElementById('permissionModal').classList.add('hidden');
             });
         });
     </script>
 
+    <!-- Permission Modal -->
+    <div id="permissionModal"
+        class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-sm overflow-hidden text-center p-6">
+            <div class="mb-4">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-lock text-2xl text-red-500"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Login Required</h3>
+                <p class="text-gray-500 text-sm">Please login to proceed with your booking.</p>
+            </div>
+            <div class="flex flex-col gap-3">
+                <button id="loginRedirectBtn"
+                    class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary-600 transition-colors">
+                    Login Now
+                </button>
+                <button id="closePermissionModal"
+                    class="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-colors">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
 @endsection

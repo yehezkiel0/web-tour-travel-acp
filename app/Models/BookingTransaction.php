@@ -22,6 +22,7 @@ class BookingTransaction extends Model
         'contact_phone',
         'contact_email',
         'notes',
+        'promo_code_id',
     ];
 
     public function user(): BelongsTo

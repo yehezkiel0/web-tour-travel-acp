@@ -194,6 +194,74 @@
                 </div>
             </div>
 
+            <!-- Recent Hotel Bookings -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Recent Hotel Bookings</h3>
+                    <a href="{{ route('admin_hotel_bookings') }}"
+                        class="text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium">
+                        View All <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Booking Code</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Hotel</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Member</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Dates</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Total</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse($recentHotelBookings as $booking)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        {{ $booking->booking_code }}</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $booking->hotel->name }}</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $booking->user->name ?? 'Guest' }}</td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                                        {{ \Carbon\Carbon::parse($booking->check_in_date)->format('d M') }} -
+                                        {{ \Carbon\Carbon::parse($booking->check_out_date)->format('d M') }}
+                                    </td>
+                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                        {{ formatIDR($booking->total_price) }}</td>
+                                    <td class="px-4 py-3 whitespace-nowrap">
+                                        @php
+                                            $statusColors = [
+                                                'pending' => 'bg-yellow-100 text-yellow-800',
+                                                'confirmed' => 'bg-green-100 text-green-800',
+                                                'cancelled' => 'bg-red-100 text-red-800',
+                                                'completed' => 'bg-blue-100 text-blue-800',
+                                            ];
+                                            $color = $statusColors[$booking->status] ?? 'bg-gray-100 text-gray-800';
+                                        @endphp
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $color }}">
+                                            {{ ucfirst($booking->status) }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="px-4 py-6 text-center text-gray-500">No hotel bookings yet
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <!-- Testimonials Section -->
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div class="flex items-center justify-between mb-4">

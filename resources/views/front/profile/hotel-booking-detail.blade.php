@@ -54,8 +54,8 @@
                     <!-- Hotel Info -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                         <div class="relative h-48">
-                            @if ($hotelBooking->hotel && $hotelBooking->hotel->photos->first())
-                                <img src="{{ asset('storage/' . $hotelBooking->hotel->photos->first()->photo) }}"
+                            @if ($hotelBooking->hotel && $hotelBooking->hotel->featured_photo)
+                                <img src="{{ Storage::url($hotelBooking->hotel->featured_photo) }}"
                                     alt="{{ $hotelBooking->hotel->name }}" class="w-full h-full object-cover">
                             @else
                                 <div
@@ -117,9 +117,9 @@
                             Room Details
                         </h3>
                         <div class="flex flex-col md:flex-row gap-6">
-                            @if ($hotelBooking->room && $hotelBooking->room->photo)
+                            @if ($hotelBooking->room && $hotelBooking->room->room_photo)
                                 <div class="w-full md:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
-                                    <img src="{{ asset('storage/' . $hotelBooking->room->photo) }}"
+                                    <img src="{{ Storage::url($hotelBooking->room->room_photo) }}"
                                         alt="{{ $hotelBooking->room->room_type }}" class="w-full h-full object-cover">
                                 </div>
                             @endif

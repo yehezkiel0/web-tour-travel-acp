@@ -50,8 +50,8 @@
                                     <div class="flex flex-col lg:flex-row lg:items-center gap-6">
                                         <!-- Destination Image -->
                                         <div class="w-full lg:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
-                                            @if ($booking->destination && $booking->destination->photos->first())
-                                                <img src="{{ asset('storage/' . $booking->destination->photos->first()->photo) }}"
+                                            @if ($booking->destination && $booking->destination->featured_photo)
+                                                <img src="{{ Storage::url($booking->destination->featured_photo) }}"
                                                     alt="{{ $booking->destination->title }}"
                                                     class="w-full h-full object-cover">
                                             @else
@@ -164,8 +164,8 @@
                                     <div class="flex flex-col lg:flex-row lg:items-center gap-6">
                                         <!-- Hotel Image -->
                                         <div class="w-full lg:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
-                                            @if ($booking->hotel && $booking->hotel->photos->first())
-                                                <img src="{{ asset('storage/' . $booking->hotel->photos->first()->photo) }}"
+                                            @if ($booking->hotel && $booking->hotel->featured_photo)
+                                                <img src="{{ Storage::url($booking->hotel->featured_photo) }}"
                                                     alt="{{ $booking->hotel->name }}" class="w-full h-full object-cover">
                                             @else
                                                 <div

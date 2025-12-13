@@ -97,13 +97,12 @@ class AdminHotelController extends Controller
     return redirect()->route('admin_hotel_index')->with('success', 'Hotel created successfully!');
   }
 
-  public function edit($id)
+  public function edit(Hotel $hotel)
   {
-    $hotel = Hotel::findOrFail($id);
     return view('admin.hotel.edit', compact('hotel'));
   }
 
-  public function update(Request $request, $id)
+  public function update(Request $request, Hotel $hotel)
   {
     $request->validate([
       'name' => 'required|string|max:255',
@@ -117,7 +116,6 @@ class AdminHotelController extends Controller
       'longitude' => 'nullable|numeric',
     ]);
 
-    $hotel = Hotel::findOrFail($id);
     $hotel->name = $request->name;
     $hotel->slug = Str::slug($request->name);
     $hotel->description = $request->description;
@@ -155,9 +153,8 @@ class AdminHotelController extends Controller
     return redirect()->route('admin_hotel_index')->with('success', 'Hotel updated successfully!');
   }
 
-  public function delete($id)
+  public function delete(Hotel $hotel)
   {
-    $hotel = Hotel::findOrFail($id);
 
     if ($hotel->featured_photo) {
       Storage::disk('public')->delete($hotel->featured_photo);
@@ -182,13 +179,13 @@ class AdminHotelController extends Controller
   }
 
   // Rooms Management
-  public function rooms($id)
+  public function rooms(Hotel $hotel)
   {
-    $hotel = Hotel::with('rooms')->findOrFail($id);
+    $hotel->load('rooms');
     return view('admin.hotel.rooms', compact('hotel'));
   }
 
-  public function storeRoom(Request $request, $id)
+  public function storeRoom(Request $request, Hotel $hotel)
   {
     $request->validate([
       'room_name' => 'required|string|max:255',
@@ -202,7 +199,7 @@ class AdminHotelController extends Controller
     ]);
 
     $room = new HotelRoom();
-    $room->hotel_id = $id;
+    $room->hotel_id = $hotel->id;
     $room->room_name = $request->room_name;
     $room->room_description = $request->room_description;
     $room->max_guests = $request->max_guests;
@@ -224,30 +221,69 @@ class AdminHotelController extends Controller
 
     $room->save();
 
-    return redirect()->route('admin_hotel_rooms', $id)->with('success', 'Room added successfully!');
+    return redirect()->route('admin_hotel_rooms', $hotel->slug)->with('success', 'Room added successfully!');
   }
 
-  public function deleteRoom($hotelId, $roomId)
+  public function updateRoom(Request $request, Hotel $hotel, HotelRoom $room)
   {
-    $room = HotelRoom::where('hotel_id', $hotelId)->findOrFail($roomId);
+    $request->validate([
+      'room_name' => 'required|string|max:255',
+      'room_description' => 'nullable|string',
+      'max_guests' => 'required|integer|min:1',
+      'bed_count' => 'required|integer|min:1',
+      'bed_type' => 'required|string|max:255',
+      'price_without_breakfast' => 'required|numeric|min:0',
+      'price_with_breakfast' => 'required|numeric|min:0',
+      'room_photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ]);
 
+    $room->room_name = $request->room_name;
+    $room->room_description = $request->room_description;
+    $room->max_guests = $request->max_guests;
+    $room->bed_count = $request->bed_count;
+    $room->bed_type = $request->bed_type;
+    $room->price_without_breakfast = $request->price_without_breakfast;
+    $room->price_with_breakfast = $request->price_with_breakfast;
+    // Checkbox handling: if not present in request, set to false
+    $room->has_breakfast = $request->has('has_breakfast');
+    $room->free_cancellation = $request->has('free_cancellation');
+    $room->pay_at_hotel = $request->has('pay_at_hotel');
+    $room->smoking_allowed = $request->has('smoking_allowed');
+    $room->has_wifi = $request->has('has_wifi');
+    $room->has_air_conditioning = $request->has('has_air_conditioning');
+
+    if ($request->hasFile('room_photo')) {
+      if ($room->room_photo) {
+        Storage::disk('public')->delete($room->room_photo);
+      }
+      $path = $request->file('room_photo')->store('hotels/rooms', 'public');
+      $room->room_photo = $path;
+    }
+
+    $room->save();
+
+    return redirect()->route('admin_hotel_rooms', $hotel->slug)->with('success', 'Room updated successfully!');
+  }
+
+  public function deleteRoom(Hotel $hotel, HotelRoom $room)
+  {
     if ($room->room_photo) {
       Storage::disk('public')->delete($room->room_photo);
     }
 
     $room->delete();
 
-    return redirect()->route('admin_hotel_rooms', $hotelId)->with('success', 'Room deleted successfully!');
+    return redirect()->route('admin_hotel_rooms', $hotel->slug)->with('success', 'Room deleted successfully!');
   }
 
   // Amenities Management
-  public function amenities($id)
+  public function amenities(Hotel $hotel)
   {
-    $hotel = Hotel::with('amenities')->findOrFail($id);
+    $hotel->load('amenities');
     return view('admin.hotel.amenities', compact('hotel'));
   }
 
-  public function storeAmenity(Request $request, $id)
+  public function storeAmenity(Request $request, Hotel $hotel)
   {
     $request->validate([
       'name' => 'required|string|max:255',
@@ -256,20 +292,19 @@ class AdminHotelController extends Controller
     ]);
 
     HotelAmenity::create([
-      'hotel_id' => $id,
+      'hotel_id' => $hotel->id,
       'name' => $request->name,
       'icon_class' => $request->icon_class,
       'category' => $request->category,
     ]);
 
-    return redirect()->route('admin_hotel_amenities', $id)->with('success', 'Amenity added successfully!');
+    return redirect()->route('admin_hotel_amenities', $hotel->slug)->with('success', 'Amenity added successfully!');
   }
 
-  public function deleteAmenity($hotelId, $amenityId)
+  public function deleteAmenity(Hotel $hotel, HotelAmenity $amenity)
   {
-    $amenity = HotelAmenity::where('hotel_id', $hotelId)->findOrFail($amenityId);
     $amenity->delete();
 
-    return redirect()->route('admin_hotel_amenities', $hotelId)->with('success', 'Amenity deleted successfully!');
+    return redirect()->route('admin_hotel_amenities', $hotel->slug)->with('success', 'Amenity deleted successfully!');
   }
 }

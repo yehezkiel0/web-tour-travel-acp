@@ -1,11 +1,12 @@
 <!-- Newsletter Subscription Section -->
-<div class="bg-gradient-to-r from-blue-600 to-indigo-700 py-12">
+<div class="bg-gradient-to-r from-blue-600 to-indigo-700 py-8 md:py-12">
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto text-center">
             <div class="mb-6">
-                <i class="fas fa-envelope text-white text-5xl mb-4"></i>
-                <h3 class="text-3xl font-bold text-white mb-3">Subscribe to Our Newsletter</h3>
-                <p class="text-blue-100 text-lg">Get exclusive travel deals, tips, and destination guides delivered to
+                <i class="fas fa-envelope text-white text-3xl md:text-5xl mb-3 md:mb-4"></i>
+                <h3 class="text-xl md:text-3xl font-bold text-white mb-2 md:mb-3">Subscribe to Our Newsletter</h3>
+                <p class="text-blue-100 text-sm md:text-lg">Get exclusive travel deals, tips, and destination guides
+                    delivered to
                     your inbox!</p>
             </div>
 
@@ -15,15 +16,15 @@
                     <div class="flex-1">
                         <input type="email" name="email" id="newsletterEmail" placeholder="Enter your email address"
                             required
-                            class="w-full px-6 py-4 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white">
+                            class="w-full px-4 py-3 md:px-6 md:py-4 rounded-lg text-sm md:text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white">
                     </div>
                     <button type="submit"
-                        class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2">
+                        class="bg-white text-blue-600 px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center gap-2 text-sm md:text-base">
                         <i class="fas fa-paper-plane"></i>
                         <span>Subscribe</span>
                     </button>
                 </div>
-                <p class="text-blue-100 text-sm mt-3">We respect your privacy. Unsubscribe anytime.</p>
+                <p class="text-blue-100 text-xs md:text-sm mt-3">We respect your privacy. Unsubscribe anytime.</p>
             </form>
 
             <!-- Success Message -->

@@ -146,21 +146,21 @@
                                                 </td>
                                                 <td class="px-4 py-3">
                                                     <div class="flex items-center gap-2">
-                                                        <a href="{{ route('admin_hotel_edit', $hotel->id) }}"
+                                                        <a href="{{ route('admin_hotel_edit', $hotel->slug) }}"
                                                             class="text-blue-600 hover:text-blue-800">
                                                             <i class="fa-solid fa-edit"></i>
                                                         </a>
-                                                        <a href="{{ route('admin_hotel_rooms', $hotel->id) }}"
+                                                        <a href="{{ route('admin_hotel_rooms', $hotel->slug) }}"
                                                             class="text-green-600 hover:text-green-800"
                                                             title="Manage Rooms">
                                                             <i class="fa-solid fa-bed"></i>
                                                         </a>
-                                                        <a href="{{ route('admin_hotel_amenities', $hotel->id) }}"
+                                                        <a href="{{ route('admin_hotel_amenities', $hotel->slug) }}"
                                                             class="text-purple-600 hover:text-purple-800"
                                                             title="Manage Amenities">
                                                             <i class="fa-solid fa-list"></i>
                                                         </a>
-                                                        <form action="{{ route('admin_hotel_delete', $hotel->id) }}"
+                                                        <form action="{{ route('admin_hotel_delete', $hotel->slug) }}"
                                                             method="POST" class="inline"
                                                             onsubmit="return confirm('Are you sure?');">
                                                             @csrf
