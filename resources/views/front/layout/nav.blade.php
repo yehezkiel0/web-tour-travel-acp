@@ -1,4 +1,4 @@
-<header class="navbar-container">
+<header class="navbar-container sticky top-0 z-[999] bg-white transition-all duration-300">
     <nav class="navbar" id="navbar-home">
         <div
             class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-2 xl:pt-4 xl:px-0">
@@ -9,66 +9,119 @@
             </a>
             <ul class="nav-menu hidden xl:flex flex-row gap-x-6 xl:gap-x-10 items-center">
                 <li><a href="{{ route('home') }}"
-                        class="{{ request()->is('home') ? 'is-active custom-border' : '' }}flex pb-[26px] pt-7 custom-border">Home</a>
+                        class="{{ request()->is('home') ? 'is-active custom-border' : '' }}flex pb-[26px] pt-7 custom-border">{{ __('messages.home') }}</a>
                 </li>
                 <li class="relative">
                     <a href="#" class="relative flex flex-row items-baseline gap-x-2 pb-[26px] pt-7"
                         data-dropdown="travel">
-                        Travel
+                        {{ __('messages.travel') }}
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
-                    <ul class="bg-white w-48 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
+                    <ul class="hidden bg-white w-48 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
                         id="dropdown-travel">
                         <li class="py-3 z-[1000] px-4">
-                            <a href="{{ route('destination', ['type' => 'open-trip']) }}"
-                                class="text-sm flex items-center gap-x-3">
+                            <a href="#" class="text-sm flex items-center gap-x-3">
                                 <i class="fa-solid fa-person-walking-luggage text-lg"></i>
-                                Open Trip
+                                {{ __('messages.open_trip') }}
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
-                            <a href="{{ route('destination', ['type' => 'private-trip']) }}"
-                                class="text-sm flex items-center gap-x-3">
+                            <a href="#" class="text-sm flex items-center gap-x-3">
                                 <i class="fa-solid fa-suitcase text-lg"></i>
-                                Private Tour
+                                {{ __('messages.private_tour') }}
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
                             <a href="#" class="text-sm flex items-center gap-x-3">
                                 <i class="fa-solid fa-briefcase text-lg"></i>
-                                Various Package
+                                {{ __('messages.various_package') }}
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li><a href="{{ route('hotel.index') }}" class=" flex pb-[26px] pt-7 custom-border">Hotel</a></li>
+                <li><a href="{{ route('hotel.index') }}"
+                        class=" flex pb-[26px] pt-7 custom-border">{{ __('messages.hotel') }}</a></li>
                 <li class="relative">
                     <a href="#" class="flex flex-row items-center gap-x-2 pb-[26px] pt-7 "
                         data-dropdown="services">
-                        Services
+                        {{ __('messages.services') }}
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
-                    <ul class="bg-white w-48 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
+                    <ul class="hidden bg-white w-48 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
                         id="dropdown-services">
                         <li class="py-3 z-[1000] px-4">
                             <a href="{{ route('services_medical') }}" class="text-sm flex items-center gap-x-3">
-                                Medical Health & Beauty
+                                {{ __('messages.medical') }}
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
                             <a href="{{ route('services_recruitment') }}" class="text-sm flex items-center gap-x-3">
-                                Recruitment
+                                {{ __('messages.recruitment') }}
                             </a>
                         </li>
                         <li class="py-3 z-[1000] px-4">
                             <a href="{{ route('services_entertainment') }}" class="text-sm flex items-center gap-x-3">
-                                Entertainment
+                                {{ __('messages.entertainment') }}
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li><a href="{{ route('about') }}" class="flex pb-[26px] pt-7 custom-border">About Us</a></li>
-                <li><a href="{{ route('contact') }}" class="flex pb-[26px] pt-7 custom-border">Contact Us</a></li>
+                <li><a href="{{ route('blog.index') }}"
+                        class="flex pb-[26px] pt-7 custom-border">{{ __('messages.blog') }}</a></li>
+                <li><a href="{{ route('about') }}"
+                        class="flex pb-[26px] pt-7 custom-border">{{ __('messages.about_us') }}</a></li>
+                <li><a href="{{ route('contact') }}"
+                        class="flex pb-[26px] pt-7 custom-border">{{ __('messages.contact_us') }}</a></li>
+
+                {{-- Language Selector --}}
+                <li class="relative">
+                    <a href="#"
+                        class="relative flex flex-row items-baseline gap-x-2 pb-[26px] pt-7 font-semibold text-blue-600 uppercase"
+                        data-dropdown="language">
+                        {{ LaravelLocalization::getCurrentLocale() }}
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </a>
+                    <ul class="hidden bg-white w-24 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
+                        id="dropdown-language">
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li>
+                                <a rel="alternate" hreflang="{{ $localeCode }}"
+                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                                    class="block py-2 z-[1000] px-4 hover:bg-gray-100 cursor-pointer">
+                                    <span
+                                        class="text-sm font-medium uppercase {{ LaravelLocalization::getCurrentLocale() == $localeCode ? 'text-blue-600' : '' }}">
+                                        {{ $localeCode }}
+                                    </span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+
+                {{-- Currency Selector --}}
+                <li class="relative">
+                    <a href="#"
+                        class="relative flex flex-row items-baseline gap-x-2 pb-[26px] pt-7 font-semibold text-blue-600"
+                        data-dropdown="currency">
+                        {{ $currentCurrency ?? 'IDR' }}
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </a>
+                    <ul class="hidden bg-white w-24 shadow-lg border absolute top-14 py-2 rounded-lg z-[1000] text-[#687176]"
+                        id="dropdown-currency">
+                        @foreach (['IDR', 'USD', 'KRW', 'SGD', 'MYR', 'EUR'] as $curr)
+                            <li class="py-2 z-[1000] px-4 hover:bg-gray-100 cursor-pointer"
+                                onclick="document.getElementById('form-currency-{{ $curr }}').submit()">
+                                <span
+                                    class="text-sm font-medium {{ ($currentCurrency ?? 'IDR') == $curr ? 'text-blue-600' : '' }}">{{ $curr }}</span>
+                                <form id="form-currency-{{ $curr }}" action="{{ route('currency.switch') }}"
+                                    method="POST" class="hidden">
+                                    @csrf
+                                    <input type="hidden" name="currency" value="{{ $curr }}">
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
             </ul>
             <div class="hidden xl:flex flex-row gap-x-[30px]">
                 @guest
@@ -121,12 +174,28 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <!-- My Itineraries -->
+                                    <li class="z-[1000] hover:bg-gray-50 transition-colors">
+                                        <a href="{{ route('itineraries.index') }}"
+                                            class="text-sm flex items-center gap-x-3 py-3 px-4">
+                                            <i class="fa-solid fa-map-location-dot text-primary"></i>
+                                            My Itineraries
+                                        </a>
+                                    </li>
                                     <!-- My Bookings -->
                                     <li class="z-[1000] hover:bg-gray-50 transition-colors">
                                         <a href="{{ route('profile.bookings') }}"
                                             class="text-sm flex items-center gap-x-3 py-3 px-4">
                                             <i class="fa-solid fa-ticket text-primary"></i>
                                             My Bookings
+                                        </a>
+                                    </li>
+                                    <!-- My Points -->
+                                    <li class="z-[1000] hover:bg-gray-50 transition-colors">
+                                        <a href="{{ route('profile.points') }}"
+                                            class="text-sm flex items-center gap-x-3 py-3 px-4">
+                                            <i class="fa-solid fa-coins text-primary"></i>
+                                            My Points
                                         </a>
                                     </li>
                                     <!-- Edit Profile -->
@@ -240,6 +309,12 @@
                     <a href="{{ route('services_entertainment') }}" class="text-lg flex items-center gap-x-5">
                         <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
                         Entertainment
+                    </a>
+                </li>
+                <li class="py-3 px-4">
+                    <a href="{{ route('blog.index') }}" class="text-lg flex items-center gap-x-5">
+                        <i class="fa-solid fa-newspaper text-xl"></i>
+                        Blog
                     </a>
                 </li>
                 <li class="py-3 px-4">

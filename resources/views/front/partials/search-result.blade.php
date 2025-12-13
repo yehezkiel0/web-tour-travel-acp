@@ -49,3 +49,9 @@
         <p class="text-gray-2">No results found</p>
     </div>
 @endforelse
+
+@if ($results->hasPages())
+    <div class="mt-8 flex justify-center">
+        {{ $results->appends(request()->query())->links('pagination.custom') }}
+    </div>
+@endif

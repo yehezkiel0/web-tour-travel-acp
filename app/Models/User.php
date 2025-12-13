@@ -70,4 +70,52 @@ class User extends Authenticatable
     {
         return $this->hasMany(DestinationReview::class);
     }
+
+    public function loyaltyPointTransactions(): HasMany
+    {
+        return $this->hasMany(LoyaltyPointTransaction::class);
+    }
+
+    public function addPoints(int $amount, string $description = 'Earned points')
+    {
+        $this->increment('loyalty_points', $amount);
+        $this->loyaltyPointTransactions()->create([
+            'points' => $amount,
+            'type' => 'earn',
+            'description' => $description,
+        ]);
+        $this->updateTier();
+    }
+
+    public function redeemPoints(int $amount, string $description = 'Redeemed points')
+    {
+        if ($this->loyalty_points < $amount) {
+            return false;
+        }
+
+        $this->decrement('loyalty_points', $amount);
+        $this->loyaltyPointTransactions()->create([
+            'points' => -$amount,
+            'type' => 'redeem',
+            'description' => $description,
+        ]);
+
+        return true;
+    }
+
+    public function updateTier()
+    {
+        // Simple tier logic
+        if ($this->loyalty_points >= 5000) {
+            $this->update(['loyalty_tier' => 'Platinum']);
+        } elseif ($this->loyalty_points >= 1000) {
+            $this->update(['loyalty_tier' => 'Gold']);
+        } else {
+            $this->update(['loyalty_tier' => 'Silver']);
+        }
+    }
+    public function itineraries(): HasMany
+    {
+        return $this->hasMany(Itinerary::class);
+    }
 }

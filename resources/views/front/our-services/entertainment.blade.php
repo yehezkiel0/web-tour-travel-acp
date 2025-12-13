@@ -9,7 +9,7 @@
                     <a href="{{ route('home') }}"
                         class="inline-flex gap-x-2 items-center font-medium text-gray-3 hover:underline">
                         <img src="{{ asset('images/icon/Home.svg') }}" alt="home-icon">
-                        Home
+                        {{ __('messages.home') }}
                     </a>
                 </li>
                 <li class="inline-flex items-center text-xs md:text-base">
@@ -19,7 +19,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        Services
+                        {{ __('messages.services') }}
                     </span>
                 </li>
                 <li>
@@ -42,13 +42,12 @@
                         <div class="text-center w-full px-8 xl:px-40 md:w-[calc(100%-395px)]">
                             <h1
                                 class="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#3477F6] to-[#1E4690] mb-6 md:leading-snug">
-                                Bringing Color
-                                to South Korea’s Entertainment Scene</h1>
-                            <p class="text-gray-2 text-[10px] md:text-sm mb-6">Creating unforgettable moments with
-                                innovation, creativity, and passion.</p>
-                            <a href="#"
+                                {{ __('messages.entertainment_hero_title') }}</h1>
+                            <p class="text-gray-2 text-[10px] md:text-sm mb-6">{{ __('messages.entertainment_hero_desc') }}
+                            </p>
+                            <a href="{{ route('contact') }}"
                                 class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
-                                Contact Us
+                                {{ __('messages.contact_us') }}
                             </a>
                         </div>
                         <figure class="w-3/4 md:w-[476px] md:h-auto">
@@ -62,7 +61,7 @@
                 <div class="w-full space-y-16">
                     <div class="space-y-2 text-center">
                         <h2 class="text-xl md:text-3xl font-semibold text-primary">
-                            Our Services
+                            {{ __('messages.our_services') }}
                         </h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
@@ -109,23 +108,20 @@
                             </svg>
                             <div class="space-y-4 flex-grow">
                                 <h4 class="text-lg md:text-2xl font-bold text-primary-800">
-                                    Event Management
+                                    {{ __('messages.event_management') }}
                                 </h4>
-                                <p class="text-[10px] md:text-sm font-normal text-gray-2">From corporate gatherings
-                                    to
-                                    large-scale festivals, we design and execute world-class events.</p>
+                                <p class="text-[10px] md:text-sm font-normal text-gray-2">
+                                    {{ __('messages.event_management_desc') }}</p>
                                 <div class="text-[10px] md:text-sm font-normal text-gray-1">
                                     <ul class="space-y-3">
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Corporate
-                                            Events & Brand
-                                            Activations
+                                            {{ __('messages.corporate_events') }}
                                         </li>
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Concerts & Music Festivals
+                                            {{ __('messages.concerts_festivals') }}
                                         </li>
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Private Celebrations
+                                            {{ __('messages.private_celebrations') }}
                                         </li>
                                     </ul>
                                 </div>
@@ -160,20 +156,20 @@
                             </svg>
                             <div class="space-y-4 flex-grow">
                                 <h4 class="text-lg md:text-2xl font-bold text-primary-800">
-                                    Lighting & Sound
+                                    {{ __('messages.lighting_sound') }}
                                 </h4>
-                                <p class="text-[10px] md:text-sm font-normal text-gray-2">Advanced technology and
-                                    experienced engineers ensuring immersive experiences.</p>
+                                <p class="text-[10px] md:text-sm font-normal text-gray-2">
+                                    {{ __('messages.lighting_sound_desc') }}</p>
                                 <div class="text-[10px] md:text-sm font-normal text-gray-1">
                                     <ul class="space-y-3">
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Professional Sound Systems
+                                            {{ __('messages.sound_systems') }}
                                         </li>
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Intelligent Lighting
+                                            {{ __('messages.intelligent_lighting') }}
                                         </li>
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Visual Projections
+                                            {{ __('messages.visual_projections') }}
                                         </li>
                                     </ul>
                                 </div>
@@ -209,20 +205,20 @@
                             </svg>
                             <div class="space-y-4 flex-grow">
                                 <h4 class="text-lg md:text-2xl font-bold text-primary-800">
-                                    Entertainment Solutions
+                                    {{ __('messages.entertainment_solutions') }}
                                 </h4>
-                                <p class="text-[10px] md:text-sm font-normal text-gray-2">Fully integrated entertainment
-                                    solutions in your special moments for dynamic atmospheres.</p>
+                                <p class="text-[10px] md:text-sm font-normal text-gray-2">
+                                    {{ __('messages.entertainment_solutions_desc') }}</p>
                                 <div class="text-[10px] md:text-sm font-normal text-gray-1">
                                     <ul class="space-y-3">
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Live Performances
+                                            {{ __('messages.live_performances') }}
                                         </li>
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Professional Artists
+                                            {{ __('messages.professional_artists') }}
                                         </li>
                                         <li class="flex gap-2 items-center"><i class="fa-solid fa-check text-primary"></i>
-                                            Stage Design
+                                            {{ __('messages.stage_design') }}
                                         </li>
                                     </ul>
                                 </div>
@@ -234,7 +230,7 @@
             <div class="max-w-7xl mx-auto px-4 py-14 sm:px-6 lg:px-0 md:py-[100px]">
                 <h2
                     class="w-full md:max-w-2xl text-2xl text-center font-semibold text-primary md:leading-tight mb-11 md:text-left md:text-5xl">
-                    Creating Moment is Easier with ACP</h2>
+                    {{ __('messages.creating_moment_title') }}</h2>
                 <div class="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-24">
                     <div class="w-full overflow-hidden h-auto md:max-w-[508px]">
                         <img src="{{ asset('images/services/service-entertainment-1.png') }}" alt="entertainment-1"
@@ -244,19 +240,19 @@
                         <div class="px-5 space-y-5 md:space-y-9 text-[#070828] font-medium text-base md:text-xl">
                             <div class="flex items-start gap-4 border-b pb-7 md:gap-12">
                                 <span>01</span>
-                                <h3>Expertise & Innovation</h3>
+                                <h3>{{ __('messages.expertise_innovation') }}</h3>
                             </div>
                             <div class="flex items-start gap-4 border-b pb-7 md:gap-12">
                                 <span>02</span>
-                                <h3>Cutting-Edge Technology</h3>
+                                <h3>{{ __('messages.cutting_edge_technology') }}</h3>
                             </div>
                             <div class="flex items-start gap-4 border-b pb-7 md:gap-12">
                                 <span>03</span>
-                                <h3>Tailored to Your Vision</h3>
+                                <h3>{{ __('messages.tailored_vision') }}</h3>
                             </div>
                             <div class="flex items-start gap-4 border-b pb-7 md:gap-12">
                                 <span>04</span>
-                                <h3>Seamless Execution</h3>
+                                <h3>{{ __('messages.seamless_execution') }}</h3>
                             </div>
                         </div>
                     </div>
@@ -267,11 +263,13 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Testimonial Header -->
                     <div class="text-center mb-12">
-                        <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">Testimonials</p>
-                        <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">What our Customers says...</h2>
+                        <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">
+                            {{ __('messages.testimonials') }}</p>
+                        <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">
+                            {{ __('messages.testimonials_title') }}</h2>
                         <button onclick="openTestimonialModal()"
                             class="mt-4 px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
-                            Share Your Experience
+                            {{ __('messages.share_experience') }}
                         </button>
                     </div>
 
@@ -404,11 +402,10 @@
                             </div>
                         @else
                             <div class="text-center py-12 bg-white rounded-2xl shadow-lg">
-                                <p class="text-gray-500 text-lg mb-4">No testimonials yet. Be the first to share your
-                                    experience!</p>
+                                <p class="text-gray-500 text-lg mb-4">{{ __('messages.no_testimonials') }}</p>
                                 <button onclick="openTestimonialModal()"
                                     class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
-                                    Write a Testimonial
+                                    {{ __('messages.write_testimonial') }}
                                 </button>
                             </div>
                         @endif

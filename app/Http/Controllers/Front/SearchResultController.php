@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Mews\Purifier\Facades\Purifier;
 use Illuminate\Support\Str;
 
@@ -14,141 +15,98 @@ class SearchResultController extends Controller
     public function index(Request $request)
     {
         $query = Destination::query();
-        $maxPrice = Destination::max('price');
-        $cities = Destination::select('city')->distinct()->orderBy('city')->pluck('city');
 
-        if ($request->filled('type')) {
-            $databaseType = Str::title(str_replace('-', ' ', $request->type));
-            $query->where('type', $databaseType);
-        }
-
-        $results = $query->get()->each(function ($result) {
-            $result->description_result = $result->description;
-            $result->duration = calculateDuration($result->date_started, $result->date_ended);
-        });
-
-        return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
-    }
-
-    public function searchResult(Request $request)
-    {
-        $request->validate([
-            'destination_input' => 'nullable|string|max:255',
-            'destination_date' => 'nullable|date',
-            'destination_type' => 'nullable|string'
-        ]);
-
-        // Simpan parameter pencarian ke session
-        $searchParams = [
-            'destination_input' => $request->destination_input,
-            'destination_date' => $request->destination_date,
-            'destination_type' => $request->destination_type
-        ];
-        session()->put('destination_search_params', $searchParams);
-
-        $query = Destination::query();
-        $maxPrice = Destination::max('price');
-        $cities = Destination::select('city')->distinct()->orderBy('city')->pluck('city');
-
-        if ($request->filled('destination_input')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('title', 'LIKE', '%' . $request->destination_input . '%')
-                    ->orWhere('description', 'LIKE', '%' . $request->destination_input . '%');
+        // 1. Keyword Search (Title or Description)
+        if ($request->filled('q')) {
+            $keyword = $request->q;
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('description', 'LIKE', '%' . $keyword . '%');
             });
         }
 
-        if ($request->filled('destination_date')) {
-            $query->whereDate('date_started', $request->destination_date);
-        }
-
-        if ($request->filled('destination_type')) {
-            $query->where('type', $request->destination_type);
-        }
-
-        $results = $query->get()->each(function ($result) {
-            $result->description_result = $result->description;
-            $result->duration = calculateDuration($result->date_started, $result->date_ended);
-        });
-
-        $request->replace([]);
-
-        return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
-    }
-
-    public function filterSearch(Request $request)
-    {
-        $request->validate([
-            'min_price' => 'nullable|numeric',
-            'max_price' => 'nullable|numeric',
-            'price_range' => 'nullable|numeric',
-            'location' => 'nullable|string',
-            'date' => 'nullable|date',
-            'trip_type' => 'nullable|array'
-        ]);
-        $query = Destination::query();
-
-        if ($request->filled(['min_price', 'max_price'])) {
-            $minPrice = (int) $request->min_price;
-            $maxPrice = (int) $request->max_price;
-            $query->whereBetween('price', [$minPrice, $maxPrice]);
-        } elseif ($request->filled('price_range')) {
-            $priceRange = (int) $request->price_range;
-            $query->where('price', '>=', $priceRange);
-        }
-
-        if ($request->filled('location') && $request->location !== '') {
+        // 2. Location (City)
+        if ($request->filled('location')) {
             $query->where('city', $request->location);
         }
 
-        if ($request->filled('date') && $request->date !== '') {
+        // 3. Date
+        if ($request->filled('date')) {
             $query->whereDate('date_started', $request->date);
         }
 
-        if ($request->filled('trip_type') && is_array($request->trip_type) && count($request->trip_type) > 0) {
-            $query->whereIn('type', $request->trip_type);
+        // 4. Trip Type (Array)
+        if ($request->filled('trip_type')) {
+            // Explode if it's a comma-separated string (from URL) or use as array
+            $types = is_array($request->trip_type) ? $request->trip_type : explode(',', $request->trip_type);
+            $query->whereIn('type', $types);
         }
 
-        $results = $query->get()->each(function ($result) {
+        // 5. Price Range
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', (int) $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', (int) $request->max_price);
+        }
+
+        // 6. Duration
+        if ($request->filled('duration')) {
+            $duration = $request->duration;
+            if ($duration == '1-3') {
+                $query->whereRaw('DATEDIFF(date_ended, date_started) + 1 BETWEEN 1 AND 3');
+            } elseif ($duration == '4-7') {
+                $query->whereRaw('DATEDIFF(date_ended, date_started) + 1 BETWEEN 4 AND 7');
+            } elseif ($duration == '8+') {
+                $query->whereRaw('DATEDIFF(date_ended, date_started) + 1 >= 8');
+            }
+        }
+
+        // 7. Sorting
+        if ($request->filled('sort')) {
+            switch ($request->sort) {
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'popularity':
+                    $query->orderBy('view_count', 'desc');
+                    break;
+                case 'rating':
+                    $query->withCount([
+                        'reviews as avg_rating' => function ($q) {
+                            $q->select(DB::raw('coalesce(avg(rating),0)'));
+                        }
+                    ])->orderByDesc('avg_rating');
+                    break;
+                default:
+                    $query->latest();
+            }
+        } else {
+            $query->latest();
+        }
+
+        // Execute Query
+        $results = $query->paginate(5);
+
+        // Transform the collection to add calculated properties
+        $results->getCollection()->transform(function ($result) {
             $result->description_result = $result->description;
             $result->duration = calculateDuration($result->date_started, $result->date_ended);
+            return $result;
         });
 
-        return view('front.partials.search-result', compact('results'));
-    }
+        // 8. Return Response
+        // If AJAX, return strictly the partial view
+        if ($request->ajax()) {
+            return view('front.partials.search-result', compact('results'));
+        }
 
-    public function searchAll(Request $request)
-    {
-        $searchParams = session('destination_search_params', []);
-
+        // Metadata for Filters
         $maxPrice = Destination::max('price');
         $cities = Destination::select('city')->distinct()->orderBy('city')->pluck('city');
-
-        if (empty($searchParams)) {
-            $results = collect();
-            return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
-        }
-
-        $query = Destination::query();
-
-        if (!empty($searchParams['destination_input'])) {
-            $query->where(function ($q) use ($searchParams) {
-                $q->where('title', 'LIKE', '%' . $searchParams['destination_input'] . '%')
-                    ->orWhere('description', 'LIKE', '%' . $searchParams['destination_input'] . '%');
-            });
-        }
-
-        if (!empty($searchParams['destination_date'])) {
-            $query->whereDate('date_started', $searchParams['destination_date']);
-        }
-
-        if (!empty($searchParams['destination_type'])) {
-            $query->where('type', $searchParams['destination_type']);
-        }
-
-        $results = $query->get()->each(function ($result) {
-            $result->description_result = $result->description;
-            $result->duration = calculateDuration($result->date_started, $result->date_ended);
-        });
 
         return view('front.destination.search-filter', compact('results', 'maxPrice', 'cities'));
     }

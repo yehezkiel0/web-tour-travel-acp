@@ -5,39 +5,44 @@
             <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
                 <div class="col-span-1 pt-7 md:col-span-2 md:pt-10">
                     <h4 class="text-[#333333] text-xs font-normal px-0 md:w-[90%] md:text-base md:px-4">
-                        Turning Your Dreams Into Reality with Complete and Integrated Solutions
+                        {{ __('messages.footer_tagline') }}
                     </h4>
                 </div>
                 <div class="text-[#333333]">
-                    <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">For Beginners</h3>
+                    <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">{{ __('messages.for_beginners') }}</h3>
                     <ul class="text-xs space-y-1 md:text-base md:space-y-2">
                         <li>
-                            <a href="{{ route('login_register') }}" class="font-normal hover:underline">New Account</a>
+                            <a href="{{ route('login_register') }}"
+                                class="font-normal hover:underline">{{ __('messages.new_account') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="font-normal hover:underline">Start Booking Travel</a>
+                            <a href="#"
+                                class="font-normal hover:underline">{{ __('messages.start_booking_travel') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="font-normal hover:underline">Start Booking Hotels</a>
+                            <a href="#"
+                                class="font-normal hover:underline">{{ __('messages.start_booking_hotels') }}</a>
                         </li>
                     </ul>
                 </div>
                 <div class="text-[#333333]">
-                    <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">Explore Us</h3>
+                    <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">{{ __('messages.explore_us') }}</h3>
                     <ul class="text-xs space-y-1 md:text-base md:space-y-2">
                         <li>
-                            <a href="#" class="font-normal hover:underline">Our Careers</a>
+                            <a href="#" class="font-normal hover:underline">{{ __('messages.our_careers') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="font-normal hover:underline">Privacy & Policy</a>
+                            <a href="#"
+                                class="font-normal hover:underline">{{ __('messages.privacy_policy') }}</a>
                         </li>
                         <li>
-                            <a href="#" class="font-normal hover:underline">Terms & Condition</a>
+                            <a href="#"
+                                class="font-normal hover:underline">{{ __('messages.terms_condition') }}</a>
                         </li>
                     </ul>
                 </div>
                 <div class="text-[#333333]">
-                    <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">Connect Us</h3>
+                    <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">{{ __('messages.connect_us') }}</h3>
                     <ul class="text-xs space-y-1 md:text-base md:space-y-2">
                         <li>
                             <a href="#" class="font-normal hover:underline">support&#64;acptours.id</a>
@@ -60,7 +65,7 @@
     <div class="container w-[90%] md:w-[80%] lg:w-[90%] xl:max-w-7xl mx-auto pt-12 px-4">
         <div class="flex flex-col-reverse gap-y-4 md:flex-row md:justify-between items-center">
             <p class="text-[#333333] text-xs mb-4 md:mb-0 md:text-base md:font-normal">
-                &copy; 2019 &bull; All rights reserved &bull; ACP Tours
+                &copy; 2019 &bull; {{ __('messages.rights_reserved') }} &bull; ACP Tours
             </p>
             <div class="flex flex-row gap-x-2">
                 <a href="#"

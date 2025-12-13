@@ -111,6 +111,16 @@
             </div>
 
             <div class="bg-white rounded-2xl w-full border h-fit order-1 lg:order-2 sticky top-20 lg:top-24">
+                {{-- Add to Itinerary Button --}}
+                @auth
+                    <div class="px-5 sm:px-7 pt-4 pb-2">
+                        <button onclick="openItineraryModal()"
+                            class="w-full bg-secondary text-gray-800 font-semibold py-3 rounded-xl hover:bg-yellow-400 transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Add to Itinerary
+                        </button>
+                    </div>
+                @endauth
+
                 <h3 class="text-lg sm:text-xl font-semibold text-gray-1 px-5 sm:px-7 py-4 sm:py-6">Start Booking</h3>
                 <hr>
                 <form action="{{ route('booking_form', $destination->slug) }}" method="POST" class="booking-form">
@@ -393,4 +403,90 @@
 
 
     @include('front.layout.footer')
+
+    {{-- Itinerary Modal --}}
+    @auth
+        <div id="itineraryModal"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl max-w-md w-full p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-gray-900">Add to Itinerary</h3>
+                    <button onclick="closeItineraryModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                @if (isset($userItineraries) && $userItineraries->count() > 0)
+                    <div class="space-y-3 max-h-[60vh] overflow-y-auto mb-4">
+                        @foreach ($userItineraries as $itinerary)
+                            <button onclick="addToItinerary({{ $itinerary->id }}, {{ $destination->id }})"
+                                class="w-full text-left p-3 rounded-lg border hover:bg-blue-50 hover:border-blue-300 transition flex justify-between items-center group">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">{{ $itinerary->name }}</h4>
+                                    <p class="text-xs text-gray-500">{{ $itinerary->items->count() }} items •
+                                        {{ $itinerary->start_date ? $itinerary->start_date->format('M d') : 'No Date' }}</p>
+                                </div>
+                                <i class="fa-solid fa-plus text-primary opacity-0 group-hover:opacity-100 transition"></i>
+                            </button>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-6">
+                        <p class="text-gray-500 mb-4">You don't have any itineraries yet.</p>
+                        <a href="{{ route('itineraries.create') }}" class="text-primary font-semibold hover:underline">Create
+                            New Itinerary</a>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <script>
+            function openItineraryModal() {
+                document.getElementById('itineraryModal').classList.remove('hidden');
+            }
+
+            function closeItineraryModal() {
+                document.getElementById('itineraryModal').classList.add('hidden');
+            }
+
+            function addToItinerary(itineraryId, destinationId) {
+                fetch('{{ route('itinerary.add_item') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            itinerary_id: itineraryId,
+                            destination_id: destinationId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            iziToast.success({
+                                title: 'Success',
+                                message: 'Added to itinerary!',
+                                position: 'topRight'
+                            });
+                            closeItineraryModal();
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'Failed to add to itinerary',
+                                position: 'topRight'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'Something went wrong',
+                            position: 'topRight'
+                        });
+                    });
+            }
+        </script>
+    @endauth
 @endsection

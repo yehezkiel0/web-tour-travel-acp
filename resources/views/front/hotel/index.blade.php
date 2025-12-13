@@ -15,8 +15,8 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-center mb-12">
                 <div class="text-center text-white max-w-3xl">
-                    <h1 class="text-5xl font-bold mb-4">BOOK A HOTEL AT ACP TOURS</h1>
-                    <p class="text-xl">Always available. Get discount here</p>
+                    <h1 class="text-5xl font-bold mb-4">{{ __('messages.hotel_hero_title') }}</h1>
+                    <p class="text-xl">{{ __('messages.hotel_hero_subtitle') }}</p>
                 </div>
             </div>
             <div class="flex justify-center">
@@ -28,7 +28,8 @@
                                 <div class="flex items-center border border-gray-300 rounded-lg px-4 py-3 bg-white">
                                     <i class="fas fa-search text-gray-400 mr-3"></i>
                                     <input type="text" name="search" id="searchInput"
-                                        class="w-full focus:outline-none text-gray-700" placeholder="Malang"
+                                        class="w-full focus:outline-none text-gray-700"
+                                        placeholder="{{ __('messages.search_hotel_placeholder') }}"
                                         value="{{ request('search') }}">
                                 </div>
                             </div>
@@ -147,7 +148,7 @@
                             <div class="mt-6">
                                 <button type="submit"
                                     class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition shadow-lg">
-                                    <i class="fas fa-search mr-2"></i>Cari Hotel
+                                    <i class="fas fa-search mr-2"></i>{{ __('messages.search_hotel') }}
                                 </button>
                             </div>
                         </form>
@@ -176,8 +177,9 @@
                                 <i class="fas fa-search text-white text-xl"></i>
                             </div>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-800">Hasil Pencarian Hotel</h3>
-                                <p class="text-sm text-gray-600">{{ $hotels->total() }} hotel tersedia</p>
+                                <h3 class="text-xl font-bold text-gray-800">{{ __('messages.hotel_search_results') }}</h3>
+                                <p class="text-sm text-gray-600">{{ $hotels->total() }}
+                                    {{ __('messages.hotels_available') }}</p>
                             </div>
                         </div>
                         <a href="{{ route('hotel.index') }}" class="text-blue-600 hover:text-blue-800 transition">
@@ -196,7 +198,7 @@
                                 <p class="text-sm font-bold text-gray-800">
                                     {{ \Carbon\Carbon::parse($searchParams['check_in'])->format('d M') }} -
                                     {{ \Carbon\Carbon::parse($searchParams['check_out'])->format('d M Y') }}</p>
-                                <p class="text-xs text-gray-600 mt-1">{{ $nights }} malam</p>
+                                <p class="text-xs text-gray-600 mt-1">{{ $nights }} {{ __('messages.nights') }}</p>
                             </div>
                         @endif
 
@@ -236,17 +238,16 @@
             <div class="mb-8">
                 <div class="flex items-center mb-4">
                     <i class="fas fa-hotel text-blue-600 text-3xl mr-4"></i>
-                    <h3 class="text-2xl font-bold text-gray-800">Kalian bisa pilih hotel sepuas kalian!</h3>
+                    <h3 class="text-2xl font-bold text-gray-800">{{ __('messages.hotel_promo_title') }}</h3>
                 </div>
-                <p class="text-gray-600 mb-6">Jangan sampai tidak bisa menginap dengan sekali pesan. Selaras pesan, hotel
-                    berjugan kebutuhan</p>
+                <p class="text-gray-600 mb-6">{{ __('messages.hotel_promo_desc') }}</p>
 
                 <!-- City Filter Pills -->
                 <div class="flex flex-wrap gap-3 mb-8" id="cityFilters">
                     <button
                         class="city-filter-btn px-6 py-2 rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition active"
                         data-city="">
-                        All Cities
+                        {{ __('messages.all_cities') }}
                     </button>
                     @foreach ($cities as $city)
                         <button
@@ -282,7 +283,7 @@
                 @else
                     <div class="text-center py-12">
                         <i class="fas fa-hotel text-gray-300 text-6xl mb-4"></i>
-                        <p class="text-gray-500 text-lg">No hotels found</p>
+                        <p class="text-gray-500 text-lg">{{ __('messages.no_hotels_found') }}</p>
                     </div>
                 @endif
             </div>
@@ -296,7 +297,7 @@
             <div class="text-center">
                 <a href="{{ route('hotel.index') }}"
                     class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-12 py-3 rounded-full transition">
-                    See all Hotels
+                    {{ __('messages.see_all_hotels') }}
                 </a>
             </div>
         </div>
@@ -307,12 +308,11 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div class="text-white">
-                    <h2 class="text-3xl font-bold mb-4">Bisa refund ataupun reschedule secara gratis apapun alasannya!</h2>
-                    <p class="text-lg mb-6">Yuk, segera daftar di ACP Tours untuk ikopan yang menyebabkan bisa refund dan
-                        reschedule dengan mudah.</p>
+                    <h2 class="text-3xl font-bold mb-4">{{ __('messages.refund_title') }}</h2>
+                    <p class="text-lg mb-6">{{ __('messages.refund_desc') }}</p>
                     <button
                         class="bg-white text-purple-600 hover:bg-gray-100 font-semibold px-8 py-3 rounded-lg transition">
-                        Cek Infonya
+                        {{ __('messages.check_info') }}
                     </button>
                 </div>
                 <div>
@@ -327,8 +327,8 @@
     <div class="py-16 bg-gray-100">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-2 text-gray-800">TOP DESTINATIONS IN KOREA</h2>
-                <p class="text-gray-600">Saatnya kalian memilih destinasi yang menarik</p>
+                <h2 class="text-3xl font-bold mb-2 text-gray-800">{{ __('messages.top_destinations_korea') }}</h2>
+                <p class="text-gray-600">{{ __('messages.top_destinations_desc') }}</p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
                 @php
@@ -342,7 +342,8 @@
                                 alt="{{ $destination->city }}">
                             <div class="p-4 text-center">
                                 <h6 class="font-bold text-gray-800 mb-1">{{ $destination->city }}</h6>
-                                <small class="text-gray-500">{{ $destination->view_count }} accommodations</small>
+                                <small class="text-gray-500">{{ $destination->view_count }}
+                                    {{ __('messages.accommodations') }}</small>
                             </div>
                         </div>
                     </a>
@@ -351,7 +352,7 @@
             <div class="text-center">
                 <a href="{{ route('destination') }}"
                     class="inline-block bg-white border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-12 py-3 rounded-full transition">
-                    See all
+                    {{ __('messages.see_all') }}
                 </a>
             </div>
         </div>
@@ -360,8 +361,7 @@
     <!-- Why Book Section -->
     <div class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Mengapa kamu harus <span class="text-blue-600">Booking
-                    Hotel</span> di ACP Tours?</h2>
+            <h2 class="text-3xl font-bold text-center mb-12">{!! __('messages.why_book_hotel') !!}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Card 1 -->
                 <div class="rounded-xl p-8 text-center text-white"
@@ -371,9 +371,8 @@
                             <i class="fas fa-hotel text-5xl"></i>
                         </div>
                     </div>
-                    <h5 class="font-bold text-xl mb-4">Paket Akomodasi yang Variatif</h5>
-                    <p class="text-sm opacity-90">ACP Travel & Tours menyediakan berbagai pilihan hotel dan penginapan yang
-                        luas dan budget-friendly hingga resor, sesuai dengan preferensi dan anggaran Anda.</p>
+                    <h5 class="font-bold text-xl mb-4">{{ __('messages.varied_accommodation') }}</h5>
+                    <p class="text-sm opacity-90">{{ __('messages.varied_desc') }}</p>
                 </div>
 
                 <!-- Card 2 -->
@@ -384,9 +383,8 @@
                             <i class="fas fa-tags text-5xl"></i>
                         </div>
                     </div>
-                    <h5 class="font-bold text-xl mb-4">Harga Kompetitif</h5>
-                    <p class="text-sm opacity-90">Kami kami menawarkan harga yang kompetitif dengan diskon yang menarik
-                        memperhatikan biaya anda.</p>
+                    <h5 class="font-bold text-xl mb-4">{{ __('messages.competitive_price') }}</h5>
+                    <p class="text-sm opacity-90">{{ __('messages.competitive_desc') }}</p>
                 </div>
 
                 <!-- Card 3 -->
@@ -397,9 +395,8 @@
                             <i class="fas fa-calendar-check text-5xl"></i>
                         </div>
                     </div>
-                    <h5 class="font-bold text-xl mb-4">Kemudahan Reservasi</h5>
-                    <p class="text-sm opacity-90">Proses pemesanan yang mudah, baik secara online maupun melalui layanan
-                        pelanggan, membuat pengaturan perjalanan menjadi efisien.</p>
+                    <h5 class="font-bold text-xl mb-4">{{ __('messages.easy_reservation') }}</h5>
+                    <p class="text-sm opacity-90">{{ __('messages.easy_desc') }}</p>
                 </div>
 
                 <!-- Card 4 -->
@@ -410,10 +407,8 @@
                             <i class="fas fa-map-marker-alt text-5xl text-orange-600"></i>
                         </div>
                     </div>
-                    <h5 class="font-bold text-xl mb-4 text-gray-800">Lokasi Strategis</h5>
-                    <p class="text-sm text-gray-700">Kami pengalaman terbaik di lokasi-lokasi strategis yang dekat dengan
-                        dengan daya tarik utama. Anda tidak perlu khawatir menemukan lokasi-lokasi menarik, membuat Anda
-                        mudah.</p>
+                    <h5 class="font-bold text-xl mb-4 text-gray-800">{{ __('messages.strategic_location') }}</h5>
+                    <p class="text-sm text-gray-700">{{ __('messages.strategic_desc') }}</p>
                 </div>
             </div>
         </div>

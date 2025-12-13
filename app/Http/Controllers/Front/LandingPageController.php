@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Destination;
+use App\Models\BlogPost;
 
 class LandingPageController extends Controller
 {
@@ -12,8 +13,9 @@ class LandingPageController extends Controller
         $popularDestinations = Destination::orderBy('view_count', 'desc')->take(10)->get();
         $openTrips = Destination::where('type', 'Open Trip')->take(8)->get();
         $privateTrips = Destination::where('type', 'Private Trip')->take(4)->get();
+        $latestBlogs = BlogPost::where('is_published', true)->latest()->take(3)->get();
 
-        return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips'));
+        return view('front.home', compact('popularDestinations', 'openTrips', 'privateTrips', 'latestBlogs'));
     }
 
     public function destination_detail($slug)
@@ -31,7 +33,12 @@ class LandingPageController extends Controller
             });
         }
 
-        return view('front.destination.destination-detail', compact('destination', 'destination_photos', 'itineraries'));
+        $userItineraries = [];
+        if (auth()->check()) {
+            $userItineraries = auth()->user()->itineraries()->orderBy('created_at', 'desc')->get();
+        }
+
+        return view('front.destination.destination-detail', compact('destination', 'destination_photos', 'itineraries', 'userItineraries'));
     }
 
     public function servicesMedical()

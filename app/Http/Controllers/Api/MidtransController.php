@@ -44,38 +44,58 @@ class MidtransController extends Controller
                             'status' => 'pending',
                         ]);
                     } else {
-                        $transaction->update([
-                            'status' => 'paid',
-                        ]);
+                        if ($transaction->status !== 'paid') {
+                            $transaction->update(['status' => 'paid']);
+
+                            // Award points logic
+                            $transaction->load('user');
+                            if ($transaction->user) {
+                                $points = intval($transaction->total_price / 10000);
+                                if ($points > 0) {
+                                    $transaction->user->addPoints($points, "Booking Reward: {$transaction->code}");
+                                }
+                            }
+                        }
                     }
                 }
                 break;
             case 'settlement':
                 try {
-                    $transaction->update(['status' => 'paid']);
+                    // Check if already paid to avoid double points
+                    if ($transaction->status !== 'paid') {
+                        $transaction->update(['status' => 'paid']);
 
-                    $transaction->load(['user', 'destination']);
+                        $transaction->load(['user', 'destination']);
 
-                    if (!$transaction->user || !$transaction->destination) {
-                        Log::error('User or destination not found', [
+                        if ($transaction->user) {
+                            // Award points (1 point per 10,000 IDR)
+                            $points = intval($transaction->total_price / 10000);
+                            if ($points > 0) {
+                                $transaction->user->addPoints($points, "Booking Reward: {$transaction->code}");
+                            }
+                        }
+
+                        if (!$transaction->user || !$transaction->destination) {
+                            Log::error('User or destination not found', [
+                                'transaction_id' => $transaction->id,
+                                'user_id' => $transaction->user_id,
+                                'destination_id' => $transaction->destination_id
+                            ]);
+                            return;
+                        }
+
+                        Mail::to($transaction->user->email)
+                            ->send(new TicketMail(
+                                $transaction->user,
+                                $transaction,
+                                $transaction->destination
+                            ));
+
+                        Log::info('Ticket email sent successfully', [
                             'transaction_id' => $transaction->id,
-                            'user_id' => $transaction->user_id,
-                            'destination_id' => $transaction->destination_id
+                            'email' => $transaction->user->email
                         ]);
-                        return;
                     }
-
-                    Mail::to($transaction->user->email)
-                        ->send(new TicketMail(
-                            $transaction->user,
-                            $transaction,
-                            $transaction->destination
-                        ));
-
-                    Log::info('Ticket email sent successfully', [
-                        'transaction_id' => $transaction->id,
-                        'email' => $transaction->user->email
-                    ]);
                 } catch (\Exception $e) {
                     Log::error('Failed to process settlement', [
                         'transaction_id' => $transaction->id,
@@ -106,9 +126,9 @@ class MidtransController extends Controller
                     'travellers' => json_decode($transaction->traveller_details, true),
                     'total_price' => $transaction->total_price,
                 ];
-    
+
                 session()->put('booking', $bookingData);
-    
+
                 return redirect()->route('checkout', ['slug' => $transaction->destination->slug])
                     ->with('error', 'Payment failed. Please try again.');
                 break;
@@ -137,24 +157,24 @@ class MidtransController extends Controller
                 ->withBasicAuth($serverKey, '')
                 ->get($url);
 
-                if ($response->successful()) {
-                    $responseData = $response->json();
-        
-                    if (isset($responseData['status_code']) && $responseData['status_code'] == '404') {
-                        return response()->json([
-                            'status' => 'error',
-                            'message' => 'Transaction not found',
-                            'error' => $responseData['status_message']
-                        ], 404);
-                    }
-        
+            if ($response->successful()) {
+                $responseData = $response->json();
+
+                if (isset($responseData['status_code']) && $responseData['status_code'] == '404') {
                     return response()->json([
-                        'status' => 'success',
-                        'data' => $responseData
-                    ], 200);
+                        'status' => 'error',
+                        'message' => 'Transaction not found',
+                        'error' => $responseData['status_message']
+                    ], 404);
                 }
-        
-    
+
+                return response()->json([
+                    'status' => 'success',
+                    'data' => $responseData
+                ], 200);
+            }
+
+
             // Handle other errors
             return response()->json([
                 'status' => 'error',

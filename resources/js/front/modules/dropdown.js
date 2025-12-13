@@ -14,4 +14,6 @@ export const initDropdown = ($) => {
     setupDropdown('[data-dropdown="travel"]', "#dropdown-travel");
     setupDropdown('[data-dropdown="services"]', "#dropdown-services");
     setupDropdown('[data-dropdown="profile-user"]', "#dropdown-user-profile");
+    setupDropdown('[data-dropdown="currency"]', "#dropdown-currency");
+    setupDropdown('[data-dropdown="language"]', "#dropdown-language");
 };

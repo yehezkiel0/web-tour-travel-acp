@@ -16,17 +16,16 @@
                         <div class="flex flex-col items-center py-0 gap-y-5 sm:gap-y-2 lg:gap-y-5 lg:py-4 lg:items-start">
                             <div
                                 class="text-xl sm:text-2xl flex gap-x-2 md:text-4xl xl:text-5xl lg:block font-bold lg:leading-[60px]">
-                                <h1>Make Dreams a</h1>
-                                <h1 class="text-primary">Destination</h1>
+                                <h1>{{ __('messages.hero_title_1') }}</h1>
+                                <h1 class="text-primary">{{ __('messages.hero_title_2') }}</h1>
                             </div>
                             <p class="text-[12px] sm:text-[14px] md:text-base text-[#4F4F4F]">
-                                Make your dream trip to South Korea come true with <br />
-                                unforgettable experiences from ACP Tour & Travel.
+                                {!! __('messages.hero_subtitle') !!}
                             </p>
                         </div>
                         <button
                             class="bg-primary py-[10px] sm:py-[10px] sm:px-10 w-[164px] md:w-52 rounded-xl text-xs md:text-base text-white border border-[#E0E0E0] font-semibold hover:bg-primary-400">
-                            Discover Now
+                            {{ __('messages.discover_now') }}
                         </button>
                     </div>
                     <picture>
@@ -43,10 +42,10 @@
             <div class="max-w-7xl mx-auto py-7 px-6 md:px-7 lg:px-5 xl:px-0">
                 <h6
                     class="flex justify-center gap-x-2 xl:gap-x-0 lg:block font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 pb-[20px] text-center">
-                    Explore <span class="text-primary">Destination </span>
+                    {{ __('messages.explore_destination') }} <span class="text-primary">{{ __('messages.destination') }}
+                    </span>
                 </h6>
-                <p class="pb-[40px] text-center text-xs sm:text-sm lg:text-base">We have more than 100 destination you can
-                    choose</p>
+                <p class="pb-[40px] text-center text-xs sm:text-sm lg:text-base">{{ __('messages.explore_subtitle') }}</p>
                 <div class="swiper-popular-destination swiper-container">
                     <div class="swiper-wrapper">
                         @foreach ($popularDestinations as $destination)
@@ -89,14 +88,14 @@
                         <div class="w-full flex flex-col items-center relative" id="image-search">
                             <img src="{{ asset('images/home/sectionSearch.png') }}" alt="Search" loading="lazy"
                                 class="rounded-lg w-full" />
-                            <form action="{{ route('search_result') }}" method="POST"
+                            <form action="{{ route('search_result') }}" method="GET"
                                 class="absolute bottom-6 z-50 flex flex-row items-center justify-between w-[95%] xl:w-[90%] left-1/2 -translate-x-1/2 bg-gray-3 rounded-full border border-gray-400 p-1 md:p-2 shadow-lg glass">
-                                @csrf
+
                                 <div class="flex-1 flex items-center justify-between px-2 md:px-4 gap-2">
                                     <!-- Destination -->
                                     <div class="flex items-center gap-2 flex-1 min-w-0">
                                         <i class="fa-solid fa-location-dot text-gray-400 text-xs md:text-sm"></i>
-                                        <input type="text" id="destination_input" name="destination_input"
+                                        <input type="text" id="destination_input" name="q"
                                             placeholder="Destination"
                                             class="w-full bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 placeholder-gray-500 truncate focus:ring-0">
                                     </div>
@@ -107,7 +106,7 @@
                                     <div
                                         class="datepicker-container flex items-center gap-2 cursor-pointer relative group flex-1 min-w-0">
                                         <i class="fa-regular fa-calendar text-gray-400 text-xs md:text-sm"></i>
-                                        <input type="text" name="destination_date" id="destination_date"
+                                        <input type="text" name="date" id="destination_date"
                                             class="datepicker w-full bg-transparent border-none outline-none text-xs md:text-sm text-gray-700 placeholder-gray-500 cursor-pointer focus:ring-0 p-0"
                                             placeholder="Date" readonly>
                                         <i class="fa-solid fa-chevron-down text-[10px] text-gray-400"></i>
@@ -120,13 +119,13 @@
                                         <i class="fa-solid fa-person-hiking text-gray-400 text-xs md:text-sm"></i>
 
                                         <!-- Hidden Input for Form Submission -->
-                                        <input type="hidden" name="destination_type" id="destination_type_input">
+                                        <input type="hidden" name="trip_type" id="destination_type_input">
 
                                         <!-- Custom Dropdown Trigger -->
                                         <div id="dropdown-trigger"
                                             class="cursor-pointer flex items-center justify-between w-full">
                                             <span id="selected-type"
-                                                class="text-[9px] md:text-xs lg:text-sm xl:text-base text-gray-400 truncate">Type</span>
+                                                class="text-[9px] md:text-xs lg:text-sm xl:text-base text-gray-400 truncate">{{ __('messages.type') }}</span>
                                             <i class="fa-solid fa-chevron-down text-[10px] md:text-[8px] lg:text-[10px] transition-transform duration-200 ml-1"
                                                 id="dropdown-icon"></i>
                                         </div>
@@ -136,17 +135,17 @@
                                             class="hidden absolute top-full left-0 mt-2 w-full min-w-[120px] bg-white rounded-lg shadow-xl z-50 overflow-hidden border border-gray-100">
                                             <div class="option-item px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer text-[10px] md:text-xs lg:text-sm transition-colors"
                                                 data-value="Open Trip">
-                                                Open Trip
+                                                {{ __('messages.open_trip') }}
                                             </div>
                                             <div class="option-item px-4 py-2 text-gray-700 hover:bg-blue-50 cursor-pointer text-[10px] md:text-xs lg:text-sm transition-colors"
                                                 data-value="Private Trip">
-                                                Private Trip
+                                                {{ __('messages.private_tour') }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit"
-                                    class="font-semibold text-[10px] sm:text-[11px] lg:text-sm w-1/4 text-gray-1 rounded-full bg-secondary py-1 px-2 lg:py-2 lg:px-6 hover:bg-yellow-300 transition-all ease-in-out duration-300">Search</button>
+                                    class="font-semibold text-[10px] sm:text-[11px] lg:text-sm w-1/4 text-gray-1 rounded-full bg-secondary py-1 px-2 lg:py-2 lg:px-6 hover:bg-yellow-300 transition-all ease-in-out duration-300">{{ __('messages.search') }}</button>
                             </form>
                         </div>
                     </div>
@@ -154,21 +153,19 @@
                         <div class="flex flex-col gap-y-3 md:gap-y-[14px] lg:gap-y-[23px]">
                             <div class="flex flex-col gap-y-0 lg:gap-y-2 text-center md:text-start">
                                 <h1 class="font-bold text-xl md:text-2xl xl:text-[35px] text-gray-1">
-                                    One
-                                    Click for <span class="text-primary">You</span></h1>
-                                <p class="text-gray-3 text-xs xl:text-base">How it works?</p>
+                                    {{ __('messages.one_click_for') }} <span
+                                        class="text-primary">{{ __('messages.you') }}</span></h1>
+                                <p class="text-gray-3 text-xs xl:text-base">{{ __('messages.how_it_works') }}</p>
                             </div>
                             <div
                                 class="step-item flex flex-row items-center gap-x-3 py-2 px-3 md:gap-x-5 xl:gap-x-10 rounded-2xl border border-[#E0E0E0] md:py-4 md:px-5 xl:py-9 xl:px-10 cursor-pointer">
                                 <img src="{{ asset('images/icon/date.svg') }}" alt="date"
                                     class="icon-container w-10 md:w-11 lg:w-[52px] h-auto">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Set Your Date
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">
+                                        {{ __('messages.set_date') }}
                                     </h3>
-                                    <p class="text-gray-1 text-[10px] xl:text-xs">Choose the perfect date to
-                                        start your
-                                        unforgettable
-                                        journey.
+                                    <p class="text-gray-1 text-[10px] xl:text-xs">{{ __('messages.set_date_desc') }}
                                     </p>
                                 </div>
                             </div>
@@ -177,13 +174,11 @@
                                 <img src="{{ asset('images/icon/flight.svg') }}" alt="flight"
                                     class="icon-container w-10 md:w-11 lg:w-[52px]">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Select Your
-                                        Destination
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">
+                                        {{ __('messages.select_destination') }}
                                     </h3>
-                                    <p class="text-gray-1 text-[10px] xl:text-xs">Pick stunning destinations
-                                        that match
-                                        your dream
-                                        adventure.
+                                    <p class="text-gray-1 text-[10px] xl:text-xs">
+                                        {{ __('messages.select_destination_desc') }}
                                     </p>
                                 </div>
                             </div>
@@ -192,13 +187,11 @@
                                 <img src="{{ asset('images/icon/search.svg') }}" alt="search"
                                     class="icon-container w-10 md:w-11 lg:w-[52px]">
                                 <div class="flex flex-col gap-y-1 lg:gap-y-2">
-                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">Choose Your Trip
-                                        Type
+                                    <h3 class="font-semibold text-gray-1 text-xs md:text-sm xl:text-base">
+                                        {{ __('messages.choose_trip_type') }}
                                     </h3>
-                                    <p class="text-gray-1 text-[10px] xl:text-xs">From open trip, private
-                                        trip, and
-                                        various package, pick
-                                        the trip that suits you best.
+                                    <p class="text-gray-1 text-[10px] xl:text-xs">
+                                        {{ __('messages.choose_trip_type_desc') }}
                                     </p>
                                 </div>
                             </div>
@@ -216,14 +209,14 @@
                         class="lg:col-span-1 flex flex-col gap-y-2 lg:gap-y-[20px] justify-center items-center sm:items-start md:pl-4 lg:pl-0">
                         <h2
                             class="font-bold text-2xl block sm:flex sm:flex-col sm:gap-y-2 sm:text-4xl lg:text-[35px] text-center sm:text-left lg:leading-[60px]">
-                            Hop on Our <span class="font-semibold text-primary">Open Trip</span>
+                            {{ __('messages.hop_on_open_trip') }} <span
+                                class="font-semibold text-primary">{{ __('messages.open_trip') }}</span>
                         </h2>
-                        <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">We make exploring with
-                            <br class="hidden sm:block"> trips anyone can join
+                        <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base">{{ __('messages.open_trip_desc') }}
                         </p>
                         <a href="{{ route('destination', ['type' => 'open-trip']) }}"
                             class="bg-white py-2 px-5 text-xs text-center sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-primary border border-primary font-semibold hover:bg-primary-400 hover:text-white transition-all ease-in-out duration-300">
-                            See More
+                            {{ __('messages.see_more') }}
 
                         </a>
                     </div>
@@ -243,10 +236,10 @@
                                                 class="w-full h-full absolute bottom-0 bg-gradient-to-b from-linearCardStart via-linearCardMid to-linearCardEnd">
                                                 <div
                                                     class="background-transparent absolute bottom-0 border-t-2 border-white  bg-gradient-to-b from-radialCardStart via-radialCardMid to-radialCardEnd 
-                                                    backdrop-blur-sm w-full md:h-auto h-36 rounded-3xl">
+                                                    backdrop-blur-sm w-full h-auto rounded-3xl">
                                                     <div class="px-4 py-2 md:px-5 md:py-5">
                                                         <h4
-                                                            class="text-[15px] md:text-lg font-bold text-white md:pb-[10px]">
+                                                            class="text-[15px] md:text-lg font-bold text-white md:pb-[10px] line-clamp-3 min-h-[3.4em] md:min-h-[3.6em]">
                                                             {{ $trip->title }}
                                                         </h4>
                                                         <div
@@ -269,10 +262,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="text-white text-[10px] md:text-[13px]">
-                                                            <p>Start From</p>
+                                                            <p>{{ __('messages.start_from') }}</p>
                                                             <p class="font-bold text-sm md:text-[20px] text-secondary">
                                                                 {{ formatIDR($trip->price) }} <span
-                                                                    class="text-[13px] text-white font-normal">/person</span>
+                                                                    class="text-[13px] text-white font-normal">{{ __('messages.per_person') }}</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -293,12 +286,11 @@
                 <div
                     class="flex flex-col gap-y-4 sm:gap-y-[20px] justify-center items-center px-6 md:px-7 lg:px-5 xl:px-0">
                     <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center lg:leading-[60px]">
-                        Embark on Your Personalized
-                        <span class="font-semibold text-primary">Private Trip</span>
+                        {{ __('messages.embark_private_trip') }}
+                        <span class="font-semibold text-primary">{{ __('messages.private_tour') }}</span>
                     </h2>
-                    <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base text-center">We create personalized
-                        journeys
-                        tailored to your preferences
+                    <p class="pb-3 sm:pb-[20px] lg:pb-[40px] text-xs sm:text-base text-center">
+                        {{ __('messages.private_trip_desc') }}
                     </p>
                     <div class="wrapper-accordion xl:gap-x-4">
                         @foreach ($privateTrips as $trip)
@@ -362,10 +354,11 @@
             <div class="container mx-auto py-7 scroll-m-10">
                 <div class="flex flex-col gap-y-4 lg:gap-y-5 justify-center items-center px-6 xl:px-0">
                     <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1 text-center">
-                        Our Services <span class="font-semibold text-primary">Go Beyond Travel</span>
+                        {{ __('messages.our_services_title') }} <span
+                            class="font-semibold text-primary">{{ __('messages.go_beyond_travel') }}</span>
                     </h2>
                     <p class="pb-4 sm:pb-5 lg:pb-10 text-xs sm:text-base text-center">
-                        From entertainment and beauty to medical trips and recruitment, we've got all your needs covered.
+                        {{ __('messages.services_subtitle') }}
                     </p>
 
                     <div class="swiper-services w-full">
@@ -374,25 +367,28 @@
                                 $services = [
                                     [
                                         'image' => 'Medical-health.webp',
-                                        'title' => 'Medical Health & Beauty',
-                                        'description' =>
-                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
+                                        // 'title' => 'Medical Health & Beauty', -- REPLACED
+                                        'title_key' => 'messages.medical_title',
+                                        // 'description' => '...', -- REPLACED
+                                        'description_key' => 'messages.medical_desc',
                                         'imageClass' => 'xl:rounded-e-[270px]',
                                         'reverse' => false,
                                     ],
                                     [
                                         'image' => 'Recruitment.webp',
-                                        'title' => 'Recruitment',
-                                        'description' =>
-                                            'Buka peluang karir Anda di Korea Selatan! Kami membantu Anda menemukan pekerjaan impian dengan proses mudah, mulai dari pencarian lowongan hingga pengurusan dokumen.',
+                                        // 'title' => 'Recruitment', -- REPLACED
+                                        'title_key' => 'messages.recruitment_title',
+                                        // 'description' => '...', -- REPLACED
+                                        'description_key' => 'messages.recruitment_desc',
                                         'imageClass' => 'xl:rounded-s-[270px]',
                                         'reverse' => true,
                                     ],
                                     [
                                         'image' => 'Entertainment.webp',
-                                        'title' => 'Entertainment',
-                                        'description' =>
-                                            'Manjakan diri dengan layanan kesehatan dan kecantikan terbaik di Korea. Dapatkan akses ke perawatan medis modern dan pengalaman kecantikan premium dari ahli terpercaya.',
+                                        // 'title' => 'Entertainment', -- REPLACED
+                                        'title_key' => 'messages.entertainment_title',
+                                        // 'description' => '...', -- REPLACED
+                                        'description_key' => 'messages.entertainment_desc',
                                         'imageClass' => 'xl:rounded-e-[270px]',
                                         'reverse' => false,
                                     ],
@@ -411,7 +407,7 @@
                                                     type="image/webp">
                                                 <!-- Original format fallback -->
                                                 <img src="{{ asset('images/home/' . $service['image']) }}"
-                                                    alt="{{ Str::slug($service['title']) }}"
+                                                    alt="{{ Str::slug(__($service['title_key'])) }}"
                                                     class="w-full h-40 xl:h-[540px] xl:drop-shadow-xl object-cover {{ $service['imageClass'] }}"
                                                     {{ $loop->first ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"' }}
                                                     width="600" height="540">
@@ -421,20 +417,21 @@
                                             class="xl:w-2/5 gap-y-1 px-4 xl:px-0 xl:gap-y-[30px] {{ $service['reverse'] ? 'xl:pl-[130px]' : '' }} flex flex-col justify-center text-primary-800">
                                             <h1 class="text-lg xl:text-[45px] font-bold xl:leading-[60px]">
                                                 @php
-                                                    $titleParts = explode(' & ', $service['title']);
+                                                    $title = __($service['title_key']);
+                                                    $titleParts = explode(' & ', $title);
                                                 @endphp
                                                 {{ $titleParts[0] }} <br class="hidden xl:block">
                                                 {{ isset($titleParts[1]) ? '& ' . $titleParts[1] : '' }}
                                             </h1>
                                             <p
                                                 class="text-[10px] line-clamp-2 lg:line-clamp-none xl:text-sm font-normal xl:w-3/4 xl:text-justify leading-tight">
-                                                {{ $service['description'] }}
+                                                {{ __($service['description_key']) }}
                                             </p>
                                             <div class="py-5 xl:pb-0 xl:py-[20px] flex justify-center xl:justify-start">
                                                 <button
                                                     class="bg-white py-2 px-5 text-[10px] xl:text-sm md:py-[14px] md:px-[10px] w-40 md:w-52 rounded-[10px] border border-primary text-primary font-semibold transition-colors duration-200 hover:bg-primary-400 hover:text-white will-change-auto"
                                                     type="button">
-                                                    See all
+                                                    {{ __('messages.see_all') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -453,24 +450,21 @@
                     <!-- Left Content -->
                     <div class="w-full md:w-2/5 flex flex-col justify-center gap-y-4 lg:gap-y-[30px]">
                         <h2 class="text-2xl sm:text-4xl lg:text-[35px] font-bold text-gray-1 text-center sm:text-left">
-                            Reason for <br class="hidden sm:block">
-                            <span class="text-primary">Choosing Us</span>
+                            {{ __('messages.reason_for') }} <br class="hidden sm:block">
+                            <span class="text-primary">{{ __('messages.choosing_us') }}</span>
                         </h2>
                         <p
                             class="text-xs font-normal text-gray-3 text-justify sm:w-[90%] lg:w-4/5 leading-5 mb-4 sm:mb-6 lg:mb-8 xl:mb-14">
-                            Anugrah Cahaya Pelangi offers a safe and comfortable travel experience with professional tour
-                            guides. We
-                            provide diverse travel destinations, comfortable transportation, and quality accommodations.
-                            Easy booking, including visa processing, with transparent and competitive pricing.
+                            {{ __('messages.reason_desc') }}
                         </p>
                         <div
                             class="flex flex-row justify-center sm:justify-normal space-x-4 md:space-x-6 lg:space-x-8 text-[10px] lg:text-xs xl:text-normal text-primary font-semibold">
-                            @foreach ([['icon' => 'backpack.svg', 'text' => 'Success Tour'], ['icon' => 'happy.svg', 'text' => 'Happy Clients'], ['icon' => 'years.svg', 'text' => 'Year Experience']] as $item)
+                            @foreach ([['icon' => 'backpack.svg', 'text' => 'messages.success_tour'], ['icon' => 'happy.svg', 'text' => 'messages.happy_clients'], ['icon' => 'years.svg', 'text' => 'messages.year_experience']] as $item)
                                 <div
                                     class="flex flex-col space-y-2 items-center hover:scale-105 transition-transform duration-300">
-                                    <img src="{{ asset('images/icon/' . $item['icon']) }}" alt="{{ $item['text'] }}"
+                                    <img src="{{ asset('images/icon/' . $item['icon']) }}" alt="{{ __($item['text']) }}"
                                         class="w-9 lg:w-14" loading="lazy">
-                                    <p>{{ $item['text'] }}</p>
+                                    <p>{{ __($item['text']) }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -487,6 +481,58 @@
                             class="rounded-full w-40 lg:w-48 xl:w-[225px] absolute top-0 -right-1 lg:top-1 lg:-right-2 xl:top-6 xl:right-0"
                             loading="lazy">
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Articles -->
+        <section class="latest-articles py-10 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6 xl:px-0">
+                <div class="text-center mb-10">
+                    <h2 class="font-bold text-2xl sm:text-4xl lg:text-[35px] text-gray-1">
+                        {{ __('messages.latest_articles') }} <span
+                            class="font-semibold text-primary">{{ __('messages.articles') }}</span>
+                    </h2>
+                    <p class="text-gray-500 mt-2">{{ __('messages.latest_subtitle') }}</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach ($latestBlogs as $blog)
+                        <div
+                            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <a href="{{ route('blog.show', $blog->slug) }}">
+                                <div class="h-48 overflow-hidden">
+                                    <img src="{{ Storage::url($blog->image) }}" alt="{{ $blog->title }}"
+                                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex items-center gap-2 text-xs text-secondary mb-3">
+                                        <span
+                                            class="bg-blue-50 text-primary px-2 py-1 rounded-full">{{ $blog->category->name ?? 'Travel' }}</span>
+                                        <span class="text-gray-400">{{ $blog->created_at->format('M d, Y') }}</span>
+                                    </div>
+                                    <h3
+                                        class="font-bold text-lg text-gray-800 mb-2 line-clamp-2 hover:text-primary transition-colors">
+                                        {{ $blog->title }}
+                                    </h3>
+                                    <p class="text-gray-500 text-sm line-clamp-3 mb-4">
+                                        {{ Str::limit(strip_tags($blog->content), 100) }}
+                                    </p>
+                                    <div class="flex items-center text-primary font-semibold text-sm">
+                                        {{ __('messages.read_more') }} <i
+                                            class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="{{ route('blog.index') }}"
+                        class="inline-block border border-primary text-primary px-8 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+                        {{ __('messages.view_all_articles') }}
+                    </a>
                 </div>
             </div>
         </section>

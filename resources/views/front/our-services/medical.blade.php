@@ -9,7 +9,7 @@
                     <a href="{{ route('home') }}"
                         class="inline-flex gap-x-2 items-center font-medium text-gray-3 hover:underline">
                         <img src="{{ asset('images/icon/Home.svg') }}" alt="home-icon">
-                        Home
+                        {{ __('messages.home') }}
                     </a>
                 </li>
                 <li class="inline-flex items-center text-xs md:text-base">
@@ -19,7 +19,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        Services
+                        {{ __('messages.services') }}
                     </span>
                 </li>
                 <li>
@@ -44,17 +44,13 @@
                     <div class="text-center max-w-lg">
                         <h1
                             class="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#3477F6] to-[#1E4690] mb-4">
-                            Medical & Beauty Care
+                            {{ __('messages.medical_hero_title') }}
                         </h1>
-                        <p class="text-gray-2 text-[10px] md:text-sm mb-8 px-4 md:px-0">Anugerah Cahaya Pelangi presents The
-                            Best
-                            Medical
-                            & Beauty Care
-                            for You with professional, safe, and technology-driven services, ensuring optimal health and
-                            beauty in one integrated solution.</p>
-                        <a href="#"
+                        <p class="text-gray-2 text-[10px] md:text-sm mb-8 px-4 md:px-0">
+                            {{ __('messages.medical_hero_desc') }}</p>
+                        <a href="{{ route('contact') }}"
                             class="bg-primary py-2 px-5 text-xs sm:py-[10px] sm:px-10 w-40 md:w-52 md:text-base rounded-[10px] text-white border border-primary font-semibold hover:bg-primary-400 transition-all ease-in-out duration-300">
-                            Contact Us
+                            {{ __('messages.contact_us') }}
                         </a>
                     </div>
                 </div>
@@ -65,11 +61,10 @@
             <div class="w-full md:w-1/2 space-y-7">
                 <div class="space-y-4 md:space-y-7">
                     <h2 class="text-xl text-center md:text-left md:text-3xl font-semibold text-primary md:leading-tight">
-                        We Provide Special Care for Your Health & Well-Being
+                        {{ __('messages.medical_care_title') }}
                     </h2>
                     <p class="text-gray-1 text-xs text-justify md:text-base md:text-left">
-                        Your health is your greatest asset. Our medical services focus on early detection, expert
-                        consultation, and continuous care to help you maintain a healthy and balanced life.
+                        {{ __('messages.medical_care_desc') }}
                     </p>
                 </div>
                 <div class="flex flex-col gap-y-6">
@@ -106,22 +101,12 @@
                         class="w-full object-cover">
                 </figure>
                 <div class="text-white max-w-sm z-10">
-                    <h1 class="font-bold mb-4 text-xl text-center md:text-left md:text-3xl md:leading-snug">It’s your
-                        gateway to premium
-                        medical and beauty
-                        care in
-                        Korea.
+                    <h1 class="font-bold mb-4 text-xl text-center md:text-left md:text-3xl md:leading-snug">
+                        {{ __('messages.medical_gateway_title') }}
                     </h1>
-                    <p class="font-normal text-[10px] text-justify px-4 md:text-left md:px-0 md:text-[13px] md:mb-6">We
-                        connect
-                        you with top specialists,
-                        combining
-                        advanced
-                        treatments
-                        with a
-                        personalized touch. Every experience is seamless, safe, and designed around your needs. With modern
-                        facilities and the latest technology, we make world-class healthcare and beauty treatments
-                        effortless—so you can focus on looking and feeling your best.</p>
+                    <p class="font-normal text-[10px] text-justify px-4 md:text-left md:px-0 md:text-[13px] md:mb-6">
+                        {{ __('messages.medical_gateway_desc') }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -161,9 +146,8 @@
                 <div class="w-full">
                     <h2
                         class="text-xl text-center font-semibold text-primary-700 leading-tight mb-11 md:text-left md:text-3xl">
-                        The Work Values We
-                        Thrive for
-                        Your Beauty</h2>
+                        {{ __('messages.medical_values_title') }}
+                    </h2>
                     <div class="px-5 space-y-5 md:space-y-9">
                         <!-- Treatment 1 -->
                         <div class="flex items-start gap-4 border-b pb-9 md:gap-8">
@@ -193,12 +177,10 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">Facial & Skin Care</h3>
-                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">Deep cleansing,
-                                    chemical peels, and laser
-                                    treatments using
-                                    cutting-edge
-                                    Korean skincare technology.</p>
+                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">
+                                    {{ __('messages.facial_skin_care') }}</h3>
+                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">
+                                    {{ __('messages.facial_skin_care_desc') }}</p>
                             </div>
                         </div>
 
@@ -215,11 +197,10 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">Body Treatments</h3>
-                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">Luxurious body
-                                    scrubs, massages, and full-body
-                                    therapies inspired by
-                                    Korea's top wellness centers.</p>
+                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">
+                                    {{ __('messages.body_treatments') }}</h3>
+                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">
+                                    {{ __('messages.body_treatments_desc') }}</p>
                             </div>
                         </div>
 
@@ -305,12 +286,10 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">Personalized Beauty Therapy</h3>
-                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">Tailored
-                                    consultations and
-                                    treatments designed
-                                    to meet your unique
-                                    skin and beauty goals with the expertise of Korean specialists.</p>
+                                <h3 class="text-sm font-bold text-gray-1 mb-2 md:text-xl">
+                                    {{ __('messages.personalized_therapy') }}</h3>
+                                <p class="text-gray-2 text-xs text-justify md:text-base md:text-left">
+                                    {{ __('messages.personalized_therapy_desc') }}</p>
                             </div>
                         </div>
                     </div>
@@ -322,11 +301,13 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Testimonial Header -->
                 <div class="text-center mb-12">
-                    <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">Testimonials</p>
-                    <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">What our Customers says...</h2>
+                    <p class="text-primary underline font-semibold mb-0.5 text-xs md:text-base">
+                        {{ __('messages.testimonials') }}</p>
+                    <h2 class="text-xl font-semibold text-primary-700 md:text-3xl">{{ __('messages.testimonials_title') }}
+                    </h2>
                     <button onclick="openTestimonialModal()"
                         class="mt-4 px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
-                        Share Your Experience
+                        {{ __('messages.share_experience') }}
                     </button>
                 </div>
 
@@ -459,11 +440,10 @@
                         </div>
                     @else
                         <div class="text-center py-12 bg-white rounded-2xl shadow-lg">
-                            <p class="text-gray-500 text-lg mb-4">No testimonials yet. Be the first to share your
-                                experience!</p>
+                            <p class="text-gray-500 text-lg mb-4">{{ __('messages.no_testimonials') }}</p>
                             <button onclick="openTestimonialModal()"
                                 class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
-                                Write a Testimonial
+                                {{ __('messages.write_testimonial') }}
                             </button>
                         </div>
                     @endif

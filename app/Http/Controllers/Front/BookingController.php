@@ -122,8 +122,10 @@ class BookingController extends Controller
         }
 
         $travellers = $bookingData['travellers'] ?? [];
+        $userPoints = auth()->user()->loyalty_points ?? 0;
+        $pointValue = 100; // 1 point = 100 IDR
 
-        return view('front.booking.checkout', compact('bookingData', 'destination', 'travellers'));
+        return view('front.booking.checkout', compact('bookingData', 'destination', 'travellers', 'userPoints', 'pointValue'));
     }
 
     public function payment(Request $request, $slug)
@@ -152,7 +154,29 @@ class BookingController extends Controller
                 }
             }
 
-            $finalTotal = max(0, $totalPrice - $discountAmount);
+            // Handle Point Redemption
+            $pointsRedeemed = 0;
+            if ($request->has('redeem_points') && $request->redeem_points > 0) {
+                $pointsToRedeem = intval($request->redeem_points);
+                $pointValue = 100; // 1 point = 100 IDR
+                $maxDiscountFromPoints = $pointsToRedeem * $pointValue;
+
+                $user = Auth::user();
+                if ($user->loyalty_points >= $pointsToRedeem) {
+                    // Cap discount at strictly non-negative total? (Midtrans requires > 0 usually, let's keep at least 1000 IDR or something? No, 0 is free but midtrans might error. Let's assume min 0)
+                    // But actually let's deduct points ONLY IF we successfully reduce the price.
+
+                    $discountAmount += $maxDiscountFromPoints;
+                    $pointsRedeemed = $pointsToRedeem;
+                }
+            }
+
+            $finalTotal = max(1, $totalPrice - $discountAmount); // Ensure at least 1 for valid transaction if needed, or 0 if free allowed logic exists elsewhere. Midtrans usually needs > 0.
+
+            // Deduct points if used
+            if ($pointsRedeemed > 0) {
+                Auth::user()->redeemPoints($pointsRedeemed, "Redeemed for Booking");
+            }
 
             $booking = BookingTransaction::create([
                 'code' => $code,

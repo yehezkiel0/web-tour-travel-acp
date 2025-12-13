@@ -5,17 +5,16 @@
     <section class="container mx-auto">
         <div class="max-w-7xl mx-auto py-14 md:py-20">
             <div class="text-center mb-6 md:mb-[60px] space-y-[10px]">
-                <h1 class="text-2xl md:text-[40px] font-bold text-primary">Contact Us</h1>
-                <p class="text-sm md:text-lg font-medium text-gray-2">Any question or remarks? Just write us a message!</p>
+                <h1 class="text-2xl md:text-[40px] font-bold text-primary">{{ __('messages.contact_title') }}</h1>
+                <p class="text-sm md:text-lg font-medium text-gray-2">{{ __('messages.contact_subtitle') }}</p>
             </div>
             <div class="flex flex-col md:flex-row gap-4 md:gap-0 items-center md:rounded-xl bg-white p-3 md:drop-shadow-lg">
                 <div class="w-full px-4 md:px-0 md:w-2/5">
                     <div
                         class="bg-gradient-to-r from-[#3477F6] to-[#1D4187] rounded-md p-8 md:p-10 relative overflow-hidden">
                         <div class="space-y-2.5 text-white mb-8 md:mb-[60px]">
-                            <h3 class="text-xl md:text-[28px] font-semibold">Contact Information</h3>
-                            <p class="text-xs md:text-base">Questions, comments, or suggestions? Simply fill in the form and
-                                we’ll be in touch shortly.
+                            <h3 class="text-xl md:text-[28px] font-semibold">{{ __('messages.contact_info') }}</h3>
+                            <p class="text-xs md:text-base">{{ __('messages.contact_info_desc') }}
                             </p>
                         </div>
                         <div class="flex flex-col gap-4 md:gap-7 mb-16 md:mb-28">
@@ -35,7 +34,7 @@
                                     </svg>
                                 </div>
                                 <div class="space-y-1 md:space-y-2.5 text-white font-medium">
-                                    <h4 class="text-base md:text-xl">Address</h4>
+                                    <h4 class="text-base md:text-xl">{{ __('messages.address') }}</h4>
                                     <p class="text-[10px] md:text-sm">Jalan Balai Pustaka Timur No. 39, Rawamangun, Jakarta,
                                         Indonesia
                                     </p>
@@ -52,7 +51,7 @@
                                     </svg>
                                 </div>
                                 <div class="space-y-1 md:space-y-2.5 text-white font-medium">
-                                    <h4 class="text-base md:text-xl">Phone</h4>
+                                    <h4 class="text-base md:text-xl">{{ __('messages.phone') }}</h4>
                                     <p class="text-[10px] md:text-sm">(+62)812-8377-7765
                                     </p>
                                 </div>
@@ -70,7 +69,7 @@
                                     </svg>
                                 </div>
                                 <div class="space-y-1 md:space-y-2.5 text-white font-medium">
-                                    <h4 class="text-base md:text-xl">Email</h4>
+                                    <h4 class="text-base md:text-xl">{{ __('messages.email') }}</h4>
                                     <p class="text-[10px] md:text-sm">anugrahcahayapelangi@gmail.com
                                     </p>
                                 </div>
@@ -133,32 +132,36 @@
                             @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-11">
                                 <div>
-                                    <label for="first_name" class="font-medium text-gray-3 text-xs">First Name<span
+                                    <label for="first_name"
+                                        class="font-medium text-gray-3 text-xs">{{ __('messages.first_name') }}<span
                                             class="text-[#FD2D2D]">*</span></label>
                                     <input type="text" name="first_name" id="first_name"
                                         class="w-full py-2 border-0 border-b-2 border-gray-4 focus:outline-none" required>
                                 </div>
                                 <div>
-                                    <label for="last_name" class="font-medium text-gray-3 text-xs">Last Name<span
+                                    <label for="last_name"
+                                        class="font-medium text-gray-3 text-xs">{{ __('messages.last_name') }}<span
                                             class="text-[#FD2D2D]">*</span></label>
                                     <input type="text" name="last_name" id="last_name"
                                         class="w-full py-2 border-0 border-b-2 border-gray-4 focus:outline-none" required>
                                 </div>
                                 <div>
-                                    <label for="email" class="font-medium text-gray-3 text-xs">Email<span
+                                    <label for="email"
+                                        class="font-medium text-gray-3 text-xs">{{ __('messages.email') }}<span
                                             class="text-[#FD2D2D]">*</span></label>
                                     <input type="email" name="email" id="email"
                                         class="w-full py-2 border-0 border-b-2 border-gray-4 focus:outline-none" required>
                                 </div>
                                 <div>
-                                    <label for="phone_number" class="font-medium text-gray-3 text-xs">Phone Number<span
+                                    <label for="phone_number"
+                                        class="font-medium text-gray-3 text-xs">{{ __('messages.phone_number') }}<span
                                             class="text-[#FD2D2D]">*</span></label>
                                     <input type="tel" name="phone_number" id="phone_number"
                                         class="w-full py-2 border-0 border-b-2 border-gray-4 focus:outline-none" required>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-4 mb-11">
-                                <h4 class="text-sm font-semibold text-gray-1">Select Subject?</h4>
+                                <h4 class="text-sm font-semibold text-gray-1">{{ __('messages.select_subject') }}</h4>
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-3">
                                     <!-- Tour & Travel -->
                                     <label class="flex items-center gap-2 cursor-pointer">
@@ -172,7 +175,7 @@
                                                     d="M5 13l4 4L19 7" />
                                             </svg>
                                         </div>
-                                        <span class="text-[#011C2A] text-sm">Tour & Travel</span>
+                                        <span class="text-[#011C2A] text-sm">{{ __('messages.tour_travel') }}</span>
                                     </label>
 
                                     <!-- Health & Beauty -->
@@ -187,7 +190,7 @@
                                                     d="M5 13l4 4L19 7" />
                                             </svg>
                                         </div>
-                                        <span class="text-[#011C2A] text-sm">Health & Beauty</span>
+                                        <span class="text-[#011C2A] text-sm">{{ __('messages.health_beauty') }}</span>
                                     </label>
 
                                     <!-- Recruitment -->
@@ -202,7 +205,7 @@
                                                     d="M5 13l4 4L19 7" />
                                             </svg>
                                         </div>
-                                        <span class="text-[#011C2A] text-sm">Recruitment</span>
+                                        <span class="text-[#011C2A] text-sm">{{ __('messages.recruitment') }}</span>
                                     </label>
 
                                     <!-- Entertainment -->
@@ -217,20 +220,21 @@
                                                     d="M5 13l4 4L19 7" />
                                             </svg>
                                         </div>
-                                        <span class="text-[#011C2A] text-sm">Entertainment</span>
+                                        <span class="text-[#011C2A] text-sm">{{ __('messages.entertainment') }}</span>
                                     </label>
                                 </div>
                             </div>
                             <div class="mb-10 md:mb-[60px] text-[#8D8D8D]">
                                 <div class="flex flex-col gap-[10px]">
-                                    <label for="message" class="font-medium text-xs">Message</label>
+                                    <label for="message"
+                                        class="font-medium text-xs">{{ __('messages.message') }}</label>
                                     <textarea name="message" id="message" cols="10" rows="1.5"
-                                        class="pb-2 border-b-2 border-[#8D8D8D] outline-none resize-none focus:text-black">Write your message..</textarea>
+                                        class="pb-2 border-b-2 border-[#8D8D8D] outline-none resize-none focus:text-black">{{ __('messages.write_message_placeholder') }}</textarea>
                                 </div>
                             </div>
                             <button type="submit"
                                 class="bg-primary py-[14px] text-sm text-white font-bold sm:py-[10px] sm:px-10 md:px-[60px] w-full rounded-[10px] border border-primary hover:bg-primary-400 transition-all ease-in-out duration-300">
-                                Send Message
+                                {{ __('messages.send_message') }}
                             </button>
                         </form>
                     </div>

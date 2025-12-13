@@ -1,163 +1,188 @@
+import { debounce } from "../utils/eventUtils";
+
 export const initSearchResult = ($) => {
-    const formatIDR = (number) => {
-        if (!number) return "";
-        return `IDR ${number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
+    // Selectors
+    const $container = $("#search-results-grid");
+    const $loading = $("#loading-state");
+    const $count = $("#result-count");
+
+    // Inputs (mapped to the new ID structure in blade)
+    const $inputs = {
+        q: $("#filter-q"),
+        location: $("#filter-location"),
+        date: $("#filter-date"),
+        minPrice: $("#filter-min-price"),
+        maxPrice: $("#filter-max-price"),
+        duration: $('input[name="duration"]'),
+        tripType: $('input[name="trip_type[]"]'),
+        sort: $("#sort-select"),
     };
 
-    const parseIDR = (str) => {
-        if (!str) return "";
-        return parseInt(str.replace(/[^\d]/g, ""));
+    // Mobile Toggle Logic
+    const initMobileToggle = () => {
+        const $sidebar = $("#filter-sidebar");
+        const $backdrop = $("#filter-backdrop");
+        const $toggleBtn = $("#mobile-filter-toggle");
+        const $closeBtn = $("#close-filter-sidebar");
+
+        const open = () => {
+            $sidebar.removeClass("translate-x-full");
+            $backdrop.removeClass("hidden");
+            $("body").addClass("overflow-hidden");
+        };
+
+        const close = () => {
+            $sidebar.addClass("translate-x-full");
+            $backdrop.addClass("hidden");
+            $("body").removeClass("overflow-hidden");
+        };
+
+        $toggleBtn.on("click", open);
+        $closeBtn.on("click", close);
+        $backdrop.on("click", close);
     };
 
-    const $priceRange = $(".price-range");
-    const $minPrice = $(".min-price");
-    const $maxPrice = $(".max-price");
-    const $locationSelect = $(".location-select");
-    const $dateInput = $(".date-input");
-    const $tripType = $(".trip-type");
-    const $searchResults = $("#search-results");
+    // Collect current filter state
+    const getFilters = () => {
+        const filters = {};
 
-    const defaultMin = 0;
-    let dynamicMax = $maxPrice.val();
-    let currentMax = dynamicMax;
-    let currentMin = defaultMin;
+        // Text & Selects
+        if ($inputs.q.val()) filters.q = $inputs.q.val();
+        if ($inputs.location.val()) filters.location = $inputs.location.val();
+        if ($inputs.date.val()) filters.date = $inputs.date.val();
+        if ($inputs.sort.val()) filters.sort = $inputs.sort.val();
 
-    $minPrice.val(formatIDR(defaultMin));
-    $maxPrice.val(formatIDR(dynamicMax));
-    $priceRange.attr({
-        min: defaultMin,
-        max: dynamicMax,
-        value: defaultMin,
-    });
+        // Numbers
+        if ($inputs.minPrice.val()) filters.min_price = $inputs.minPrice.val();
+        if ($inputs.maxPrice.val()) filters.max_price = $inputs.maxPrice.val();
 
-    $minPrice.on("input", function () {
-        let value = parseIDR($(this).val());
+        // Radios (Duration)
+        const duration = $('input[name="duration"]:checked').val();
+        if (duration) filters.duration = duration;
 
-        if (isNaN(value) || value < defaultMin) value = defaultMin;
-        if (value > currentMax) value = currentMax;
+        // Checkboxes (Trip Type)
+        const types = [];
+        $('input[name="trip_type[]"]:checked').each(function () {
+            types.push($(this).val());
+        });
+        if (types.length) filters.trip_type = types;
 
-        currentMin = value;
-        $(this).val(formatIDR(value));
-        $priceRange.val(value);
-        updateResults();
-    });
+        return filters;
+    };
 
-    $maxPrice.on("input", function () {
-        let value = parseIDR($(this).val());
-        const maxPriceLimit = parseInt($(this).data("max-price"));
+    // Main Fetch Function
+    const fetchResults = (url = null) => {
+        let fetchUrl = url;
+        let data = {};
 
-        if (isNaN(value) || value < currentMin) value = currentMin;
-        if (value > maxPriceLimit) value = maxPriceLimit;
-
-        currentMax = value;
-
-        $(this).val(formatIDR(value));
-        $priceRange.attr("max", value);
-        updateResults();
-    });
-
-    $priceRange.on("input", function () {
-        const value = parseInt($(this).val());
-        currentMin = value;
-        $minPrice.val(formatIDR(value));
-
-        if (value > currentMax) {
-            currentMax = value;
-            $maxPrice.val(formatIDR(value));
+        // If no URL provided (normal filter change), build it from filters
+        if (!fetchUrl) {
+            const filters = getFilters();
+            // Reset to page 1 by not including page param (default)
+            // unless we want to keep it? No, changing filters usually resets page.
+            data = filters;
+            fetchUrl = window.searchConfig?.url || "/search-result";
         }
-        updateResults();
-    });
 
-    $(".clear-all-btn").click(function () {
-        $locationSelect.val("");
-        $dateInput.val("");
-        $tripType.prop("checked", false);
+        // 1. Update URL (without reload)
+        // If we have a direct URL (pagination), use it.
+        // If we have data (filters), build query string.
+        let pushUrl = fetchUrl;
+        if (!url) {
+            const queryString = $.param(data);
+            pushUrl = `${window.location.pathname}?${queryString}`;
+        }
+        window.history.pushState({ path: pushUrl }, "", pushUrl);
 
-        currentMin = defaultMin;
-        currentMax = dynamicMax;
-        $priceRange.val(defaultMin).attr("max", dynamicMax);
-        $minPrice.val(formatIDR(defaultMin));
-        $maxPrice.val(formatIDR(dynamicMax));
+        // 2. UI Loading State
+        $container.addClass("opacity-50 pointer-events-none");
+        $loading.removeClass("hidden");
 
-        updateResults(true);
-    });
+        // 3. Ajax Request
+        $.ajax({
+            url: fetchUrl,
+            method: "GET",
+            data: data, // Only sent if building from filters
+            cache: false,
+            success: (html) => {
+                $container.html(html);
+                $container.removeClass("opacity-50 pointer-events-none");
+                $loading.addClass("hidden");
 
-    $(".clear-location-btn").click(function () {
-        $locationSelect.val("");
-        updateResults(true);
-    });
-
-    $(".clear-date-btn").click(function () {
-        $dateInput.val("");
-        updateResults(true);
-    });
-
-    $(".clear-type-btn").click(function () {
-        $tripType.prop("checked", false);
-        updateResults(true);
-    });
-
-    $locationSelect.on("change", () => updateResults(false));
-    $tripType.on("change", () => updateResults(false));
-    $dateInput.on("change", () => updateResults(false));
-
-    let debounceTimer;
-    function updateResults(isClear = false) {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            let filters = {};
-
-            if (!isClear) {
-                if (currentMin > defaultMin) filters.min_price = currentMin;
-                if (currentMax < dynamicMax) filters.max_price = currentMax;
-                if ($locationSelect.val())
-                    filters.location = $locationSelect.val();
-                if ($dateInput.val()) filters.date = $dateInput.val();
-                if ($priceRange.val() > 0)
-                    filters.price_range = $priceRange.val();
-
-                const selectedTypes = $tripType
-                    .filter(":checked")
-                    .map(function () {
-                        return $(this).val();
-                    })
-                    .get();
-
-                if (selectedTypes.length > 0) {
-                    filters.trip_type = selectedTypes;
+                // Scroll to top of results on pagination
+                if (url) {
+                    $("html, body").animate(
+                        {
+                            scrollTop: $container.offset().top - 100,
+                        },
+                        500
+                    );
                 }
+
+                // Update count (Approximate based on DOM elements returned)
+                // Note: Pagination introduces complex counting client-side.
+                // Ideally backend returns JSON metadata.
+                // For now, we won't strictly update count from partials as it only shows current page count.
+                // Leaving count update disabled or simple check.
+            },
+            error: (err) => {
+                console.error("Search Failed", err);
+                $container.removeClass("opacity-50 pointer-events-none");
+                $loading.addClass("hidden");
+            },
+        });
+    };
+
+    // Initialize Event Listeners
+    const initListeners = () => {
+        // Debounced inputs (Text/Number)
+        const debouncedFetch = debounce(() => fetchResults(), 500);
+
+        $inputs.q.on("input", debouncedFetch);
+        $inputs.minPrice.on("input", debouncedFetch);
+        $inputs.maxPrice.on("input", debouncedFetch);
+
+        // Instant inputs (Select, Date, Radio, Checkbox)
+        $inputs.location.on("change", () => fetchResults());
+        $inputs.date.on("change", () => fetchResults());
+        $inputs.sort.on("change", () => fetchResults());
+        $inputs.duration.on("change", () => fetchResults());
+        $inputs.tripType.on("change", () => fetchResults());
+
+        // Price Presets
+        $(".price-preset").on("click", function () {
+            const max = $(this).data("max");
+            $inputs.maxPrice.val(max).trigger("input");
+        });
+
+        // Reset
+        $("#reset-filters").on("click", () => {
+            // Reset all values
+            $inputs.q.val("");
+            $inputs.location.val("");
+            $inputs.date.val("");
+            $inputs.minPrice.val("");
+            $inputs.maxPrice.val("");
+            $inputs.sort.val("");
+            $('input[name="duration"]').prop("checked", false);
+            $('input[name="trip_type[]"]').prop("checked", false);
+
+            fetchResults();
+        });
+
+        // Pagination Click Handler
+        $(document).on("click", ".pagination a", function (e) {
+            e.preventDefault();
+            const url = $(this).attr("href");
+            if (url) {
+                fetchResults(url);
             }
-            $searchResults.addClass("loading");
-
-            $.ajax({
-                url: "/search-result",
-                method: "GET",
-                data: filters,
-                success: function (response) {
-                    setTimeout(() => {
-                        $searchResults.removeClass("loading");
-                        $("#search-results").html(response);
-                    }, 2000);
-                },
-                error: function (xhr, status, error) {
-                    $searchResults.removeClass("loading");
-                    console.error("Filter error:", error);
-                },
-            });
-        }, 300);
-    }
-
-    $(document).ready(function () {
-        $(".filter-toggle-btn").on("click", function () {
-            $(".mobile-filter-overlay")
-                .removeClass("translate-x-full")
-                .addClass("translate-x-0");
         });
+    };
 
-        $(".close-filter-btn").on("click", function () {
-            $(".mobile-filter-overlay")
-                .removeClass("translate-x-0")
-                .addClass("translate-x-full");
-        });
+    // Run on Init
+    $(() => {
+        initMobileToggle();
+        initListeners();
     });
 };

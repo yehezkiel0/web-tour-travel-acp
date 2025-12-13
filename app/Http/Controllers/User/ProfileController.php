@@ -100,4 +100,12 @@ class ProfileController extends Controller
 
     abort(404, 'Booking not found');
   }
+
+
+  public function points()
+  {
+    $user = Auth::user();
+    $transactions = $user->loyaltyPointTransactions()->orderBy('created_at', 'desc')->paginate(15);
+    return view('front.profile.points', compact('user', 'transactions'));
+  }
 }

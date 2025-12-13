@@ -14,6 +14,8 @@ import { initBookingDetail } from "./modules/booking-detail";
 import { initVideoPlayer } from "./modules/video-player";
 import { initMapErrorHandler } from "./modules/map-handler";
 import initHotelFilter from "./modules/hotel-filter";
+import { initItinerary } from "./modules/itinerary";
+import { initItineraryMap } from "./modules/itinerary-map";
 
 // Wait for DOM to be ready - jQuery ($) is available globally
 $(() => {
@@ -32,4 +34,6 @@ $(() => {
     initVideoPlayer($);
     initMapErrorHandler();
     initHotelFilter();
+    initItinerary($);
+    initItineraryMap();
 });

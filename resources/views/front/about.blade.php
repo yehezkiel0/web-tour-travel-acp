@@ -9,20 +9,10 @@
                     class="object-cover w-full h-auto opacity-20">
             </div>
             <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
-                <h1 class="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">About Us</h1>
-                <p class="text-base md:text-xl font-semibold text-primary-700 italic mb-6 md:mb-8">“Fulfilling Your Dreams
-                    with
-                    Complete &
-                    Integrated
-                    Business Solutions”</p>
-                <p class="text-sm md:text-lg text-gray-2 max-w-3xl mx-auto">Anugerah Cahaya Pelangi is your trusted
-                    partner, delivering
-                    comprehensive
-                    solutions that
-                    empower your
-                    business and personal goals. We believe every dream deserves to be realized through innovative,
-                    dedicated service. Since our inception, we've proudly supported thousands of clients, especially by
-                    bridging opportunities between Indonesia and South Korea, with our proven premium services.</p>
+                <h1 class="text-2xl md:text-5xl font-bold text-primary mb-4 md:mb-6">{{ __('messages.about_title') }}</h1>
+                <p class="text-base md:text-xl font-semibold text-primary-700 italic mb-6 md:mb-8">
+                    {{ __('messages.about_subtitle') }}</p>
+                <p class="text-sm md:text-lg text-gray-2 max-w-3xl mx-auto">{{ __('messages.about_desc') }}</p>
             </div>
         </div>
         <div class="max-w-7xl mx-auto py-14 md:py-20">
@@ -49,11 +39,8 @@
                             </defs>
                         </svg>
                     </div>
-                    <h4 class="text-lg md:text-2xl font-bold text-gray-1 mb-2 md:mb-4">Our Vision</h4>
-                    <p class="text-gray-2 text-xs md:text-base">To create a better world by inspiring positive change
-                        through innovative and
-                        reliable business
-                        solutions in South Korea.</p>
+                    <h4 class="text-lg md:text-2xl font-bold text-gray-1 mb-2 md:mb-4">{{ __('messages.our_vision') }}</h4>
+                    <p class="text-gray-2 text-xs md:text-base">{{ __('messages.vision_desc') }}</p>
                 </div>
                 <div class="rounded-2xl stroke-1 stroke-[#E5E7EB] drop-shadow-md bg-white p-8">
                     <div class="mb-4 md:mb-6">
@@ -77,27 +64,24 @@
                             </defs>
                         </svg>
                     </div>
-                    <h4 class="text-lg md:text-2xl font-bold text-gray-1 mb-2 md:mb-4">Our Mision</h4>
-                    <p class="text-gray-2 text-xs md:text-base">To provide integrated, professional solutions across various
-                        sectors while
-                        embracing innovation and building lasting partnerships with our clients.</p>
+                    <h4 class="text-lg md:text-2xl font-bold text-gray-1 mb-2 md:mb-4">{{ __('messages.our_mission') }}</h4>
+                    <p class="text-gray-2 text-xs md:text-base">{{ __('messages.mission_desc') }}</p>
                 </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-10">
                 <div class="w-full md:w-1/2 pr-0 md:pr-20 md:mb-0">
-                    <h2 class="text-3xl md:text-5xl text-center md:text-left font-semibold text-primary mb-3 md:mb-5">Our
-                        Business
-                        Lines</h2>
+                    <h2 class="text-3xl md:text-5xl text-center md:text-left font-semibold text-primary mb-3 md:mb-5">
+                        {{ __('messages.our_business_lines') }}</h2>
                     <p class="text-base md:text-xl text-center md:text-left text-gray-2 mb-8 md:mb-10">
-                        We offer a wide range of services tailored to meet your diverse needs:
+                        {{ __('messages.business_lines_desc') }}
                     </p>
 
                     <div class="space-y-3 px-6 md:px-0">
                         <a href="{{ route('destination') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span class="text-xs md:text-base">Tour and Travel</span>
+                            <span class="text-xs md:text-base">{{ __('messages.tour_travel') }}</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg
                                     class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +94,7 @@
 
                         <a href="{{ route('services_medical') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span class="text-xs md:text-base">Health & Beauty</span>
+                            <span class="text-xs md:text-base">{{ __('messages.health_beauty') }}</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg
                                     class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +108,7 @@
 
                         <a href="{{ route('services_recruitment') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span class="text-xs md:text-base">Recruitment</span>
+                            <span class="text-xs md:text-base">{{ __('messages.recruitment') }}</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg
                                     class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -137,7 +121,7 @@
 
                         <a href="{{ route('services_entertainment') }}"
                             class="business-line-item bg-primary text-white rounded-xl flex justify-between items-center px-4 py-3 md:px-6 md:py-4 border-[0.5px] border-primary-800 cursor-pointer hover:bg-primary-400 hover:scale-105 transition-all duration-300">
-                            <span class="text-xs md:text-base">Entertainment</span>
+                            <span class="text-xs md:text-base">{{ __('messages.entertainment') }}</span>
                             <span class="arrow-icon transform transition-transform duration-300"><svg
                                     class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -161,8 +145,8 @@
         <div class="bg-[#F9FAFB] py-14 md:py-20">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center space-y-3 mb-8 md:mb-16">
-                    <h2 class="text-2xl md:text-4xl font-semibold text-primary">Our Core Values</h2>
-                    <p class="text-gray-2 text-xs md:text-base">The principles that guide everything we do</p>
+                    <h2 class="text-2xl md:text-4xl font-semibold text-primary">{{ __('messages.our_core_values') }}</h2>
+                    <p class="text-gray-2 text-xs md:text-base">{{ __('messages.core_values_desc') }}</p>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-5 px-4 md:px-0">
                     <div class="flex flex-col items-center text-center">
@@ -188,8 +172,9 @@
                                 </defs>
                             </svg>
                         </div>
-                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Experience</h4>
-                        <p class="text-gray-2 text-xs md:text-base">Our experts deliver top-quality services.</p>
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">{{ __('messages.experience') }}
+                        </h4>
+                        <p class="text-gray-2 text-xs md:text-base">{{ __('messages.experience_desc') }}</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
                         <div class="mb-4 md:mb-6">
@@ -206,8 +191,9 @@
                                     fill="#3477F6" />
                             </svg>
                         </div>
-                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Innovation</h4>
-                        <p class="text-gray-2 text-xs md:text-base">We leverage trends for unique interactions.</p>
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">{{ __('messages.innovation') }}
+                        </h4>
+                        <p class="text-gray-2 text-xs md:text-base">{{ __('messages.innovation_desc') }}</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
                         <div class="mb-4 md:mb-6">
@@ -232,9 +218,9 @@
                                 </defs>
                             </svg>
                         </div>
-                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Integrated</h4>
-                        <p class="text-gray-2 text-xs md:text-base">Our approach offers an
-                            all-in-one experience.</p>
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">{{ __('messages.integrated') }}
+                        </h4>
+                        <p class="text-gray-2 text-xs md:text-base">{{ __('messages.integrated_desc') }}</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
                         <div class="mb-4 md:mb-6">
@@ -259,8 +245,9 @@
                                 </defs>
                             </svg>
                         </div>
-                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">Satisfaction</h4>
-                        <p class="text-gray-2 text-xs md:text-base">Your trust drives us, reflected in our testimonials.
+                        <h4 class="text-base md:text-xl font-semibold text-gray-1 mb-2.5">
+                            {{ __('messages.satisfaction') }}</h4>
+                        <p class="text-gray-2 text-xs md:text-base">{{ __('messages.satisfaction_desc') }}
                         </p>
                     </div>
                 </div>
@@ -268,8 +255,8 @@
         </div>
         <div class="max-w-7xl mx-auto mt-4 mb-14 md:mb-20">
             <div class="text-center mb-5">
-                <h2 class="text-2xl md:text-4xl font-semibold text-primary md:mb-3">Our Gallery</h2>
-                <p class="text-gray-2 text-xs md:text-base">see our latest updates</p>
+                <h2 class="text-2xl md:text-4xl font-semibold text-primary md:mb-3">{{ __('messages.our_gallery') }}</h2>
+                <p class="text-gray-2 text-xs md:text-base">{{ __('messages.gallery_desc') }}</p>
             </div>
             <div class="pb-10 relative">
                 <div class="swiper-about-us swiper-container relative px-4 md:px-0">

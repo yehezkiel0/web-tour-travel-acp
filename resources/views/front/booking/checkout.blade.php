@@ -144,17 +144,80 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="book-now"
-                            class="w-full text-white py-4 rounded-[10px] font-bold mb-9  border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300"
-                            data-authenticated="{{ auth()->check() ? 'true' : 'false' }}">
-                            Pay Now
-                        </button>
-                        <a href="{{ route('destination_detail', ['slug' => $destination->slug]) }}"
-                            class="flex justify-center text-[#FF3B3B] font-semibold text-center mb-8">Cancel</a>
                     </div>
+
+                    {{-- Loyalty Points Redemption --}}
+                    @if ($userPoints > 0)
+                        <div
+                            class="w-full border border-gray-4 rounded-[10px] p-7 text-gray-1 font-medium mb-7 bg-blue-50 border-blue-100">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-semibold text-gray-800">Loyalty Points</h3>
+                                <span
+                                    class="text-blue-600 font-bold bg-white px-3 py-1 rounded-full shadow-sm">{{ number_format($userPoints) }}
+                                    Points</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mb-4">Redeem your points for a discount! 1 Point =
+                                {{ formatCurrency($pointValue) }}</p>
+
+                            <div class="flex items-center gap-3">
+                                <input type="number" name="redeem_points" id="redeem_points"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                                    placeholder="Enter points to redeem (Max: {{ $userPoints }})" min="0"
+                                    max="{{ $userPoints }}">
+                                <button type="button" onclick="applyPoints()"
+                                    class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Apply</button>
+                            </div>
+                            <div id="points_feedback" class="text-sm mt-3 hidden font-medium"></div>
+                        </div>
+
+                        <script>
+                            function applyPoints() {
+                                const input = document.getElementById('redeem_points');
+                                const points = parseInt(input.value) || 0;
+                                const maxPoints = {{ $userPoints }};
+                                const pointValue = {{ $pointValue }};
+                                const feedback = document.getElementById('points_feedback');
+                                const totalElement = document.getElementById('total-amount');
+
+                                // Reset styles
+                                feedback.className = "text-sm mt-3 hidden font-medium";
+
+                                if (points > maxPoints) {
+                                    feedback.textContent = "You don't have enough points.";
+                                    feedback.classList.remove('hidden');
+                                    feedback.classList.add('text-red-600');
+                                    input.value = maxPoints;
+                                    return;
+                                }
+
+                                if (points < 0) {
+                                    input.value = 0;
+                                    return;
+                                }
+
+                                const discount = points * pointValue;
+                                feedback.textContent =
+                                    `Saving ${new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(discount)}`;
+                                feedback.classList.remove('hidden');
+                                feedback.classList.add('text-green-600');
+
+                                // Note: Total update handled server-side on submission, but visual update here is good UX
+                                // For simplicity and avoiding currency format clash with JS, we just show savings feedback.
+                            }
+                        </script>
+                    @endif
+
+                    <button type="submit" id="book-now"
+                        class="w-full text-white py-4 rounded-[10px] font-bold mb-9  border border-primary bg-primary hover:bg-primary-400 transition ease-in-out duration-300"
+                        data-authenticated="{{ auth()->check() ? 'true' : 'false' }}">
+                        Pay Now
+                    </button>
+                    <a href="{{ route('destination_detail', ['slug' => $destination->slug]) }}"
+                        class="flex justify-center text-[#FF3B3B] font-semibold text-center mb-8">Cancel</a>
                 </div>
-                <input type="hidden" name="promo_code_id" id="applied_promo_id">
-            </form>
+        </div>
+        <input type="hidden" name="promo_code_id" id="applied_promo_id">
+        </form>
         </div>
         </div>
     </section>
