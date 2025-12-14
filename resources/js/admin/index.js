@@ -26,6 +26,15 @@ $(function () {
         $chevron.toggleClass("rotate-180");
     });
 
+    $('[data-dropdown="destination"]').on("click", function (e) {
+        e.preventDefault();
+        const $dropdown = $(this).next("#dropdown-destination");
+        const $chevron = $(this).find(".fa-chevron-down");
+
+        $dropdown.slideToggle(300);
+        $chevron.toggleClass("rotate-180");
+    });
+
     $('[data-dropdown="admin"]').on("click", function (e) {
         e.preventDefault();
         $("#dropdown-profile").slideToggle(300);
@@ -35,8 +44,12 @@ $(function () {
         if (!$(e.target).closest("[data-dropdown]").length) {
             $("#dropdown-items").slideUp(300);
             $("#dropdown-hotel").slideUp(300);
+            $("#dropdown-destination").slideUp(300);
             $("#dropdown-profile").slideUp(300);
             $('[data-dropdown="hotel"] .fa-chevron-down').removeClass(
+                "rotate-180"
+            );
+            $('[data-dropdown="destination"] .fa-chevron-down').removeClass(
                 "rotate-180"
             );
         }

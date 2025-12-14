@@ -23,6 +23,8 @@ class BookingTransaction extends Model
         'contact_email',
         'notes',
         'promo_code_id',
+        'insurance_id',
+        'insurance_amount',
     ];
 
     public function user(): BelongsTo
@@ -33,5 +35,10 @@ class BookingTransaction extends Model
     public function destination(): BelongsTo
     {
         return $this->belongsTo(Destination::class);
+    }
+
+    public function insurance(): BelongsTo
+    {
+        return $this->belongsTo(Insurance::class);
     }
 }

@@ -1,4 +1,4 @@
-<header class="navbar-container sticky top-0 z-[999] bg-white transition-all duration-300">
+<header class="navbar-container sticky top-0 z-[2000] bg-white transition-all duration-300 shadow-sm">
     <nav class="navbar" id="navbar-home">
         <div
             class="nav-home flex flex-row-reverse xl:flex-row max-w-7xl mx-auto justify-between items-center p-2 xl:pt-4 xl:px-0">
@@ -7,7 +7,7 @@
                     <img src="{{ asset('images/icon/Logo.svg') }}" alt="Logo-Acp" />
                 </div>
             </a>
-            <ul class="nav-menu hidden xl:flex flex-row gap-x-6 xl:gap-x-10 items-center">
+            <ul class="nav-menu hidden xl:flex flex-row gap-x-6 xl:gap-x-8 items-center">
                 <li><a href="{{ route('home') }}"
                         class="{{ request()->is('home') ? 'is-active custom-border' : '' }}flex pb-[26px] pt-7 custom-border">{{ __('messages.home') }}</a>
                 </li>
@@ -123,17 +123,17 @@
                     </ul>
                 </li>
             </ul>
-            <div class="hidden xl:flex flex-row gap-x-[30px]">
+            <div class="hidden xl:flex flex-row gap-x-4 items-center">
                 @guest
                     <div>
                         <a href="{{ route('login_register') }}"
-                            class="border-[3px] border-primary px-10 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
+                            class="border-[3px] border-primary px-6 py-1.5 rounded-lg font-medium hover:ring-1 hover:ring-primary transition-all ease-in-out duration-300 whitespace-nowrap">
                             Login
                         </a>
                     </div>
                     <div>
                         <a href="{{ route('login_register') }}"
-                            class="border-[3px] border-primary bg-primary px-10 py-2 h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
+                            class="border-[3px] border-primary bg-primary px-6 py-1.5 rounded-lg text-white font-medium hover:bg-primary-400 transition-all ease-in-out duration-300 whitespace-nowrap">
                             Sign Up
                         </a>
                     </div>
@@ -245,91 +245,101 @@
         </div>
         {{-- Sidebar --}}
         <div
-            class="sidebar-home flex flex-col justify-start items-start gap-y-5 pt-20 max-h-dvh w-screen bg-white overflow-y-auto">
-            <div class="flex flex-row gap-x-3 px-6 py-4 border-b w-full">
-                <div>
-                    <a href="{{ route('login') }}"
-                        class="border-[3px] border-primary px-6 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary  transition-all ease-in-out duration-300">
-                        Sign In
-                    </a>
-                </div>
-                <div>
-                    <a href="{{ route('register') }}"
-                        class="bg-primary px-6 py-2 h-10 rounded-lg text-white font-medium hover:bg-primary-400  transition-all ease-in-out duration-300">
-                        Sign Up
-                    </a>
-                </div>
+            class="sidebar-home fixed inset-0 z-[1999] flex flex-col justify-start items-start pt-24 h-screen w-screen bg-white/95 backdrop-blur-sm overflow-y-auto transition-all duration-300">
+            <div class="flex flex-col w-full px-6 gap-y-4 mb-6">
+                <a href="{{ route('login') }}"
+                    class="w-full text-center border-2 border-primary text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary-50 transition-all">
+                    Sign In
+                </a>
+                <a href="{{ route('register') }}"
+                    class="w-full text-center bg-primary text-white border-2 border-primary px-6 py-3 rounded-xl font-bold hover:bg-primary-800 transition-all shadow-lg shadow-blue-200">
+                    Sign Up
+                </a>
             </div>
-            <ul class="flex flex-col w-full px-2 gap-y-5 text-[#687176]">
-                <li class="py-3 px-4">
-                    <a href="{{ route('home') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-house text-xl"></i>
-                        Home
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('destination', ['type' => 'open-trip']) }}"
-                        class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-person-walking-luggage text-xl"></i>
-                        Open Trip
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('destination', ['type' => 'private-trip']) }}"
-                        class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-suitcase text-xl"></i>
-                        Private Tour
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="#" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-briefcase text-xl"></i>
-                        Various Package
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('hotel.index') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-hotel text-xl"></i>
-                        Hotel
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('services_medical') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-heart text-xl"></i>
-                        Medical Health & Beauty
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('services_recruitment') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-user-tie text-xl"></i>
-                        Recruitment
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('services_entertainment') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
-                        Entertainment
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('blog.index') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-newspaper text-xl"></i>
-                        Blog
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('about') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-circle-info text-xl"></i>
-                        About Us
-                    </a>
-                </li>
-                <li class="py-3 px-4">
-                    <a href="{{ route('contact') }}" class="text-lg flex items-center gap-x-5">
-                        <i class="fa-solid fa-address-book text-xl"></i>
-                        Contact Us
-                    </a>
-                </li>
-            </ul>
+
+            <div class="w-full px-6 pb-20">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-2">Menu</p>
+                <ul
+                    class="flex flex-col w-full text-gray-600 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden divide-y divide-gray-50">
+                    <li>
+                        <a href="{{ route('home') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-house text-lg w-6 text-center"></i>
+                            <span class="font-medium">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('destination', ['type' => 'open-trip']) }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-person-walking-luggage text-lg w-6 text-center"></i>
+                            <span class="font-medium">Open Trip</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('destination', ['type' => 'private-trip']) }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-suitcase text-lg w-6 text-center"></i>
+                            <span class="font-medium">Private Tour</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-briefcase text-lg w-6 text-center"></i>
+                            <span class="font-medium">Various Package</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('hotel.index') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-hotel text-lg w-6 text-center"></i>
+                            <span class="font-medium">Hotel</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('services_medical') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-heart text-lg w-6 text-center"></i>
+                            <span class="font-medium">Medical Health & Beauty</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('services_recruitment') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-user-tie text-lg w-6 text-center"></i>
+                            <span class="font-medium">Recruitment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('services_entertainment') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-wand-magic-sparkles text-lg w-6 text-center"></i>
+                            <span class="font-medium">Entertainment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('blog.index') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-newspaper text-lg w-6 text-center"></i>
+                            <span class="font-medium">Blog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('about') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-circle-info text-lg w-6 text-center"></i>
+                            <span class="font-medium">About Us</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('contact') }}"
+                            class="flex items-center gap-x-4 py-4 px-5 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                            <i class="fa-solid fa-address-book text-lg w-6 text-center"></i>
+                            <span class="font-medium">Contact Us</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="navbar-placeholder"></div>

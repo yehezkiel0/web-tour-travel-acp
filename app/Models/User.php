@@ -26,6 +26,8 @@ class User extends Authenticatable
         'status',
         'role',
         'photo',
+        'referral_code',
+        'referrer_id',
     ];
 
     /**
@@ -117,5 +119,15 @@ class User extends Authenticatable
     public function itineraries(): HasMany
     {
         return $this->hasMany(Itinerary::class);
+    }
+
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id');
     }
 }

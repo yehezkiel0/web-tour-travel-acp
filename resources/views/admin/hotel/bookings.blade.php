@@ -165,7 +165,7 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-3">
-                                        <div class="font-semibold text-primary">
+                                        <div class="font-semibold text-primary whitespace-nowrap">
                                             Rp {{ number_format($booking->total_price, 0, ',', '.') }}
                                         </div>
                                     </td>
@@ -213,15 +213,11 @@
                                                 </select>
                                             </form>
 
-                                            <form action="{{ route('admin_hotel_booking_delete', $booking->id) }}"
-                                                method="POST" class="inline"
-                                                onsubmit="return confirm('Are you sure?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-800">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            <button type="button"
+                                                onclick="openDeleteModal('{{ route('admin_hotel_booking_delete', $booking->id) }}')"
+                                                class="text-red-600 hover:text-red-800">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

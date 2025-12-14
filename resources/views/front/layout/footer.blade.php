@@ -39,6 +39,10 @@
                             <a href="#"
                                 class="font-normal hover:underline">{{ __('messages.terms_condition') }}</a>
                         </li>
+                        <li>
+                            <a href="{{ route('corporate_index') }}" class="font-normal hover:underline">Corporate
+                                Travel</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="text-[#333333]">

@@ -97,6 +97,11 @@
                 <button data-tab="location"
                     class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Location</button>
                 <button data-tab="notes" class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap">Notes</button>
+                @if ($destination->virtual_tour_images)
+                    <button data-tab="virtual-tour"
+                        class="tab-btn py-3 sm:py-4 px-2 custom-border whitespace-nowrap text-primary"><i
+                            class="fas fa-cube mr-1"></i> Virtual Tour</button>
+                @endif
             </nav>
         </div>
 
@@ -107,7 +112,9 @@
                 @include('front.partials.price')
                 @include('front.partials.itinerary')
                 @include('front.partials.location')
+                @include('front.partials.location')
                 @include('front.partials.notes')
+                @include('front.partials.virtual-tour')
             </div>
 
             <div class="bg-white rounded-2xl w-full border h-fit order-1 lg:order-2 sticky top-20 lg:top-24">
@@ -489,4 +496,46 @@
             }
         </script>
     @endauth
+    @push('styles')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
+    @endpush
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                @if (isset($destination->virtual_tour_images) && count($destination->virtual_tour_images) > 0)
+                    // Defer initialization until tab is clicked to ensure container has dimensions
+                    const virtualTourTabBtn = document.querySelector('button[data-tab="virtual-tour"]');
+                    let viewerInitialized = false;
+
+                    if (virtualTourTabBtn) {
+                        virtualTourTabBtn.addEventListener('click', function() {
+                            if (!viewerInitialized) {
+                                setTimeout(() => {
+                                    pannellum.viewer('panorama', {
+                                        "type": "equirectangular",
+                                        "panorama": "{{ Storage::url($destination->virtual_tour_images[0]) }}",
+                                        "autoLoad": true,
+                                        "compass": true,
+                                        "showControls": true
+                                    });
+                                    viewerInitialized = true;
+                                }, 200); // Small delay for layout
+                            }
+                        });
+                    }
+
+                    window.loadScene = function(url) {
+                        pannellum.viewer('panorama', {
+                            "type": "equirectangular",
+                            "panorama": url,
+                            "autoLoad": true,
+                            "compass": true,
+                            "showControls": true
+                        });
+                    }
+                @endif
+            });
+        </script>
+    @endpush
 @endsection

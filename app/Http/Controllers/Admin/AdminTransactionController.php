@@ -52,4 +52,24 @@ class AdminTransactionController extends Controller
 
         return view('admin.transaction.index', compact('transactions'));
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,paid,cancelled,completed,failed',
+        ]);
+
+        $transaction = \App\Models\BookingTransaction::findOrFail($id);
+        $transaction->update(['status' => $request->status]);
+
+        return redirect()->back()->with('success', 'Transaction status updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $transaction = \App\Models\BookingTransaction::findOrFail($id);
+        $transaction->delete();
+
+        return redirect()->back()->with('success', 'Transaction deleted successfully!');
+    }
 }

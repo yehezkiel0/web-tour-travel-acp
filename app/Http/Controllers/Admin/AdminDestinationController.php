@@ -65,6 +65,7 @@ class AdminDestinationController extends Controller
             'min_people' => $request->min_people,
             'max_people' => $request->max_people,
             'view_count' => 1,
+            'virtual_tour_images' => $this->uploadVirtualTourImages($request),
         ]);
 
         return redirect()
@@ -147,6 +148,14 @@ class AdminDestinationController extends Controller
             'max_people' => $request->max_people,
         ]);
 
+        if ($request->hasFile('virtual_tour_images')) {
+            $existingImages = $destination->virtual_tour_images ?? [];
+            $newImages = $this->uploadVirtualTourImages($request);
+            $destination->update([
+                'virtual_tour_images' => array_merge($existingImages, $newImages)
+            ]);
+        }
+
         return response()
             ->redirectToRoute('admin_destination_index')
             ->with('success', 'Destination updated successfully!')
@@ -172,5 +181,17 @@ class AdminDestinationController extends Controller
             ->redirectToRoute('admin_destination_index')
             ->with('success', 'Destination deleted successfully!')
             ->setStatusCode(200);
+    } // Corrected closing brace for method delete
+
+    private function uploadVirtualTourImages(Request $request): array
+    {
+        $paths = [];
+        if ($request->hasFile('virtual_tour_images')) {
+            foreach ($request->file('virtual_tour_images') as $image) {
+                $name = 'virtual_tour_' . time() . '_' . uniqid() . '.' . $image->extension();
+                $paths[] = $image->storeAs('virtual_tours', $name, 'public');
+            }
+        }
+        return $paths;
     }
 }

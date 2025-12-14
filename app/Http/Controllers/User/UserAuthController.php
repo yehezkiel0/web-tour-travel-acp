@@ -64,11 +64,21 @@ class UserAuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required||min:8|confirmed',
+            'referral_code' => 'nullable|string|exists:users,referral_code',
         ]);
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
         $data['password'] = Hash::make($request->password);
+        $data['referral_code'] = \Illuminate\Support\Str::upper(\Illuminate\Support\Str::random(10));
+
+        if ($request->filled('referral_code')) {
+            $referrer = User::where('referral_code', $request->referral_code)->first();
+            if ($referrer) {
+                $data['referrer_id'] = $referrer->id;
+            }
+        }
+
         $token = hash('sha256', time());
         $data['token'] = $token;
         $user = User::create($data);
@@ -109,6 +119,15 @@ class UserAuthController extends Controller
         $user->token = "";
         $user->status = 1;
         $user->update();
+
+        // Award Referral Points
+        if ($user->referrer_id) {
+            $referrer = User::find($user->referrer_id);
+            if ($referrer) {
+                $referrer->addPoints(50, 'Referral Bonus: ' . $user->name);
+                $user->addPoints(50, 'Referral Bonus: Used code ' . $referrer->referral_code);
+            }
+        }
 
         session()->forget('register_token');
         session()->forget('register_email');

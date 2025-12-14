@@ -48,6 +48,16 @@
                                 placeholder="Enter your password" autocomplete="off">
                             <i class="fa-regular fa-eye-slash absolute right-5 py-5 text-[#616161] show-password"></i>
                         </div>
+                        <div class="relative text-xs">
+                            <label for="referral-code"
+                                class="text-[#757575] absolute left-14 -top-3 font-light bg-white px-2">Referral Code
+                                (Optional)</label>
+                            <img src="{{ asset('images/icon/person.svg') }}" class="absolute py-4 px-[32px]" alt="referral">
+                            <input
+                                class="border border-gray-300 hover:border-gray-400 rounded-full w-full py-4 pl-16 text-[#616161]"
+                                type="text" id="referral-code" name="referral_code" placeholder="Enter referral code"
+                                value="{{ old('referral_code') }}" autocomplete="off">
+                        </div>
                     </div>
                     <div class="flex items-center justify-center pb-5 py-10 mb-2">
                         <button type="submit"

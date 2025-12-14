@@ -41,6 +41,7 @@
     <x-text-area-config />
 
     @stack('scripts')
+    @include('components.admin.delete-modal')
 </body>
 
 </html>

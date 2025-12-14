@@ -109,7 +109,10 @@ class HotelBookingController extends Controller
       DB::beginTransaction();
 
       $hotel = Hotel::where('slug', $slug)->firstOrFail();
-      $transactionCode = 'HTL-' . strtoupper(Str::random(10));
+
+      do {
+        $transactionCode = 'HTL-' . strtoupper(Str::random(10));
+      } while (HotelBooking::where('booking_code', $transactionCode)->exists());
 
       Log::info('Hotel Booking Payment Request:', $request->all());
 

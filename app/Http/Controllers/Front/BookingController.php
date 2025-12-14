@@ -43,6 +43,8 @@ class BookingController extends Controller
             'individual_visa_rate' => $pricing_settings->individual_visa_rate,
             'group_visa_rate' => $pricing_settings->group_visa_rate,
             'tax_percentage' => $pricing_settings->tax_percentage,
+            'group_discount_threshold' => $pricing_settings->group_discount_threshold ?? 10,
+            'group_discount_percentage' => $pricing_settings->group_discount_percentage ?? 0,
         ]);
 
         return redirect()->route('booking_details', ['slug' => $slug]);
@@ -53,13 +55,14 @@ class BookingController extends Controller
         $destination = Destination::where('slug', $slug)->firstOrFail();
 
         $bookingData = session('booking');
+        $insurances = \App\Models\Insurance::all();
 
 
         if (!$bookingData) {
             return redirect()->route('destination_detail', ['slug' => $slug])->with('error', 'Booking data not found.');
         }
 
-        return view('front.booking.booking', compact('bookingData', 'destination'));
+        return view('front.booking.booking', compact('bookingData', 'destination', 'insurances'));
     }
 
     public function storeBooking(Request $request, $slug)
@@ -79,6 +82,7 @@ class BookingController extends Controller
             'contact_email' => 'required|email|max:255',
             'total_price' => 'required|numeric',
             'notes' => 'nullable|string',
+            'insurance_id' => 'nullable|exists:insurances,id',
         ]);
 
         $bookingData = session('booking');
@@ -92,6 +96,17 @@ class BookingController extends Controller
             return back()->with('error', 'Number of travelers does not match the booking details.');
         }
 
+        // Calculate Insurance Amount if selected
+        $insuranceAmount = 0;
+        $insuranceId = $request->insurance_id;
+
+        if ($insuranceId) {
+            $insurance = \App\Models\Insurance::find($insuranceId);
+            if ($insurance) {
+                // Assuming price is per person
+                $insuranceAmount = $insurance->price * $totalTravelers;
+            }
+        }
 
         session()->put('booking', [
             'travellers' => $request->travellers,
@@ -102,7 +117,9 @@ class BookingController extends Controller
             'notes' => $request->notes,
             'individual_visa' => $request->individual_visa,
             'group_visa' => $request->group_visa,
-            'sub_total' => $request->sub_total
+            'sub_total' => $request->sub_total,
+            'insurance_id' => $insuranceId,
+            'insurance_amount' => $insuranceAmount,
         ]);
 
         session()->put('booking', array_merge($bookingData, session('booking')));
@@ -163,15 +180,12 @@ class BookingController extends Controller
 
                 $user = Auth::user();
                 if ($user->loyalty_points >= $pointsToRedeem) {
-                    // Cap discount at strictly non-negative total? (Midtrans requires > 0 usually, let's keep at least 1000 IDR or something? No, 0 is free but midtrans might error. Let's assume min 0)
-                    // But actually let's deduct points ONLY IF we successfully reduce the price.
-
                     $discountAmount += $maxDiscountFromPoints;
                     $pointsRedeemed = $pointsToRedeem;
                 }
             }
 
-            $finalTotal = max(1, $totalPrice - $discountAmount); // Ensure at least 1 for valid transaction if needed, or 0 if free allowed logic exists elsewhere. Midtrans usually needs > 0.
+            $finalTotal = max(1, $totalPrice - $discountAmount);
 
             // Deduct points if used
             if ($pointsRedeemed > 0) {
@@ -194,6 +208,8 @@ class BookingController extends Controller
                 'notes' => $bookingData['notes'],
                 'status' => 'pending',
                 'promo_code_id' => $request->promo_code_id ?? null,
+                'insurance_id' => $bookingData['insurance_id'] ?? null,
+                'insurance_amount' => $bookingData['insurance_amount'] ?? 0,
             ]);
 
             if (isset($promoCode)) {
@@ -243,6 +259,6 @@ class BookingController extends Controller
         if (!$transaction) {
             return redirect()->route('home')->with('error', 'Transaction not found.');
         }
-        return view('front.booking.success');
+        return view('front.booking.success', compact('transaction'));
     }
 }

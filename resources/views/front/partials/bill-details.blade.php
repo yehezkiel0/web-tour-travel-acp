@@ -1,4 +1,21 @@
-<div class="bill-details lg:sticky lg:top-24">
+@php
+    $bookingConfig = [
+        'individualVisaRate' => session('booking.individual_visa_rate', 0),
+        'groupVisaRate' => session('booking.group_visa_rate', 0),
+        'taxPercentage' => session('booking.tax_percentage', 0),
+        'adultPrice' => session('booking.adult_price', 0),
+        'childPrice' => session('booking.child_price', 0),
+        'adultCount' => session('booking.adult_count', 0),
+        'childCount' => session('booking.child_count', 0),
+        'groupDiscountThreshold' => session('booking.group_discount_threshold', 10),
+        'groupDiscountPercentage' => session('booking.group_discount_percentage', 0),
+        'seasonalPrices' => $seasonalPrices ?? [],
+        'fromDate' => session('booking.from_date'),
+        'toDate' => session('booking.to_date'),
+    ];
+@endphp
+<div id="bill-details-container" class="bill-details lg:sticky lg:top-24"
+    data-booking-config='@json($bookingConfig)'>
     <div
         class="w-full border border-gray-4 rounded-[10px] p-4 sm:p-5 lg:p-7 text-gray-1 font-medium mb-5 sm:mb-6 lg:mb-7">
         <h3 class="text-lg sm:text-xl font-semibold mb-5 sm:mb-6 lg:mb-7">Bill Details</h3>
@@ -24,11 +41,29 @@
                 <span class="text-center text-xs sm:text-sm">X <span id="group-visa-count">0</span></span>
                 <span id="group-visa-amount" class="text-right text-xs sm:text-sm">0</span>
             </div>
+            <!-- Insurance Row -->
+            <div id="insurance-row" class="insurance grid-cols-3 items-center gap-2 hidden" style="color: #2563EB;">
+                <span class="text-xs sm:text-sm font-semibold">Travel Insurance</span>
+                <span class="text-center text-xs sm:text-sm">X <span id="insurance-count">0</span></span>
+                <span id="insurance-amount" class="text-right text-xs sm:text-sm font-semibold">0</span>
+            </div>
         </div>
         <div class="space-y-3 sm:space-y-4 text-gray-2">
             <div class="flex justify-between text-xs sm:text-sm font-semibold">
                 <span>Sub Total</span>
-                <span id="sub-total">0</span">
+                <span id="sub-total">0</span>
+            </div>
+            <div id="discount-row" class="hidden justify-between text-xs sm:text-sm font-semibold text-green-600">
+                <span>Group Discount</span>
+                <span id="discount-amount">0</span>
+            </div>
+            <div id="seasonal-row" class="justify-between text-xs sm:text-sm font-semibold text-orange-600 hidden">
+                <span>Seasonal Adjustment</span>
+                <span id="seasonal-amount">0</span>
+            </div>
+            <div id="installment-row" class="justify-between text-xs sm:text-sm font-semibold text-blue-600 hidden">
+                <span>Payable Now (50%)</span>
+                <span id="installment-amount">0</span>
             </div>
             <div class="tax grid grid-cols-3 items-center text-gray-2 text-xs sm:text-sm font-medium gap-2">
                 <span>Tax</span>
@@ -102,36 +137,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    window.bookingData = {
-        individualVisaRate: {{ session('booking.individual_visa_rate', 0) }},
-        groupVisaRate: {{ session('booking.group_visa_rate', 0) }},
-        taxPercentage: {{ session('booking.tax_percentage', 0) }},
-        adultPrice: {{ session('booking.adult_price', 0) }},
-        childPrice: {{ session('booking.child_price', 0) }},
-        adultCount: {{ session('booking.adult_count', 0) }},
-        childCount: {{ session('booking.child_count', 0) }},
-    };
-
-    document.getElementById('book-now').addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const isAuthenticated = this.dataset.authenticated === 'true';
-        const closeModal = document.getElementById('closeModal');
-
-        if (isAuthenticated) {
-            document.getElementById('booking-form').submit();
-        } else {
-            document.getElementById('loginModal').classList.remove('hidden');
-        }
-
-        if (closeModal) {
-            closeModal.addEventListener('click', function() {
-                document.getElementById('loginModal').classList.add('hidden');
-            }, {
-                once: true
-            });
-        }
-    });
-</script>

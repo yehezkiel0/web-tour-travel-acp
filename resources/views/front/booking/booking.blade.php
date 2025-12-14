@@ -55,6 +55,82 @@
                                     value="{{ old('contact_email') }}">
                             </div>
                         </div>
+
+                        <!-- Travel Insurance Section -->
+                        <div class="w-full border border-gray-4 rounded-[10px] p-4 sm:p-5 lg:p-7">
+                            <h3 class="text-lg sm:text-xl mb-4 sm:mb-5 lg:mb-7 font-semibold">Travel Insurance <span
+                                    class="text-sm font-normal text-gray-500">(Optional)</span></h3>
+                            <div class="space-y-3">
+                                <label
+                                    class="relative flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50/30 transition-all group">
+                                    <input type="radio" name="insurance_id" value="" data-price="0"
+                                        class="w-4 h-4 text-primary border-gray-300 focus:ring-primary mr-4" checked>
+                                    <div class="flex-1">
+                                        <span class="font-bold text-gray-800">No Insurance</span>
+                                        <p class="text-sm text-gray-500 mt-0.5">I decline travel insurance coverage.</p>
+                                    </div>
+                                </label>
+                                @foreach ($insurances as $insurance)
+                                    <label
+                                        class="relative flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-primary hover:bg-blue-50/30 transition-all group">
+                                        <input type="radio" name="insurance_id" value="{{ $insurance->id }}"
+                                            data-price="{{ $insurance->price }}"
+                                            class="w-4 h-4 text-primary border-gray-300 focus:ring-primary mr-4">
+                                        <div
+                                            class="flex-1 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                            <div>
+                                                <div class="flex items-center gap-2">
+                                                    <span class="font-bold text-gray-800">{{ $insurance->name }}</span>
+                                                    @if ($insurance->type == 'premium')
+                                                        <span
+                                                            class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 text-purple-700 uppercase tracking-wide">Premium</span>
+                                                    @elseif($insurance->type == 'basic')
+                                                        <span
+                                                            class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 uppercase tracking-wide">Basic</span>
+                                                    @else
+                                                        <span
+                                                            class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 uppercase tracking-wide">{{ $insurance->type }}</span>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-gray-500 mt-0.5">{{ $insurance->description }}</p>
+                                            </div>
+                                            <div class="text-left sm:text-right">
+                                                <span
+                                                    class="font-bold text-primary text-lg">{{ formatIDR($insurance->price) }}</span>
+                                                <p class="text-xs text-gray-400">per person</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Payment Method Section -->
+                        <div class="w-full border border-gray-4 rounded-[10px] p-4 sm:p-5 lg:p-7 mt-4">
+                            <h3 class="text-lg sm:text-xl mb-4 sm:mb-5 lg:mb-7 font-semibold">Payment Method</h3>
+                            <div class="space-y-4">
+                                <label
+                                    class="relative flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50/30 transition-all">
+                                    <input type="radio" name="payment_method" value="full"
+                                        class="w-4 h-4 text-primary border-gray-300 focus:ring-primary mr-4" checked>
+                                    <div class="flex-1">
+                                        <span class="font-bold text-gray-800">Full Payment</span>
+                                        <p class="text-sm text-gray-500 mt-0.5">Pay the total amount now.</p>
+                                    </div>
+                                </label>
+
+                                <label
+                                    class="relative flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50/30 transition-all">
+                                    <input type="radio" name="payment_method" value="installment"
+                                        class="w-4 h-4 text-primary border-gray-300 focus:ring-primary mr-4">
+                                    <div class="flex-1">
+                                        <span class="font-bold text-gray-800">Installment Plan</span>
+                                        <p class="text-sm text-gray-500 mt-0.5">Pay 50% now and the rest later.</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="notes w-full">
                             <div class="flex items-center space-x-3 sm:space-x-4 mb-4 sm:mb-5">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" width="16" height="19"
@@ -78,7 +154,11 @@
                                 placeholder="Write your additional here..."></textarea>
                         </div>
                     </div>
-                    @include('front.partials.bill-details')
+
+                    <!-- Right Column (Sidebar) -->
+                    <div>
+                        @include('front.partials.bill-details')
+                    </div>
                 </div>
             </form>
         </div>

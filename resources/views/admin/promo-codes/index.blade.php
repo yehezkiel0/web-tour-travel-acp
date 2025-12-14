@@ -81,15 +81,11 @@
                                                     class="text-blue-600 hover:text-blue-800">
                                                     <i class="fas fa-edit text-lg"></i>
                                                 </a>
-                                                <form action="{{ route('admin_promo_codes_delete', $promo->id) }}"
-                                                    method="POST" class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-800"
-                                                        onclick="return confirm('Delete this promo code?')">
-                                                        <i class="fas fa-trash text-lg"></i>
-                                                    </button>
-                                                </form>
+                                                <button type="button"
+                                                    onclick="openDeleteModal('{{ route('admin_promo_codes_delete', $promo->id) }}')"
+                                                    class="text-red-600 hover:text-red-800" title="Delete">
+                                                    <i class="fas fa-trash text-lg"></i>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>

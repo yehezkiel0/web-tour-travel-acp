@@ -108,4 +108,11 @@ class ProfileController extends Controller
     $transactions = $user->loyaltyPointTransactions()->orderBy('created_at', 'desc')->paginate(15);
     return view('front.profile.points', compact('user', 'transactions'));
   }
+
+  public function referrals()
+  {
+    $user = Auth::user();
+    $referrals = $user->referrals()->with('referrer')->latest()->paginate(10);
+    return view('front.profile.referrals', compact('user', 'referrals'));
+  }
 }

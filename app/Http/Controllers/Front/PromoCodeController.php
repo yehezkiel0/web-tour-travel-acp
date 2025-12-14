@@ -37,8 +37,22 @@ class PromoCodeController extends Controller
       $userId = Auth::id();
 
       if ($userId) {
-        $hotelUsage = \App\Models\HotelBooking::where('user_id', $userId)->where('promo_code_id', $promo->id)->count();
-        $destinationUsage = \App\Models\BookingTransaction::where('user_id', $userId)->where('promo_code_id', $promo->id)->count();
+        $hotelUsage = \App\Models\HotelBooking::where('user_id', $userId)
+          ->where('promo_code_id', $promo->id)
+          ->where('status', '!=', 'cancelled')
+          ->where('status', '!=', 'failed')
+          ->where('status', '!=', 'expired')
+          ->where('status', '!=', 'pending')
+          ->count();
+
+        $destinationUsage = \App\Models\BookingTransaction::where('user_id', $userId)
+          ->where('promo_code_id', $promo->id)
+          ->where('status', '!=', 'cancelled')
+          ->where('status', '!=', 'failed')
+          ->where('status', '!=', 'expired')
+          ->where('status', '!=', 'pending')
+          ->count();
+
         $userUsage = $hotelUsage + $destinationUsage;
       }
 

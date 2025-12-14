@@ -28,7 +28,14 @@ class Destination extends Model
         'min_people',
         'max_people',
         'featured_photo',
-        'view_count'
+        'view_count',
+        'virtual_tour_images',
+    ];
+
+    protected $casts = [
+        'virtual_tour_images' => 'array',
+        'date_started' => 'date',
+        'date_ended' => 'date',
     ];
 
     public function photos(): HasMany

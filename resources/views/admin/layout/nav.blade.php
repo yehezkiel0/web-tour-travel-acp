@@ -12,9 +12,9 @@
         </div>
         <ul class="flex flex-row w-full justify-end items-center">
             <li class="px-4">
-                <a href="#"
+                <a href="{{ route('home') }}" target="_blank"
                     class="bg-yellow-400 hover:bg-yellow-300 shadow-yellow-200 shadow-sm text-white px-3 py-1 rounded">
-                    Front-end
+                    <i class="fas fa-external-link-alt mr-2"></i>Visit Website
                 </a>
             </li>
             <li class="relative px-4">

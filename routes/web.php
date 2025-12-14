@@ -19,6 +19,7 @@ use App\Http\Controllers\Front\SearchResultController;
 use App\Http\Controllers\Front\TestimonialController;
 use App\Http\Controllers\User\UserAuthController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Front\PromoCodeController;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -65,6 +66,10 @@ Route::group(
         Route::get('/contact-us', [LandingPageController::class, 'contact'])->name('contact');
         Route::post('/contact-us', [AboutController::class, 'store'])->name('contact_submit');
 
+        //Corporate Booking
+        Route::get('/corporate-booking', [\App\Http\Controllers\Front\CorporateBookingController::class, 'index'])->name('corporate_index');
+        Route::post('/corporate-booking', [\App\Http\Controllers\Front\CorporateBookingController::class, 'store'])->name('corporate_store');
+
         //Testimonials
         Route::post('/testimonial', [TestimonialController::class, 'store'])->name('testimonial.store');
         Route::get('/testimonials/{serviceType}', [TestimonialController::class, 'getApproved'])->name('testimonial.get');
@@ -102,16 +107,24 @@ Route::group(
 
             // User Profile routes
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+            // Route::post('/promo-check', [PromoCodeController::class, 'check'])->name('promo_check');
             Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::get('/my-bookings', [ProfileController::class, 'bookings'])->name('profile.bookings');
             Route::get('/my-points', [ProfileController::class, 'points'])->name('profile.points');
             Route::get('/my-bookings/{code}', [ProfileController::class, 'bookingDetail'])->name('profile.booking.detail');
+            Route::get('/my-referrals', [ProfileController::class, 'referrals'])->name('profile.referrals');
 
             // Itinerary Routes
             Route::resource('itineraries', \App\Http\Controllers\Front\ItineraryController::class);
             Route::post('/itinerary/add-item', [\App\Http\Controllers\Front\ItineraryController::class, 'addItem'])->name('itinerary.add_item');
             Route::delete('/itinerary/remove-item/{id}', [\App\Http\Controllers\Front\ItineraryController::class, 'removeItem'])->name('itinerary.remove_item');
             Route::post('/itinerary/update-order', [\App\Http\Controllers\Front\ItineraryController::class, 'updateOrder'])->name('itinerary.update_order');
+
+            // Visa Assistance
+            Route::get('/visa-assistance', [\App\Http\Controllers\Front\VisaController::class, 'index'])->name('visa.index');
+            Route::get('/visa-assistance/apply', [\App\Http\Controllers\Front\VisaController::class, 'create'])->name('visa.create');
+            Route::post('/visa-assistance', [\App\Http\Controllers\Front\VisaController::class, 'store'])->name('visa.store');
+            Route::get('/visa-assistance/{id}', [\App\Http\Controllers\Front\VisaController::class, 'show'])->name('visa.show');
         });
 
         Route::get('/shared-itinerary/{token}', [\App\Http\Controllers\Front\ItineraryController::class, 'shared'])->name('itinerary.shared');
@@ -130,6 +143,8 @@ Route::group(
             Route::post('/forget-password', [UserAuthController::class, 'forget_password_submit'])->name('forget_password_submit');
             Route::get('/reset-password', [UserAuthController::class, 'reset_password'])->name('reset_password');
             Route::post('/reset-password', [UserAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
+            Route::get('/reset-password', [UserAuthController::class, 'reset_password'])->name('reset_password');
+            Route::post('/reset-password', [UserAuthController::class, 'reset_password_submit'])->name('reset_password_submit');
         });
     }
 );
@@ -140,6 +155,19 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/profile', [AdminAuthController::class, 'profile'])->name('admin_profile');
     Route::post('/profile', [AdminAuthController::class, 'profile_submit'])->name('admin_profile_submit');
     Route::get('/logout', [AdminAuthController::class, 'logout'])->name('admin_logout');
+
+    // Visa Management
+    Route::get('/visas', [\App\Http\Controllers\Admin\AdminVisaController::class, 'index'])->name('admin_visa_index');
+    Route::get('/visas/{id}', [\App\Http\Controllers\Admin\AdminVisaController::class, 'show'])->name('admin_visa_show');
+    Route::put('/visas/{id}', [\App\Http\Controllers\Admin\AdminVisaController::class, 'update'])->name('admin_visa_update');
+
+    // Insurance Management
+    Route::get('/insurance', [\App\Http\Controllers\Admin\AdminInsuranceController::class, 'index'])->name('admin_insurance_index');
+    Route::get('/insurance/create', [\App\Http\Controllers\Admin\AdminInsuranceController::class, 'create'])->name('admin_insurance_create');
+    Route::post('/insurance', [\App\Http\Controllers\Admin\AdminInsuranceController::class, 'store'])->name('admin_insurance_store');
+    Route::get('/insurance/{id}/edit', [\App\Http\Controllers\Admin\AdminInsuranceController::class, 'edit'])->name('admin_insurance_edit');
+    Route::put('/insurance/{id}', [\App\Http\Controllers\Admin\AdminInsuranceController::class, 'update'])->name('admin_insurance_update');
+    Route::delete('/insurance/{id}', [\App\Http\Controllers\Admin\AdminInsuranceController::class, 'destroy'])->name('admin_insurance_destroy');
 
     //Destination Section
     Route::get('/destination', [AdminDestinationController::class, 'index'])->name('admin_destination_index');
@@ -159,6 +187,8 @@ Route::middleware('admin')->prefix('admin')->group(function () {
 
     //Transactions Section
     Route::get('/transaction', [AdminTransactionController::class, 'index'])->name('admin_transaction_index');
+    Route::put('/transaction/{id}/status', [AdminTransactionController::class, 'updateStatus'])->name('admin_transaction_update_status');
+    Route::delete('/transaction/{id}', [AdminTransactionController::class, 'destroy'])->name('admin_transaction_delete');
 
     //Hotel Section
     Route::get('/hotel', [AdminHotelController::class, 'index'])->name('admin_hotel_index');
@@ -212,6 +242,12 @@ Route::middleware('admin')->prefix('admin')->group(function () {
         return view('admin.newsletters.index', compact('subscribers'));
     })->name('admin_newsletters_index');
 
+    // Analytics Section
+    Route::get('/analytics', [\App\Http\Controllers\Admin\AdminAnalyticsController::class, 'index'])->name('admin_analytics_index');
+
+    // Customer Section
+    Route::get('/customers', [\App\Http\Controllers\Admin\AdminCustomerController::class, 'index'])->name('admin_customer_index');
+
     // Blog Section
     Route::get('/blog', [\App\Http\Controllers\Admin\AdminBlogController::class, 'index'])->name('admin_blog_index');
     Route::get('/blog/create', [\App\Http\Controllers\Admin\AdminBlogController::class, 'create'])->name('admin_blog_create');
@@ -222,6 +258,19 @@ Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/blog/{post}/edit', [\App\Http\Controllers\Admin\AdminBlogController::class, 'edit'])->name('admin_blog_edit');
     Route::put('/blog/{post}', [\App\Http\Controllers\Admin\AdminBlogController::class, 'update'])->name('admin_blog_update');
     Route::delete('/blog/{post}', [\App\Http\Controllers\Admin\AdminBlogController::class, 'delete'])->name('admin_blog_delete');
+
+    // Inbox / Contacts
+    Route::get('/contacts', [\App\Http\Controllers\Admin\AdminContactController::class, 'index'])->name('admin_contact_index');
+    Route::delete('/contacts/{id}', [\App\Http\Controllers\Admin\AdminContactController::class, 'destroy'])->name('admin_contact_destroy');
+
+    // Price Settings
+    Route::get('/price-settings', [\App\Http\Controllers\Admin\AdminPriceSettingController::class, 'index'])->name('admin_price_setting_index');
+    Route::put('/price-settings', [\App\Http\Controllers\Admin\AdminPriceSettingController::class, 'update'])->name('admin_price_setting_update');
+
+    // Seasonal Pricing
+    Route::get('/seasonal-pricing', [\App\Http\Controllers\Admin\AdminSeasonalPricingController::class, 'index'])->name('admin_seasonal_index');
+    Route::post('/seasonal-pricing', [\App\Http\Controllers\Admin\AdminSeasonalPricingController::class, 'store'])->name('admin_seasonal_store');
+    Route::delete('/seasonal-pricing/{id}', [\App\Http\Controllers\Admin\AdminSeasonalPricingController::class, 'destroy'])->name('admin_seasonal_destroy');
 });
 // Admin Authentication
 Route::prefix('admin')->group(function () {
