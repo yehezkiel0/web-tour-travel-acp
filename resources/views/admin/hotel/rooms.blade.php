@@ -8,7 +8,7 @@
                 <h1 class="text-2xl font-bold text-gray-800">Manage Rooms</h1>
                 <p class="text-gray-600">{{ $hotel->name }}</p>
             </div>
-            <a href="{{ route('admin_hotel_index') }}"
+            <a href="{{ route('admin.hotels.index') }}"
                 class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Hotels
             </a>
@@ -33,7 +33,8 @@
         <!-- Add Room Form -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Add New Room</h2>
-            <form action="{{ route('admin_hotel_store_room', $hotel->slug) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.hotels.rooms.store', $hotel->slug) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -229,7 +230,8 @@
                                             class="text-blue-600 hover:text-blue-900 mr-2">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form action="{{ route('admin_hotel_delete_room', [$hotel->slug, $room->id]) }}"
+                                        <form
+                                            action="{{ route('admin.hotels.rooms.destroy', [$hotel->slug, $room->id]) }}"
                                             method="POST"
                                             onsubmit="return confirm('Are you sure you want to delete this room?');"
                                             class="inline">
@@ -259,7 +261,7 @@
             const form = document.getElementById('editRoomForm');
 
             // Construct the update URL dynamically
-            form.action = "{{ route('admin_hotel_update_room', ['hotel' => $hotel->slug, 'room' => ':id']) }}".replace(
+            form.action = "{{ route('admin.hotels.rooms.update', ['hotel' => $hotel->slug, 'room' => ':id']) }}".replace(
                 ':id', room.id);
 
             // Populate fields

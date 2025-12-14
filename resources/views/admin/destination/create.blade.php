@@ -6,14 +6,14 @@
         <div class="flex flex-col gap-y-2">
             <div class="bg-white p-5 mb-4 flex flex-row justify-between items-center rounded-sm shadow-md relative ">
                 <h1 class=" lg:text-2xl text-xl font-medium mt-1 text-gray-700">Create Destination</h1>
-                <a href="{{ route('admin_destination_index') }}">
+                <a href="{{ route('admin.destinations.index') }}">
                     <button
                         class="bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-400 drop-shadow-md transition-all ease-in-out duration-300">View
                         All</button>
                 </a>
             </div>
             <div class="bg-white">
-                <form action="{{ route('admin_destination_store') }}" method="POST"
+                <form action="{{ route('admin.destinations.store') }}" method="POST"
                     class="flex flex-col gap-y-4 py-5 lg:gap-x-2 lg:px-6 px-2" enctype="multipart/form-data">
                     @csrf
                     <div class="gap-4 px-3">

@@ -30,7 +30,7 @@ class AdminInsuranceController extends Controller
 
         Insurance::create($request->all());
 
-        return redirect()->route('admin_insurance_index')->with('success', 'Insurance plan created successfully!');
+        return redirect()->route('admin.insurance.index')->with('success', 'Insurance plan created successfully!');
     }
 
     public function edit($id)
@@ -51,7 +51,7 @@ class AdminInsuranceController extends Controller
         $insurance = Insurance::findOrFail($id);
         $insurance->update($request->all());
 
-        return redirect()->route('admin_insurance_index')->with('success', 'Insurance plan updated successfully!');
+        return redirect()->route('admin.insurance.index')->with('success', 'Insurance plan updated successfully!');
     }
 
     public function destroy($id)
@@ -59,6 +59,6 @@ class AdminInsuranceController extends Controller
         $insurance = Insurance::findOrFail($id);
         $insurance->delete();
 
-        return redirect()->route('admin_insurance_index')->with('success', 'Insurance plan deleted successfully!');
+        return redirect()->route('admin.insurance.index')->with('success', 'Insurance plan deleted successfully!');
     }
 }

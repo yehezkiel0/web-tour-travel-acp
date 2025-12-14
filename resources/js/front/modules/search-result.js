@@ -136,18 +136,35 @@ export const initSearchResult = ($) => {
     // Initialize Event Listeners
     const initListeners = () => {
         // Debounced inputs (Text/Number)
-        const debouncedFetch = debounce(() => fetchResults(), 500);
+        // Only debounce fetch if NOT on mobile (or if mobile sidebar is closed)
+        const debouncedFetch = debounce(() => {
+            if (isMobileAndOpen()) return;
+            fetchResults();
+        }, 500);
 
         $inputs.q.on("input", debouncedFetch);
         $inputs.minPrice.on("input", debouncedFetch);
         $inputs.maxPrice.on("input", debouncedFetch);
 
         // Instant inputs (Select, Date, Radio, Checkbox)
-        $inputs.location.on("change", () => fetchResults());
-        $inputs.date.on("change", () => fetchResults());
-        $inputs.sort.on("change", () => fetchResults());
-        $inputs.duration.on("change", () => fetchResults());
-        $inputs.tripType.on("change", () => fetchResults());
+        const instantFetch = () => {
+            if (isMobileAndOpen()) return;
+            fetchResults();
+        };
+
+        $inputs.location.on("change", instantFetch);
+        $inputs.date.on("change", instantFetch);
+        $inputs.sort.on("change", instantFetch);
+        $inputs.duration.on("change", instantFetch);
+        $inputs.tripType.on("change", instantFetch);
+
+        // Helper to check if mobile sidebar is active
+        const isMobileAndOpen = () => {
+            const $sidebar = $("#filter-sidebar");
+            const isMobile = $(window).width() < 768; // Tailwind md breakpoint
+            const isOpen = !$sidebar.hasClass("translate-x-full");
+            return isMobile && isOpen;
+        };
 
         // Price Presets
         $(".price-preset").on("click", function () {
@@ -155,20 +172,37 @@ export const initSearchResult = ($) => {
             $inputs.maxPrice.val(max).trigger("input");
         });
 
-        // Reset
+        // Reset (Desktop)
         $("#reset-filters").on("click", () => {
-            // Reset all values
+            resetInputs();
+            fetchResults();
+        });
+
+        // Reset (Mobile)
+        $("#mobile-reset-filters").on("click", () => {
+            resetInputs();
+            // Do not fetch immediately, let user click Apply
+        });
+
+        // Apply Filters (Mobile)
+        $("#apply-filters").on("click", () => {
+            fetchResults();
+            // Close sidebar
+            $("#filter-sidebar").addClass("translate-x-full");
+            $("#filter-backdrop").addClass("hidden");
+            $("body").removeClass("overflow-hidden");
+        });
+
+        function resetInputs() {
             $inputs.q.val("");
             $inputs.location.val("");
             $inputs.date.val("");
             $inputs.minPrice.val("");
             $inputs.maxPrice.val("");
-            $inputs.sort.val("");
+            $inputs.sort.val(""); // Keep sort? Usually reset doesn't reset sort, but code says yes.
             $('input[name="duration"]').prop("checked", false);
             $('input[name="trip_type[]"]').prop("checked", false);
-
-            fetchResults();
-        });
+        }
 
         // Pagination Click Handler
         $(document).on("click", ".pagination a", function (e) {

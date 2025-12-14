@@ -12,7 +12,7 @@
 
             <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
                 <div class="p-4 border-b border-gray-100 flex gap-4">
-                    <form action="{{ route('admin_visa_index') }}" method="GET" class="flex gap-2 items-center">
+                    <form action="{{ route('admin.visas.index') }}" method="GET" class="flex gap-2 items-center">
                         <select name="status"
                             class="rounded-md border-gray-300 text-sm focus:ring-primary focus:border-primary">
                             <option value="">All Status</option>
@@ -67,7 +67,7 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        <a href="{{ route('admin_visa_show', $app->id) }}"
+                                        <a href="{{ route('admin.visas.show', $app->id) }}"
                                             class="bg-blue-100 text-blue-600 hover:bg-blue-200 px-3 py-1 rounded text-sm font-medium transition-colors">
                                             Manage
                                         </a>

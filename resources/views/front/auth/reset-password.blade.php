@@ -7,7 +7,7 @@
                 Reset Password
             </h4>
             <div class="py-3">
-                <form method="POST" action="{{ route('reset_password_submit') }}">
+                <form method="POST" action="{{ route('user.reset_password.submit') }}">
                     @csrf
                     <div class="flex flex-col gap-y-6">
                         <input type="hidden" name="token" value="{{ $token }}">

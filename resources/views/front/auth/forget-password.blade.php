@@ -7,7 +7,7 @@
                 Forget Password
             </h1>
             <div class="py-3">
-                <form method="POST" action="{{ route('forget_password_submit') }}">
+                <form method="POST" action="{{ route('user.forget_password_submit') }}">
                     @csrf
                     <div class="flex flex-col gap-y-6">
                         <div>
@@ -22,7 +22,7 @@
                             </button>
                         </div>
                         <div class="text-start text-sm">
-                            <a href="{{ route('login_register') }}" class="text-blue-500 underline">
+                            <a href="{{ route('user.login_register') }}" class="text-blue-500 underline">
                                 Back to login page
                             </a>
                         </div>

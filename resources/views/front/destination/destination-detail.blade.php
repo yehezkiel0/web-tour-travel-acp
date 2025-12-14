@@ -235,7 +235,7 @@
                         <i class="fas fa-star mr-2"></i>Write a Review
                     </button>
                 @else
-                    <a href="{{ route('login') }}"
+                    <a href="{{ route('user.login') }}"
                         class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all">
                         <i class="fas fa-star mr-2"></i>Login to Review
                     </a>

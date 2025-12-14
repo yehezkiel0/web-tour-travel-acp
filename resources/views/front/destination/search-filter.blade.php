@@ -19,167 +19,179 @@
 
                 <!-- Sidebar Filters (Desktop Sticky / Mobile Drawer) -->
                 <aside id="filter-sidebar"
-                    class="fixed inset-0 z-50 bg-white transform translate-x-full transition-transform duration-300 md:translate-x-0 md:sticky md:top-24 md:block md:w-1/4 md:shadow-none shadow-xl overflow-y-auto md:overflow-visible md:h-[calc(100vh-8rem)]">
-                    <div class="h-full md:h-auto p-0 md:p-0">
+                    class="fixed inset-0 z-[3000] md:z-30 bg-white transform translate-x-full transition-transform duration-300 md:translate-x-0 md:sticky md:top-24 md:block md:w-1/4 md:shadow-none shadow-xl flex flex-col h-[100dvh] md:h-[calc(100vh-8rem)]">
 
-                        <!-- Mobile Header -->
-                        <div class="md:hidden p-4 border-b flex justify-between items-center sticky top-0 bg-white z-10">
-                            <h2 class="font-bold text-lg">{{ __('messages.filters') }}</h2>
-                            <button id="close-filter-sidebar" class="text-gray-500 hover:text-gray-700">
-                                <i class="fa-solid fa-xmark text-xl"></i>
+                    <!-- Mobile Header -->
+                    <div
+                        class="md:hidden px-4 py-4 border-b flex justify-between items-center bg-white z-20 shadow-sm shrink-0">
+                        <h2 class="font-bold text-lg text-gray-800">{{ __('messages.filters') }}</h2>
+                        <button id="close-filter-sidebar"
+                            class="p-2 text-gray-600 hover:text-gray-900 bg-gray-100 rounded-full w-10 h-10 flex items-center justify-center transition-colors">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Filter Content (Scrollable) -->
+                    <div
+                        class="flex-1 overflow-y-auto p-5 md:p-0 md:bg-white md:rounded-xl md:border md:border-gray-100 md:shadow-sm space-y-6 pb-24 md:pb-0">
+
+                        <!-- Search -->
+                        <div class="md:p-4 md:border-b md:border-gray-50">
+                            <label class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.search') }}</label>
+                            <div class="relative">
+                                <input type="text" id="filter-q" name="q" value="{{ request('q') }}"
+                                    placeholder="{{ __('messages.search_placeholder') }}"
+                                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm">
+                                <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400 text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="md:px-4">
+                            <label class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.location') }}</label>
+                            <select id="filter-location" name="location"
+                                class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm appearance-none cursor-pointer">
+                                <option value="">{{ __('messages.all_locations') }}</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city }}"
+                                        {{ request('location') == $city ? 'selected' : '' }}>{{ $city }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="md:px-4">
+                            <label class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.date') }}</label>
+                            <input type="date" id="filter-date" name="date" value="{{ request('date') }}"
+                                class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm cursor-pointer">
+                        </div>
+
+                        <hr class="border-gray-100 mx-4">
+
+                        <!-- Price Range -->
+                        <div class="md:px-4">
+                            <label
+                                class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.price_range') }}</label>
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="relative w-1/2">
+                                    <span class="absolute left-3 top-2.5 text-gray-400 text-xs">Rp</span>
+                                    <input type="number" id="filter-min-price" name="min_price"
+                                        placeholder="{{ __('messages.price_min') }}" value="{{ request('min_price') }}"
+                                        class="w-full pl-8 pr-2 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:border-primary focus:ring-0">
+                                </div>
+                                <span class="text-gray-400">-</span>
+                                <div class="relative w-1/2">
+                                    <span class="absolute left-3 top-2.5 text-gray-400 text-xs">Rp</span>
+                                    <input type="number" id="filter-max-price" name="max_price"
+                                        placeholder="{{ __('messages.price_max') }}" value="{{ request('max_price') }}"
+                                        class="w-full pl-8 pr-2 py-2 bg-white border border-gray-300 rounded-lg text-sm focus:border-primary focus:ring-0">
+                                </div>
+                            </div>
+                            <!-- Simple presets -->
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button"
+                                    class="price-preset px-3 py-1 text-xs bg-gray-100 rounded-full hover:bg-gray-200 text-gray-600 transition-colors border border-gray-200"
+                                    data-max="1000000">
+                                    < 1M</button>
+                                        <button type="button"
+                                            class="price-preset px-3 py-1 text-xs bg-gray-100 rounded-full hover:bg-gray-200 text-gray-600 transition-colors border border-gray-200"
+                                            data-max="5000000">
+                                            < 5M</button>
+                                                <button type="button"
+                                                    class="price-preset px-3 py-1 text-xs bg-gray-100 rounded-full hover:bg-gray-200 text-gray-600 transition-colors border border-gray-200"
+                                                    data-max="10000000">
+                                                    < 10M</button>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-100 mx-4">
+
+                        <!-- Duration -->
+                        <div class="md:px-4">
+                            <label class="block text-sm font-bold text-gray-800 mb-3">Duration</label>
+                            <div class="space-y-3">
+                                <label
+                                    class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <div class="relative flex items-center">
+                                        <input type="radio" name="duration" value="1-3" class="peer sr-only"
+                                            {{ request('duration') == '1-3' ? 'checked' : '' }}>
+                                        <div
+                                            class="w-5 h-5 border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all bg-white">
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 group-hover:text-gray-800 select-none">Short (1-3
+                                        Days)</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <div class="relative flex items-center">
+                                        <input type="radio" name="duration" value="4-7" class="peer sr-only"
+                                            {{ request('duration') == '4-7' ? 'checked' : '' }}>
+                                        <div
+                                            class="w-5 h-5 border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all bg-white">
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 group-hover:text-gray-800 select-none">Medium
+                                        (4-7
+                                        Days)</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <div class="relative flex items-center">
+                                        <input type="radio" name="duration" value="8+" class="peer sr-only"
+                                            {{ request('duration') == '8+' ? 'checked' : '' }}>
+                                        <div
+                                            class="w-5 h-5 border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all bg-white">
+                                        </div>
+                                    </div>
+                                    <span class="text-sm text-gray-600 group-hover:text-gray-800 select-none">Long (8+
+                                        Days)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-100 mx-4">
+
+                        <!-- Trip Type -->
+                        <div class="md:px-4">
+                            <label class="block text-sm font-bold text-gray-800 mb-3">Trip Type</label>
+                            <div class="space-y-3">
+                                @foreach (['Open Trip', 'Private Trip', 'Package'] as $type)
+                                    <label
+                                        class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                        <input type="checkbox" name="trip_type[]" value="{{ $type }}"
+                                            class="w-5 h-5 border-gray-300 rounded text-primary focus:ring-primary/20 transition-all checked:bg-primary"
+                                            {{ in_array($type, (array) request('trip_type', [])) ? 'checked' : '' }}>
+                                        <span
+                                            class="text-sm text-gray-600 group-hover:text-gray-800 select-none">{{ $type }}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Desktop Reset (Hidden on Mobile) -->
+                        <div class="p-4 pt-2 hidden md:block">
+                            <button id="reset-filters"
+                                class="w-full py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                Reset Filters
                             </button>
                         </div>
-
-                        <!-- Filter Form -->
-                        <div
-                            class="p-5 md:p-0 md:bg-white md:rounded-xl md:border md:border-gray-100 md:shadow-sm space-y-6">
-
-                            <!-- Search -->
-                            <div class="md:p-4 md:border-b md:border-gray-50">
-                                <label
-                                    class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.search') }}</label>
-                                <div class="relative">
-                                    <input type="text" id="filter-q" name="q" value="{{ request('q') }}"
-                                        placeholder="{{ __('messages.search_placeholder') }}"
-                                        class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm">
-                                    <i class="fa-solid fa-search absolute left-3.5 top-3.5 text-gray-400 text-xs"></i>
-                                </div>
-                            </div>
-
-                            <!-- Location -->
-                            <div class="md:px-4">
-                                <label
-                                    class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.location') }}</label>
-                                <select id="filter-location" name="location"
-                                    class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm appearance-none cursor-pointer">
-                                    <option value="">{{ __('messages.all_locations') }}</option>
-                                    @foreach ($cities as $city)
-                                        <option value="{{ $city }}"
-                                            {{ request('location') == $city ? 'selected' : '' }}>{{ $city }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <!-- Date -->
-                            <div class="md:px-4">
-                                <label class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.date') }}</label>
-                                <input type="date" id="filter-date" name="date" value="{{ request('date') }}"
-                                    class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-sm cursor-pointer">
-                            </div>
-
-                            <hr class="border-gray-100 mx-4">
-
-                            <!-- Price Range -->
-                            <div class="md:px-4">
-                                <label
-                                    class="block text-sm font-bold text-gray-800 mb-2">{{ __('messages.price_range') }}</label>
-                                <div class="flex items-center gap-2 mb-4">
-                                    <div class="relative w-1/2">
-                                        <span class="absolute left-3 top-2.5 text-gray-400 text-xs">Rp</span>
-                                        <input type="number" id="filter-min-price" name="min_price"
-                                            placeholder="{{ __('messages.price_min') }}"
-                                            value="{{ request('min_price') }}"
-                                            class="w-full pl-8 pr-2 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-0">
-                                    </div>
-                                    <span class="text-gray-400">-</span>
-                                    <div class="relative w-1/2">
-                                        <span class="absolute left-3 top-2.5 text-gray-400 text-xs">Rp</span>
-                                        <input type="number" id="filter-max-price" name="max_price"
-                                            placeholder="{{ __('messages.price_max') }}"
-                                            value="{{ request('max_price') }}"
-                                            class="w-full pl-8 pr-2 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-0">
-                                    </div>
-                                </div>
-                                <!-- Simple presets -->
-                                <div class="flex flex-wrap gap-2">
-                                    <button type="button"
-                                        class="price-preset px-3 py-1 text-xs bg-gray-100 rounded-full hover:bg-gray-200 text-gray-600 transition-colors"
-                                        data-max="1000000">
-                                        < 1M</button>
-                                            <button type="button"
-                                                class="price-preset px-3 py-1 text-xs bg-gray-100 rounded-full hover:bg-gray-200 text-gray-600 transition-colors"
-                                                data-max="5000000">
-                                                < 5M</button>
-                                                    <button type="button"
-                                                        class="price-preset px-3 py-1 text-xs bg-gray-100 rounded-full hover:bg-gray-200 text-gray-600 transition-colors"
-                                                        data-max="10000000">
-                                                        < 10M</button>
-                                </div>
-                            </div>
-
-                            <hr class="border-gray-100 mx-4">
-
-                            <!-- Duration -->
-                            <div class="md:px-4">
-                                <label class="block text-sm font-bold text-gray-800 mb-3">Duration</label>
-                                <div class="space-y-3">
-                                    <label class="flex items-center gap-3 cursor-pointer group">
-                                        <div class="relative flex items-center">
-                                            <input type="radio" name="duration" value="1-3" class="peer sr-only"
-                                                {{ request('duration') == '1-3' ? 'checked' : '' }}>
-                                            <div
-                                                class="w-5 h-5 border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all bg-white">
-                                            </div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 group-hover:text-gray-800 select-none">Short (1-3
-                                            Days)</span>
-                                    </label>
-                                    <label class="flex items-center gap-3 cursor-pointer group">
-                                        <div class="relative flex items-center">
-                                            <input type="radio" name="duration" value="4-7" class="peer sr-only"
-                                                {{ request('duration') == '4-7' ? 'checked' : '' }}>
-                                            <div
-                                                class="w-5 h-5 border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all bg-white">
-                                            </div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 group-hover:text-gray-800 select-none">Medium
-                                            (4-7
-                                            Days)</span>
-                                    </label>
-                                    <label class="flex items-center gap-3 cursor-pointer group">
-                                        <div class="relative flex items-center">
-                                            <input type="radio" name="duration" value="8+" class="peer sr-only"
-                                                {{ request('duration') == '8+' ? 'checked' : '' }}>
-                                            <div
-                                                class="w-5 h-5 border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all bg-white">
-                                            </div>
-                                        </div>
-                                        <span class="text-sm text-gray-600 group-hover:text-gray-800 select-none">Long (8+
-                                            Days)</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <hr class="border-gray-100 mx-4">
-
-                            <!-- Trip Type -->
-                            <div class="md:px-4">
-                                <label class="block text-sm font-bold text-gray-800 mb-3">Trip Type</label>
-                                <div class="space-y-3">
-                                    @foreach (['Open Trip', 'Private Trip', 'Package'] as $type)
-                                        <label class="flex items-center gap-3 cursor-pointer group">
-                                            <input type="checkbox" name="trip_type[]" value="{{ $type }}"
-                                                class="w-5 h-5 border-gray-300 rounded text-primary focus:ring-primary/20 transition-all checked:bg-primary"
-                                                {{ in_array($type, (array) request('trip_type', [])) ? 'checked' : '' }}>
-                                            <span
-                                                class="text-sm text-gray-600 group-hover:text-gray-800 select-none">{{ $type }}</span>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="p-4 pt-2">
-                                <button id="reset-filters"
-                                    class="w-full py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                                    Reset Filters
-                                </button>
-                            </div>
-
-                        </div>
                     </div>
-                    <!-- Mobile Backdrop -->
-                    <div id="filter-backdrop" class="fixed inset-0 bg-black/50 z-[-1] hidden md:hidden"></div>
+
+                    <!-- Mobile Sticky Footer -->
+                    <div
+                        class="md:hidden absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 flex gap-3 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                        <button id="mobile-reset-filters"
+                            class="flex-1 py-3 text-sm font-bold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors">
+                            Reset
+                        </button>
+                        <button id="apply-filters"
+                            class="flex-1 py-3 text-sm font-bold text-white bg-primary rounded-xl hover:bg-primary-dark transition-colors shadow-lg shadow-primary/30">
+                            Apply Filters
+                        </button>
+                    </div>
+
                 </aside>
 
                 <!-- Results Grid -->

@@ -125,7 +125,7 @@
                 Please log in to access this feature. Create an account if you don't have one yet.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="{{ route('login_register') }}"
+                <a href="{{ route('user.login_register') }}"
                     class="inline-flex justify-center items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
                     Go to Login
                 </a>

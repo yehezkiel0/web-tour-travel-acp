@@ -16,7 +16,7 @@
                             <div
                                 class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                 <div class="w-full">
-                                    <form method="GET" action="{{ route('admin_testimonials_index') }}"
+                                    <form method="GET" action="{{ route('admin.testimonials.index') }}"
                                         class="flex items-center gap-3">
                                         <select name="service_type"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2">
@@ -48,7 +48,7 @@
                                         </button>
 
                                         @if (request('service_type') || request('status'))
-                                            <a href="{{ route('admin_testimonials_index') }}"
+                                            <a href="{{ route('admin.testimonials.index') }}"
                                                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 <i class="fa-solid fa-times mr-1"></i>
                                                 Clear
@@ -129,7 +129,7 @@
                                                     <div class="flex items-center gap-2">
                                                         @if ($testimonial->is_approved)
                                                             <form
-                                                                action="{{ route('admin_testimonial_unapprove', $testimonial->id) }}"
+                                                                action="{{ route('admin.testimonials.unapprove', $testimonial->id) }}"
                                                                 method="POST" class="inline">
                                                                 @csrf
                                                                 <button type="submit"
@@ -141,7 +141,7 @@
                                                             </form>
                                                         @else
                                                             <form
-                                                                action="{{ route('admin_testimonial_approve', $testimonial->id) }}"
+                                                                action="{{ route('admin.testimonials.approve', $testimonial->id) }}"
                                                                 method="POST" class="inline">
                                                                 @csrf
                                                                 <button type="submit"
@@ -153,7 +153,7 @@
                                                         @endif
 
                                                         <form
-                                                            action="{{ route('admin_testimonial_delete', $testimonial->id) }}"
+                                                            action="{{ route('admin.testimonials.destroy', $testimonial->id) }}"
                                                             method="POST" class="inline">
                                                             @csrf
                                                             @method('DELETE')

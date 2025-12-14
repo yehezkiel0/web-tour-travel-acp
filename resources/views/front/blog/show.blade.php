@@ -55,7 +55,8 @@
                         </form>
                     @else
                         <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-10 text-center">
-                            <p class="text-blue-800">Please <a href="{{ route('login') }}" class="font-bold underline">login</a>
+                            <p class="text-blue-800">Please <a href="{{ route('user.login') }}"
+                                    class="font-bold underline">login</a>
                                 to leave a comment.</p>
                         </div>
                     @endauth
@@ -120,7 +121,8 @@
                                         @else
                                             <div
                                                 class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-                                                <i class="fas fa-image text-gray-400"></i></div>
+                                                <i class="fas fa-image text-gray-400"></i>
+                                            </div>
                                         @endif
                                     </a>
                                     <div>

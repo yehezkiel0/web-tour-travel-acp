@@ -37,7 +37,7 @@ class AdminAuthController extends Controller
 
             // Cek role user
             if ($user->role === 'admin') { // Sesuaikan dengan nilai role di database
-                return redirect()->route('admin_dashboard')->with('success', 'Login admin berhasil!');
+                return redirect()->route('admin.dashboard')->with('success', 'Login admin berhasil!');
             } else {
                 Auth::logout(); // Logout jika bukan admin
                 return redirect()->back()->with('error', 'Akses hanya untuk admin.');
@@ -50,7 +50,7 @@ class AdminAuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('admin_login')->with('success', 'Logout is successful!');
+        return redirect()->route('admin.login')->with('success', 'Logout is successful!');
     }
 
     public function profile()
@@ -153,7 +153,7 @@ class AdminAuthController extends Controller
         $email = session('reset_email');
 
         if (!$token || !$email) {
-            return redirect()->route('admin_login')->with('error', 'Token or email is not correct');
+            return redirect()->route('admin.login')->with('success', 'Password has been reset successfully. Please login with your new password.');
         }
 
         return view('admin.auth.reset-password', compact('token', 'email'));
@@ -169,7 +169,7 @@ class AdminAuthController extends Controller
         $email = session('reset_email');
 
         if (!$token || !$email) {
-            return redirect()->route('admin_login')->with('error', 'Invalid or expired link');
+            return redirect()->route('admin.login')->with('error', 'Invalid or expired link');
         }
         $token_data = DB::table('password_reset_tokens')
             ->where('email', $email)
@@ -177,14 +177,14 @@ class AdminAuthController extends Controller
             ->first();
 
         if (!$token_data) {
-            return redirect()->route('admin_login')->with('error', 'Token or email is not correct');
+            return redirect()->route('admin.login')->with('success', 'Password has been reset successfully. Please login with your new password.');
         }
 
         $createdAt = \Carbon\Carbon::parse($token_data->created_at);
         $expiryDate = $createdAt->addMinutes(10);
 
         if (now() > $expiryDate) {
-            return redirect()->route('admin_login')->with('error', 'Token has expired. Please request a new password reset link.');
+            return redirect()->route('admin.login')->with('error', 'Token has expired. Please request a new password reset link.');
         }
 
         $admin = User::where('email', $email)->first();
@@ -199,7 +199,7 @@ class AdminAuthController extends Controller
 
             DB::table('sessions')->where('user_id', $admin->id)->delete();
 
-            return redirect()->route('admin_login')->with('success', 'Password has been reset successfully. Please login with your new password.');
+            return redirect()->route('admin.login')->with('success', 'Password has been reset successfully. Please login with your new password.');
         }
     }
 }

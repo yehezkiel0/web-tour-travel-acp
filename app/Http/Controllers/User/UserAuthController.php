@@ -55,7 +55,7 @@ class UserAuthController extends Controller
         Auth::guard('web')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect()->route('login_register')->with('success', 'Logout is successful!');
+        return redirect()->route('user.login_register')->with('success', 'Logout is successful!');
     }
 
     public function register_submit(Request $request)
@@ -90,7 +90,7 @@ class UserAuthController extends Controller
         session(['register_token' => $token]);
         session(['register_email' => $request->email]);
 
-        $verification_link = route('register_verify');
+        $verification_link = route('user.register_verify');
         $subject = "User Account Verification";
         $message = "To complete registration, please click on the link below:<br>";
         $message .= "<a href='" . $verification_link . "'>Click Here</a>";
@@ -108,7 +108,7 @@ class UserAuthController extends Controller
         $email = session('register_email');
 
         if (!$token || !$email) {
-            return redirect()->route('login_register')->with('error', 'Token or email is not correct');
+            return redirect()->route('user.login_register')->with('error', 'Token or email is not correct');
         }
 
         $user = User::where('email', $email)->where('token', $token)->first();
@@ -132,7 +132,7 @@ class UserAuthController extends Controller
         session()->forget('register_token');
         session()->forget('register_email');
 
-        return redirect()->route('login_register')->with('success', 'Your account is verified. You can login now.');
+        return redirect()->route('user.login_register')->with('success', 'Your account is verified. You can login now.');
     }
 
     public function forget_password()
@@ -177,7 +177,7 @@ class UserAuthController extends Controller
         $email = session('reset_email');
 
         if (!$token || !$email) {
-            return redirect()->route('login_register')->with('error', 'Token or email is not correct');
+            return redirect()->route('user.login_register')->with('error', 'Token or email is not correct');
         }
 
         return view('front.auth.reset-password', compact('token', 'email'));
@@ -193,7 +193,7 @@ class UserAuthController extends Controller
         $email = session('reset_email');
 
         if (!$token || !$email) {
-            return redirect()->route('login_register')->with('error', 'Invalid or expired link');
+            return redirect()->route('user.login_register')->with('error', 'Invalid or expired link');
         }
         $token_data = DB::table('password_reset_tokens')
             ->where('email', $email)
@@ -201,14 +201,14 @@ class UserAuthController extends Controller
             ->first();
 
         if (!$token_data) {
-            return redirect()->route('login_register')->with('error', 'Token or email is not correct');
+            return redirect()->route('user.login_register')->with('error', 'Token or email is not correct');
         }
 
         $createdAt = \Carbon\Carbon::parse($token_data->created_at);
         $expiryDate = $createdAt->addMinutes(10);
 
         if (now() > $expiryDate) {
-            return redirect()->route('login_register')->with('error', 'Token has expired. Please request a new password reset link.');
+            return redirect()->route('user.login_register')->with('error', 'Token has expired. Please request a new password reset link.');
         }
 
         $user = User::where('email', $email)->first();
@@ -223,7 +223,7 @@ class UserAuthController extends Controller
 
             DB::table('sessions')->where('user_id', $user->id)->delete();
 
-            return redirect()->route('login_register')->with('success', 'Password has been reset successfully. Please login with your new password.');
+            return redirect()->route('user.login_register')->with('success', 'Password has been reset successfully. Please login with your new password.');
         }
     }
 }

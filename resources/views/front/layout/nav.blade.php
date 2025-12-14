@@ -126,13 +126,13 @@
             <div class="hidden xl:flex flex-row gap-x-4 items-center">
                 @guest
                     <div>
-                        <a href="{{ route('login_register') }}"
+                        <a href="{{ route('user.login_register') }}"
                             class="border-[3px] border-primary px-6 py-1.5 rounded-lg font-medium hover:ring-1 hover:ring-primary transition-all ease-in-out duration-300 whitespace-nowrap">
                             Login
                         </a>
                     </div>
                     <div>
-                        <a href="{{ route('login_register') }}"
+                        <a href="{{ route('user.login_register') }}"
                             class="border-[3px] border-primary bg-primary px-6 py-1.5 rounded-lg text-white font-medium hover:bg-primary-400 transition-all ease-in-out duration-300 whitespace-nowrap">
                             Sign Up
                         </a>
@@ -208,7 +208,7 @@
                                     </li>
                                     <!-- Logout -->
                                     <li class="z-[1000] border-t">
-                                        <form action="{{ route('logout') }}" method="POST">
+                                        <form action="{{ route('user.logout') }}" method="POST">
                                             @csrf
                                             <button type="submit"
                                                 class="text-sm flex items-center gap-x-3 py-3 px-4 w-full text-left hover:bg-red-50 text-red-600 transition-colors">
@@ -223,11 +223,11 @@
                     @else
                         {{-- Admin logged in - show login/register buttons instead --}}
                         <div class="flex flex-row gap-x-3">
-                            <a href="{{ route('login_register') }}"
+                            <a href="{{ route('user.login_register') }}"
                                 class="border-[3px] border-primary px-6 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary transition-all ease-in-out duration-300">
                                 Login
                             </a>
-                            <a href="{{ route('login_register') }}"
+                            <a href="{{ route('user.login_register') }}"
                                 class="bg-primary text-white px-6 py-2 h-10 rounded-lg font-medium hover:ring-1 hover:ring-primary transition-all ease-in-out duration-300">
                                 Sign Up
                             </a>
@@ -247,11 +247,11 @@
         <div
             class="sidebar-home fixed inset-0 z-[1999] flex flex-col justify-start items-start pt-24 h-screen w-screen bg-white/95 backdrop-blur-sm overflow-y-auto transition-all duration-300">
             <div class="flex flex-col w-full px-6 gap-y-4 mb-6">
-                <a href="{{ route('login') }}"
+                <a href="{{ route('user.login') }}"
                     class="w-full text-center border-2 border-primary text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary-50 transition-all">
                     Sign In
                 </a>
-                <a href="{{ route('register') }}"
+                <a href="{{ route('user.register') }}"
                     class="w-full text-center bg-primary text-white border-2 border-primary px-6 py-3 rounded-xl font-bold hover:bg-primary-800 transition-all shadow-lg shadow-blue-200">
                     Sign Up
                 </a>

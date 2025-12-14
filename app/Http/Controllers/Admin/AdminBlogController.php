@@ -59,7 +59,7 @@ class AdminBlogController extends Controller
 
         $post->save();
 
-        return redirect()->route('admin_blog_index')->with('success', 'Blog post created successfully!');
+        return redirect()->route('admin.blog.index')->with('success', 'Blog post created successfully!');
     }
 
     public function edit(BlogPost $post)
@@ -92,7 +92,7 @@ class AdminBlogController extends Controller
 
         $post->save();
 
-        return redirect()->route('admin_blog_index')->with('success', 'Blog post updated successfully!');
+        return redirect()->route('admin.blog.index')->with('success', 'Blog post updated successfully!');
     }
 
     public function delete(BlogPost $post)
@@ -103,7 +103,7 @@ class AdminBlogController extends Controller
 
         $post->delete();
 
-        return redirect()->route('admin_blog_index')->with('success', 'Blog post deleted successfully!');
+        return redirect()->route('admin.blog.index')->with('success', 'Blog post deleted successfully!');
     }
 
     // Category Management
@@ -123,12 +123,12 @@ class AdminBlogController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect()->route('admin_blog_categories')->with('success', 'Category created successfully!');
+        return redirect()->route('admin.blog.categories')->with('success', 'Category created successfully!');
     }
 
     public function deleteCategory(BlogCategory $category)
     {
         $category->delete();
-        return redirect()->route('admin_blog_categories')->with('success', 'Category deleted successfully!');
+        return redirect()->route('admin.blog.categories')->with('success', 'Category deleted successfully!');
     }
 }

@@ -16,7 +16,7 @@
         <script>
             function toggleWishlist(type, id, button) {
                 @guest
-                window.location.href = '{{ route('login') }}';
+                window.location.href = '{{ route('user.login') }}';
                 return;
             @endguest
 

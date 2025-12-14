@@ -12,13 +12,13 @@
             <div class="px-6 py-6">
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex items-center justify-end mb-6">
-                        <a href="{{ route('admin_insurance_index') }}"
+                        <a href="{{ route('admin.insurance.index') }}"
                             class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
                             <i class="fas fa-arrow-left mr-2"></i> Back
                         </a>
                     </div>
 
-                    <form action="{{ route('admin_insurance_update', $insurance->id) }}" method="POST">
+                    <form action="{{ route('admin.insurance.update', $insurance->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 

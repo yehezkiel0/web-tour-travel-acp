@@ -89,7 +89,7 @@
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-800">Hotel Booking Statistics</h3>
-                    <a href="{{ route('admin_hotel_bookings') }}"
+                    <a href="{{ route('admin.hotels.bookings.index') }}"
                         class="text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium">
                         View All <i class="fas fa-arrow-right ml-1"></i>
                     </a>
@@ -198,7 +198,7 @@
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-800">Recent Hotel Bookings</h3>
-                    <a href="{{ route('admin_hotel_bookings') }}"
+                    <a href="{{ route('admin.hotels.bookings.index') }}"
                         class="text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium">
                         View All <i class="fas fa-arrow-right ml-1"></i>
                     </a>
@@ -266,7 +266,7 @@
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-800">Service Testimonials</h3>
-                    <a href="{{ route('admin_testimonials_index') }}"
+                    <a href="{{ route('admin.testimonials.index') }}"
                         class="text-[#4F46E5] hover:text-[#4338CA] text-sm font-medium">
                         View All <i class="fas fa-arrow-right ml-1"></i>
                     </a>

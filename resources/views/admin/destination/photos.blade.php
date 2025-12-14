@@ -6,7 +6,7 @@
         <div class="flex flex-col gap-y-2">
             <div class="bg-white p-5 mb-4 flex flex-row justify-between items-center rounded-sm shadow-md relative ">
                 <h1 class=" lg:text-2xl text-xl font-medium mt-1 text-gray-700">Photos of {{ $destination->title }}</h1>
-                <a href="{{ route('admin_destination_index') }}">
+                <a href="{{ route('admin.destinations.index') }}">
                     <button
                         class="bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-400 drop-shadow-md transition-all ease-in-out duration-300">Back
                         to Previous</button>

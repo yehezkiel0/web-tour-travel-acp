@@ -13,7 +13,7 @@
                 {{-- Create Form --}}
                 <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
                     <h3 class="font-bold text-lg mb-4 text-gray-800">Add New Season</h3>
-                    <form action="{{ route('admin_seasonal_store') }}" method="POST"
+                    <form action="{{ route('admin.seasonal_pricing.store') }}" method="POST"
                         class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
                         @csrf
                         <div class="md:col-span-1">
@@ -88,8 +88,8 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            <form action="{{ route('admin_seasonal_destroy', $season->id) }}" method="POST"
-                                                onsubmit="return confirm('Delete this season?');">
+                                            <form action="{{ route('admin.seasonal_pricing.destroy', $season->id) }}"
+                                                method="POST" onsubmit="return confirm('Delete this season?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

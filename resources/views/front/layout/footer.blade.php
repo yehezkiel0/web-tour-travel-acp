@@ -12,7 +12,7 @@
                     <h3 class="font-bold text-sm mb-2 md:text-lg md:mb-6">{{ __('messages.for_beginners') }}</h3>
                     <ul class="text-xs space-y-1 md:text-base md:space-y-2">
                         <li>
-                            <a href="{{ route('login_register') }}"
+                            <a href="{{ route('user.login_register') }}"
                                 class="font-normal hover:underline">{{ __('messages.new_account') }}</a>
                         </li>
                         <li>

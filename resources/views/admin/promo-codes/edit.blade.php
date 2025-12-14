@@ -6,7 +6,7 @@
         <div class="flex flex-col gap-y-2">
             <div class="bg-white p-5 mb-4 flex items-center justify-between rounded-sm shadow-md">
                 <h1 class="lg:text-2xl text-xl font-medium mt-1 text-gray-700">Edit Promo Code</h1>
-                <a href="{{ route('admin_promo_codes_index') }}">
+                <a href="{{ route('admin.promo_codes.index') }}">
                     <button class="bg-gray-500 text-white rounded-lg px-4 py-2 hover:bg-gray-600 transition-all">
                         <i class="fas fa-arrow-left mr-2"></i>Back
                     </button>
@@ -14,7 +14,7 @@
             </div>
 
             <div class="bg-white p-6 rounded-sm shadow-md">
-                <form action="{{ route('admin_promo_codes_update', $promoCode->id) }}" method="POST">
+                <form action="{{ route('admin.promo_codes.update', $promoCode->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -131,7 +131,7 @@
                         <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                             <i class="fas fa-save mr-2"></i>Update Promo Code
                         </button>
-                        <a href="{{ route('admin_promo_codes_index') }}"
+                        <a href="{{ route('admin.promo_codes.index') }}"
                             class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400">
                             Cancel
                         </a>

@@ -185,7 +185,7 @@
                                                     <div class="py-1">
                                                         @foreach (['pending', 'paid', 'completed', 'cancelled', 'failed'] as $status)
                                                             <form
-                                                                action="{{ route('admin_transaction_update_status', $transaction->id) }}"
+                                                                action="{{ route('admin.transactions.update_status', $transaction->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('PUT')
@@ -207,7 +207,7 @@
 
                                             <!-- Delete Button using Modal -->
                                             <button type="button"
-                                                onclick="openDeleteModal('{{ route('admin_transaction_delete', $transaction->id) }}')"
+                                                onclick="openDeleteModal('{{ route('admin.transactions.destroy', $transaction->id) }}')"
                                                 class="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                                 title="Delete">
                                                 <i class="fa-solid fa-trash"></i>

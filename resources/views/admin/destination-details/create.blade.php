@@ -7,7 +7,7 @@
             <div class="bg-white p-5 mb-4 flex flex-row justify-between items-center rounded-sm shadow-md relative">
                 <h1 class="lg:text-2xl text-xl font-medium mt-1 text-gray-700">Create {{ $destination_details->title }}
                     Details</h1>
-                <a href="{{ route('admin_destination_index') }}">
+                <a href="{{ route('admin.destinations.index') }}">
                     <button
                         class="bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-400 drop-shadow-md transition-all ease-in-out duration-300">
                         View All
@@ -16,7 +16,7 @@
             </div>
 
             <div class="bg-white p-6 rounded-sm shadow-md">
-                <form action="{{ route('admin_destination_details_store', $destination_details->slug) }}" method="POST"
+                <form action="{{ route('admin.destinations.details.store', $destination_details->slug) }}" method="POST"
                     id="detailsForm" class="flex flex-col gap-y-6">
                     @csrf
                     <input type="hidden" name="destination_id" value="{{ $destination_details->id }}">

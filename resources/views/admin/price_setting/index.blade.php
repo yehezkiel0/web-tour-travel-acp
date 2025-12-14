@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin_price_setting_update') }}" method="POST">
+                    <form action="{{ route('admin.price_settings.update') }}" method="POST">
                         @csrf
                         @method('PUT')
 

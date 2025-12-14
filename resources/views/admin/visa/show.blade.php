@@ -8,7 +8,7 @@
         <div class="flex flex-col gap-y-2">
             <div class="bg-white p-5 mb-4 flex items-center justify-between rounded-sm shadow-md">
                 <h1 class="text-xl lg:text-2xl font-medium mt-1 text-gray-700">Visa Application Details</h1>
-                <a href="{{ route('admin_visa_index') }}" class="text-gray-500 hover:text-gray-700 text-sm">
+                <a href="{{ route('admin.visas.index') }}" class="text-gray-500 hover:text-gray-700 text-sm">
                     <i class="fas fa-arrow-left mr-1"></i> Back to List
                 </a>
             </div>
@@ -70,7 +70,7 @@
                 {{-- Status Management --}}
                 <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 h-fit">
                     <h3 class="font-bold text-gray-700 mb-4">Manage Application</h3>
-                    <form action="{{ route('admin_visa_update', $application->id) }}" method="POST" class="space-y-4">
+                    <form action="{{ route('admin.visas.update', $application->id) }}" method="POST" class="space-y-4">
                         @csrf
                         @method('PUT')
 

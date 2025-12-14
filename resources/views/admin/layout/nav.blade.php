@@ -27,12 +27,12 @@
                     id="dropdown-profile">
                     <li class="py-2 z-[1000]">
                         <a class="text-sm flex items-center gap-x-3 text-slate-500"
-                            href="{{ route('admin_profile') }}"><i class="far fa-user"></i>Edit
+                            href="{{ route('admin.profile') }}"><i class="far fa-user"></i>Edit
                             Profile</a>
                     </li>
                     <li class="py-2 z-[1000]">
                         <a class="text-sm flex items-center gap-x-3 text-slate-500"
-                            href="{{ route('admin_logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                            href="{{ route('admin.logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
                     </li>
                 </ul>
             </li>

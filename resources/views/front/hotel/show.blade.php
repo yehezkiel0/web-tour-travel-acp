@@ -610,7 +610,7 @@
                             } catch (e) {
                                 // If parsing fails, it's likely HTML (Login page or Error page)
                                 if (text.includes('<!DOCTYPE html>') || text.includes(
-                                    '<html')) {
+                                        '<html')) {
                                     // Assuming session expired or middleware redirect
                                     document.getElementById('permissionModal').classList.remove(
                                         'hidden');
@@ -643,7 +643,8 @@
             // Login Redirect Logic
             document.getElementById('loginRedirectBtn').addEventListener('click', function() {
                 const isMobile = window.innerWidth <= 768; // Standard mobile breakpoint
-                const loginRoute = isMobile ? "{{ route('login') }}" : "{{ route('login_register') }}";
+                const loginRoute = isMobile ? "{{ route('user.login') }}" :
+                    "{{ route('user.login_register') }}";
                 window.location.href = loginRoute;
             });
 

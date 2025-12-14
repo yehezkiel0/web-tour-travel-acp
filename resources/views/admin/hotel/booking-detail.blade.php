@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Booking Detail #{{ $booking->booking_code }}</h1>
-            <a href="{{ route('admin_hotel_bookings') }}"
+            <a href="{{ route('admin.hotels.bookings.index') }}"
                 class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
                 <i class="fas fa-arrow-left mr-2"></i>Back to Bookings
             </a>
@@ -58,7 +58,7 @@
                     </div>
 
                     <!-- Update Status Form -->
-                    <form action="{{ route('admin_hotel_booking_update_status', $booking->id) }}" method="POST"
+                    <form action="{{ route('admin.hotels.bookings.update_status', $booking->id) }}" method="POST"
                         class="mt-4 pt-4 border-t">
                         @csrf
                         @method('PUT')
@@ -259,7 +259,7 @@
                             <i class="fas fa-envelope mr-2"></i>Send Email
                         </a>
 
-                        <form action="{{ route('admin_hotel_booking_delete', $booking->id) }}" method="POST"
+                        <form action="{{ route('admin.hotels.bookings.destroy', $booking->id) }}" method="POST"
                             onsubmit="return confirm('Are you sure you want to delete this booking?');">
                             @csrf
                             @method('DELETE')

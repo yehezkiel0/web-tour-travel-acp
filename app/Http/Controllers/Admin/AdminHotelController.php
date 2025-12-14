@@ -94,7 +94,7 @@ class AdminHotelController extends Controller
       }
     }
 
-    return redirect()->route('admin_hotel_index')->with('success', 'Hotel created successfully!');
+    return redirect()->route('admin.hotels.index')->with('success', 'Hotel created successfully!');
   }
 
   public function edit(Hotel $hotel)
@@ -150,7 +150,7 @@ class AdminHotelController extends Controller
       }
     }
 
-    return redirect()->route('admin_hotel_index')->with('success', 'Hotel updated successfully!');
+    return redirect()->route('admin.hotels.index')->with('success', 'Hotel updated successfully!');
   }
 
   public function delete(Hotel $hotel)
@@ -162,7 +162,7 @@ class AdminHotelController extends Controller
 
     $hotel->delete();
 
-    return redirect()->route('admin_hotel_index')->with('success', 'Hotel deleted successfully!');
+    return redirect()->route('admin.hotels.index')->with('success', 'Hotel deleted successfully!');
   }
 
   public function deletePhoto($id)
@@ -221,7 +221,7 @@ class AdminHotelController extends Controller
 
     $room->save();
 
-    return redirect()->route('admin_hotel_rooms', $hotel->slug)->with('success', 'Room added successfully!');
+    return redirect()->route('admin.hotels.rooms', $hotel->slug)->with('success', 'Room added successfully!');
   }
 
   public function updateRoom(Request $request, Hotel $hotel, HotelRoom $room)
@@ -262,7 +262,7 @@ class AdminHotelController extends Controller
 
     $room->save();
 
-    return redirect()->route('admin_hotel_rooms', $hotel->slug)->with('success', 'Room updated successfully!');
+    return redirect()->route('admin.hotels.rooms', $hotel->slug)->with('success', 'Room updated successfully!');
   }
 
   public function deleteRoom(Hotel $hotel, HotelRoom $room)
@@ -273,7 +273,7 @@ class AdminHotelController extends Controller
 
     $room->delete();
 
-    return redirect()->route('admin_hotel_rooms', $hotel->slug)->with('success', 'Room deleted successfully!');
+    return redirect()->route('admin.hotels.rooms', $hotel->slug)->with('success', 'Room deleted successfully!');
   }
 
   // Amenities Management
@@ -298,13 +298,13 @@ class AdminHotelController extends Controller
       'category' => $request->category,
     ]);
 
-    return redirect()->route('admin_hotel_amenities', $hotel->slug)->with('success', 'Amenity added successfully!');
+    return redirect()->route('admin.hotels.amenities', $hotel->slug)->with('success', 'Amenity added successfully!');
   }
 
   public function deleteAmenity(Hotel $hotel, HotelAmenity $amenity)
   {
     $amenity->delete();
 
-    return redirect()->route('admin_hotel_amenities', $hotel->slug)->with('success', 'Amenity deleted successfully!');
+    return redirect()->route('admin.hotels.amenities', $hotel->slug)->with('success', 'Amenity deleted successfully!');
   }
 }

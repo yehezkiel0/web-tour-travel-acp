@@ -8,7 +8,7 @@
                 <h1 class="lg:text-2xl text-xl font-medium mt-1 text-gray-700">Edit Profile</h1>
             </div>
             <div class="bg-white">
-                <form action="{{ route('admin_profile_submit') }}" method="POST"
+                <form action="{{ route('admin.profile.submit') }}" method="POST"
                     class="grid lg:grid-cols-12 grid-cols-2 py-5 lg:gap-x-2 gap-y-4 lg:px-6 px-2"
                     enctype="multipart/form-data">
                     @csrf

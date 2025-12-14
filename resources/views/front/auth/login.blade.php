@@ -6,7 +6,7 @@
             <div class="flex flex-col items-center gap-y-8 py-6 px-8">
                 <h1 class="text-3xl font-semibold text-primary text-center mb-4 pt-4">
                     Login</h1>
-                <form action="{{ route('login_submit') }}" class="form-login" method="POST">
+                <form action="{{ route('user.login.submit') }}" class="form-login" method="POST">
                     @csrf
                     <div class="flex flex-col gap-y-8">
                         <div class="relative text-xs">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end pt-2 mb-2">
-                        <a href="{{ route('forget_password') }}"
+                        <a href="{{ route('user.forget_password') }}"
                             class="text-sm text-primary hover:underline transition-all ease-in-out duration-300">Forget
                             Password?</a>
                     </div>

@@ -41,7 +41,7 @@ class AdminPromoCodeController extends Controller
 
         PromoCode::create($validated);
 
-        return redirect()->route('admin_promo_codes_index')
+        return redirect()->route('admin.promo_codes.index')
             ->with('success', 'Promo code created successfully!');
     }
 
@@ -75,7 +75,7 @@ class AdminPromoCodeController extends Controller
 
         $promoCode->update($validated);
 
-        return redirect()->route('admin_promo_codes_index')
+        return redirect()->route('admin.promo_codes.index')
             ->with('success', 'Promo code updated successfully!');
     }
 
@@ -84,7 +84,7 @@ class AdminPromoCodeController extends Controller
         $promoCode = PromoCode::findOrFail($id);
         $promoCode->delete();
 
-        return redirect()->route('admin_promo_codes_index')
+        return redirect()->route('admin.promo_codes.index')
             ->with('success', 'Promo code deleted successfully!');
     }
 }

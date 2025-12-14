@@ -7,7 +7,7 @@
                 class="form-container container-login flex flex-col items-center gap-y-8 rounded-xl bg-white py-6 px-8 w-[50%] h-full z-[2] absolute">
                 <h1 class="text-5xl font-semibold text-primary text-center py-8">
                     Login</h1>
-                <form action="{{ route('login_submit') }}" class="form-login" method="POST">
+                <form action="{{ route('user.login.submit') }}" class="form-login" method="POST">
                     @csrf
                     <div class=" flex flex-col gap-y-8">
                         <div class="relative text-sm">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="flex justify-end py-5">
-                        <a href="{{ route('forget_password') }}"
+                        <a href="{{ route('user.forget_password') }}"
                             class="text-primary hover:underline transition-all ease-in-out duration-300">Forget
                             Password?</a>
                     </div>
@@ -69,7 +69,7 @@
             <div
                 class="form-container container-register flex flex-col items-center gap-y-8 rounded-xl bg-white py-6 px-2 w-[50%] h-full z-[1] absolute opacity-0">
                 <h1 class="text-5xl font-semibold text-primary text-center py-8">Create Account</h1>
-                <form action="{{ route('register_submit') }}" class="form-register" method="POST">
+                <form action="{{ route('user.register.submit') }}" class="form-register" method="POST">
                     @csrf
                     <div class=" flex flex-col gap-y-8 px-4">
                         <div class="flex flex-row gap-x-5">

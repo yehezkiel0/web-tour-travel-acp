@@ -6,7 +6,7 @@
         <div class="flex flex-col gap-y-2">
             <div class="bg-white p-5 mb-4 flex items-center justify-between rounded-sm shadow-md">
                 <h1 class="lg:text-2xl text-xl font-medium mt-1 text-gray-700">Promo Codes</h1>
-                <a href="{{ route('admin_promo_codes_create') }}">
+                <a href="{{ route('admin.promo_codes.create') }}">
                     <button
                         class="bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-400 drop-shadow-md transition-all">
                         <i class="fas fa-plus mr-2"></i>Create Promo Code
@@ -77,12 +77,12 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <div class="flex gap-2">
-                                                <a href="{{ route('admin_promo_codes_edit', $promo->id) }}"
+                                                <a href="{{ route('admin.promo_codes.edit', $promo->id) }}"
                                                     class="text-blue-600 hover:text-blue-800">
                                                     <i class="fas fa-edit text-lg"></i>
                                                 </a>
                                                 <button type="button"
-                                                    onclick="openDeleteModal('{{ route('admin_promo_codes_delete', $promo->id) }}')"
+                                                    onclick="openDeleteModal('{{ route('admin.promo_codes.destroy', $promo->id) }}')"
                                                     class="text-red-600 hover:text-red-800" title="Delete">
                                                     <i class="fas fa-trash text-lg"></i>
                                                 </button>

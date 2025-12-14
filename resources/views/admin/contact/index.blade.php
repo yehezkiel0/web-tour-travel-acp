@@ -39,8 +39,8 @@
                                             {{ Str::limit($contact->message, 50) }}
                                         </td>
                                         <td class="px-6 py-4 text-center">
-                                            <form action="{{ route('admin_contact_destroy', $contact->id) }}" method="POST"
-                                                onsubmit="return confirm('Delete this message?');">
+                                            <form action="{{ route('admin.contacts.destroy', $contact->id) }}"
+                                                method="POST" onsubmit="return confirm('Delete this message?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

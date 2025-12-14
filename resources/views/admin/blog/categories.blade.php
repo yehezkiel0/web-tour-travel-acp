@@ -19,7 +19,7 @@
                 <!-- Create Category -->
                 <div class="bg-white rounded-lg shadow-md p-6 h-fit">
                     <h2 class="text-lg font-semibold mb-4 text-gray-800">Create New Category</h2>
-                    <form action="{{ route('admin_blog_category_store') }}" method="POST">
+                    <form action="{{ route('admin.blogs.categories.store') }}" method="POST">
                         @csrf
                         <div class="mb-4">
                             <label class="block text-gray-700 font-medium mb-2">Name</label>
@@ -50,7 +50,7 @@
                                         <td class="px-4 py-3 font-medium">{{ $category->name }}</td>
                                         <td class="px-4 py-3">{{ $category->posts_count }}</td>
                                         <td class="px-4 py-3">
-                                            <form action="{{ route('admin_blog_category_delete', $category->id) }}"
+                                            <form action="{{ route('admin.blogs.categories.destroy', $category->id) }}"
                                                 method="POST" onsubmit="return confirm('Delete this category?')">
                                                 @csrf
                                                 @method('DELETE')

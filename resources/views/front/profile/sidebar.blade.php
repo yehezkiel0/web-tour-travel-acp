@@ -48,7 +48,7 @@
                 class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors {{ request()->routeIs('visa.*') ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-600' }}">
                 <i class="fas fa-passport w-5"></i> Visa Assistance
             </a>
-            <form action="{{ route('logout') }}" method="POST">
+            <form action="{{ route('user.logout') }}" method="POST">
                 @csrf
                 <button
                     class="w-full flex items-center gap-3 p-3 rounded-lg text-red-600 hover:bg-red-50 transition-colors text-left">

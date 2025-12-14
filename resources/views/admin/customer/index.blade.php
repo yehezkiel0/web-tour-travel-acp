@@ -14,7 +14,7 @@
                             <div
                                 class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                 <div class="w-full md:w-2/3">
-                                    <form method="GET" action="{{ route('admin_customer_index') }}"
+                                    <form method="GET" action="{{ route('admin.customers.index') }}"
                                         class="flex items-center gap-3">
                                         <div class="relative flex-1">
                                             <div
@@ -38,7 +38,7 @@
                                         </button>
 
                                         @if (request('search'))
-                                            <a href="{{ route('admin_customer_index') }}"
+                                            <a href="{{ route('admin.customers.index') }}"
                                                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 <i class="fa-solid fa-times mr-1"></i>
                                                 Clear

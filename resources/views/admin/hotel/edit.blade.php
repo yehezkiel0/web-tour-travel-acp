@@ -5,7 +5,7 @@
     <div class="max-w-7xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Edit Hotel</h1>
-            <a href="{{ route('admin_hotel_index') }}"
+            <a href="{{ route('admin.hotels.index') }}"
                 class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
                 <i class="fas fa-arrow-left mr-2"></i>Back to List
             </a>
@@ -22,7 +22,7 @@
         @endif
 
         <div class="bg-white rounded-lg shadow-md p-6">
-            <form action="{{ route('admin_hotel_update', $hotel->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.hotels.update', $hotel->slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -155,7 +155,7 @@
 
                 <!-- Submit Button -->
                 <div class="flex items-center justify-end gap-4">
-                    <a href="{{ route('admin_hotel_index') }}"
+                    <a href="{{ route('admin.hotels.index') }}"
                         class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                         Cancel
                     </a>

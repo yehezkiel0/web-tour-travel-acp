@@ -6,7 +6,7 @@
             <div class="flex flex-col items-center gap-y-8 py-6 px-8">
                 <h1 class="text-3xl font-semibold text-primary text-center mb-4 pt-4">
                     Create Account</h1>
-                <form action="{{ route('register_submit') }}" class="form-register" method="POST">
+                <form action="{{ route('user.register.submit') }}" class="form-register" method="POST">
                     @csrf
                     <div class=" flex flex-col gap-y-8">
                         <div class="relative text-xs">

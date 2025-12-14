@@ -31,7 +31,7 @@
                                 <i class="fas fa-filter mr-2"></i>Filter
                             </button>
                             @if (request('status') || request('rating'))
-                                <a href="{{ route('admin_reviews_index') }}"
+                                <a href="{{ route('admin.reviews.index') }}"
                                     class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400">
                                     <i class="fas fa-times mr-2"></i>Clear
                                 </a>
@@ -99,7 +99,7 @@
                                         <td class="px-4 py-3">
                                             <div class="flex gap-2">
                                                 @if ($review->is_approved)
-                                                    <form action="{{ route('admin_review_unapprove', $review->id) }}"
+                                                    <form action="{{ route('admin.reviews.unapprove', $review->id) }}"
                                                         method="POST" class="inline">
                                                         @csrf
                                                         <button type="submit" class="text-yellow-600 hover:text-yellow-800"
@@ -108,7 +108,7 @@
                                                         </button>
                                                     </form>
                                                 @else
-                                                    <form action="{{ route('admin_review_approve', $review->id) }}"
+                                                    <form action="{{ route('admin.reviews.approve', $review->id) }}"
                                                         method="POST" class="inline">
                                                         @csrf
                                                         <button type="submit" class="text-green-600 hover:text-green-800"
@@ -117,7 +117,7 @@
                                                         </button>
                                                     </form>
                                                 @endif
-                                                <form action="{{ route('admin_review_delete', $review->id) }}"
+                                                <form action="{{ route('admin.reviews.destroy', $review->id) }}"
                                                     method="POST" class="inline">
                                                     @csrf
                                                     @method('DELETE')

@@ -10,7 +10,7 @@
             </div>
             <div class="px-6 py-4">
                 <div class="flex justify-end items-center mb-6">
-                    <a href="{{ route('admin_insurance_create') }}"
+                    <a href="{{ route('admin.insurance.create') }}"
                         class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm transition-all">
                         <i class="fas fa-plus"></i> Add New Plan
                     </a>
@@ -47,11 +47,11 @@
                                         <td class="px-6 py-4 text-sm max-w-xs truncate">{{ $insurance->description }}</td>
                                         <td class="px-6 py-4">
                                             <div class="flex justify-center gap-3">
-                                                <a href="{{ route('admin_insurance_edit', $insurance->id) }}"
+                                                <a href="{{ route('admin.insurance.edit', $insurance->id) }}"
                                                     class="text-blue-500 hover:text-blue-700 transition-colors">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('admin_insurance_destroy', $insurance->id) }}"
+                                                <form action="{{ route('admin.insurance.destroy', $insurance->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Are you sure you want to delete this plan?');">
                                                     @csrf

@@ -71,6 +71,6 @@ class AdminHotelBookingController extends Controller
     $booking = HotelBooking::findOrFail($id);
     $booking->delete();
 
-    return redirect()->route('admin_hotel_bookings')->with('success', 'Booking deleted successfully!');
+    return redirect()->route('admin.hotels.bookings.index')->with('success', 'Booking deleted successfully!');
   }
 }

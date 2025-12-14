@@ -14,7 +14,7 @@
                             <div
                                 class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                 <div class="w-full md:w-2/3">
-                                    <form method="GET" action="{{ route('admin_destination_index') }}"
+                                    <form method="GET" action="{{ route('admin.destinations.index') }}"
                                         class="flex items-center gap-3">
                                         <div class="relative flex-1">
                                             <div
@@ -53,7 +53,7 @@
                                         </button>
 
                                         @if (request('search') || request('country'))
-                                            <a href="{{ route('admin_destination_index') }}"
+                                            <a href="{{ route('admin.destinations.index') }}"
                                                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300">
                                                 <i class="fa-solid fa-times mr-1"></i>
                                                 Clear
@@ -63,7 +63,7 @@
                                 </div>
                                 <div
                                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                                    <a href="{{ route('admin_destination_create') }}">
+                                    <a href="{{ route('admin.destinations.create') }}">
                                         <button type="button"
                                             class="flex items-center justify-center text-white bg-primary hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2">
                                             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
@@ -121,7 +121,7 @@
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border border-gray-300">
                                                     <div class="flex justify-center items-center space-x-2">
-                                                        <a href="{{ route('destination_photos', ['slug' => $destination->slug]) }}"
+                                                        <a href="{{ route('admin.destinations.photos', ['slug' => $destination->slug]) }}"
                                                             class="rounded-md shadow-sm text-sm font-medium bg-green-500 text-white px-3 py-2 hover:bg-green-600">
                                                             Photo Gallery
                                                         </a>
@@ -130,25 +130,25 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
                                                     <div class="flex justify-center items-center space-x-2">
                                                         @if ($destination->destination_detail)
-                                                            <a href="{{ route('admin_destination_details_edit', ['slug' => $destination->slug]) }}"
+                                                            <a href="{{ route('admin.destinations.details.edit', ['slug' => $destination->slug]) }}"
                                                                 class="inline-flex items-center px-3 py-2 border border-blue-400 rounded-md shadow-sm text-sm font-medium text-blue-700 bg-blue-100 hover:bg-blue-200">
                                                                 <i class="fas fa-list mr-1"></i> Details
                                                             </a>
                                                         @else
-                                                            <a href="{{ route('admin_destination_details', ['slug' => $destination->slug]) }}"
+                                                            <a href="{{ route('admin.destinations.details', ['slug' => $destination->slug]) }}"
                                                                 class="inline-flex items-center px-3 py-2 border border-green-400 rounded-md shadow-sm text-sm font-medium text-green-700 bg-green-100 hover:bg-green-200">
                                                                 <i class="fas fa-plus mr-1"></i> Add Details
                                                             </a>
                                                         @endif
                                                         <a
-                                                            href="{{ route('admin_destination_edit', ['slug' => $destination->slug]) }}">
+                                                            href="{{ route('admin.destinations.edit', ['slug' => $destination->slug]) }}">
                                                             <button type="button"
                                                                 class="inline-flex items-center px-3 py-2 border border-blue-400 rounded-md shadow-sm text-sm font-medium text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
                                                         </a>
                                                         <form
-                                                            action="{{ route('admin_destination_delete', ['id' => $destination->id]) }}"
+                                                            action="{{ route('admin.destinations.destroy', ['id' => $destination->id]) }}"
                                                             method="POST">
                                                             @method('DELETE')
                                                             @csrf

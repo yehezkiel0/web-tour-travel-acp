@@ -8,13 +8,13 @@
             <div class="bg-white p-5 mb-4 flex items-center rounded-sm shadow-md relative">
                 <h1 class="lg:text-2xl text-xl font-medium mt-1 text-gray-700">Create New Post</h1>
                 <div class="ml-auto">
-                    <a href="{{ route('admin_blog_index') }}"
+                    <a href="{{ route('admin.blogs.index') }}"
                         class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Back</a>
                 </div>
             </div>
 
             <div class="bg-white rounded-lg shadow-md p-6">
-                <form action="{{ route('admin_blog_store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
                         <label class="block text-gray-700 font-medium mb-2">Title</label>

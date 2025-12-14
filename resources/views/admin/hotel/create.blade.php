@@ -6,7 +6,7 @@
         <div class="flex flex-col gap-y-2">
             <div class="bg-white p-5 mb-4 flex items-center justify-between rounded-sm shadow-md">
                 <h1 class="lg:text-2xl text-xl font-medium text-gray-700">Add New Hotel</h1>
-                <a href="{{ route('admin_hotel_index') }}"
+                <a href="{{ route('admin.hotels.index') }}"
                     class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
                     <i class="fa-solid fa-arrow-left mr-2"></i>Back
                 </a>
@@ -23,7 +23,7 @@
             @endif
 
             <div class="bg-white rounded-lg shadow-md p-6">
-                <form action="{{ route('admin_hotel_store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.hotels.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="mt-6 flex justify-end gap-3">
-                        <a href="{{ route('admin_hotel_index') }}"
+                        <a href="{{ route('admin.hotels.index') }}"
                             class="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</a>
                         <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-800">
                             Create Hotel

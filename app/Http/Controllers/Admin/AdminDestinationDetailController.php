@@ -33,7 +33,7 @@ class AdminDestinationDetailController extends Controller
     $destination->destination_detail()->create($validated);
 
     return redirect()
-      ->route('admin_destination_index')
+      ->route('admin.destinations.index')
       ->with('success', 'Destination details created successfully')
       ->setStatusCode(201);
   }
@@ -44,7 +44,7 @@ class AdminDestinationDetailController extends Controller
 
     if (!$destination->destination_detail) {
       return redirect()
-        ->route('admin_destination_details', $slug)
+        ->route('admin.destinations.details', $slug)
         ->with('info', 'Please create destination details first');
     }
 
@@ -69,7 +69,7 @@ class AdminDestinationDetailController extends Controller
     $destination->destination_detail()->update($validated);
 
     return redirect()
-      ->route('admin_destination_index')
+      ->route('admin.destinations.index')
       ->with('success', 'Destination details updated successfully')
       ->setStatusCode(200);
   }

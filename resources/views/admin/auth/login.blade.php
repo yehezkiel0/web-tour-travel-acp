@@ -7,7 +7,7 @@
                 Admin Panel Login
             </h4>
             <div class="py-3">
-                <form method="POST" action="{{ route('admin_login_submit') }}">
+                <form method="POST" action="{{ route('admin.login.submit') }}">
                     @csrf
                     <div class="flex flex-col gap-y-6">
                         <div>
@@ -27,7 +27,7 @@
                             </button>
                         </div>
                         <div class="text-start text-sm">
-                            <a href="{{ route('admin_forget_password') }}" class="text-blue-500 hover:underline">
+                            <a href="{{ route('admin.forget_password') }}" class="text-blue-500 hover:underline">
                                 Forget Password?
                             </a>
                         </div>

@@ -8,9 +8,9 @@
             <div class="bg-white p-5 mb-4 flex items-center rounded-sm shadow-md relative">
                 <h1 class="lg:text-2xl text-xl font-medium mt-1 text-gray-700">Blog Posts</h1>
                 <div class="ml-auto flex gap-2">
-                    <a href="{{ route('admin_blog_create') }}"
+                    <a href="{{ route('admin.blogs.create') }}"
                         class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Add New Post</a>
-                    <a href="{{ route('admin_blog_categories') }}"
+                    <a href="{{ route('admin.blogs.categories') }}"
                         class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 transition">Manage
                         Categories</a>
                 </div>
@@ -23,7 +23,7 @@
             @endif
 
             <div class="bg-white rounded-lg shadow-md p-4">
-                <form action="{{ route('admin_blog_index') }}" method="GET" class="mb-4 flex flex-col md:flex-row gap-4">
+                <form action="{{ route('admin.blogs.index') }}" method="GET" class="mb-4 flex flex-col md:flex-row gap-4">
                     <input type="text" name="search" class="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/3"
                         placeholder="Search by title..." value="{{ request('search') }}">
                     <select name="category" class="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/3">
@@ -75,9 +75,9 @@
                                     </td>
                                     <td class="px-4 py-3">{{ $post->author->name }}</td>
                                     <td class="px-4 py-3 flex gap-2">
-                                        <a href="{{ route('admin_blog_edit', $post->id) }}"
+                                        <a href="{{ route('admin.blogs.edit', $post->id) }}"
                                             class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-edit"></i></a>
-                                        <form action="{{ route('admin_blog_delete', $post->id) }}" method="POST"
+                                        <form action="{{ route('admin.blogs.destroy', $post->id) }}" method="POST"
                                             onsubmit="return confirm('Are you sure?')">
                                             @csrf
                                             @method('DELETE')

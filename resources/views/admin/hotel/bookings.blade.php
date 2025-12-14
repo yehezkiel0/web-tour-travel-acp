@@ -70,7 +70,7 @@
 
             {{-- Filters --}}
             <div class="bg-white rounded-lg shadow-md p-4 mb-4">
-                <form method="GET" action="{{ route('admin_hotel_bookings') }}"
+                <form method="GET" action="{{ route('admin.hotels.bookings.index') }}"
                     class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
@@ -109,7 +109,7 @@
                         <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-800">
                             <i class="fa-solid fa-filter mr-2"></i>Apply Filters
                         </button>
-                        <a href="{{ route('admin_hotel_bookings') }}"
+                        <a href="{{ route('admin.hotels.bookings.index') }}"
                             class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
                             <i class="fa-solid fa-rotate-right mr-2"></i>Reset
                         </a>
@@ -186,13 +186,14 @@
                                     </td>
                                     <td class="px-4 py-3">
                                         <div class="flex items-center gap-2">
-                                            <a href="{{ route('admin_hotel_booking_show', $booking->id) }}"
+                                            <a href="{{ route('admin.hotels.bookings.show', $booking->id) }}"
                                                 class="text-blue-600 hover:text-blue-800" title="View Details">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
 
                                             {{-- Quick Status Update --}}
-                                            <form action="{{ route('admin_hotel_booking_update_status', $booking->id) }}"
+                                            <form
+                                                action="{{ route('admin.hotels.bookings.update_status', $booking->id) }}"
                                                 method="POST" class="inline">
                                                 @csrf
                                                 @method('PUT')
@@ -214,7 +215,7 @@
                                             </form>
 
                                             <button type="button"
-                                                onclick="openDeleteModal('{{ route('admin_hotel_booking_delete', $booking->id) }}')"
+                                                onclick="openDeleteModal('{{ route('admin.hotels.bookings.destroy', $booking->id) }}')"
                                                 class="text-red-600 hover:text-red-800">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
